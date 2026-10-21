@@ -63,13 +63,12 @@ Non-coders can maintain the JSON collections from a spreadsheet. Publish each sh
 
 ## Deploying (free)
 
-Live at https://asgi.app. The domain is registered at Name.com (free first year through the GitHub Student Developer Pack, registered 2026-10-21) with DNS on Cloudflare, and the site is served by Cloudflare Pages.
+Live at https://asgi.app. The domain is registered at Name.com (free first year through the GitHub Student Developer Pack, registered 2026-10-21) with DNS on Cloudflare. The site is served by Cloudflare Workers static assets, configured in `wrangler.jsonc`, and built by Workers Builds from the GitHub repository `tcantbenormal/asgi`.
 
-1. Push this folder to the GitHub repository. Every push to `main` redeploys.
-2. Cloudflare Pages project settings: build command `npm run build`, output directory `dist`, Node version 22 or newer.
-3. Custom domains: `asgi.app` and `www.asgi.app`. If the domain ever changes, update `site` in `astro.config.mjs` and `public/robots.txt`.
-4. Weekly rebuild: `.github/workflows/weekly-rebuild.yml` calls the Pages deploy hook every Monday so new approved profiles appear and the Supabase project is kept awake. Create the hook under Pages > Settings > Builds > Deploy hooks and store its URL as the repository secret `CF_DEPLOY_HOOK`.
-5. Supabase > Authentication > URL Configuration: site URL `https://asgi.app`, redirect URLs `https://asgi.app/alumni/join` and `http://localhost:4321/alumni/join`.
+1. Every push to `main` rebuilds and redeploys. Build command `npm run build`, deploy command `npx wrangler deploy`.
+2. Custom domain: Worker > Settings > Domains & Routes > add `asgi.app` and `www.asgi.app`. If the domain ever changes, update `site` in `astro.config.mjs` and `public/robots.txt`.
+3. Weekly rebuild: `.github/workflows/weekly-rebuild.yml` builds and deploys every Monday so new approved profiles appear and the Supabase project is kept awake. It needs two repository secrets: `CLOUDFLARE_API_TOKEN` (template "Edit Cloudflare Workers") and `CLOUDFLARE_ACCOUNT_ID` (shown on the Workers & Pages overview page).
+4. Supabase > Authentication > URL Configuration: site URL `https://asgi.app`, redirect URLs `https://asgi.app/alumni/join` and `http://localhost:4321/alumni/join`.
 
 ## Handover
 

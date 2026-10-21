@@ -1,0 +1,34 @@
+[
+  {
+    "id": "gis-day-2026",
+    "title": "GIS Day 2026: poster competition and alumni panel",
+    "date": "2026-11-18",
+    "venue": "Institute auditorium",
+    "description": "Student map poster exhibition, a panel with three alumni on careers in government, industry and research, and the society's annual awards.",
+    "url": ""
+  },
+  {
+    "id": "gee-workshop-2026",
+    "title": "Hands-on workshop: Google Earth Engine for crop monitoring",
+    "date": "2026-10-28",
+    "venue": "GIS Lab 2",
+    "description": "Two-hour session for second and third year students. Bring a laptop with an Earth Engine account approved in advance.",
+    "url": ""
+  },
+  {
+    "id": "field-trip-2026",
+    "title": "Field visit: drone survey demonstration",
+    "date": "2026-12-05",
+    "venue": "University research farm",
+    "description": "Flight planning, ground control placement and live processing, led by an alumnus running a survey business.",
+    "url": ""
+  },
+  {
+    "id": "orientation-2026",
+    "title": "Society orientation for first-year students",
+    "date": "2026-09-15",
+    "venue": "Seminar room",
+    "description": "What the society does, how to join, and a walkthrough of this portal.",
+    "url": ""
+  }
+]

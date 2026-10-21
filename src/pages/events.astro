@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+const today = new Date().toISOString().slice(0, 10);
+const events = (await getCollection('events')).sort((a, b) => b.data.date.localeCompare(a.data.date));
+const groups = [
+  ['Upcoming', events.filter((e) => e.data.date >= today).reverse(), 'Nothing scheduled yet. Follow the society\'s social pages for announcements.'],
+  ['Past', events.filter((e) => e.data.date < today), 'No past events recorded.'],
+] as const;
+---
+<Base title="Events" description="Seminars, workshops, field trips and GIS Day celebrations organised by the society.">
+  <PageHead eyebrow="Society" title="Events" lead="Workshops, guest lectures, field visits and the annual GIS Day in November." />
+  {groups.map(([label, list, empty], i) => (
+    <section style={i ? 'margin-top:3rem' : ''}>
+      <h2>{label}</h2>
+      {list.length === 0 ? <p class="empty-state">{empty}</p> : (
+        <div class="timeline">
+          {list.map((e) => {
+            const d = new Date(e.data.date);
+            return (
+              <div class="event">
+                <div class="date">{d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}<small>{d.getFullYear()}</small></div>
+                <div>
+                  <h3>{e.data.url ? <a href={e.data.url} style="color:inherit;text-decoration:none">{e.data.title}</a> : e.data.title}</h3>
+                  <p>{e.data.venue} · {e.data.description}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </section>
+  ))}
+</Base>

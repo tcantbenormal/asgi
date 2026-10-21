@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import ResourceList from '../components/ResourceList.astro';
+import { site } from '../config/site';
+const items = (await getCollection('resources')).filter((r) => r.data.kind === 'software').sort((a, b) => a.data.name.localeCompare(b.data.name));
+---
+<Base title="GIS software" description="Free and open-source GIS, remote sensing and surveying software with tutorials, curated for students.">
+  <PageHead eyebrow="Software" title="Free and open-source GIS software" lead="Everything here is legally free to install and use. Commercial tools are listed only where a student licence exists, with instructions on how to get it.">
+    <p class="notice" style="margin:1rem 0 0">Mirrors are hosted by the society for students on slow or filtered connections. Always prefer the official download if it works for you. <a href={site.forms.submitResource}>Suggest a tool</a>.</p>
+  </PageHead>
+  <ResourceList items={items} />
+</Base>

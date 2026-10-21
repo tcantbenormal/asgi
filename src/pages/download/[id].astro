@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import { site } from '../../config/site';
+
+export async function getStaticPaths() {
+  const items = await getCollection('resources');
+  return items.map((r) => ({ params: { id: r.id }, props: { r } }));
+}
+const { r } = Astro.props;
+const d = r.data;
+// ponytail: base64 keeps the URL out of plain-text scrapers; a determined user can still
+// read it from the source, which is fine. Real enforcement would need a server.
+const encoded = Buffer.from(d.download).toString('base64');
+const seconds = site.downloadCountdown;
+---
+<Base title={`Download ${d.name}`} description={`Download ${d.name}. ${d.description}`} noindex>
+  <meta name="robots" content="noindex" slot="head" />
+  <div class="wrap" style="max-width:860px">
+    <AdSlot slot="banner" />
+    <header class="page-head" style="text-align:center;border:0;margin-bottom:1rem">
+      <div class="eyebrow">{d.kind} · {d.category}</div>
+      <h1 style="font-size:2rem">{d.name}</h1>
+      <p class="lead" style="margin-inline:auto">{d.version && `Version ${d.version} · `}{d.size && `${d.size} · `}{d.license}</p>
+    </header>
+
+    <div class="gate-box" id="gate" data-url={encoded} data-seconds={seconds}>
+      <AdSlot slot="gate" />
+      <p class="muted" style="margin:1.25rem 0 0">Your download link unlocks in</p>
+      <div class="timer" id="timer" aria-live="polite">{seconds}</div>
+      <div class="bar"><i id="bar"></i></div>
+      <a class="btn btn-accent" id="go" href="#" aria-disabled="true" rel="noopener">Download from {d.host}</a>
+      <p class="muted" style="margin:1rem 0 0;font-size:.85rem">The short wait funds hosting and the society's activities. Thank you.</p>
+    </div>
+
+    <p style="text-align:center;margin-top:1.5rem"><a href={`/resources/${r.id}`}>Back to {d.name}</a> · <a href="/legal">Content policy</a></p>
+  </div>
+
+  <script>
+    const gate = document.getElementById('gate')!;
+    const timer = document.getElementById('timer')!;
+    const bar = document.getElementById('bar')!;
+    const go = document.getElementById('go') as HTMLAnchorElement;
+    const total = Number(gate.dataset.seconds);
+    let left = total;
+    const tick = () => {
+      left--;
+      timer.textContent = String(Math.max(left, 0));
+      bar.style.width = `${((total - left) / total) * 100}%`;
+      if (left <= 0) {
+        clearInterval(iv);
+        go.href = atob(gate.dataset.url!);
+        go.removeAttribute('aria-disabled');
+        timer.textContent = 'Ready';
+        go.focus();
+      }
+    };
+    // Pause when the tab is hidden so the ad is actually on screen.
+    let iv = setInterval(tick, 1000);
+    document.addEventListener('visibilitychange', () => {
+      if (left <= 0) return;
+      if (document.hidden) clearInterval(iv);
+      else iv = setInterval(tick, 1000);
+    });
+    requestAnimationFrame(() => (bar.style.width = '0%'));
+  </script>
+</Base>

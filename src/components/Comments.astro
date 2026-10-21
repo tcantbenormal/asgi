@@ -1,0 +1,24 @@
+---
+/** Giscus comments backed by GitHub Discussions. Renders nothing until site.giscus.repo is set. */
+import { site } from '../config/site';
+const g = site.giscus;
+---
+{g.repo && (
+  <section class="section" data-pagefind-ignore>
+    <h2>Discussion</h2>
+    <script
+      src="https://giscus.app/client.js"
+      data-repo={g.repo}
+      data-repo-id={g.repoId}
+      data-category={g.category}
+      data-category-id={g.categoryId}
+      data-mapping="pathname"
+      data-reactions-enabled="1"
+      data-input-position="top"
+      data-theme="light"
+      data-lang="en"
+      crossorigin="anonymous"
+      async
+    />
+  </section>
+)}

@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { items: CollectionEntry<'resources'>[] }
+const { items } = Astro.props;
+const categories = [...new Set(items.map((i) => i.data.category))].sort();
+---
+<div class="filters" data-pagefind-ignore>
+  <label class="sr-only" for="rq">Search</label>
+  <input id="rq" type="search" placeholder="Search by name or description" />
+  <select id="rcat" aria-label="Category"><option value="">All categories</option>{categories.map((c) => <option>{c}</option>)}</select>
+</div>
+<div class="grid" id="rlist">
+  {items.map((i) => (
+    <article class="card" data-cat={i.data.category} data-text={`${i.data.name} ${i.data.description} ${i.data.category}`.toLowerCase()}>
+      <span class="tag grey">{i.data.category}</span>
+      <h3><a href={`/resources/${i.id}`}>{i.data.name}</a></h3>
+      <p>{i.data.description}</p>
+      <div class="meta">
+        {i.data.version && <span>v{i.data.version}</span>}
+        {i.data.size && <span>{i.data.size}</span>}
+        {i.data.os.length > 0 && <span>{i.data.os.join(' · ')}</span>}
+      </div>
+      <div class="foot">
+        <small class="muted">{i.data.license}</small>
+        <a class="btn btn-primary btn-sm" href={`/download/${i.id}`}>Download</a>
+      </div>
+    </article>
+  ))}
+</div>
+<p class="empty-state" id="rempty" hidden>Nothing matches.</p>
+<script>
+  const q = document.getElementById('rq') as HTMLInputElement;
+  const cat = document.getElementById('rcat') as HTMLSelectElement;
+  const cards = [...document.querySelectorAll<HTMLElement>('#rlist .card')];
+  const apply = () => {
+    const t = q.value.trim().toLowerCase();
+    let n = 0;
+    for (const c of cards) {
+      const ok = (!t || c.dataset.text!.includes(t)) && (!cat.value || c.dataset.cat === cat.value);
+      c.hidden = !ok;
+      if (ok) n++;
+    }
+    document.getElementById('rempty')!.hidden = n > 0;
+  };
+  q.addEventListener('input', apply);
+  cat.addEventListener('change', apply);
+</script>

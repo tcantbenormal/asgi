@@ -1,0 +1,143 @@
+[
+  {
+    "id": "erasmus-mundus-gem",
+    "category": "scholarship",
+    "title": "Erasmus Mundus Joint Master's in Geo-information Science and Earth Observation",
+    "provider": "European Union",
+    "url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
+    "description": "Fully funded two-year master's across European universities. Several GIS and remote sensing programmes in the catalogue. Pakistani applicants are regularly selected.",
+    "deadline": "January each year",
+    "location": "Europe",
+    "cost": "Fully funded",
+    "tags": ["master's", "Europe"]
+  },
+  {
+    "id": "daad-epos",
+    "category": "scholarship",
+    "title": "DAAD EPOS development-related postgraduate courses",
+    "provider": "DAAD, Germany",
+    "url": "https://www.daad.de/en/study-and-research-in-germany/scholarships/development-related-postgraduate-courses/",
+    "description": "Funded master's in Germany for applicants with two years of work experience. Includes geodesy, photogrammetry and environmental programmes.",
+    "deadline": "August to October",
+    "location": "Germany",
+    "cost": "Fully funded",
+    "tags": ["master's", "Germany", "work experience"]
+  },
+  {
+    "id": "csc-china",
+    "category": "scholarship",
+    "title": "Chinese Government Scholarship, CSC",
+    "provider": "China Scholarship Council via HEC",
+    "url": "https://www.hec.gov.pk/english/scholarshipsgrants/",
+    "description": "Master's and PhD in Chinese universities with strong remote sensing groups, including Wuhan, Beijing Normal and CAS institutes. Apply through HEC or directly to the university.",
+    "deadline": "December to March",
+    "location": "China",
+    "cost": "Fully funded",
+    "tags": ["master's", "PhD", "China"]
+  },
+  {
+    "id": "fulbright-pakistan",
+    "category": "scholarship",
+    "title": "Fulbright Master's and PhD Programme for Pakistan",
+    "provider": "USEFP",
+    "url": "https://www.usefp.org/",
+    "description": "The largest Fulbright programme in the world. Geography, environmental science and urban planning are eligible fields.",
+    "deadline": "May each year",
+    "location": "United States",
+    "cost": "Fully funded",
+    "tags": ["master's", "PhD", "USA"]
+  },
+  {
+    "id": "hec-overseas",
+    "category": "scholarship",
+    "title": "HEC Overseas Scholarships and Indigenous PhD Fellowships",
+    "provider": "Higher Education Commission",
+    "url": "https://www.hec.gov.pk/english/scholarshipsgrants/",
+    "description": "Rolling programmes for MS and PhD abroad and in Pakistan. Check the current phase and the list of eligible fields.",
+    "location": "Various",
+    "cost": "Fully funded",
+    "tags": ["PhD", "HEC"]
+  },
+  {
+    "id": "gee-intro-course",
+    "category": "course",
+    "title": "End-to-End Google Earth Engine",
+    "provider": "Spatial Thoughts",
+    "url": "https://courses.spatialthoughts.com/end-to-end-gee.html",
+    "description": "The most complete free Earth Engine course, from basics to supervised classification and time series. Self-paced with full materials.",
+    "cost": "Free",
+    "tags": ["GEE", "remote sensing"]
+  },
+  {
+    "id": "nasa-arset",
+    "category": "course",
+    "title": "NASA ARSET applied remote sensing trainings",
+    "provider": "NASA",
+    "url": "https://appliedsciences.nasa.gov/get-involved/training",
+    "description": "Free webinar series on floods, agriculture, air quality, and disasters, with certificates of completion.",
+    "cost": "Free",
+    "tags": ["remote sensing", "certificate"]
+  },
+  {
+    "id": "esri-mooc",
+    "category": "course",
+    "title": "Esri MOOCs",
+    "provider": "Esri",
+    "url": "https://www.esri.com/training/mooc/",
+    "description": "Six-week courses with a free temporary ArcGIS licence. Cartography, spatial data science, and imagery courses run several times a year.",
+    "cost": "Free",
+    "tags": ["ArcGIS", "certificate"]
+  },
+  {
+    "id": "geocomputation-r",
+    "category": "course",
+    "title": "Geocomputation with R",
+    "provider": "Lovelace, Nowosad, Muenchow",
+    "url": "https://r.geocompx.org/",
+    "description": "Open textbook for spatial analysis in R. Pairs well with the statistics modules.",
+    "cost": "Free",
+    "tags": ["R", "textbook"]
+  },
+  {
+    "id": "gisp",
+    "category": "certification",
+    "title": "GISP, Certified GIS Professional",
+    "provider": "GIS Certification Institute",
+    "url": "https://www.gisci.org/",
+    "description": "Portfolio plus exam based certification recognised by international employers. Worth planning for after a few years of work.",
+    "cost": "Paid",
+    "tags": ["professional"]
+  },
+  {
+    "id": "esri-technical-cert",
+    "category": "certification",
+    "title": "Esri Technical Certification",
+    "provider": "Esri",
+    "url": "https://www.esri.com/training/certification/",
+    "description": "Role-based exams for ArcGIS Pro and ArcGIS Enterprise. Useful for Esri partner employers in the Gulf.",
+    "cost": "Paid",
+    "tags": ["ArcGIS", "professional"]
+  },
+  {
+    "id": "sample-job-gis-analyst",
+    "category": "job",
+    "title": "GIS Analyst, urban planning consultancy",
+    "provider": "Sample listing, replace with real posts",
+    "url": "https://www.rozee.pk/",
+    "description": "Fresh graduates with QGIS or ArcGIS Pro and basic Python. Islamabad based. Shared by an alumnus.",
+    "deadline": "2026-11-30",
+    "location": "Islamabad",
+    "tags": ["fresh graduate", "full time"]
+  },
+  {
+    "id": "sample-internship-rs",
+    "category": "job",
+    "title": "Remote sensing internship, summer 2027",
+    "provider": "Sample listing, replace with real posts",
+    "url": "https://www.linkedin.com/jobs/",
+    "description": "Eight-week paid internship on crop monitoring with Sentinel-2. Earth Engine experience preferred.",
+    "deadline": "2027-03-15",
+    "location": "Lahore",
+    "tags": ["internship"]
+  }
+]

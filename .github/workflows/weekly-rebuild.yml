@@ -1,0 +1,15 @@
+# Rebuilds the site every Monday so new approved profiles appear and the
+# Supabase free project never idles for 7 days. Needs the repository secret
+# CF_DEPLOY_HOOK = the Cloudflare Pages deploy hook URL.
+name: Weekly rebuild
+on:
+  schedule:
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS -X POST "$HOOK"
+        env:
+          HOOK: ${{ secrets.CF_DEPLOY_HOOK }}

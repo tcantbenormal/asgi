@@ -1,0 +1,57 @@
+[
+  {
+    "id": "wheat-mapping-punjab-2019",
+    "title": "Wheat acreage estimation in central Punjab using Sentinel-2 time series",
+    "students": ["Ayesha Khan"],
+    "supervisor": "Dr. Sample Supervisor",
+    "year": 2019,
+    "domain": "Agriculture",
+    "abstract": "Random forest classification of Sentinel-2 NDVI time series over the Rabi season for Faisalabad and Jhang districts, validated against provincial crop reporting data. Overall accuracy of 89 percent.",
+    "tools": ["Google Earth Engine", "QGIS", "R"],
+    "report": ""
+  },
+  {
+    "id": "flood-extent-sentinel1-2021",
+    "title": "Flood extent mapping of the 2020 monsoon in Sindh with Sentinel-1 SAR",
+    "students": ["Hira Baig"],
+    "supervisor": "Dr. Sample Supervisor",
+    "year": 2021,
+    "domain": "Disaster management",
+    "abstract": "Change detection on Sentinel-1 VV backscatter to delineate inundated area across five districts, with damage assessment against WorldPop population and OSM infrastructure.",
+    "tools": ["SNAP", "Google Earth Engine", "QGIS"],
+    "report": ""
+  },
+  {
+    "id": "vaccination-web-map-2020",
+    "title": "Web-based dashboard for union council vaccination coverage in Rawalpindi",
+    "students": ["Usman Tariq"],
+    "supervisor": "Sample Supervisor",
+    "year": 2020,
+    "domain": "Web GIS",
+    "abstract": "A Leaflet and PostGIS application for an NGO partner to visualise coverage, flag low-performing areas, and export reports. Deployed on a free cloud tier.",
+    "tools": ["Leaflet", "PostGIS", "Python", "Flask"],
+    "report": ""
+  },
+  {
+    "id": "drone-survey-housing-2022",
+    "title": "UAV photogrammetric survey and volumetric analysis of a housing scheme earthworks",
+    "students": ["Bilal Ahmed"],
+    "supervisor": "Sample Supervisor",
+    "year": 2022,
+    "domain": "Surveying",
+    "abstract": "Orthomosaic and DSM generation from 1,200 images with ground control, accuracy assessment against total station checkpoints, and cut-and-fill volumes for the contractor.",
+    "tools": ["WebODM", "QGIS", "AutoCAD"],
+    "report": ""
+  },
+  {
+    "id": "urban-growth-rawalpindi-2023",
+    "title": "Three decades of urban expansion in Rawalpindi-Islamabad from Landsat",
+    "students": ["Sample Student A", "Sample Student B"],
+    "supervisor": "Dr. Sample Supervisor",
+    "year": 2023,
+    "domain": "Urban planning",
+    "abstract": "Built-up area classification for 1990, 2000, 2010 and 2020, landscape metrics, and a comparison with master plan zoning to identify unplanned growth corridors.",
+    "tools": ["Google Earth Engine", "QGIS", "Python"],
+    "report": ""
+  }
+]

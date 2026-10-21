@@ -1,0 +1,192 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import AlumniMap from '../components/AlumniMap.astro';
+import AlumniCard from '../components/AlumniCard.astro';
+import { site } from '../config/site';
+
+const alumni = await getCollection('alumni');
+const posts = (await getCollection('posts')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const roadmaps = (await getCollection('roadmaps')).sort((a, b) => a.data.order - b.data.order);
+const resources = await getCollection('resources');
+const events = (await getCollection('events')).filter((e) => e.data.date >= new Date().toISOString().slice(0, 10)).sort((a, b) => a.data.date.localeCompare(b.data.date));
+
+const featured = (alumni.filter((a) => a.data.featured).length ? alumni.filter((a) => a.data.featured) : alumni).slice(0, 3);
+const countries = new Set(alumni.map((a) => a.data.country)).size;
+const orgs = new Set(alumni.map((a) => a.data.organization)).size;
+const mentors = alumni.filter((a) => a.data.mentor).length;
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+---
+<Base title={site.name} rail={false}>
+  <script slot="head" type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+  <section class="hero">
+    <svg class="orbit" viewBox="0 0 800 600" fill="none" aria-hidden="true">
+      <ellipse cx="400" cy="300" rx="380" ry="200" stroke="#12325e" stroke-opacity=".18" stroke-width="1.5" />
+      <ellipse cx="400" cy="300" rx="300" ry="120" stroke="#12325e" stroke-opacity=".12" stroke-width="1" transform="rotate(-18 400 300)" />
+      <circle cx="780" cy="300" r="6" fill="#e3101c" />
+    </svg>
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">{site.department}</div>
+        <h1>Where our GIS graduates went, and how to get there.</h1>
+        <p class="lead">Alumni career journeys, skills roadmaps, open-source tools and Pakistan-focused datasets, curated by the {site.name} for the students who come after.</p>
+        <div class="actions">
+          <a href="/alumni" class="btn btn-primary">Browse alumni</a>
+          <a href="/roadmaps" class="btn btn-ghost">Skills roadmaps</a>
+          <a href="/alumni/join" class="btn btn-accent">Create your profile</a>
+        </div>
+      </div>
+      <model-viewer src="/models/satellite.glb" alt="Rotating Earth observation satellite" auto-rotate rotation-per-second="18deg" camera-controls disable-zoom disable-pan interaction-prompt="none" shadow-intensity="0" exposure="1.1" loading="eager" camera-orbit="35deg 75deg auto"></model-viewer>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><b>{alumni.length}</b><span>Alumni profiles</span></div>
+        <div class="stat"><b>{countries}</b><span>Countries</span></div>
+        <div class="stat"><b>{orgs}</b><span>Organisations</span></div>
+        <div class="stat"><b>{mentors}</b><span>Open to mentoring</span></div>
+        <div class="stat"><b>{resources.length}</b><span>Tools and datasets</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="eyebrow">Alumni network</div><h2>One pin per graduate</h2></div>
+        <a href="/map" class="btn btn-ghost btn-sm">Open full map</a>
+      </div>
+      <a href="/map" aria-label="Open the full alumni map" style="display:block"><AlumniMap alumni={alumni.filter((a) => a.data.sector !== 'Student')} interactive={false} /></a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="eyebrow">Featured alumni</div><h2>Seniors worth learning from</h2></div>
+        <a href="/alumni" class="btn btn-ghost btn-sm">All alumni</a>
+      </div>
+      <div class="grid">{featured.map((a) => <AlumniCard a={a} />)}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap" style="display:grid;grid-template-columns:1.2fr .8fr;gap:2.5rem;align-items:start" id="earth-grid">
+      <div>
+        <div class="eyebrow">Pakistan from orbit</div>
+        <h2>Yesterday's pass</h2>
+        <p class="lead">MODIS Terra true-colour imagery over Pakistan, from NASA Worldview. Updated every day without anyone touching the site.</p>
+        <p><a class="btn btn-ghost btn-sm" id="earth-link" href="https://worldview.earthdata.nasa.gov/?v=58,20,80,40&l=MODIS_Terra_CorrectedReflectance_TrueColor,Coastlines_15m" rel="noopener">Explore in Worldview</a></p>
+      </div>
+      <figure class="earth" style="margin:0">
+        <img id="earth-img" alt="MODIS Terra true-colour image of Pakistan and surroundings" loading="lazy" width="1024" height="512" />
+        <figcaption class="cap"><span id="earth-date">MODIS Terra</span><a href="https://earthdata.nasa.gov/gibs" rel="noopener">NASA GIBS</a></figcaption>
+      </figure>
+    </div>
+    <script is:inline>
+      (function () {
+        var d = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+        var base = 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Terra_CorrectedReflectance_TrueColor/default/' + d + '/250m/5/';
+        var img = document.getElementById('earth-img');
+        // Level 5 of the 250m set is 40 x 20 tiles of 9 degrees. Rows 5 to 7, cols 26 to 28 cover 54E to 81E, 18N to 45N.
+        // Drawn into one canvas, then cropped to 57E to 80E, 21N to 42N so Pakistan fills the frame.
+        var px = 512 / 9, c = document.createElement('canvas');
+        c.width = Math.round(23 * px); c.height = Math.round(21 * px);
+        var ctx = c.getContext('2d'), n = 0, total = 9;
+        for (var r = 5; r <= 7; r++) for (var col = 26; col <= 28; col++) (function (r, col) {
+          var t = new Image(); t.crossOrigin = 'anonymous';
+          t.onload = t.onerror = function () {
+            if (t.complete && t.naturalWidth) ctx.drawImage(t, Math.round((col - 26) * 512 - 3 * px), Math.round((r - 5) * 512 - 3 * px));
+            if (++n === total) img.src = c.toDataURL('image/jpeg', 0.85);
+          };
+          t.src = base + r + '/' + col + '.jpg';
+        })(r, col);
+        document.getElementById('earth-date').textContent = 'MODIS Terra · ' + d;
+      })();
+    </script>
+    <style>@media (max-width: 900px) { #earth-grid { grid-template-columns: 1fr !important; } }</style>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="eyebrow">Stories and guides</div><h2>Latest from alumni and students</h2></div>
+        <a href="/stories" class="btn btn-ghost btn-sm">All stories</a>
+      </div>
+      <div class="grid">
+        {posts.slice(0, 3).map((p) => (
+          <article class="card">
+            <span class="tag red" style="text-transform:capitalize">{p.data.type}</span>
+            <h3><a href={`/stories/${p.id}`}>{p.data.title}</a></h3>
+            <p>{p.data.summary}</p>
+            <div class="meta"><span>{p.data.author}</span><span>{fmt(p.data.date)}</span></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="eyebrow">Career tracks</div><h2>Pick a direction, follow the roadmap</h2></div>
+        <a href="/roadmaps" class="btn btn-ghost btn-sm">All roadmaps</a>
+      </div>
+      <div class="grid">
+        {roadmaps.slice(0, 6).map((r) => (
+          <article class="card">
+            <h3><a href={`/roadmaps/${r.id}`}>{r.data.title}</a></h3>
+            <p>{r.data.summary}</p>
+            <div class="foot"><span class="tag grey">Demand: {r.data.demand}</span><small class="muted">{r.data.stages.length} stages</small></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem">
+      <article class="card">
+        <h3><a href="/software">Open-source GIS software</a></h3>
+        <p>QGIS, GRASS, SAGA, PostGIS, QField and more, with version notes and tutorials for each.</p>
+      </article>
+      <article class="card">
+        <h3><a href="/datasets">Pakistan-focused datasets</a></h3>
+        <p>Administrative boundaries, elevation, land cover, climate and census data, ready to load.</p>
+      </article>
+      <article class="card">
+        <h3><a href="/opportunities">Scholarships, courses and jobs</a></h3>
+        <p>Funded master's programmes abroad, free certifications, and openings shared by alumni.</p>
+      </article>
+      <article class="card">
+        <h3><a href="/mentorship">Ask an alumnus</a></h3>
+        <p>Request a short call or email exchange with a senior working in the field you want to enter.</p>
+      </article>
+    </div>
+  </section>
+
+  {events.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">Upcoming</div><h2>Events</h2></div>
+          <a href="/events" class="btn btn-ghost btn-sm">All events</a>
+        </div>
+        <div class="timeline">
+          {events.slice(0, 3).map((e) => {
+            const d = new Date(e.data.date);
+            return (
+              <div class="event">
+                <div class="date">{d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}<small>{d.getFullYear()}</small></div>
+                <div><h3>{e.data.title}</h3><p>{e.data.venue} · {e.data.description}</p></div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+</Base>

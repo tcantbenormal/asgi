@@ -1,0 +1,38 @@
+---
+import { site } from '../config/site';
+const path = Astro.url.pathname;
+const links = [
+  ['/alumni', 'Alumni'],
+  ['/map', 'Map'],
+  ['/stories', 'Stories'],
+  ['/roadmaps', 'Roadmaps'],
+  ['/software', 'Software'],
+  ['/datasets', 'Datasets'],
+  ['/opportunities', 'Opportunities'],
+  ['/projects', 'Projects'],
+  ['/society', 'Society'],
+];
+const current = (href: string) => (path === href || path.startsWith(href + '/') ? 'page' : undefined);
+---
+<header class="site-header" data-pagefind-ignore>
+  <div class="wrap">
+    <a href="/" class="brand" aria-label={`${site.name} home`}>
+      <img src="/img/logo.jpg" alt="" width="46" height="46" />
+      <span>{site.short}<small>{site.name}</small></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      {links.map(([href, label]) => <a href={href} aria-current={current(href)}>{label}</a>)}
+      <a href="/search" aria-current={current('/search')}>Search</a>
+      <a href="/alumni/join" class="cta">Join as alumni</a>
+    </nav>
+  </div>
+</header>
+<script>
+  const btn = document.querySelector('.nav-toggle');
+  const nav = document.getElementById('nav');
+  btn?.addEventListener('click', () => {
+    const open = nav!.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+</script>

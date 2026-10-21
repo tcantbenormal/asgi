@@ -1,0 +1,34 @@
+// Single place for everything a cabinet member may need to change.
+export const site = {
+  name: 'Arid Society of GIS',
+  short: 'ASGI',
+  tagline: 'Alumni, careers and resources for GIS students of PMAS-Arid Agriculture University.',
+  university: 'PMAS-Arid Agriculture University, Rawalpindi',
+  department: 'Institute of Geo-Information & Earth Observation',
+  email: 'aridsocietyofgis@gmail.com',
+  // Google Forms. Replace with the society's own forms.
+  forms: {
+    alumni: 'https://forms.gle/REPLACE_ALUMNI_FORM',
+    mentorship: 'https://forms.gle/REPLACE_MENTORSHIP_FORM',
+    membership: 'https://forms.gle/REPLACE_MEMBERSHIP_FORM',
+    submitResource: 'https://forms.gle/REPLACE_RESOURCE_FORM',
+  },
+  social: {
+    linkedin: 'https://www.linkedin.com/company/REPLACE',
+    facebook: 'https://www.facebook.com/REPLACE',
+    instagram: 'https://www.instagram.com/REPLACE',
+    whatsapp: '',
+  },
+  // Supabase project. The publishable key is designed to be public; row level security does the protecting.
+  supabase: {
+    url: 'https://tuelxiyqeryqeualsepj.supabase.co',
+    key: 'sb_publishable_iU9dwNtMSXOcRljCO6azWQ_V7J7SDgE',
+  },
+  // CARTO basemap tiles. Swap "voyager" for "light_all" (Positron) for a lighter grey look.
+  // Restrict the key to the site's domain in the CARTO dashboard once a domain is connected.
+  basemapTiles: 'https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=cb1_4l8y_1_ec349aafebc313c616d23a11',
+  // Seconds a visitor waits on the download gate before the link unlocks.
+  downloadCountdown: 15,
+  // Giscus comments (https://giscus.app). Leave repo empty to hide comments.
+  giscus: { repo: '', repoId: '', category: 'General', categoryId: '' },
+};

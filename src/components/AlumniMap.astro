@@ -1,0 +1,54 @@
+---
+/** Leaflet map of alumni. Leaflet and leaflet.heat come from a CDN, no npm dependency. */
+import type { CollectionEntry } from 'astro:content';
+import { site } from '../config/site';
+interface Props { alumni: CollectionEntry<'alumni'>[]; tall?: boolean; interactive?: boolean; heat?: boolean }
+const { alumni, tall = false, interactive = true, heat = false } = Astro.props;
+const points = alumni.map((a) => ({
+  id: a.id,
+  name: a.data.name,
+  role: a.data.role,
+  org: a.data.organization,
+  city: a.data.city,
+  country: a.data.country,
+  sector: a.data.sector,
+  photo: a.data.photo ?? '',
+  initials: a.data.name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]!.toUpperCase()).join(''),
+  lat: a.data.lat,
+  lng: a.data.lng,
+  batch: a.data.batch,
+}));
+const uid = `map-${Math.random().toString(36).slice(2, 8)}`;
+---
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+<div class:list={['map-box', { tall }]} id={uid} data-interactive={interactive ? '1' : '0'} data-heat={heat ? '1' : '0'} data-tiles={site.basemapTiles} aria-label="Map of alumni locations" role="img"></div>
+<script type="application/json" data-for={uid} set:html={JSON.stringify(points)} />
+<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+{heat && <script is:inline src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js" crossorigin=""></script>}
+<script>
+  declare const L: any;
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+  document.querySelectorAll<HTMLElement>('.map-box[id^="map-"]').forEach((el) => {
+    const data = JSON.parse(document.querySelector(`script[data-for="${el.id}"]`)!.textContent || '[]');
+    const interactive = el.dataset.interactive === '1';
+    const map = L.map(el, { scrollWheelZoom: interactive, dragging: interactive, zoomControl: interactive, attributionControl: true });
+    L.tileLayer(el.dataset.tiles!, {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      maxZoom: 18,
+    }).addTo(map);
+    if (el.dataset.heat === '1' && (L as any).heatLayer && data.length > 1) {
+      L.heatLayer(data.map((p: any) => [p.lat, p.lng, 1]), { radius: 38, blur: 30, minOpacity: 0.25, gradient: { 0.2: '#c7d6ee', 0.5: '#5b8bd6', 0.8: '#e3101c' } }).addTo(map);
+    }
+    const group = L.featureGroup();
+    for (const p of data) {
+      const avatar = p.photo ? `<img src="${esc(p.photo)}" alt="">` : `<span>${esc(p.initials)}</span>`;
+      const html = `<div class="pp"><div class="pp-av">${avatar}</div><div><b>${esc(p.name)}</b><div class="pp-role">${esc(p.role)}<br>${esc(p.org)}</div><div class="pp-meta">${esc(p.city)}, ${esc(p.country)} · Batch ${esc(p.batch)} · ${esc(p.sector)}</div><a class="pp-link" href="/${esc(p.id)}">View profile →</a></div></div>`;
+      L.circleMarker([p.lat, p.lng], { radius: 7, color: '#ffffff', weight: 2, fillColor: '#e3101c', fillOpacity: 0.95 })
+        .bindPopup(html, { maxWidth: 320, className: 'pp-popup' })
+        .addTo(group);
+    }
+    group.addTo(map);
+    if (data.length) map.fitBounds(group.getBounds().pad(0.25), { maxZoom: 6 });
+    else map.setView([30.4, 69.3], 5);
+  });
+</script>

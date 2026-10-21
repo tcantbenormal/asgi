@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+---
+<Base title="Search" description="Search alumni, stories, roadmaps, software and datasets." noindex>
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" slot="head" />
+  <PageHead eyebrow="Search" title="Search the portal" />
+  <div id="search"></div>
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      new PagefindUI({ element: '#search', showSubResults: true, showImages: false, autofocus: true });
+    });
+  </script>
+  <style is:global>
+    :root { --pagefind-ui-primary: var(--navy); --pagefind-ui-text: var(--ink); --pagefind-ui-background: #fff; --pagefind-ui-border: var(--line); --pagefind-ui-font: var(--sans); --pagefind-ui-border-radius: 8px; }
+  </style>
+</Base>

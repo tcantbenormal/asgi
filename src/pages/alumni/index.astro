@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import AlumniCard from '../../components/AlumniCard.astro';
+
+const alumni = (await getCollection('alumni')).sort((a, b) => b.data.batch.localeCompare(a.data.batch) || a.data.name.localeCompare(b.data.name));
+const batches = [...new Set(alumni.map((a) => a.data.batch))].sort().reverse();
+const sectors = [...new Set(alumni.map((a) => a.data.sector))].sort();
+const countries = [...new Set(alumni.map((a) => a.data.country))].sort();
+---
+<Base title="Alumni directory" description="Directory of GIS and remote sensing graduates: where they work, what they do, and how to reach them.">
+  <PageHead eyebrow="Alumni" title="Alumni directory" lead="Graduates of the institute, by batch and sector. Filter to find someone in the organisation or country you are aiming for.">
+    <p style="margin-top:1rem"><a href="/alumni/join" class="btn btn-primary btn-sm">Add or update your profile</a></p>
+  </PageHead>
+
+  <form class="filters" id="filters" data-pagefind-ignore>
+    <label class="sr-only" for="q">Search</label>
+    <input id="q" type="search" placeholder="Search name, role, organisation, skill" />
+    <select id="batch" aria-label="Batch"><option value="">All batches</option>{batches.map((b) => <option>{b}</option>)}</select>
+    <select id="sector" aria-label="Sector"><option value="">All sectors</option>{sectors.map((s) => <option>{s}</option>)}</select>
+    <select id="country" aria-label="Country"><option value="">All countries</option>{countries.map((c) => <option>{c}</option>)}</select>
+    <label style="font-size:.9rem;display:flex;gap:.4rem;align-items:center"><input type="checkbox" id="mentor" /> Mentors only</label>
+  </form>
+
+  <div class="grid" id="list">{alumni.map((a) => <AlumniCard a={a} />)}</div>
+  <p class="empty-state" id="empty" hidden>No alumni match these filters.</p>
+
+  <script>
+    const $ = (id: string) => document.getElementById(id) as HTMLInputElement | HTMLSelectElement;
+    const cards = [...document.querySelectorAll<HTMLElement>('#list .card')];
+    const apply = () => {
+      const q = $('q').value.trim().toLowerCase();
+      const batch = $('batch').value, sector = $('sector').value, country = $('country').value;
+      const mentor = ($('mentor') as HTMLInputElement).checked;
+      let n = 0;
+      for (const c of cards) {
+        const ok = (!q || c.dataset.text!.includes(q)) && (!batch || c.dataset.batch === batch) && (!sector || c.dataset.sector === sector) && (!country || c.dataset.country === country) && (!mentor || c.dataset.mentor === '1');
+        c.hidden = !ok;
+        if (ok) n++;
+      }
+      document.getElementById('empty')!.hidden = n > 0;
+    };
+    document.getElementById('filters')!.addEventListener('input', apply);
+  </script>
+</Base>

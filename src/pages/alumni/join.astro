@@ -1,0 +1,318 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import { site } from '../../config/site';
+const sectors = ['Government', 'Private', 'NGO / UN', 'Academia', 'Freelance', 'Student'];
+const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilgit-Baltistan', 'Azad Jammu & Kashmir', 'Islamabad Capital Territory'];
+---
+<Base title="Create your profile" description="Sign in and build a profile that doubles as your portfolio: CV, projects, publications, experience and links." rail={false} noindex>
+  <div class="wrap" style="max-width:980px">
+    <PageHead eyebrow="Alumni" title="Your profile and portfolio" lead="Sign in, fill what applies, save. Your page lives at a short link you choose. The cabinet approves new profiles, usually within a few days. Come back any time to edit." />
+
+    <div id="auth" class="card" style="max-width:520px">
+      <h3>Sign in to continue</h3>
+      <p>Use the account you prefer. We only use it to know which profile is yours.</p>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem">
+        <button class="btn btn-primary" data-provider="google">Continue with Google</button>
+        <button class="btn btn-ghost" data-provider="github">Continue with GitHub</button>
+      </div>
+      <form id="magic" style="display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap">
+        <input type="email" id="magic-email" placeholder="or your email for a sign-in link" required style="flex:1;min-width:220px;font:inherit;padding:.55rem .75rem;border:1px solid var(--line);border-radius:8px" />
+        <button class="btn btn-ghost" type="submit">Send link</button>
+      </form>
+      <p id="auth-msg" class="status" hidden></p>
+    </div>
+
+    <form id="editor" class="form" hidden>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
+        <p id="who" class="muted" style="margin:0"></p>
+        <button type="button" class="btn btn-ghost btn-sm" id="signout">Sign out</button>
+      </div>
+      <p id="state" class="status" hidden></p>
+
+      <fieldset>
+        <legend>Identity</legend>
+        <div class="row">
+          <label>Full name <input name="name" required maxlength="80" /></label>
+          <label>Short link <span style="display:flex;align-items:center;gap:.3rem;font-weight:400"><span class="muted" id="origin"></span>/<input name="username" placeholder="fahadkarim" pattern="[a-z0-9][a-z0-9-]{2,29}" title="3 to 30 lowercase letters, digits or hyphens" style="flex:1" /></span></label>
+        </div>
+        <div class="row">
+          <label>Photo <input type="file" name="photo" accept="image/jpeg,image/png,image/webp" /></label>
+          <label>CV (PDF, max 5 MB) <input type="file" name="cv" accept="application/pdf" /></label>
+        </div>
+        <div class="row-3">
+          <label>Batch <input name="batch" placeholder="2021-25" required pattern="\d{4}-\d{2}" /></label>
+          <label>Degree from the institute <input name="degree" placeholder="BS Geoinformatics" required /></label>
+          <label>Sector <select name="sector" required>{sectors.map((s) => <option>{s}</option>)}</select></label>
+        </div>
+        <div class="row">
+          <label>Current role <input name="role" placeholder="GIS Analyst" required /></label>
+          <label>Organisation <input name="organization" placeholder="SUPARCO" required /></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Location</legend>
+        <div class="row-3">
+          <label>City <input name="city" required /></label>
+          <label>Country <input name="country" required /></label>
+          <label>Province (if Pakistan) <select name="province"><option value="">—</option>{provinces.map((p) => <option>{p}</option>)}</select></label>
+        </div>
+        <div class="row-3">
+          <label>Latitude <input name="lat" type="number" step="any" min="-90" max="90" required /></label>
+          <label>Longitude <input name="lng" type="number" step="any" min="-180" max="180" required /></label>
+          <label>Map pin
+            <span style="display:flex;gap:.5rem;flex-wrap:wrap">
+              <button type="button" class="btn btn-primary btn-sm" id="locate">Use my location</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="geocode">Look up city</button>
+            </span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Links</legend>
+        <div class="row">
+          <label>LinkedIn <input name="linkedin" type="url" placeholder="https://linkedin.com/in/…" /></label>
+          <label>GitHub <input name="github" type="url" placeholder="https://github.com/…" /></label>
+        </div>
+        <div class="row">
+          <label>Portfolio or website <input name="portfolio" type="url" placeholder="https://…" /></label>
+          <label>ORCID iD <input name="orcid" placeholder="0000-0002-1825-0097" pattern="\d{4}-\d{4}-\d{4}-\d{3}[\dX]" /></label>
+        </div>
+        <label>Public contact email (shown on your page) <input name="email_public" type="email" /></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Career</legend>
+        <label>Skills, comma separated <input name="skills" placeholder="QGIS, Python, Google Earth Engine" /></label>
+        <label>One line of advice for juniors <input name="advice" maxlength="200" /></label>
+        <label>Your journey (Markdown allowed) <textarea name="bio" placeholder="How you got from first semester to where you are now. Honest beats polished."></textarea></label>
+        <label class="check"><input type="checkbox" name="mentor" /> List me as open to mentoring students</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Experience</legend>
+        <div id="exp"></div>
+        <button type="button" class="btn btn-ghost btn-sm" data-add="exp" style="justify-self:start">Add position</button>
+      </fieldset>
+
+      <fieldset>
+        <legend>Education</legend>
+        <p class="muted" style="margin:0;font-size:.88rem">All degrees, including the one from the institute and anything in progress.</p>
+        <div id="edu"></div>
+        <button type="button" class="btn btn-ghost btn-sm" data-add="edu" style="justify-self:start">Add degree</button>
+      </fieldset>
+
+      <fieldset>
+        <legend>Projects</legend>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
+          <button type="button" class="btn btn-ghost btn-sm" id="import-github">Import from GitHub</button>
+          <span class="muted" style="font-size:.85rem">Pulls your twelve most recently updated public repositories. Edit or remove anything after.</span>
+        </div>
+        <div id="proj"></div>
+        <button type="button" class="btn btn-ghost btn-sm" data-add="proj" style="justify-self:start">Add project</button>
+      </fieldset>
+
+      <fieldset>
+        <legend>Publications</legend>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
+          <button type="button" class="btn btn-ghost btn-sm" id="import-orcid">Import from ORCID</button>
+          <span class="muted" style="font-size:.85rem">Uses the open OpenAlex index. Needs your ORCID iD above.</span>
+        </div>
+        <div id="pub"></div>
+        <button type="button" class="btn btn-ghost btn-sm" data-add="pub" style="justify-self:start">Add publication</button>
+      </fieldset>
+
+      <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
+        <button class="btn btn-accent" type="submit" id="save">Save profile</button>
+        <span class="muted" style="font-size:.88rem">By saving you agree to your profile being published on this site. See the <a href="/privacy">privacy policy</a>.</span>
+      </div>
+    </form>
+  </div>
+
+  <template id="t-pub"><div class="rrow c4">
+    <label>Title <input data-k="title" required /></label>
+    <label>Venue <input data-k="venue" placeholder="Journal / conference" /></label>
+    <label>Year <input data-k="year" placeholder="2025" /></label>
+    <label>Link <input data-k="url" type="url" placeholder="https://doi.org/…" /></label>
+    <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove">×</button>
+  </div></template>
+  <template id="t-edu"><div class="rrow c5">
+    <label>Institution <input data-k="institution" required placeholder="NUST, Islamabad" /></label>
+    <label>Degree <input data-k="degree" placeholder="MS" /></label>
+    <label>Programme <input data-k="program" placeholder="Remote Sensing & GIS" /></label>
+    <label>Start <input data-k="start" placeholder="2025" /></label>
+    <label>End <input data-k="end" placeholder="2027 or present" /></label>
+    <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove">×</button>
+  </div></template>
+  <template id="t-exp"><div class="rrow c4">
+    <label>Title <input data-k="title" required placeholder="GIS Analyst" /></label>
+    <label>Organisation <input data-k="organization" /></label>
+    <label>Start <input data-k="start" placeholder="2024-06" /></label>
+    <label>End <input data-k="end" placeholder="leave empty if current" /></label>
+    <label class="span">Description <input data-k="description" placeholder="One or two lines on what you did" /></label>
+    <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove">×</button>
+  </div></template>
+  <template id="t-proj"><div class="rrow c3">
+    <label>Title <input data-k="title" required /></label>
+    <label>Live link <input data-k="url" type="url" placeholder="https://…" /></label>
+    <label>Repository <input data-k="repo" type="url" placeholder="https://github.com/…" /></label>
+    <label class="span">Description <input data-k="description" /></label>
+    <label>Tags <input data-k="tags" placeholder="Leaflet, PostGIS" /></label>
+    <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove">×</button>
+  </div></template>
+
+  <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    const sb = createClient(url, key);
+    const $ = (id) => document.getElementById(id);
+    const editor = $('editor'), auth = $('auth'), state = $('state'), f = editor.elements;
+    const say = (el, msg, kind = '') => { el.textContent = msg; el.className = `status ${kind}`; el.hidden = !msg; };
+    $('origin').textContent = location.origin;
+
+    // Auth
+    document.querySelectorAll('[data-provider]').forEach((b) => b.addEventListener('click', () =>
+      sb.auth.signInWithOAuth({ provider: b.dataset.provider, options: { redirectTo: location.href } })));
+    $('magic').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const { error } = await sb.auth.signInWithOtp({ email: $('magic-email').value, options: { emailRedirectTo: location.href } });
+      say($('auth-msg'), error ? error.message : 'Check your inbox for the sign-in link.', error ? 'err' : 'ok');
+    });
+    $('signout').addEventListener('click', () => sb.auth.signOut().then(() => location.reload()));
+
+    // Repeatable rows: pub, edu, exp, proj
+    const addRow = (kind, v = {}) => {
+      const row = $(`t-${kind}`).content.firstElementChild.cloneNode(true);
+      row.querySelectorAll('[data-k]').forEach((i) => (i.value = Array.isArray(v[i.dataset.k]) ? v[i.dataset.k].join(', ') : v[i.dataset.k] ?? ''));
+      row.querySelector('[data-remove]').addEventListener('click', () => row.remove());
+      $(kind).appendChild(row);
+    };
+    const readRows = (kind) => [...$(kind).querySelectorAll('.rrow')].map((r) => Object.fromEntries([...r.querySelectorAll('[data-k]')].map((i) => [i.dataset.k, i.value.trim()])));
+    document.querySelectorAll('[data-add]').forEach((b) => b.addEventListener('click', () => addRow(b.dataset.add)));
+
+    // Imports. GitHub public API, 60 requests per hour per IP, no key. OpenAlex, free, polite pool with an email.
+    $('import-github').addEventListener('click', async () => {
+      const user = (f.github.value.match(/github\.com\/([^/?#]+)/) || [])[1];
+      if (!user) return say(state, 'Add your GitHub profile link first.', 'err');
+      const r = await fetch(`https://api.github.com/users/${user}/repos?sort=updated&per_page=12&type=owner`);
+      if (!r.ok) return say(state, `GitHub said ${r.status}. Try again in a while.`, 'err');
+      const repos = (await r.json()).filter((x) => !x.fork);
+      repos.forEach((x) => addRow('proj', { title: x.name, description: x.description || '', url: x.homepage || '', repo: x.html_url, tags: [x.language].filter(Boolean) }));
+      say(state, `Imported ${repos.length} repositories. Remove any that do not belong on a portfolio.`, 'ok');
+    });
+    $('import-orcid').addEventListener('click', async () => {
+      const id = f.orcid.value.trim();
+      if (!id) return say(state, 'Enter your ORCID iD first.', 'err');
+      const r = await fetch(`https://api.openalex.org/works?filter=authorships.author.orcid:https://orcid.org/${id}&per-page=50&select=title,publication_year,primary_location,doi&mailto=portal@asgi.pk`);
+      if (!r.ok) return say(state, `OpenAlex said ${r.status}.`, 'err');
+      const works = (await r.json()).results || [];
+      works.forEach((w) => addRow('pub', { title: w.title, venue: w.primary_location?.source?.display_name || '', year: w.publication_year || '', url: w.doi || '' }));
+      say(state, works.length ? `Imported ${works.length} works.` : 'No works found for that ORCID in OpenAlex yet.', works.length ? 'ok' : 'err');
+    });
+
+    // Location
+    $('locate').addEventListener('click', () => {
+      if (!navigator.geolocation) return say(state, 'Your browser does not support location. Use "Look up city" instead.', 'err');
+      say(state, 'Waiting for location permission…');
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        const lat = pos.coords.latitude, lng = pos.coords.longitude;
+        f.lat.value = lat.toFixed(4); f.lng.value = lng.toFixed(4);
+        try {
+          const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&zoom=10&lat=${lat}&lon=${lng}`, { headers: { Accept: 'application/json' } });
+          const a = (await r.json()).address || {};
+          if (!f.city.value) f.city.value = a.city || a.town || a.village || a.county || a.state || '';
+          if (!f.country.value) f.country.value = a.country || '';
+          if (!f.province.value && a.state) [...f.province.options].forEach((o) => { if (a.state.includes(o.value.split(' ')[0]) && o.value) f.province.value = o.value; });
+        } catch {}
+        say(state, 'Pinned to your current location. Adjust if you want to show a different city.', 'ok');
+      }, (err) => say(state, err.code === 1 ? 'Location permission denied. Use "Look up city" instead.' : 'Could not get location. Use "Look up city" instead.', 'err'), { timeout: 10000 });
+    });
+    $('geocode').addEventListener('click', async () => {
+      const q = encodeURIComponent(`${f.city.value}, ${f.country.value}`);
+      const r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${q}`, { headers: { Accept: 'application/json' } });
+      const [hit] = await r.json();
+      if (!hit) return say(state, 'Place not found. Enter coordinates manually.', 'err');
+      f.lat.value = Number(hit.lat).toFixed(4); f.lng.value = Number(hit.lon).toFixed(4);
+      say(state, `Pinned to ${hit.display_name}`, 'ok');
+    });
+
+    // Load existing profile
+    const fill = (p) => {
+      for (const k of ['name','username','batch','degree','sector','role','organization','city','country','province','lat','lng','linkedin','github','portfolio','orcid','email_public','advice','bio']) f[k].value = p[k] ?? '';
+      f.skills.value = (p.skills ?? []).join(', ');
+      f.mentor.checked = !!p.mentor;
+      for (const k of ['pub','edu','exp','proj']) $(k).innerHTML = '';
+      (p.publications ?? []).forEach((v) => addRow('pub', v));
+      (p.education ?? []).forEach((v) => addRow('edu', v));
+      (p.experience ?? []).forEach((v) => addRow('exp', v));
+      (p.projects ?? []).forEach((v) => addRow('proj', v));
+      const path = p.username || p.slug;
+      say(state, p.approved ? `Your page is live at ${location.origin}/${path}. Edits go live on the next site build.` : `Saved and waiting for cabinet approval. Your page will be ${location.origin}/${path}.`, p.approved ? 'ok' : '');
+    };
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) {
+      auth.hidden = true; editor.hidden = false;
+      $('who').textContent = `Signed in as ${session.user.email}`;
+      const { data } = await sb.from('profiles').select('*').eq('user_id', session.user.id).maybeSingle();
+      if (data) fill(data); else { addRow('edu'); addRow('exp'); }
+    }
+
+    // Upload helper
+    const upload = async (bucket, file, name) => {
+      const path = `${session.user.id}/${name}`;
+      const { error } = await sb.storage.from(bucket).upload(path, file, { upsert: true, contentType: file.type });
+      if (error) throw new Error(`${bucket} upload failed: ${error.message}`);
+      return sb.storage.from(bucket).getPublicUrl(path).data.publicUrl + `?v=${Date.now()}`;
+    };
+
+    // Save
+    editor.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      $('save').disabled = true; say(state, 'Saving…');
+      try {
+        const extra = {};
+        if (f.photo.files[0]) {
+          if (f.photo.files[0].size > 2 * 1024 * 1024) throw new Error('Photo must be under 2 MB.');
+          extra.photo_url = await upload('avatars', f.photo.files[0], `avatar.${f.photo.files[0].name.split('.').pop().toLowerCase()}`);
+        }
+        if (f.cv.files[0]) {
+          if (f.cv.files[0].size > 5 * 1024 * 1024) throw new Error('CV must be under 5 MB.');
+          extra.cv_url = await upload('cv', f.cv.files[0], 'cv.pdf');
+        }
+        const row = {
+          user_id: session.user.id,
+          name: f.name.value.trim(), username: f.username.value.trim().toLowerCase() || null,
+          batch: f.batch.value.trim(), degree: f.degree.value.trim(), sector: f.sector.value,
+          role: f.role.value.trim(), organization: f.organization.value.trim(),
+          city: f.city.value.trim(), country: f.country.value.trim(), province: f.province.value || null,
+          lat: Number(f.lat.value), lng: Number(f.lng.value),
+          linkedin: f.linkedin.value || null, github: f.github.value || null, portfolio: f.portfolio.value || null,
+          orcid: f.orcid.value.trim() || null, email_public: f.email_public.value || null,
+          skills: f.skills.value.split(',').map((s) => s.trim()).filter(Boolean),
+          advice: f.advice.value.trim() || null, bio: f.bio.value.trim() || null, mentor: f.mentor.checked,
+          publications: readRows('pub').filter((p) => p.title),
+          education: readRows('edu').filter((p) => p.institution),
+          experience: readRows('exp').filter((p) => p.title).map((p) => ({ ...p, current: !p.end })),
+          projects: readRows('proj').filter((p) => p.title).map((p) => ({ ...p, tags: p.tags.split(',').map((s) => s.trim()).filter(Boolean) })),
+          ...extra,
+        };
+        const { data, error } = await sb.from('profiles').upsert(row, { onConflict: 'user_id' }).select().single();
+        if (error) throw new Error(error.message.includes('profiles_username') ? 'That short link is taken or not allowed. Pick another.' : error.message);
+        fill(data);
+      } catch (err) {
+        say(state, err.message, 'err');
+      } finally {
+        $('save').disabled = false;
+      }
+    });
+  </script>
+  <style>
+    .rrow { display: grid; gap: 0.5rem; align-items: end; padding: 0.75rem; border: 1px dashed var(--line); border-radius: 8px; margin-bottom: 0.5rem; }
+    .rrow.c3 { grid-template-columns: 1fr 1fr 1fr auto; }
+    .rrow.c4 { grid-template-columns: 2fr 1fr 80px 2fr auto; }
+    .rrow.c5 { grid-template-columns: 2fr 1fr 2fr 80px 110px auto; }
+    .rrow .span { grid-column: 1 / -2; }
+    @media (max-width: 760px) { .rrow, .rrow.c3, .rrow.c4, .rrow.c5 { grid-template-columns: 1fr; } .rrow .span { grid-column: auto; } }
+  </style>
+</Base>

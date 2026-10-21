@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { site } from '../config/site';
+---
+<Base title="Privacy policy" description="How this site handles personal data, cookies and advertising." rail={false} noindex>
+  <div class="wrap">
+    <PageHead eyebrow="Legal" title="Privacy policy" lead="Last updated 15 October 2026." />
+    <div class="prose">
+      <h2>Who we are</h2>
+      <p>This website is operated by the {site.name}, a student society at the {site.university}. Contact: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      <h2>What we collect</h2>
+      <p>The site itself is static and has no user accounts. It does not set cookies of its own. When you submit a form, the data goes to Google Forms and is stored in a Google Sheet controlled by the society cabinet. We only publish what you agree to publish on your profile.</p>
+      <h2>Alumni profiles</h2>
+      <p>Profiles are published with the consent of the person concerned. You may ask for your profile to be edited or removed at any time by emailing us from your registered address. We act within seven days.</p>
+      <h2>Advertising</h2>
+      <p>We show advertisements from third-party networks to cover costs. These networks may use cookies and similar technologies to show ads based on your prior visits to this or other websites, and may collect your IP address and device information. You can opt out of personalised advertising through your browser settings or at <a href="https://www.youronlinechoices.com/" rel="noopener">youronlinechoices.com</a>. The download pages show advertisements during a short countdown before a link is revealed.</p>
+      <h2>Analytics</h2>
+      <p>We use privacy-respecting, cookie-free analytics to count page views. No personal profile is built.</p>
+      <h2>Third-party links</h2>
+      <p>Download links point to Google Drive, MEGA, the Internet Archive, GitHub, or the official site of the software. Their privacy policies apply once you leave this site.</p>
+      <h2>Changes</h2>
+      <p>We will post any changes to this policy on this page.</p>
+    </div>
+  </div>
+</Base>

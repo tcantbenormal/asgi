@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import AlumniCard from '../components/AlumniCard.astro';
+import { site } from '../config/site';
+const mentors = (await getCollection('alumni')).filter((a) => a.data.mentor);
+---
+<Base title="Mentorship" description="Request guidance from an alumnus working in the field you want to enter.">
+  <PageHead eyebrow="Alumni" title="Ask an alumnus" lead="A short email exchange or a thirty-minute call with a senior who has been where you are. Free, and run by the society." />
+  <div class="prose">
+    <h2>How it works</h2>
+    <ol>
+      <li>Fill the request form. Say what you want to ask and which sector or organisation you are interested in.</li>
+      <li>The cabinet matches you with an alumnus who has opted in, usually within two weeks.</li>
+      <li>You get an introduction by email. Be specific, be on time, and send a thank-you note afterwards.</li>
+    </ol>
+    <p><a class="btn btn-primary" href={site.forms.mentorship} rel="noopener">Request a mentor</a></p>
+    <h2>Good questions to ask</h2>
+    <ul>
+      <li>How did you get your first role, and what would you do differently?</li>
+      <li>Which skills from the degree mattered most, and which did you have to learn on your own?</li>
+      <li>What does a typical week look like in your job?</li>
+      <li>How did you prepare your application for a scholarship or a foreign master's?</li>
+    </ul>
+  </div>
+  <section class="section">
+    <h2>Alumni open to mentoring</h2>
+    {mentors.length ? <div class="grid">{mentors.map((a) => <AlumniCard a={a} />)}</div> : <p class="empty-state">No mentors listed yet.</p>}
+  </section>
+</Base>

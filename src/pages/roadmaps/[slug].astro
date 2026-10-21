@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Comments from '../../components/Comments.astro';
+
+export async function getStaticPaths() {
+  const roadmaps = await getCollection('roadmaps');
+  return roadmaps.map((r) => ({ params: { slug: r.id }, props: { r } }));
+}
+const { r } = Astro.props;
+const { Content } = await render(r);
+---
+<Base title={r.data.title} description={r.data.summary}>
+  <header class="page-head">
+    <div class="eyebrow">Roadmap · Demand: {r.data.demand}</div>
+    <h1>{r.data.title}</h1>
+    <p class="lead">{r.data.summary}</p>
+    <div class="tags" style="margin-top:1rem">{r.data.tools.map((t) => <span class="tag grey">{t}</span>)}</div>
+  </header>
+  <div class="prose" style="margin-bottom:2rem"><Content /></div>
+  <h2>Stages</h2>
+  <ol class="stages" style="list-style:none;padding:0;margin:0">
+    {r.data.stages.map((s) => (
+      <li class="stage">
+        <h3>{s.name}</h3>
+        <div class="duration">{s.duration}</div>
+        <ul>{s.skills.map((k) => <li>{k}</li>)}</ul>
+        {s.resources.length > 0 && <div class="res">{s.resources.map((x) => <a class="btn btn-ghost btn-sm" href={x.url} rel="noopener">{x.label}</a>)}</div>}
+      </li>
+    ))}
+  </ol>
+  <Comments />
+</Base>

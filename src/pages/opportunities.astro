@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { site } from '../config/site';
+
+const all = await getCollection('links');
+const groups: [string, string, string][] = [
+  ['scholarship', 'Scholarships and funded programmes', 'Fully or partially funded master\'s and PhD routes that GIS graduates from Pakistan regularly win.'],
+  ['course', 'Free courses', 'Self-paced courses you can finish in a semester. Most issue a certificate at no cost.'],
+  ['certification', 'Certifications', 'Credentials that employers in the region actually recognise.'],
+  ['job', 'Jobs and internships', 'Openings shared by alumni and the cabinet. Listings older than sixty days are removed.'],
+];
+---
+<Base title="Opportunities" description="Scholarships, free courses, certifications, jobs and internships for GIS and remote sensing students.">
+  <PageHead eyebrow="Opportunities" title="Scholarships, courses and jobs" lead="Curated, not scraped. Every link was checked by a person. Alumni can post openings through the form below.">
+    <p style="margin-top:1rem"><a class="btn btn-primary btn-sm" href={site.forms.submitResource}>Post an opportunity</a></p>
+  </PageHead>
+  <nav class="filters" aria-label="Sections" data-pagefind-ignore>
+    {groups.map(([k, label]) => <a class="btn btn-ghost btn-sm" href={`#${k}`}>{label}</a>)}
+  </nav>
+  {groups.map(([k, label, lead]) => {
+    const items = all.filter((l) => l.data.category === k);
+    return (
+      <section class="section" id={k}>
+        <h2>{label}</h2>
+        <p class="lead" style="margin-bottom:1.5rem">{lead}</p>
+        {items.length === 0 ? <p class="empty-state">Nothing listed right now.</p> : (
+          <div class="grid grid-2">
+            {items.map((l) => (
+              <article class="card">
+                <h3><a href={l.data.url} rel="noopener">{l.data.title}</a></h3>
+                <p>{l.data.description}</p>
+                <div class="meta">
+                  <span>{l.data.provider}</span>
+                  {l.data.location && <span>{l.data.location}</span>}
+                  {l.data.cost && <span>{l.data.cost}</span>}
+                  {l.data.deadline && <span>Deadline: {l.data.deadline}</span>}
+                </div>
+                {l.data.tags.length > 0 && <div class="tags">{l.data.tags.map((t) => <span class="tag grey">{t}</span>)}</div>}
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+    );
+  })}
+</Base>

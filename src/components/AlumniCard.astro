@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Avatar from './Avatar.astro';
+interface Props { a: CollectionEntry<'alumni'> }
+const { a } = Astro.props;
+const d = a.data;
+---
+<article class="card" data-batch={d.batch} data-sector={d.sector} data-country={d.country} data-mentor={d.mentor ? '1' : '0'} data-text={`${d.name} ${d.role} ${d.organization} ${d.city} ${d.skills.join(' ')}`.toLowerCase()}>
+  <div class="person">
+    <Avatar name={d.name} photo={d.photo} />
+    <div>
+      <h3><a href={`/${a.id}`}>{d.name}</a></h3>
+      <p>{d.role} · {d.organization}</p>
+    </div>
+  </div>
+  <div class="meta">
+    <span>Batch {d.batch}</span>
+    <span>{d.city}, {d.country}</span>
+  </div>
+  <div class="foot">
+    <span class="tag grey">{d.sector}</span>
+    {d.mentor && <span class="tag">Open to mentoring</span>}
+  </div>
+</article>

@@ -1,0 +1,53 @@
+---
+import { site } from '../config/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer" data-pagefind-ignore>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>{site.name}</h4>
+        <p>{site.department}<br />{site.university}</p>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      </div>
+      <div>
+        <h4>Alumni</h4>
+        <ul>
+          <li><a href="/alumni">Directory</a></li>
+          <li><a href="/map">Alumni map</a></li>
+          <li><a href="/stories">Stories</a></li>
+          <li><a href="/alumni/join">Add your profile</a></li>
+          <li><a href="/mentorship">Mentorship</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="/roadmaps">Skills roadmaps</a></li>
+          <li><a href="/software">Software</a></li>
+          <li><a href="/datasets">Datasets</a></li>
+          <li><a href="/opportunities">Scholarships and jobs</a></li>
+          <li><a href="/projects">FYP archive</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Society</h4>
+        <ul>
+          <li><a href="/society">About and cabinet</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/legal">Content policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© {year} {site.name}. Built and maintained by students.</span>
+      <span>
+        {site.social.linkedin && <a href={site.social.linkedin}>LinkedIn</a>} ·
+        {site.social.facebook && <a href={site.social.facebook}>Facebook</a>} ·
+        {site.social.instagram && <a href={site.social.instagram}>Instagram</a>}
+      </span>
+    </div>
+  </div>
+</footer>

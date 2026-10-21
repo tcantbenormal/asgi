@@ -1,0 +1,7 @@
+[
+  { "id": "president-2026", "name": "Sample President", "position": "President", "session": "2026-27", "linkedin": "" },
+  { "id": "vp-2026", "name": "Sample Vice President", "position": "Vice President", "session": "2026-27", "linkedin": "" },
+  { "id": "gs-2026", "name": "Sample General Secretary", "position": "General Secretary", "session": "2026-27", "linkedin": "" },
+  { "id": "web-2026", "name": "Sample Web Lead", "position": "Portal and Alumni Relations", "session": "2026-27", "linkedin": "" },
+  { "id": "president-2025", "name": "Sample Past President", "position": "President", "session": "2025-26", "linkedin": "" }
+]

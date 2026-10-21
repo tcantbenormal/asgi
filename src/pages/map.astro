@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import AlumniMap from '../components/AlumniMap.astro';
+
+// Only graduates who are in the market: everyone except current students.
+const alumni = (await getCollection('alumni')).filter((a) => a.data.sector !== 'Student');
+type A = (typeof alumni)[number];
+const count = (key: (a: A) => string | undefined): [string, number][] =>
+  Object.entries(alumni.reduce<Record<string, number>>((m, a) => { const k = key(a); if (k) m[k] = (m[k] || 0) + 1; return m; }, {})).sort((a, b) => b[1] - a[1]);
+const tables: [string, [string, number][]][] = [
+  ['By country', count((a) => a.data.country)],
+  ['Pakistan by province', count((a) => (a.data.country === 'Pakistan' ? a.data.province || 'Province not set' : undefined))],
+  ['Top cities', count((a) => `${a.data.city}, ${a.data.country}`).slice(0, 10)],
+  ['By sector', count((a) => a.data.sector)],
+];
+const countries = tables[0]![1].length;
+const abroad = alumni.filter((a) => a.data.country !== 'Pakistan').length;
+---
+<Base title="Alumni map" description="Where graduates of the institute live and work: interactive map, heatmap, and breakdowns by country, province, city and sector." rail={false}>
+  <div class="wrap">
+    <PageHead eyebrow="Alumni network" title="Alumni map" lead="Graduates working in the market, one pin each. Click a pin for the person. The heat shows where the community is dense." />
+    <div class="stats" style="margin-bottom:1.5rem">
+      <div class="stat"><b>{alumni.length}</b><span>Working graduates</span></div>
+      <div class="stat"><b>{countries}</b><span>Countries</span></div>
+      <div class="stat"><b>{abroad}</b><span>Based abroad</span></div>
+      <div class="stat"><b>{tables[2]![1].length}</b><span>Cities (top ten shown)</span></div>
+    </div>
+    <AlumniMap alumni={alumni} tall heat />
+    <div class="section" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.25rem">
+      {tables.map(([title, rows]) => (
+        <div class="card">
+          <h3 style="font-size:1rem">{title}</h3>
+          {rows.length ? (
+            <table class="mini">
+              <tbody>
+                {rows.map(([k, v]) => (
+                  <tr><td>{k}</td><td><i style={`width:${Math.round((v / rows[0]![1]) * 100)}%`}></i><span>{v}</span></td></tr>
+                ))}
+              </tbody>
+            </table>
+          ) : <p class="muted">No data yet.</p>}
+        </div>
+      ))}
+    </div>
+    <p class="notice navy">Current students are listed in the <a href="/alumni">directory</a> but not on this map. Not pinned yet? <a href="/alumni/join">Create your profile</a>.</p>
+  </div>
+  <style>
+    .mini { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .mini td { padding: 0.3rem 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
+    .mini td:last-child { width: 45%; }
+    .mini td i { display: inline-block; height: 8px; background: var(--navy-soft); border-radius: 4px; vertical-align: middle; margin-right: 0.4rem; }
+    .mini td span { font-weight: 600; color: var(--navy); }
+  </style>
+</Base>

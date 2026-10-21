@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { site } from '../config/site';
+const projects = (await getCollection('projects')).sort((a, b) => b.data.year - a.data.year);
+const domains = [...new Set(projects.map((p) => p.data.domain))].sort();
+---
+<Base title="Final year projects" description="Archive of final year projects from the institute: abstracts, tools used, and supervisors, to help juniors choose and scope their own.">
+  <PageHead eyebrow="Academia" title="Final year project archive" lead="What seniors built, which tools they used, and who supervised. Read a few before you pick your own topic, and avoid repeating one.">
+    <p style="margin-top:1rem"><a class="btn btn-primary btn-sm" href={site.forms.submitResource}>Add your project</a></p>
+  </PageHead>
+  <div class="filters" data-pagefind-ignore>
+    <select id="pdom" aria-label="Domain"><option value="">All domains</option>{domains.map((d) => <option>{d}</option>)}</select>
+  </div>
+  <div class="grid grid-2" id="plist">
+    {projects.map((p) => (
+      <article class="card" data-dom={p.data.domain}>
+        <div class="meta"><span class="tag grey">{p.data.domain}</span><span>{p.data.year}</span></div>
+        <h3>{p.data.title}</h3>
+        <p>{p.data.abstract}</p>
+        <div class="meta" style="margin-top:.4rem"><span>{p.data.students.join(', ')}</span><span>Supervisor: {p.data.supervisor}</span></div>
+        <div class="foot">
+          <div class="tags">{p.data.tools.map((t) => <span class="tag grey">{t}</span>)}</div>
+          {p.data.report && <a class="btn btn-ghost btn-sm" href={p.data.report} rel="noopener">Report</a>}
+        </div>
+      </article>
+    ))}
+  </div>
+  <script>
+    const sel = document.getElementById('pdom') as HTMLSelectElement;
+    sel.addEventListener('change', () => document.querySelectorAll<HTMLElement>('#plist .card').forEach((c) => (c.hidden = !!sel.value && c.dataset.dom !== sel.value)));
+  </script>
+</Base>

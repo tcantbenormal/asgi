@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { site } from '../config/site';
+---
+<Base title="Content policy" description="What this site hosts, what it does not, and how to report a problem." rail={false} noindex>
+  <div class="wrap">
+    <PageHead eyebrow="Legal" title="Content policy" />
+    <div class="prose">
+      <h2>Software</h2>
+      <p>We only list software that is free and open-source, or freeware whose licence permits redistribution, or commercial software for which we link to the vendor's own student-licence page. We do not host cracked, patched, or licence-bypassed software, and we remove any such link immediately on notice.</p>
+      <h2>Datasets</h2>
+      <p>Datasets are listed with their source and licence. Most are open data from government or research providers. Society-made datasets are released under the licence stated on their page. Users are responsible for complying with those licences when publishing results.</p>
+      <h2>Alumni and student content</h2>
+      <p>Profiles, stories, and project abstracts are contributed by the people named and published with their consent. Opinions are their own and not those of the university.</p>
+      <h2>Reporting</h2>
+      <p>To report a copyright concern or a link that should not be here, email <a href={`mailto:${site.email}`}>{site.email}</a> with the page address. We respond within seven days.</p>
+    </div>
+  </div>
+</Base>

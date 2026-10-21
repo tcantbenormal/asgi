@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Avatar from '../components/Avatar.astro';
+import { site } from '../config/site';
+const cabinet = await getCollection('cabinet');
+const sessions = [...new Set(cabinet.map((c) => c.data.session))].sort().reverse();
+---
+<Base title="About the society" description={`About the ${site.name}: mission, cabinet, membership and how the society is run.`}>
+  <PageHead eyebrow="Society" title={site.name} lead={`A student-run society at the ${site.department}, ${site.university}.`} />
+  <div class="prose">
+    <h2>What we do</h2>
+    <p>The society exists to connect students of GIS and remote sensing with each other, with alumni, and with the profession. We run workshops, invite guest speakers, organise field visits, celebrate GIS Day, and maintain this portal so that every batch leaves something behind for the next.</p>
+    <h2>Membership</h2>
+    <p>Any enrolled student of the institute can join. Membership is free. Members get early access to workshops, can propose events, and may stand for the cabinet.</p>
+    <p><a class="btn btn-primary" href={site.forms.membership} rel="noopener">Membership form</a></p>
+  </div>
+
+  {sessions.map((s, i) => (
+    <section class="section" style={i === 0 ? '' : 'padding-top:2rem'}>
+      <h2>{i === 0 ? 'Current cabinet' : 'Cabinet'} <small class="muted" style="font-family:var(--sans);font-size:1rem;font-weight:400">{s}</small></h2>
+      <div class="grid">
+        {cabinet.filter((c) => c.data.session === s).map((c) => (
+          <div class="card">
+            <div class="person">
+              <Avatar name={c.data.name} />
+              <div>
+                <h3>{c.data.name}</h3>
+                <p>{c.data.position}</p>
+                {c.data.linkedin && <a href={c.data.linkedin} rel="noopener" style="font-size:.85rem">LinkedIn</a>}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <section class="section">
+    <h2>How this site is run</h2>
+    <div class="prose">
+      <p>The portal is built and maintained by students. Content is added through forms and reviewed by the cabinet before it goes live. The domain, hosting, and accounts belong to the society, not to any individual, and are handed over at each election. The site costs nothing to host. Advertising and sponsorships cover the domain and fund society activities.</p>
+      <p>Want to help maintain it? Write to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
+  </section>
+</Base>

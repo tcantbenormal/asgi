@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Comments from '../../components/Comments.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((p) => ({ params: { slug: p.id }, props: { p } }));
+}
+const { p } = Astro.props;
+const { Content } = await render(p);
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base title={p.data.title} description={p.data.summary}>
+  <header class="page-head">
+    <div class="eyebrow" style="text-transform:capitalize">{p.data.type}</div>
+    <h1>{p.data.title}</h1>
+    <p class="lead">{p.data.summary}</p>
+    <p class="muted" style="margin:.75rem 0 0;font-size:.9rem">By {p.data.author} · {fmt(p.data.date)}</p>
+  </header>
+  {p.data.cover && <img src={p.data.cover} alt="" style="border-radius:var(--radius);margin-bottom:2rem" />}
+  <article class="prose"><Content /></article>
+  {p.data.tags.length > 0 && <div class="tags" style="margin-top:2rem">{p.data.tags.map((t) => <span class="tag grey">{t}</span>)}</div>}
+  <Comments />
+</Base>

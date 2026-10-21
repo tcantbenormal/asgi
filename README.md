@@ -43,7 +43,7 @@ One-time setup:
 
 Approving a profile: Table Editor > profiles > tick `approved`. Tick `featured` to show it on the home page. Then trigger a rebuild (push a commit, or call the Cloudflare deploy hook).
 
-Until the table has at least one approved row, the build falls back to the sample Markdown files in `src/content/alumni/`. Delete those once real profiles exist.
+If Supabase is unreachable at build time the build falls back to any Markdown files in `src/content/alumni/`; that folder is empty on purpose, so the alumni directory simply renders empty rather than showing stale or sample people.
 
 Keeping the free project awake: Supabase pauses free projects after seven days without requests. A weekly scheduled build, or a cron ping to the REST endpoint, prevents that.
 

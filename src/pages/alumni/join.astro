@@ -13,8 +13,8 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       <h3>Sign in to continue</h3>
       <p>Use the account you prefer. We only use it to know which profile is yours.</p>
       <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem">
-        <button class="btn btn-primary" data-provider="google">Continue with Google</button>
-        <button class="btn btn-ghost" data-provider="github">Continue with GitHub</button>
+        <button hidden class="btn btn-primary" data-provider="google">Continue with Google</button>
+        <button hidden class="btn btn-ghost" data-provider="github">Continue with GitHub</button>
       </div>
       <form id="magic" style="display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap">
         <input type="email" id="magic-email" placeholder="or your email for a sign-in link" required style="flex:1;min-width:220px;font:inherit;padding:.55rem .75rem;border:1px solid var(--line);border-radius:8px" />
@@ -166,6 +166,9 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
   <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
     const sb = createClient(url, key);
+    // Show OAuth buttons only for providers enabled in the Supabase dashboard.
+    fetch(`${url}/auth/v1/settings`, { headers: { apikey: key } }).then((r) => r.json()).then((s) =>
+      document.querySelectorAll('[data-provider]').forEach((b) => { b.hidden = !s.external?.[b.dataset.provider]; }));
     const $ = (id) => document.getElementById(id);
     const editor = $('editor'), auth = $('auth'), state = $('state'), f = editor.elements;
     const say = (el, msg, kind = '') => { el.textContent = msg; el.className = `status ${kind}`; el.hidden = !msg; };

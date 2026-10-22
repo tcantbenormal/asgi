@@ -67,7 +67,7 @@ Live at https://asgi.app. The domain is registered at Name.com (free first year 
 
 1. Every push to `main` rebuilds and redeploys. Build command `npm run build`, deploy command `npx wrangler deploy`.
 2. Custom domain: Worker > Settings > Domains & Routes > add `asgi.app` and `www.asgi.app`. If the domain ever changes, update `site` in `astro.config.mjs` and `public/robots.txt`.
-3. Weekly rebuild: `.github/workflows/weekly-rebuild.yml` builds and deploys every Monday so new approved profiles appear and the Supabase project is kept awake. It needs two repository secrets: `CLOUDFLARE_API_TOKEN` (template "Edit Cloudflare Workers") and `CLOUDFLARE_ACCOUNT_ID` (shown on the Workers & Pages overview page).
+3. Weekly rebuild: `.github/workflows/weekly-rebuild.yml` builds and deploys every Monday so new approved profiles appear and the Supabase project is kept awake. It needs two repository secrets: `CLOUDFARE_API_TOKEN` (template "Edit Cloudflare Workers") and `CLOUDFARE_ACCOUNT_ID` (shown on the Workers & Pages overview page); the names are spelled without the L, matching the repository settings.
 4. Supabase > Authentication > URL Configuration: site URL `https://asgi.app`, redirect URLs `https://asgi.app/alumni/join` and `http://localhost:4321/alumni/join`.
 
 ## Handover

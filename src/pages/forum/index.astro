@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../config/site';
+---
+<Base title="Forum" description="Ask for help, request datasets, and discuss GIS and remote sensing work with ASGI members.">
+  <div class="wrap" data-pagefind-ignore>
+    <header class="page-head">
+      <div class="eyebrow">Community</div>
+      <h1>Forum</h1>
+      <p class="lead">Ask a question, request a dataset, or start a discussion. Members answer. Everything here is public.</p>
+    </header>
+
+    <div class="forum-bar">
+      <nav class="tabs" id="tabs" aria-label="Post type">
+        <button data-kind="" aria-current="true">All</button>
+        <button data-kind="question">Questions</button>
+        <button data-kind="data_request">Data requests</button>
+        <button data-kind="discussion">Discussions</button>
+      </nav>
+      <button class="btn btn-accent btn-sm" id="new-toggle">New post</button>
+    </div>
+
+    <p id="signin" class="notice" hidden>Sign in to post. <a id="signin-link" href="/alumni/join?next=/forum">Sign in with Google, GitHub or email</a>, you will be sent back here.</p>
+
+    <form id="new" class="card forum-form" hidden style="margin-bottom:1.25rem">
+      <label>Type
+        <select name="kind" required>
+          <option value="question">Question, I need help with something</option>
+          <option value="data_request">Data request, I am looking for a dataset</option>
+          <option value="discussion">Discussion</option>
+        </select>
+      </label>
+      <label>Title <input name="title" required minlength="5" maxlength="160" placeholder="Short and specific, like a search query" /></label>
+      <label>Details <textarea name="body" required minlength="10" maxlength="10000" placeholder="What you are trying to do, what you tried, area and time period if it is data. Links are fine."></textarea></label>
+      <label>Tags, comma separated, up to five <input name="tags" placeholder="qgis, sentinel-2, punjab" /></label>
+      <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
+        <button class="btn btn-primary" type="submit">Post</button>
+        <button class="btn btn-ghost" type="button" id="new-cancel">Cancel</button>
+        <span id="new-msg" class="status" hidden></span>
+      </div>
+    </form>
+
+    <ol id="list" class="posts" aria-live="polite"></ol>
+    <p id="empty" class="muted" hidden>Nothing here yet. Be the first.</p>
+  </div>
+
+  <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    const sb = createClient(url, key);
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const KIND = { question: 'Question', data_request: 'Data request', discussion: 'Discussion' };
+    const ago = (d) => { const s = (Date.now() - new Date(d)) / 1000; const [n, u] = s < 3600 ? [s / 60, ' min'] : s < 86400 ? [s / 3600, ' h'] : [s / 86400, ' d']; return `${Math.max(1, Math.floor(n))}${u} ago`; };
+    const authors = async (ids) => { const { data } = await sb.from('profiles').select('user_id,name,username').in('user_id', [...new Set(ids)]); return Object.fromEntries((data || []).map((p) => [p.user_id, p])); };
+    const who = (a) => !a ? 'Member' : a.username ? `<a href="/${esc(a.username)}">${esc(a.name)}</a>` : esc(a.name);
+
+    let kind = '';
+    const load = async () => {
+      let q = sb.from('posts').select('id,kind,title,tags,created_at,user_id,replies(accepted)').order('created_at', { ascending: false }).limit(100);
+      if (kind) q = q.eq('kind', kind);
+      const { data, error } = await q;
+      if (error) { $('list').innerHTML = `<li class="status err">${esc(error.message)}</li>`; return; }
+      const by = await authors(data.map((p) => p.user_id));
+      $('empty').hidden = data.length > 0;
+      $('list').innerHTML = data.map((p) => {
+        const solved = p.replies.some((r) => r.accepted);
+        return `<li class="${solved ? 'solved' : ''}"><a href="/forum/post?id=${p.id}">${esc(p.title)}</a>
+          <div class="pmeta"><span class="kind ${p.kind}">${KIND[p.kind]}</span><span>${who(by[p.user_id])}</span><span>${ago(p.created_at)}</span>
+          <span>${p.replies.length} ${p.replies.length === 1 ? 'reply' : 'replies'}</span>${solved ? '<span><b>Solved</b></span>' : ''}
+          ${p.tags.map((t) => `<span class="ptag">${esc(t)}</span>`).join('')}</div></li>`;
+      }).join('');
+    };
+    $('tabs').addEventListener('click', (e) => {
+      const b = e.target.closest('button'); if (!b) return;
+      kind = b.dataset.kind; [...$('tabs').children].forEach((x) => x.setAttribute('aria-current', x === b)); load();
+    });
+    load();
+
+    const { data: { session } } = await sb.auth.getSession();
+    $('new-toggle').addEventListener('click', () => { if (session) { $('new').hidden = false; $('new').title.focus(); } else $('signin').hidden = false; });
+    $('new-cancel').addEventListener('click', () => { $('new').hidden = true; });
+    $('new').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = e.target.elements, msg = $('new-msg');
+      msg.hidden = false; msg.textContent = 'Posting…'; msg.className = 'status';
+      const tags = [...new Set(f.tags.value.toLowerCase().split(',').map((t) => t.trim()).filter(Boolean))].slice(0, 5);
+      const { data, error } = await sb.from('posts').insert({ user_id: session.user.id, kind: f.kind.value, title: f.title.value.trim(), body: f.body.value.trim(), tags }).select('id').single();
+      if (error) { msg.textContent = error.message; msg.className = 'status err'; return; }
+      location.href = `/forum/post?id=${data.id}`;
+    });
+  </script>
+</Base>

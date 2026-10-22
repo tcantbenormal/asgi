@@ -1,0 +1,88 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../config/site';
+---
+<Base title="Forum post" description="A question, data request or discussion on the ASGI forum." noindex>
+  <meta name="robots" content="noindex" slot="head" />
+  <div class="wrap" style="max-width:860px" data-pagefind-ignore>
+    <p style="margin-bottom:1rem"><a href="/forum">← All posts</a></p>
+    <article id="post"><p class="muted">Loading…</p></article>
+
+    <section id="replies-wrap" hidden style="margin-top:2rem">
+      <h2 id="rcount" style="font-size:1.2rem">Replies</h2>
+      <div id="replies"></div>
+    </section>
+
+    <p id="signin" class="notice" hidden style="margin-top:1.5rem">Sign in to reply. <a id="signin-link" href="/alumni/join">Sign in with Google, GitHub or email</a>, you will be sent back here.</p>
+    <form id="reply" class="card forum-form" hidden style="margin-top:1.5rem">
+      <label>Your reply <textarea name="body" required minlength="2" maxlength="10000" placeholder="Answer, link to the data, or ask for the detail you need."></textarea></label>
+      <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
+        <button class="btn btn-primary" type="submit">Reply</button>
+        <span id="reply-msg" class="status" hidden></span>
+      </div>
+    </form>
+  </div>
+
+  <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    const sb = createClient(url, key);
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const rich = (s) => esc(s).replace(/https?:\/\/[^\s<]+/g, (u) => `<a href="${u}" rel="nofollow noopener">${u}</a>`);
+    const KIND = { question: 'Question', data_request: 'Data request', discussion: 'Discussion' };
+    const when = (d) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    const authors = async (ids) => { const { data } = await sb.from('profiles').select('user_id,name,username,photo_url').in('user_id', [...new Set(ids)]); return Object.fromEntries((data || []).map((p) => [p.user_id, p])); };
+    const who = (a) => !a ? 'Member' : a.username ? `<a href="/${esc(a.username)}">${esc(a.name)}</a>` : esc(a.name);
+
+    const id = new URLSearchParams(location.search).get('id');
+    const here = location.pathname + location.search;
+    $('signin-link').href = `/alumni/join?next=${encodeURIComponent(here)}`;
+    const { data: { session } } = await sb.auth.getSession();
+    const me = session?.user.id;
+
+    const render = async () => {
+      const { data: p, error } = await sb.from('posts').select('*').eq('id', id).maybeSingle();
+      if (error || !p) { $('post').innerHTML = '<p class="status err">This post does not exist or was removed.</p>'; return; }
+      const { data: rs } = await sb.from('replies').select('*').eq('post_id', id).order('accepted', { ascending: false }).order('created_at');
+      const by = await authors([p.user_id, ...rs.map((r) => r.user_id)]);
+      document.title = `${p.title} · ASGI forum`;
+      $('post').innerHTML = `
+        <div class="eyebrow"><span class="kind ${p.kind}">${KIND[p.kind]}</span></div>
+        <h1 style="font-size:1.7rem;margin:.25rem 0 .5rem">${esc(p.title)}</h1>
+        <div class="pmeta"><span>${who(by[p.user_id])}</span><span>${when(p.created_at)}</span>${p.tags.map((t) => `<span class="ptag">${esc(t)}</span>`).join('')}
+          ${me === p.user_id ? '<button class="btn btn-ghost btn-sm" id="del-post">Delete post</button>' : ''}</div>
+        <div class="pbody">${rich(p.body)}</div>`;
+      $('del-post')?.addEventListener('click', async () => {
+        if (!confirm('Delete this post and all its replies?')) return;
+        await sb.from('posts').delete().eq('id', id); location.href = '/forum';
+      });
+      $('replies-wrap').hidden = rs.length === 0;
+      $('rcount').textContent = `${rs.length} ${rs.length === 1 ? 'reply' : 'replies'}`;
+      $('replies').innerHTML = rs.map((r) => `
+        <div class="reply ${r.accepted ? 'accepted' : ''}" data-id="${r.id}">
+          ${r.accepted ? '<div class="eyebrow" style="color:#1a7f4b">Accepted answer</div>' : ''}
+          <div class="pbody" style="margin:0">${rich(r.body)}</div>
+          <div class="pmeta"><span>${who(by[r.user_id])}</span><span>${when(r.created_at)}</span>
+            ${me === p.user_id ? `<button class="btn btn-ghost btn-sm" data-accept="${r.accepted ? 0 : 1}">${r.accepted ? 'Unmark' : 'Mark as answer'}</button>` : ''}
+            ${me === r.user_id ? '<button class="btn btn-ghost btn-sm" data-del>Delete</button>' : ''}</div>
+        </div>`).join('');
+      $('replies').onclick = async (e) => {
+        const b = e.target.closest('button'); if (!b) return;
+        const rid = b.closest('[data-id]').dataset.id;
+        if (b.dataset.accept !== undefined) await sb.from('replies').update({ accepted: b.dataset.accept === '1' }).eq('id', rid);
+        else if (b.dataset.del !== undefined && confirm('Delete this reply?')) await sb.from('replies').delete().eq('id', rid);
+        render();
+      };
+      if (session) $('reply').hidden = false; else $('signin').hidden = false;
+    };
+    await render();
+
+    $('reply').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = $('reply-msg'); msg.hidden = false; msg.textContent = 'Posting…'; msg.className = 'status';
+      const { error } = await sb.from('replies').insert({ post_id: id, user_id: me, body: e.target.body.value.trim() });
+      if (error) { msg.textContent = error.message; msg.className = 'status err'; return; }
+      e.target.reset(); msg.hidden = true; render();
+    });
+  </script>
+</Base>

@@ -12,7 +12,8 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
     <div id="auth" class="card" style="max-width:520px">
       <h3>Sign in to continue</h3>
       <p>Use the account you prefer. We only use it to know which profile is yours.</p>
-      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem">
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;align-items:center">
+        <div id="gsi"></div>
         <button hidden class="btn btn-primary" data-provider="google">Continue with Google</button>
         <button hidden class="btn btn-ghost" data-provider="github">Continue with GitHub</button>
         <button hidden class="btn btn-ghost" data-provider="linkedin_oidc">Continue with LinkedIn</button>
@@ -170,7 +171,7 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
     <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove">×</button>
   </div></template>
 
-  <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
+  <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key, gcid: site.googleClientId }}>
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
     const sb = createClient(url, key);
     // Show OAuth buttons only for providers enabled in the Supabase dashboard.
@@ -283,6 +284,21 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       say(state, p.approved ? `Your page is live at ${location.origin}/${path}. Edits go live on the next site build.` : `Saved and waiting for cabinet approval. Your page will be ${location.origin}/${path}.`, p.approved ? 'ok' : '');
     };
     const { data: { session } } = await sb.auth.getSession();
+    // Pages like the forum send people here to sign in with ?next=/forum and expect to be sent back.
+    const next = new URLSearchParams(location.search).get('next');
+    if (session && next && /^\/[^/]/.test(next)) location.replace(next);
+    if (!session && gcid) {
+      // Google Identity Services: the consent popup names this site, not the Supabase project URL.
+      const raw = crypto.randomUUID();
+      const hashed = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw)))].map((b) => b.toString(16).padStart(2, '0')).join('');
+      await new Promise((ok) => { const t = document.createElement('script'); t.src = 'https://accounts.google.com/gsi/client'; t.onload = ok; document.head.appendChild(t); });
+      google.accounts.id.initialize({ client_id: gcid, nonce: hashed, callback: async ({ credential }) => {
+        const { error } = await sb.auth.signInWithIdToken({ provider: 'google', token: credential, nonce: raw });
+        if (error) say($('auth-msg'), error.message, 'err'); else location.reload();
+      } });
+      google.accounts.id.renderButton($('gsi'), { theme: 'outline', size: 'large', text: 'continue_with', shape: 'pill' });
+      document.querySelector('[data-provider="google"]').remove();
+    }
     if (session) {
       auth.hidden = true; editor.hidden = false;
       $('who').textContent = `Signed in as ${session.user.email}`;

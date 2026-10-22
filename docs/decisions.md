@@ -53,3 +53,9 @@ ASGI stays a single-institution portal and becomes the first tenant of the natio
 
 ### D16. Domain: asgi.app, free for year one via the GitHub Student Developer Pack
 asgi.com, .org and .net are taken. asgi.app was registered at Name.com on 2026-10-21 using the pack's one-year offer, in the founder's name. DNS is on Cloudflare so the root domain can serve Cloudflare Pages. Renewal in October 2027 is paid; before then the domain is moved to the society email. The .app zone forces HTTPS, which Cloudflare provides.
+
+### D17. A forum on the static site, rendered in the browser
+D15 said a forum had to wait for the national platform's server-rendered stack. Members asked for one before that exists, so ASGI gets a minimal version now: `posts` and `replies` tables in Supabase, two static pages (`/forum`, `/forum/post?id=`) that read and write through the public API with supabase-js, RLS for ownership, a trigger for moderation columns and rate limits, and the dashboard as the moderation tool. Trade-offs accepted: posts are not in the search index or sitemap, and the page shows nothing without JavaScript. Three post kinds: question, data request, discussion. The post author marks an accepted answer, which is what "solved" means. Moving this to server rendering later changes the two pages, not the tables.
+
+### D18. Google sign-in through Google Identity Services, not the Supabase redirect
+With the plain OAuth redirect, Google's consent screen names the Supabase project host because that is the redirect target. Supabase only fixes this with a paid custom domain. Google's own sign-in button, with the ID token passed to `signInWithIdToken`, names asgi.app instead and costs nothing, so the join page uses it when `googleClientId` is set in site config. GitHub shows the Supabase callback host in its authorise screen and has no free equivalent; that is accepted.

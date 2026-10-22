@@ -36,7 +36,7 @@ See `docs/decisions.md` for why things are the way they are and `docs/flow.md` f
 
 One-time setup:
 
-1. In the Supabase dashboard open SQL Editor, paste `supabase/schema.sql`, run it. Then paste and run `supabase/migrations/002_portfolio.sql`.
+1. In the Supabase dashboard open SQL Editor, paste `supabase/schema.sql`, run it. Then paste and run each file in `supabase/migrations/` in order (002 portfolio fields, 003 forum).
 2. Authentication > Providers: enable Google and GitHub (each needs an OAuth client id and secret from that provider; the dashboard shows the callback URL to register). Email sign-in links work without setup but are rate-limited on the free plan.
 3. Authentication > URL Configuration: add the site URL and `http://localhost:4321/alumni/join` to redirect URLs.
 4. Project URL and publishable key go in `src/config/site.ts`. Never put the secret key anywhere in this repository.
@@ -46,6 +46,12 @@ Approving a profile: Table Editor > profiles > tick `approved`. Tick `featured` 
 If Supabase is unreachable at build time the build falls back to any Markdown files in `src/content/alumni/`; that folder is empty on purpose, so the alumni directory simply renders empty rather than showing stale or sample people.
 
 Keeping the free project awake: Supabase pauses free projects after seven days without requests. A weekly scheduled build, or a cron ping to the REST endpoint, prevents that.
+
+## Forum
+
+`/forum` lists questions, data requests and discussions stored in the `posts` and `replies` tables; members post and reply after signing in. Moderation is the Table Editor: tick `hidden` on a post or reply to remove it from view. There is no rebuild involved; forum pages render in the browser.
+
+Google sign-in: paste the Google OAuth client ID into `googleClientId` in `src/config/site.ts` so the consent screen names asgi.app. The same client ID must have `https://asgi.app` as an authorised JavaScript origin in the Google Cloud console.
 
 ## Downloads and the countdown gate
 

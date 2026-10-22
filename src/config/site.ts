@@ -28,6 +28,10 @@ export const site = {
   basemapTiles: 'https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=cb1_4l8y_1_ec349aafebc313c616d23a11',
   // Seconds a visitor waits on the download gate before the link unlocks.
   downloadCountdown: 15,
+  // Google OAuth web client ID, the same one entered in Supabase. When set, the join page renders
+  // Google's own sign-in button so the consent screen names asgi.app instead of the Supabase URL.
+  // Leave empty to fall back to the Supabase redirect flow.
+  googleClientId: '',
   // Giscus comments (https://giscus.app). Leave repo empty to hide comments.
   giscus: { repo: '', repoId: '', category: 'General', categoryId: '' },
 };

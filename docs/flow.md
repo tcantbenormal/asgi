@@ -56,6 +56,15 @@ browser  →  supabase-js (CDN)  →  Supabase Auth / PostgREST / Storage
 
 Nothing on the public site changes until the next build (step 1).
 
+## 3b. Runtime, forum (`/forum`, `/forum/post?id=`)
+
+Both pages are static shells. supabase-js loads from the CDN and queries `posts` and `replies` directly.
+
+1. List: `from('posts').select('id,kind,title,tags,created_at,user_id,replies(accepted)')`, newest first, filtered by kind from the tabs. Author names come from one `profiles` query; RLS hides unapproved profiles, which then show as "Member".
+2. New post and reply: inserts with `user_id = auth.uid()`. Signed-out visitors are sent to `/alumni/join?next=<here>` and the join page bounces them back after sign-in.
+3. Post page: the post author sees "Mark as answer" on each reply; the reply author sees "Delete". The `protect_forum_columns` trigger lets the post author change only `accepted` and the reply author only `body`, and rejects a second post within two minutes or a second reply within twenty seconds.
+4. Moderation: tick `hidden` on a row in the Table Editor. The row disappears for everyone but its author. Nothing needs a rebuild.
+
 ## 4. Approval and publishing
 
 ```

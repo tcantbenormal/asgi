@@ -6,4 +6,4 @@ const html = ads[slot];
 ---
 {html
   ? <div class={`ad ${slot} filled`} set:html={html} />
-  : <div class={`ad ${slot}`} aria-hidden="true">Ad space · {slot}</div>}
+  : import.meta.env.DEV && <div class={`ad ${slot}`} aria-hidden="true">Ad space · {slot}</div>}

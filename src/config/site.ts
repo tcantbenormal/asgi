@@ -8,7 +8,6 @@ export const site = {
   email: 'aridsocietyofgis@gmail.com',
   // Google Forms. Replace with the society's own forms.
   forms: {
-    alumni: 'https://forms.gle/REPLACE_ALUMNI_FORM',
     mentorship: 'https://forms.gle/REPLACE_MENTORSHIP_FORM',
     membership: 'https://forms.gle/REPLACE_MEMBERSHIP_FORM',
     submitResource: 'https://forms.gle/REPLACE_RESOURCE_FORM',

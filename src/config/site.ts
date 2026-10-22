@@ -31,7 +31,7 @@ export const site = {
   // Google OAuth web client ID, the same one entered in Supabase. When set, the join page renders
   // Google's own sign-in button so the consent screen names asgi.app instead of the Supabase URL.
   // Leave empty to fall back to the Supabase redirect flow.
-  googleClientId: '',
+  googleClientId: '616278307392-tiv3mri5o2j4qkudnh9faqks2v9q8kuq.apps.googleusercontent.com',
   // Giscus comments (https://giscus.app). Leave repo empty to hide comments.
   giscus: { repo: '', repoId: '', category: 'General', categoryId: '' },
 };

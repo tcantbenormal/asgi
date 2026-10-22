@@ -15,6 +15,7 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem">
         <button hidden class="btn btn-primary" data-provider="google">Continue with Google</button>
         <button hidden class="btn btn-ghost" data-provider="github">Continue with GitHub</button>
+        <button hidden class="btn btn-ghost" data-provider="linkedin_oidc">Continue with LinkedIn</button>
       </div>
       <form id="magic" style="display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap">
         <input type="email" id="magic-email" placeholder="or your email for a sign-in link" required style="flex:1;min-width:220px;font:inherit;padding:.55rem .75rem;border:1px solid var(--line);border-radius:8px" />
@@ -89,6 +90,12 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
         <label>One line of advice for juniors <input name="advice" maxlength="200" /></label>
         <label>Your journey (Markdown allowed) <textarea name="bio" placeholder="How you got from first semester to where you are now. Honest beats polished."></textarea></label>
         <label class="check"><input type="checkbox" name="mentor" /> List me as open to mentoring students</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Import from LinkedIn</legend>
+        <p class="muted" style="margin:0;font-size:.88rem">LinkedIn does not let sites read your profile, but it gives you a copy of your own data. On LinkedIn open Settings &amp; Privacy, Data privacy, <em>Get a copy of your data</em>, tick Profile, Positions, Education and Skills, and request the archive. It arrives by email in about ten minutes. Unzip it and pick the CSV files here. Nothing is uploaded; the files are read in your browser.</p>
+        <label>LinkedIn CSV files <input type="file" id="li-files" accept=".csv,text/csv" multiple /></label>
       </fieldset>
 
       <fieldset>
@@ -214,6 +221,27 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       say(state, works.length ? `Imported ${works.length} works.` : 'No works found for that ORCID in OpenAlex yet.', works.length ? 'ok' : 'err');
     });
 
+    // LinkedIn data export. Columns as of 2026; unknown files are ignored.
+    const csv = (t) => { const rows = [[]]; let q = false, c = ''; for (let i = 0; i < t.length; i++) { const ch = t[i];
+      if (q) { if (ch === '"' && t[i + 1] === '"') { c += '"'; i++; } else if (ch === '"') q = false; else c += ch; }
+      else if (ch === '"') q = true; else if (ch === ',') { rows.at(-1).push(c); c = ''; } else if (ch === '\n' || ch === '\r') { if (ch === '\r' && t[i + 1] === '\n') i++; rows.at(-1).push(c); c = ''; rows.push([]); } else c += ch; }
+      rows.at(-1).push(c); const [h, ...rest] = rows.filter((r) => r.some((x) => x.trim()));
+      return rest.map((r) => Object.fromEntries(h.map((k, i) => [k.trim(), (r[i] ?? '').trim()]))); };
+    const months = { jan: '01', feb: '02', mar: '03', apr: '04', may: '05', jun: '06', jul: '07', aug: '08', sep: '09', oct: '10', nov: '11', dec: '12' };
+    const ym = (d) => { const m = d.match(/^([A-Za-z]{3})\w* (\d{4})$/); return m ? `${m[2]}-${months[m[1].toLowerCase()] || '01'}` : d; };
+    $('li-files').addEventListener('change', async (e) => {
+      let n = 0;
+      for (const file of e.target.files) {
+        const rows = csv(await file.text()), name = file.name.toLowerCase();
+        if (name.startsWith('positions')) rows.forEach((r) => { addRow('exp', { title: r['Title'], organization: r['Company Name'], start: ym(r['Started On']), end: ym(r['Finished On']), description: r['Description'].split('\n')[0] }); n++; });
+        else if (name.startsWith('education')) rows.forEach((r) => { const [deg, ...prog] = (r['Degree Name'] || '').split(','); addRow('edu', { institution: r['School Name'], degree: deg.trim(), program: prog.join(',').trim(), start: (r['Start Date'] || '').slice(-4), end: (r['End Date'] || '').slice(-4) }); n++; });
+        else if (name.startsWith('skills')) { const have = f.skills.value.split(',').map((x) => x.trim()).filter(Boolean); f.skills.value = [...new Set([...have, ...rows.map((r) => r['Name']).filter(Boolean)])].join(', '); n += rows.length; }
+        else if (name.startsWith('profile')) { const r = rows[0] || {}; if (!f.name.value) f.name.value = `${r['First Name'] || ''} ${r['Last Name'] || ''}`.trim(); if (!f.bio.value) f.bio.value = r['Summary'] || ''; if (!f.city.value) f.city.value = (r['Geo Location'] || '').split(',')[0]; n++; }
+      }
+      say(state, n ? `Imported ${n} items from LinkedIn. Check dates and remove anything you do not want public.` : 'No recognised files. Pick Positions.csv, Education.csv, Skills.csv or Profile.csv.', n ? 'ok' : 'err');
+      e.target.value = '';
+    });
+
     // Location
     $('locate').addEventListener('click', () => {
       if (!navigator.geolocation) return say(state, 'Your browser does not support location. Use "Look up city" instead.', 'err');
@@ -245,6 +273,7 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       for (const k of ['name','username','batch','degree','sector','role','organization','city','country','province','lat','lng','linkedin','github','portfolio','orcid','email_public','advice','bio']) f[k].value = p[k] ?? '';
       f.skills.value = (p.skills ?? []).join(', ');
       f.mentor.checked = !!p.mentor;
+      $('who').dataset.photo = p.photo_url || '';
       for (const k of ['pub','edu','exp','proj']) $(k).innerHTML = '';
       (p.publications ?? []).forEach((v) => addRow('pub', v));
       (p.education ?? []).forEach((v) => addRow('edu', v));
@@ -258,7 +287,11 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       auth.hidden = true; editor.hidden = false;
       $('who').textContent = `Signed in as ${session.user.email}`;
       const { data } = await sb.from('profiles').select('*').eq('user_id', session.user.id).maybeSingle();
-      if (data) fill(data); else { addRow('edu'); addRow('exp'); }
+      if (data) fill(data); else {
+        const m = session.user.user_metadata || {};
+        f.name.value = m.full_name || m.name || '';
+        addRow('edu'); addRow('exp');
+      }
     }
 
     // Upload helper
@@ -279,6 +312,7 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
           if (f.photo.files[0].size > 2 * 1024 * 1024) throw new Error('Photo must be under 2 MB.');
           extra.photo_url = await upload('avatars', f.photo.files[0], `avatar.${f.photo.files[0].name.split('.').pop().toLowerCase()}`);
         }
+        else if (!$('who').dataset.photo && (session.user.user_metadata?.avatar_url || session.user.user_metadata?.picture)) extra.photo_url = session.user.user_metadata.avatar_url || session.user.user_metadata.picture;
         if (f.cv.files[0]) {
           if (f.cv.files[0].size > 5 * 1024 * 1024) throw new Error('CV must be under 5 MB.');
           extra.cv_url = await upload('cv', f.cv.files[0], 'cv.pdf');

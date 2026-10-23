@@ -3,7 +3,7 @@
 // permits countdown / interstitial placements. Leave a slot empty to hide it.
 //
 // Slot sizes used by the layout:
-//   sidebar  -> 300x250 or 300x600 (right rail on wide screens)
+//   sidebar  -> 300x250 (right rail on wide screens, once per page)
 //   banner   -> 728x90 / responsive (top of download gate, below header)
 //   gate     -> 300x250 (inside the countdown box on the download page)
 //   footer   -> 728x90 (bottom of every page)

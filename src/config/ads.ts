@@ -16,9 +16,11 @@
 export const ads = {
   sidebar: '',
   banner: '',
-  gate: '',
+  // Monetag vignette, zone 12102160. Loads only on /download/* pages.
+  gate: `<script>(function(s){s.dataset.zone='12102160',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>`,
   footer: '',
-  directLink: '',
+  // Monetag direct link, zone 12102163.
+  directLink: 'https://uplcm.com/4/12102163',
   verification: '',
 };
 export type AdSlotName = 'sidebar' | 'banner' | 'gate' | 'footer';

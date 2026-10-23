@@ -1,6 +1,6 @@
 ---
-import { ads } from '../config/ads';
-interface Props { slot: keyof typeof ads }
+import { ads, type AdSlotName } from '../config/ads';
+interface Props { slot: AdSlotName }
 const { slot } = Astro.props;
 const html = ads[slot];
 ---

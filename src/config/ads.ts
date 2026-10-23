@@ -7,9 +7,18 @@
 //   banner   -> 728x90 / responsive (top of download gate, below header)
 //   gate     -> 300x250 (inside the countdown box on the download page)
 //   footer   -> 728x90 (bottom of every page)
-export const ads: Record<'sidebar' | 'banner' | 'gate' | 'footer', string> = {
+//
+// Extra keys:
+//   directLink   -> a network "direct link" URL. Opened in a second tab when the
+//                   visitor clicks the unlocked Download button on the gate.
+//   verification -> raw HTML placed in <head> on every page, for a network's
+//                   site-ownership <meta> tag. (An HTML verification file goes in public/ instead.)
+export const ads = {
   sidebar: '',
   banner: '',
   gate: '',
   footer: '',
+  directLink: '',
+  verification: '',
 };
+export type AdSlotName = 'sidebar' | 'banner' | 'gate' | 'footer';

@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import AdSlot from '../../components/AdSlot.astro';
+import { ads } from '../../config/ads';
 import { site } from '../../config/site';
 
 export async function getStaticPaths() {
@@ -25,7 +26,7 @@ const seconds = site.downloadCountdown;
       <p class="lead" style="margin-inline:auto">{d.version && `Version ${d.version} · `}{d.size && `${d.size} · `}{d.license}</p>
     </header>
 
-    <div class="gate-box" id="gate" data-url={encoded} data-seconds={seconds}>
+    <div class="gate-box" id="gate" data-url={encoded} data-seconds={seconds} data-direct={ads.directLink}>
       <AdSlot slot="gate" />
       <p class="muted" style="margin:1.25rem 0 0">Your download link unlocks in</p>
       <div class="timer" id="timer" aria-live="polite">{seconds}</div>
@@ -63,6 +64,8 @@ const seconds = site.downloadCountdown;
       if (document.hidden) clearInterval(iv);
       else iv = setInterval(tick, 1000);
     });
+    // Network direct link: opens in a second tab on the real click, the download itself continues as normal.
+    go.addEventListener('click', () => { if (left <= 0 && gate.dataset.direct) window.open(gate.dataset.direct, '_blank', 'noopener'); });
     requestAnimationFrame(() => (bar.style.width = '0%'));
   </script>
 </Base>

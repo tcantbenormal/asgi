@@ -19,7 +19,8 @@ import { site } from '../config/site';
           <button class="btn btn-ghost" type="submit">Send link</button>
         </form>
         <p id="auth-msg" class="status" hidden></p>
-        <p class="muted" style="font-size:.85rem;margin:1rem 0 0">No passwords. We only store the email and name the provider gives us. See the <a href="/privacy">privacy policy</a>.</p>
+        <p class="muted" style="font-size:.9rem;margin:1rem 0 0">New here? <a href="/join">Sign up</a> as a student or as alumni.</p>
+        <p class="muted" style="font-size:.85rem;margin:.5rem 0 0">No passwords. We only store the email and name the provider gives us. See the <a href="/privacy">privacy policy</a>.</p>
       </div>
     </div>
 
@@ -39,7 +40,8 @@ import { site } from '../config/site';
         <h2 style="font-size:1.2rem">Profile page</h2>
         <p id="profile-state" class="muted"></p>
         <p style="display:flex;gap:.6rem;flex-wrap:wrap">
-          <a class="btn btn-primary btn-sm" href="/alumni/join" id="profile-edit">Create your profile</a>
+          <a class="btn btn-primary btn-sm" href="/alumni/join?as=student" id="profile-edit">Create a student profile</a>
+          <a class="btn btn-accent btn-sm" href="/alumni/join?as=alumni" id="profile-alt">Create an alumni profile</a>
           <a class="btn btn-ghost btn-sm" id="profile-view" hidden>View my page</a>
           <a class="btn btn-ghost btn-sm" href="/forum">Forum</a>
         </p>
@@ -116,7 +118,7 @@ import { site } from '../config/site';
       if (!p) $('profile-state').textContent = 'You have no profile page yet. It takes a few minutes and doubles as your portfolio.';
       else {
         const path = `/${p.username || p.slug}`;
-        $('profile-edit').textContent = 'Edit profile';
+        $('profile-edit').textContent = 'Edit profile'; $('profile-edit').href = '/alumni/join'; $('profile-alt').hidden = true;
         $('profile-view').hidden = false; $('profile-view').href = path;
         $('profile-state').textContent = p.approved ? `Live at ${location.origin}${path}. Edits appear on the next site build.` : `Saved and waiting for cabinet approval. It will be at ${location.origin}${path}.`;
       }

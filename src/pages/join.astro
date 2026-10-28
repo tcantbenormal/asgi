@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+const student = '/account?next=' + encodeURIComponent('/alumni/join?as=student');
+const alumni = '/account?next=' + encodeURIComponent('/alumni/join?as=alumni');
+---
+<Base title="Join ASGI" description="Create your ASGI profile as a current student or as a graduate of the institute." rail={false}>
+  <div class="wrap" style="max-width:900px">
+    <PageHead eyebrow="Sign up" title="Join ASGI" lead="One account, two kinds of profile. Pick the one that fits you today. A student profile turns into a graduate profile with a single switch when you finish, nothing is lost." />
+
+    <div class="join-grid">
+      <article class="card">
+        <div class="eyebrow">Enrolled now</div>
+        <h2>Join as a student</h2>
+        <p>For anyone currently studying at the institute, any year, any programme.</p>
+        <p><strong>You get</strong> a profile page that works as a portfolio from day one, a place in the directory, and the forum for help and data requests.</p>
+        <p><strong>We ask for</strong> your name, programme and batch, skills, and whatever projects you want to show. No job details, no map pin.</p>
+        <a class="btn btn-primary" href={student}>Join as a student</a>
+      </article>
+      <article class="card">
+        <div class="eyebrow">Graduated</div>
+        <h2>Join as alumni</h2>
+        <p>For graduates of the institute, in Pakistan or abroad, working, freelancing, studying further, or between jobs.</p>
+        <p><strong>You get</strong> everything a student gets, plus a pin on the alumni map and the option to offer mentoring.</p>
+        <p><strong>We ask for</strong> your batch and degree, current role and organisation, and the city you work from. Faculty join here too, with sector set to Academia.</p>
+        <a class="btn btn-accent" href={alumni}>Join as alumni</a>
+      </article>
+    </div>
+
+    <p class="muted" style="margin-top:1.5rem">Already have an account? <a href="/account">Sign in</a>. Signing in with Google, GitHub or an email link creates the account; the profile is what you fill in after.</p>
+  </div>
+  <style>
+    .join-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .join-grid h2 { font-size: 1.35rem; margin: 0.25rem 0 0.5rem; }
+    .join-grid p { margin: 0 0 0.75rem; font-size: 0.95rem; }
+    .join-grid .btn { margin-top: 0.5rem; }
+    @media (max-width: 720px) { .join-grid { grid-template-columns: 1fr; } }
+  </style>
+</Base>

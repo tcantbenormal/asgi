@@ -34,8 +34,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: d.name,
-  jobTitle: d.role,
-  worksFor: { '@type': 'Organization', name: d.organization },
+  ...(d.role ? { jobTitle: d.role, worksFor: { '@type': 'Organization', name: d.organization } } : {}),
   alumniOf: [{ '@type': 'CollegeOrUniversity', name: site.university }, ...d.education.map((e) => ({ '@type': 'CollegeOrUniversity', name: e.institution }))],
   address: { '@type': 'PostalAddress', addressLocality: d.city, addressCountry: d.country },
   ...(d.photo ? { image: d.photo } : {}),
@@ -43,7 +42,7 @@ const jsonLd = {
   sameAs: [d.linkedin, d.github, d.portfolio, d.orcid ? `https://orcid.org/${d.orcid}` : ''].filter(Boolean),
 };
 ---
-<Base title={d.name} description={`${d.name}, ${d.role} at ${d.organization}. ${d.degree}, batch ${d.batch}.${d.skills.length ? ' Skills: ' + d.skills.slice(0, 6).join(', ') + '.' : ''}`}>
+<Base title={d.name} description={`${d.name}, ${d.role ? `${d.role} at ${d.organization}` : `student, ${d.degree}`}. ${d.degree}, batch ${d.batch}.${d.skills.length ? ' Skills: ' + d.skills.slice(0, 6).join(', ') + '.' : ''}`}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
   <section class="profile-band">
     <div class="inner">
@@ -51,7 +50,7 @@ const jsonLd = {
       <div style="flex:1;min-width:260px">
         <div class="eyebrow">{d.degree} · Batch {d.batch}</div>
         <h1>{d.name}</h1>
-        <p class="lead" style="font-size:1.05rem;margin:0">{d.role}, {d.organization}</p>
+        <p class="lead" style="font-size:1.05rem;margin:0">{d.role ? `${d.role}, ${d.organization}` : `Student, ${d.degree}`}</p>
         <div class="tags" style="margin-top:.6rem">
           <span class="tag grey">{d.sector}</span>
           <span class="tag grey">{d.city}, {d.country}</span>

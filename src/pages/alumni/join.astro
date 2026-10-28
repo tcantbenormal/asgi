@@ -7,7 +7,7 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
 ---
 <Base title="Your profile" description="Build a profile that doubles as your portfolio: CV, projects, publications, experience and links." rail={false} noindex>
   <div class="wrap" style="max-width:980px">
-    <PageHead eyebrow="Account" title="Your profile and portfolio" lead="For alumni, current students and faculty alike. Fill what applies, save. Your page lives at a short link you choose. The cabinet approves new profiles, usually within a few days. Come back any time to edit." />
+    <PageHead eyebrow="Account" title="Your profile and portfolio" lead="Fill what applies, save. Your page lives at a short link you choose. The cabinet approves new profiles, usually within a few days. Come back any time to edit." />
 
     <form id="editor" class="form" hidden>
       <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
@@ -15,6 +15,12 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
         <button type="button" class="btn btn-ghost btn-sm" id="signout">Sign out</button>
       </div>
       <p id="state" class="status" hidden></p>
+
+      <div class="tabs" role="group" aria-label="I am" style="margin-top:.25rem">
+        <button type="button" data-mode="student">Current student</button>
+        <button type="button" data-mode="alumni">Graduate</button>
+      </div>
+      <p class="muted" id="mode-hint" style="margin:0;font-size:.88rem"></p>
 
       <fieldset>
         <legend>Identity</legend>
@@ -29,7 +35,7 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
         <div class="row-3">
           <label>Batch <input name="batch" placeholder="2021-25" required pattern="\d{4}-\d{2}" /></label>
           <label>Degree from the institute <input name="degree" placeholder="BS Geoinformatics" required /></label>
-          <label>Sector <select name="sector" required>{sectors.map((s) => <option>{s}</option>)}</select></label>
+          <label data-only="alumni">Sector <select name="sector" required><option value="">Choose…</option>{sectors.map((s) => <option>{s}</option>)}</select></label>
         </div>
         <div class="row">
           <label>Current role <input name="role" placeholder="GIS Analyst" required /></label>
@@ -44,7 +50,7 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
           <label>Country <input name="country" required /></label>
           <label>Province (if Pakistan) <select name="province"><option value="">—</option>{provinces.map((p) => <option>{p}</option>)}</select></label>
         </div>
-        <div class="row-3">
+        <div class="row-3" data-only="alumni">
           <label>Latitude <input name="lat" type="number" step="any" min="-90" max="90" required /></label>
           <label>Longitude <input name="lng" type="number" step="any" min="-180" max="180" required /></label>
           <label>Map pin
@@ -72,9 +78,9 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       <fieldset>
         <legend>Career</legend>
         <label>Skills, comma separated <input name="skills" placeholder="QGIS, Python, Google Earth Engine" /></label>
-        <label>One line of advice for juniors <input name="advice" maxlength="200" /></label>
+        <label data-only="alumni">One line of advice for juniors <input name="advice" maxlength="200" /></label>
         <label>Your journey (Markdown allowed) <textarea name="bio" placeholder="How you got from first semester to where you are now. Honest beats polished."></textarea></label>
-        <label class="check"><input type="checkbox" name="mentor" /> List me as open to mentoring students</label>
+        <label class="check" data-only="alumni"><input type="checkbox" name="mentor" /> List me as open to mentoring students</label>
       </fieldset>
 
       <fieldset>
@@ -195,6 +201,34 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       say(state, works.length ? `Imported ${works.length} works.` : 'No works found for that ORCID in OpenAlex yet.', works.length ? 'ok' : 'err');
     });
 
+    // Student or graduate. One table: sector "Student" is the status flag, so a student
+    // switches to Graduate later in this same editor and keeps everything they entered.
+    const CAMPUS = { city: 'Rawalpindi', country: 'Pakistan', province: 'Punjab', lat: '33.6492', lng: '73.0815' };
+    const label = (name) => f[name].closest('label').firstChild;
+    const setMode = (mode) => {
+      const st = mode === 'student';
+      editor.dataset.mode = mode;
+      document.querySelectorAll('[data-only]').forEach((el) => { el.hidden = el.dataset.only !== mode; });
+      document.querySelectorAll('[data-mode]').forEach((b) => b.setAttribute('aria-current', b.dataset.mode === mode));
+      label('batch').textContent = st ? 'Batch, admission to expected graduation ' : 'Batch ';
+      f.batch.placeholder = st ? '2023-27' : '2021-25';
+      label('degree').textContent = st ? 'Programme at the institute ' : 'Degree from the institute ';
+      label('role').textContent = st ? 'Role, if any ' : 'Current role ';
+      label('organization').textContent = st ? 'Organisation, if any ' : 'Organisation ';
+      f.role.placeholder = st ? 'Intern, research assistant, leave empty if none' : 'GIS Analyst';
+      f.organization.placeholder = st ? 'Leave empty if none' : 'SUPARCO';
+      f.role.required = f.organization.required = f.lat.required = f.lng.required = !st;
+      [...f.sector.options].forEach((o) => { if (o.value === 'Student') o.hidden = !st; });
+      if (st) {
+        f.sector.value = 'Student';
+        for (const k of ['city', 'country', 'province', 'lat', 'lng']) if (!f[k].value) f[k].value = CAMPUS[k];
+      } else if (f.sector.value === 'Student') f.sector.value = '';
+      $('mode-hint').textContent = st
+        ? 'Students are in the directory and the forum. The map pin and mentoring open up when you graduate: come back and switch to Graduate.'
+        : 'Graduates appear on the alumni map and can offer mentoring. Faculty choose the Academia sector.';
+    };
+    document.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+
     // LinkedIn data export. Columns as of 2026; unknown files are ignored.
     const csv = (t) => { const rows = [[]]; let q = false, c = ''; for (let i = 0; i < t.length; i++) { const ch = t[i];
       if (q) { if (ch === '"' && t[i + 1] === '"') { c += '"'; i++; } else if (ch === '"') q = false; else c += ch; }
@@ -247,6 +281,7 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       for (const k of ['name','username','batch','degree','sector','role','organization','city','country','province','lat','lng','linkedin','github','portfolio','orcid','email_public','advice','bio']) f[k].value = p[k] ?? '';
       f.skills.value = (p.skills ?? []).join(', ');
       f.mentor.checked = !!p.mentor;
+      setMode(p.sector === 'Student' ? 'student' : 'alumni');
       $('who').dataset.photo = p.photo_url || '';
       for (const k of ['pub','edu','exp','proj']) $(k).innerHTML = '';
       (p.publications ?? []).forEach((v) => addRow('pub', v));
@@ -266,6 +301,7 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
         const m = session.user.user_metadata || {};
         f.name.value = m.full_name || m.name || '';
         addRow('edu'); addRow('exp');
+        setMode(new URLSearchParams(location.search).get('as') === 'student' ? 'student' : 'alumni');
       }
     }
 
@@ -302,7 +338,8 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
           linkedin: f.linkedin.value || null, github: f.github.value || null, portfolio: f.portfolio.value || null,
           orcid: f.orcid.value.trim() || null, email_public: f.email_public.value || null,
           skills: f.skills.value.split(',').map((s) => s.trim()).filter(Boolean),
-          advice: f.advice.value.trim() || null, bio: f.bio.value.trim() || null, mentor: f.mentor.checked,
+          advice: editor.dataset.mode === 'student' ? null : f.advice.value.trim() || null, bio: f.bio.value.trim() || null,
+          mentor: editor.dataset.mode === 'student' ? false : f.mentor.checked,
           publications: readRows('pub').filter((p) => p.title),
           education: readRows('edu').filter((p) => p.institution),
           experience: readRows('exp').filter((p) => p.title).map((p) => ({ ...p, current: !p.end })),

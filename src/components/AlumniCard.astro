@@ -10,7 +10,7 @@ const d = a.data;
     <Avatar name={d.name} photo={d.photo} />
     <div>
       <h3><a href={`/${a.id}`}>{d.name}</a></h3>
-      <p>{d.role} · {d.organization}</p>
+      <p>{d.role ? `${d.role} · ${d.organization}` : `${d.degree} · student`}</p>
     </div>
   </div>
   <div class="meta">

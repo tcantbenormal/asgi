@@ -36,7 +36,7 @@ See `docs/decisions.md` for why things are the way they are and `docs/flow.md` f
 
 One-time setup:
 
-1. In the Supabase dashboard open SQL Editor, paste `supabase/schema.sql`, run it. Then paste and run each file in `supabase/migrations/` in order (002 portfolio fields, 003 forum).
+1. In the Supabase dashboard open SQL Editor, paste `supabase/schema.sql`, run it. Then paste and run each file in `supabase/migrations/` in order (002 portfolio fields, 003 forum, 004 accounts).
 2. Authentication > Providers: enable Google and GitHub (each needs an OAuth client id and secret from that provider; the dashboard shows the callback URL to register). Email sign-in links work without setup but are rate-limited on the free plan.
 3. Authentication > URL Configuration: add the site URL and `http://localhost:4321/alumni/join` to redirect URLs.
 4. Project URL and publishable key go in `src/config/site.ts`. Never put the secret key anywhere in this repository.
@@ -46,6 +46,10 @@ Approving a profile: Table Editor > profiles > tick `approved`. Tick `featured` 
 If Supabase is unreachable at build time the build falls back to any Markdown files in `src/content/alumni/`; that folder is empty on purpose, so the alumni directory simply renders empty rather than showing stale or sample people.
 
 Keeping the free project awake: Supabase pauses free projects after seven days without requests. A weekly scheduled build, or a cron ping to the REST endpoint, prevents that.
+
+## Accounts
+
+`/account` is the only sign-in page: Google, GitHub, LinkedIn if enabled, or an email link. Students, alumni and faculty all use it; the `sector` field on the profile is what separates a current student from a graduate. Signed-in members see their name in the header with a sign-out button on every page, read from the session supabase-js stores in the browser. The account page shows profile status, lets a member change their email, and deletes the account outright through the `delete_my_account` database function, which removes uploads, profile, posts and replies. Other pages send people to `/account?next=<path>` and get them back after sign-in.
 
 ## Forum
 

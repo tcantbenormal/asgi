@@ -56,6 +56,11 @@ small, .muted { color: var(--ink-2); }
 .nav a:hover, .nav a[aria-current="page"] { background: var(--paper-2); color: var(--navy); }
 .nav .cta { background: var(--red); color: #fff; margin-left: 0.4rem; }
 .nav .cta:hover { background: var(--red-2); color: #fff; }
+.nav .auth { display: inline-flex; align-items: center; gap: 0.1rem; margin-left: 0.4rem; }
+.nav .me { display: inline-flex; align-items: center; gap: 0.45rem; font-weight: 600; color: var(--navy); }
+.nav .me img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; }
+.nav .signout { font: inherit; font-size: 0.85rem; padding: 0.4rem 0.65rem; border: 1px solid var(--line); border-radius: 6px; background: transparent; color: var(--ink-2); cursor: pointer; }
+.nav .signout:hover { border-color: var(--navy); color: var(--navy); }
 .nav-toggle { display: none; background: none; border: 1px solid var(--line); border-radius: 6px; padding: 0.4rem 0.6rem; font: inherit; cursor: pointer; }
 @media (max-width: 1040px) {
   .nav-toggle { display: inline-block; }

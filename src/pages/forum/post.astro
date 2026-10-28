@@ -36,7 +36,7 @@ import { site } from '../../config/site';
 
     const id = new URLSearchParams(location.search).get('id');
     const here = location.pathname + location.search;
-    $('signin-link').href = `/alumni/join?next=${encodeURIComponent(here)}`;
+    $('signin-link').href = `/account?next=${encodeURIComponent(here)}`;
     const { data: { session } } = await sb.auth.getSession();
     const me = session?.user.id;
 

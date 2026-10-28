@@ -36,6 +36,10 @@ Static HTML from the CDN. Client scripts are small and page-local:
 - `search.astro`: Pagefind UI reads `/pagefind/` built at step 7.
 - `components/Comments.astro`: Giscus script, only if `site.giscus.repo` is set.
 
+## 3a. Runtime, sign-in and account (`/account`)
+
+`getSession()` decides which half of the page shows. Signed out: provider buttons call `signInWithOAuth` with `redirectTo` back to `/account?next=...`; Google uses Google Identity Services and `signInWithIdToken`; the email form calls `signInWithOtp`. Signed in: if `next` is present the page bounces there; otherwise it shows the member, their profile status from one `profiles` query, an email change form (`auth.updateUser`) and the delete form (`rpc('delete_my_account')`, then `signOut`). The header on every page reads the stored session from localStorage and shows name, photo and a sign-out button without loading supabase-js.
+
 ## 3. Runtime, profile editor (`/alumni/join`)
 
 The only page that writes data.
@@ -44,7 +48,7 @@ The only page that writes data.
 browser  →  supabase-js (CDN)  →  Supabase Auth / PostgREST / Storage
 ```
 
-1. On load, `createClient(site.supabase.url, site.supabase.key)` and `getSession()`. No session: show the sign-in card. OAuth buttons call `signInWithOAuth` and return to the same URL; the email form calls `signInWithOtp`.
+1. On load, `createClient(site.supabase.url, site.supabase.key)` and `getSession()`. No session: redirect to `/account?next=/alumni/join`.
 2. With a session: `from('profiles').select('*').eq('user_id', uid).maybeSingle()`. RLS lets owners see their own row even if unapproved. The form is filled, repeatable rows (experience, education, projects, publications) are cloned from `<template>` elements.
 3. Buttons call outside services directly from the browser, all keyless:
    - "Use my location": `navigator.geolocation`, then Nominatim reverse geocode for city, country and province.

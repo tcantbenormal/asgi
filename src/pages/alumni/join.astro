@@ -5,25 +5,9 @@ import { site } from '../../config/site';
 const sectors = ['Government', 'Private', 'NGO / UN', 'Academia', 'Freelance', 'Student'];
 const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilgit-Baltistan', 'Azad Jammu & Kashmir', 'Islamabad Capital Territory'];
 ---
-<Base title="Create your profile" description="Sign in and build a profile that doubles as your portfolio: CV, projects, publications, experience and links." rail={false} noindex>
+<Base title="Your profile" description="Build a profile that doubles as your portfolio: CV, projects, publications, experience and links." rail={false} noindex>
   <div class="wrap" style="max-width:980px">
-    <PageHead eyebrow="Alumni" title="Your profile and portfolio" lead="Sign in, fill what applies, save. Your page lives at a short link you choose. The cabinet approves new profiles, usually within a few days. Come back any time to edit." />
-
-    <div id="auth" class="card" style="max-width:520px">
-      <h3>Sign in to continue</h3>
-      <p>Use the account you prefer. We only use it to know which profile is yours.</p>
-      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;align-items:center">
-        <div id="gsi"></div>
-        <button hidden class="btn btn-primary" data-provider="google">Continue with Google</button>
-        <button hidden class="btn btn-ghost" data-provider="github">Continue with GitHub</button>
-        <button hidden class="btn btn-ghost" data-provider="linkedin_oidc">Continue with LinkedIn</button>
-      </div>
-      <form id="magic" style="display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap">
-        <input type="email" id="magic-email" placeholder="or your email for a sign-in link" required style="flex:1;min-width:220px;font:inherit;padding:.55rem .75rem;border:1px solid var(--line);border-radius:8px" />
-        <button class="btn btn-ghost" type="submit">Send link</button>
-      </form>
-      <p id="auth-msg" class="status" hidden></p>
-    </div>
+    <PageHead eyebrow="Account" title="Your profile and portfolio" lead="For alumni, current students and faculty alike. Fill what applies, save. Your page lives at a short link you choose. The cabinet approves new profiles, usually within a few days. Come back any time to edit." />
 
     <form id="editor" class="form" hidden>
       <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
@@ -171,26 +155,15 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
     <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove">×</button>
   </div></template>
 
-  <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key, gcid: site.googleClientId }}>
+  <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
     const sb = createClient(url, key);
-    // Show OAuth buttons only for providers enabled in the Supabase dashboard.
-    fetch(`${url}/auth/v1/settings`, { headers: { apikey: key } }).then((r) => r.json()).then((s) =>
-      document.querySelectorAll('[data-provider]').forEach((b) => { b.hidden = !s.external?.[b.dataset.provider]; }));
     const $ = (id) => document.getElementById(id);
-    const editor = $('editor'), auth = $('auth'), state = $('state'), f = editor.elements;
+    const editor = $('editor'), state = $('state'), f = editor.elements;
     const say = (el, msg, kind = '') => { el.textContent = msg; el.className = `status ${kind}`; el.hidden = !msg; };
     $('origin').textContent = location.origin;
 
-    // Auth
-    document.querySelectorAll('[data-provider]').forEach((b) => b.addEventListener('click', () =>
-      sb.auth.signInWithOAuth({ provider: b.dataset.provider, options: { redirectTo: location.href } })));
-    $('magic').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const { error } = await sb.auth.signInWithOtp({ email: $('magic-email').value, options: { emailRedirectTo: location.href } });
-      say($('auth-msg'), error ? error.message : 'Check your inbox for the sign-in link.', error ? 'err' : 'ok');
-    });
-    $('signout').addEventListener('click', () => sb.auth.signOut().then(() => location.reload()));
+    $('signout').addEventListener('click', () => sb.auth.signOut().then(() => (location.href = '/')));
 
     // Repeatable rows: pub, edu, exp, proj
     const addRow = (kind, v = {}) => {
@@ -284,23 +257,9 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       say(state, p.approved ? `Your page is live at ${location.origin}/${path}. Edits go live on the next site build.` : `Saved and waiting for cabinet approval. Your page will be ${location.origin}/${path}.`, p.approved ? 'ok' : '');
     };
     const { data: { session } } = await sb.auth.getSession();
-    // Pages like the forum send people here to sign in with ?next=/forum and expect to be sent back.
-    const next = new URLSearchParams(location.search).get('next');
-    if (session && next && /^\/[^/]/.test(next)) location.replace(next);
-    if (!session && gcid) {
-      // Google Identity Services: the consent popup names this site, not the Supabase project URL.
-      const raw = crypto.randomUUID();
-      const hashed = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw)))].map((b) => b.toString(16).padStart(2, '0')).join('');
-      await new Promise((ok) => { const t = document.createElement('script'); t.src = 'https://accounts.google.com/gsi/client'; t.onload = ok; document.head.appendChild(t); });
-      google.accounts.id.initialize({ client_id: gcid, nonce: hashed, callback: async ({ credential }) => {
-        const { error } = await sb.auth.signInWithIdToken({ provider: 'google', token: credential, nonce: raw });
-        if (error) say($('auth-msg'), error.message, 'err'); else location.reload();
-      } });
-      google.accounts.id.renderButton($('gsi'), { theme: 'outline', size: 'large', text: 'continue_with', shape: 'pill' });
-      document.querySelector('[data-provider="google"]').remove();
-    }
+    if (!session) location.replace('/account?next=/alumni/join');
     if (session) {
-      auth.hidden = true; editor.hidden = false;
+      editor.hidden = false;
       $('who').textContent = `Signed in as ${session.user.email}`;
       const { data } = await sb.from('profiles').select('*').eq('user_id', session.user.id).maybeSingle();
       if (data) fill(data); else {

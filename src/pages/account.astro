@@ -1,0 +1,140 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { site } from '../config/site';
+---
+<Base title="Account" description="Sign in or create an account. For alumni, current students and faculty of the institute." rail={false} noindex>
+  <div class="wrap" style="max-width:760px">
+    <div id="signed-out" hidden>
+      <PageHead eyebrow="Account" title="Sign in or create an account" lead="One account for your profile page, the forum and everything else. Alumni, current students and faculty are all welcome. Signing in with a provider you have not used before creates a new account." />
+      <div class="card" style="max-width:520px">
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
+          <div id="gsi"></div>
+          <button hidden class="btn btn-primary" data-provider="google">Continue with Google</button>
+          <button hidden class="btn btn-ghost" data-provider="github">Continue with GitHub</button>
+          <button hidden class="btn btn-ghost" data-provider="linkedin_oidc">Continue with LinkedIn</button>
+        </div>
+        <form id="magic" style="display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap">
+          <input type="email" id="magic-email" placeholder="or your email for a sign-in link" required style="flex:1;min-width:220px;font:inherit;padding:.55rem .75rem;border:1px solid var(--line);border-radius:8px" />
+          <button class="btn btn-ghost" type="submit">Send link</button>
+        </form>
+        <p id="auth-msg" class="status" hidden></p>
+        <p class="muted" style="font-size:.85rem;margin:1rem 0 0">No passwords. We only store the email and name the provider gives us. See the <a href="/privacy">privacy policy</a>.</p>
+      </div>
+    </div>
+
+    <div id="signed-in" hidden>
+      <PageHead eyebrow="Account" title="Your account" lead="" />
+      <div class="card" style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap">
+        <img id="me-pic" alt="" width="56" height="56" style="border-radius:50%;object-fit:cover;background:var(--paper-2)" hidden />
+        <div style="flex:1;min-width:200px">
+          <strong id="me-name"></strong>
+          <div class="muted" id="me-email" style="font-size:.9rem"></div>
+          <div class="muted" id="me-via" style="font-size:.85rem"></div>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm" id="signout">Sign out</button>
+      </div>
+
+      <section class="section" style="padding-top:1.5rem">
+        <h2 style="font-size:1.2rem">Profile page</h2>
+        <p id="profile-state" class="muted"></p>
+        <p style="display:flex;gap:.6rem;flex-wrap:wrap">
+          <a class="btn btn-primary btn-sm" href="/alumni/join" id="profile-edit">Create your profile</a>
+          <a class="btn btn-ghost btn-sm" id="profile-view" hidden>View my page</a>
+          <a class="btn btn-ghost btn-sm" href="/forum">Forum</a>
+        </p>
+      </section>
+
+      <section class="section" style="padding-top:1rem">
+        <h2 style="font-size:1.2rem">Email</h2>
+        <form id="email-form" style="display:flex;gap:.5rem;flex-wrap:wrap;max-width:520px">
+          <input type="email" name="email" required style="flex:1;min-width:220px;font:inherit;padding:.55rem .75rem;border:1px solid var(--line);border-radius:8px" />
+          <button class="btn btn-ghost btn-sm" type="submit">Change email</button>
+        </form>
+        <p id="email-msg" class="status" hidden></p>
+        <p class="muted" style="font-size:.85rem">A confirmation link goes to both the old and the new address. The change applies once both are clicked.</p>
+      </section>
+
+      <section class="section" style="padding-top:1rem">
+        <h2 style="font-size:1.2rem">Delete account</h2>
+        <p class="muted">Removes your account, profile page, uploads, forum posts and replies. There is no undo.</p>
+        <form id="delete-form" style="display:flex;gap:.5rem;flex-wrap:wrap;max-width:520px">
+          <input name="confirm" placeholder='Type DELETE to confirm' autocomplete="off" style="flex:1;min-width:220px;font:inherit;padding:.55rem .75rem;border:1px solid var(--line);border-radius:8px" />
+          <button class="btn btn-accent btn-sm" type="submit">Delete my account</button>
+        </form>
+        <p id="delete-msg" class="status" hidden></p>
+      </section>
+    </div>
+  </div>
+
+  <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key, gcid: site.googleClientId }}>
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    const sb = createClient(url, key);
+    const $ = (id) => document.getElementById(id);
+    const say = (el, msg, kind = '') => { el.textContent = msg; el.className = `status ${kind}`; el.hidden = !msg; };
+    const next = new URLSearchParams(location.search).get('next');
+    const safeNext = next && /^\/[^/]/.test(next) ? next : null;
+    const here = location.pathname + (safeNext ? `?next=${encodeURIComponent(safeNext)}` : '');
+
+    const { data: { session } } = await sb.auth.getSession();
+
+    if (!session) {
+      $('signed-out').hidden = false;
+      fetch(`${url}/auth/v1/settings`, { headers: { apikey: key } }).then((r) => r.json()).then((s) =>
+        document.querySelectorAll('[data-provider]').forEach((b) => { b.hidden = !s.external?.[b.dataset.provider]; }));
+      document.querySelectorAll('[data-provider]').forEach((b) => b.addEventListener('click', () =>
+        sb.auth.signInWithOAuth({ provider: b.dataset.provider, options: { redirectTo: location.origin + here } })));
+      $('magic').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const { error } = await sb.auth.signInWithOtp({ email: $('magic-email').value, options: { emailRedirectTo: location.origin + here } });
+        say($('auth-msg'), error ? error.message : 'Check your inbox for the sign-in link.', error ? 'err' : 'ok');
+      });
+      if (gcid) {
+        // Google Identity Services: the consent popup names this site, not the Supabase project URL.
+        const raw = crypto.randomUUID();
+        const hashed = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw)))].map((b) => b.toString(16).padStart(2, '0')).join('');
+        await new Promise((ok) => { const t = document.createElement('script'); t.src = 'https://accounts.google.com/gsi/client'; t.onload = ok; document.head.appendChild(t); });
+        google.accounts.id.initialize({ client_id: gcid, nonce: hashed, callback: async ({ credential }) => {
+          const { error } = await sb.auth.signInWithIdToken({ provider: 'google', token: credential, nonce: raw });
+          if (error) say($('auth-msg'), error.message, 'err'); else location.replace(safeNext || '/account');
+        } });
+        google.accounts.id.renderButton($('gsi'), { theme: 'outline', size: 'large', text: 'continue_with', shape: 'pill' });
+        document.querySelector('[data-provider="google"]').remove();
+      }
+    } else {
+      if (safeNext) { location.replace(safeNext); }
+      const u = session.user, m = u.user_metadata || {};
+      $('signed-in').hidden = false;
+      $('me-name').textContent = m.full_name || m.name || u.email;
+      $('me-email').textContent = u.email;
+      $('me-via').textContent = `Signed in with ${u.app_metadata?.provider === 'email' ? 'an email link' : u.app_metadata?.provider || 'email'}`;
+      if (m.avatar_url || m.picture) { $('me-pic').src = m.avatar_url || m.picture; $('me-pic').hidden = false; }
+      $('email-form').email.value = u.email;
+      $('signout').addEventListener('click', () => sb.auth.signOut().then(() => (location.href = '/')));
+
+      const { data: p } = await sb.from('profiles').select('username,slug,approved,name').eq('user_id', u.id).maybeSingle();
+      if (!p) $('profile-state').textContent = 'You have no profile page yet. It takes a few minutes and doubles as your portfolio.';
+      else {
+        const path = `/${p.username || p.slug}`;
+        $('profile-edit').textContent = 'Edit profile';
+        $('profile-view').hidden = false; $('profile-view').href = path;
+        $('profile-state').textContent = p.approved ? `Live at ${location.origin}${path}. Edits appear on the next site build.` : `Saved and waiting for cabinet approval. It will be at ${location.origin}${path}.`;
+      }
+
+      $('email-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = e.target.email.value.trim();
+        if (email === u.email) return say($('email-msg'), 'That is already your email.', 'err');
+        const { error } = await sb.auth.updateUser({ email });
+        say($('email-msg'), error ? error.message : 'Confirmation links sent to both addresses.', error ? 'err' : 'ok');
+      });
+      $('delete-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (e.target.confirm.value !== 'DELETE') return say($('delete-msg'), 'Type DELETE in capitals to confirm.', 'err');
+        const { error } = await sb.rpc('delete_my_account');
+        if (error) return say($('delete-msg'), error.message, 'err');
+        await sb.auth.signOut(); location.href = '/';
+      });
+    }
+  </script>
+</Base>

@@ -59,3 +59,6 @@ D15 said a forum had to wait for the national platform's server-rendered stack. 
 
 ### D18. Google sign-in through Google Identity Services, not the Supabase redirect
 With the plain OAuth redirect, Google's consent screen names the Supabase project host because that is the redirect target. Supabase only fixes this with a paid custom domain. Google's own sign-in button, with the ID token passed to `signInWithIdToken`, names asgi.app instead and costs nothing, so the join page uses it when `googleClientId` is set in site config. GitHub shows the Supabase callback host in its authorise screen and has no free equivalent; that is accepted.
+
+### D19. One account page, header state without the client library
+Sign-in moved out of the profile editor to `/account`, which is also where email changes and account deletion live. Students sign up with the same flow; a profile with sector "Student" is the only difference, so there is no second table or role. The header shows the signed-in member on every page by reading the session supabase-js keeps in localStorage and calls the logout endpoint directly, so ordinary pages never load the 100 KB client. Deletion is a `security definer` function that removes the auth user; everything else cascades from there.

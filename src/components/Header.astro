@@ -25,10 +25,34 @@ const current = (href: string) => (path === href || path.startsWith(href + '/') 
     <nav class="nav" id="nav" aria-label="Main">
       {links.map(([href, label]) => <a href={href} aria-current={current(href)}>{label}</a>)}
       <a href="/search" aria-current={current('/search')}>Search</a>
-      <a href="/alumni/join" class="cta">Join as alumni</a>
+      <span class="auth" id="hdr-auth">
+        <a href="/account" aria-current={current('/account')}>Sign in</a>
+        <a href="/account?next=/alumni/join" class="cta">Join</a>
+      </span>
     </nav>
   </div>
 </header>
+<script is:inline define:vars={{ url: site.supabase.url, apikey: site.supabase.key }}>
+  // Reads the session supabase-js keeps in localStorage so every page knows who is signed in,
+  // without loading the library. Sign-out calls the auth endpoint directly, then clears the key.
+  (() => {
+    const storageKey = `sb-${new URL(url).hostname.split('.')[0]}-auth-token`;
+    let s; try { s = JSON.parse(localStorage.getItem(storageKey) || 'null'); } catch {}
+    const u = s && s.user; if (!u) return;
+    const m = u.user_metadata || {}, box = document.getElementById('hdr-auth');
+    box.textContent = '';
+    const me = document.createElement('a'); me.href = '/account'; me.className = 'me';
+    const pic = m.avatar_url || m.picture;
+    if (pic) { const i = document.createElement('img'); i.src = pic; i.alt = ''; i.width = 26; i.height = 26; me.appendChild(i); }
+    me.appendChild(document.createTextNode((m.full_name || m.name || u.email).split(' ')[0]));
+    const out = document.createElement('button'); out.type = 'button'; out.className = 'signout'; out.textContent = 'Sign out';
+    out.onclick = async () => {
+      try { await fetch(`${url}/auth/v1/logout`, { method: 'POST', headers: { apikey, Authorization: `Bearer ${s.access_token}` } }); } catch {}
+      localStorage.removeItem(storageKey); location.href = '/';
+    };
+    box.append(me, out);
+  })();
+</script>
 <script>
   const btn = document.querySelector('.nav-toggle');
   const nav = document.getElementById('nav');

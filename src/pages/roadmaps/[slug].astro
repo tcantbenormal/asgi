@@ -16,6 +16,8 @@ const { Content } = await render(r);
     <h1>{r.data.title}</h1>
     <p class="lead">{r.data.summary}</p>
     <div class="tags" style="margin-top:1rem">{r.data.tools.map((t) => <span class="tag grey">{t}</span>)}</div>
+    {r.data.roles.length > 0 && <p class="muted" style="margin:.9rem 0 0;font-size:.92rem"><strong>Job titles:</strong> {r.data.roles.join(' · ')}</p>}
+    {r.data.employers.length > 0 && <p class="muted" style="margin:.3rem 0 0;font-size:.92rem"><strong>Who hires:</strong> {r.data.employers.join(' · ')}</p>}
   </header>
   <div class="prose" style="margin-bottom:2rem"><Content /></div>
   <h2>Stages</h2>
@@ -24,8 +26,17 @@ const { Content } = await render(r);
       <li class="stage">
         <h3>{s.name}</h3>
         <div class="duration">{s.duration}</div>
+        {s.outcome && <p class="outcome"><strong>By the end you can:</strong> {s.outcome}</p>}
         <ul>{s.skills.map((k) => <li>{k}</li>)}</ul>
-        {s.resources.length > 0 && <div class="res">{s.resources.map((x) => <a class="btn btn-ghost btn-sm" href={x.url} rel="noopener">{x.label}</a>)}</div>}
+        {s.project && <p class="project"><strong>Prove it:</strong> {s.project}</p>}
+        {s.resources.length > 0 && (
+          <table class="res-table">
+            <thead><tr><th>Resource</th><th>Type</th><th>Cost</th><th>Time</th><th>What you get</th></tr></thead>
+            <tbody>{s.resources.map((x) => (
+              <tr><td><a href={x.url} rel="noopener">{x.label}</a></td><td>{x.kind}</td><td>{x.cost}</td><td>{x.hours ?? ''}</td><td>{x.gives ?? ''}</td></tr>
+            ))}</tbody>
+          </table>
+        )}
       </li>
     ))}
   </ol>

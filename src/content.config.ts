@@ -81,12 +81,23 @@ const roadmaps = defineCollection({
     order: z.number().default(99),
     demand: z.enum(['High', 'Medium', 'Growing']),
     tools: z.array(z.string()),
+    roles: z.array(z.string()).default([]),      // job titles this track leads to
+    employers: z.array(z.string()).default([]),  // who hires for it in Pakistan and remotely
     stages: z.array(
       z.object({
         name: z.string(),
         duration: z.string(),
+        outcome: z.string().optional(),          // what you can do once the stage is done
         skills: z.array(z.string()),
-        resources: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]),
+        project: z.string().optional(),          // the one deliverable that proves the stage
+        resources: z.array(z.object({
+          label: z.string(),
+          url: z.string().url(),
+          kind: z.enum(['course', 'book', 'docs', 'video', 'tool', 'certificate', 'data']).default('course'),
+          cost: z.enum(['free', 'free to audit', 'paid', 'free for students']).default('free'),
+          hours: z.string().optional(),          // honest time estimate, e.g. "30 h"
+          gives: z.string().optional(),          // the skill you walk away with
+        })).default([]),
       }),
     ),
   }),

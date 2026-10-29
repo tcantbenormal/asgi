@@ -7,8 +7,6 @@ summary: A short, copy-and-run introduction to Earth Engine using Sentinel-2 ove
 tags: [gee, remote-sensing, tutorial]
 ---
 
-> Sample tutorial. Expand or replace.
-
 You need a Google account registered for Earth Engine, which is free for research and education at [earthengine.google.com](https://earthengine.google.com/). Open the Code Editor and paste the script below.
 
 ```javascript

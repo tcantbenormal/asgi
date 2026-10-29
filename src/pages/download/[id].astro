@@ -7,13 +7,13 @@ import { site } from '../../config/site';
 
 export async function getStaticPaths() {
   const items = await getCollection('resources');
-  return items.map((r) => ({ params: { id: r.id }, props: { r } }));
+  return items.filter((r) => r.data.downloads.length > 0).map((r) => ({ params: { id: r.id }, props: { r } }));
 }
 const { r } = Astro.props;
 const d = r.data;
-// ponytail: base64 keeps the URL out of plain-text scrapers; a determined user can still
-// read it from the source, which is fine. Real enforcement would need a server.
-const encoded = Buffer.from(d.download).toString('base64');
+// ponytail: base64 keeps the URLs out of plain-text scrapers; a determined user can still
+// read them from the source, which is fine. Real enforcement would need a server.
+const encoded = Buffer.from(JSON.stringify(d.downloads.map((x) => x.url))).toString('base64');
 const seconds = site.downloadCountdown;
 ---
 <Base title={`Download ${d.name}`} description={`Download ${d.name}. ${d.description}`} noindex>
@@ -26,13 +26,15 @@ const seconds = site.downloadCountdown;
       <p class="lead" style="margin-inline:auto">{d.version && `Version ${d.version} · `}{d.size && `${d.size} · `}{d.license}</p>
     </header>
 
-    <div class="gate-box" id="gate" data-url={encoded} data-seconds={seconds} data-direct={ads.directLink}>
+    <div class="gate-box" id="gate" data-urls={encoded} data-seconds={seconds} data-direct={ads.directLink}>
       <AdSlot slot="gate" />
-      <p class="muted" style="margin:1.25rem 0 0">Your download link unlocks in</p>
+      <p class="muted" style="margin:1.25rem 0 0">Your download link{d.downloads.length > 1 && 's'} unlock{d.downloads.length === 1 && 's'} in</p>
       <div class="timer" id="timer" aria-live="polite">{seconds}</div>
       <div class="bar"><i id="bar"></i></div>
-      <a class="btn btn-accent" id="go" href="#" aria-disabled="true" rel="noopener">Download from {d.host}</a>
-      <p class="muted" style="margin:1rem 0 0;font-size:.85rem">The short wait funds hosting and the society's activities. Thank you.</p>
+      <div class="gate-links">
+        {d.downloads.map((x) => <a class="btn btn-accent go" href="#" aria-disabled="true" rel="noopener">{x.label}{x.size && ` · ${x.size}`}</a>)}
+      </div>
+      <p class="muted" style="margin:1rem 0 0;font-size:.85rem">Hosted on {d.host}. The short wait funds hosting and the society's activities. Thank you.</p>
     </div>
 
     <p style="text-align:center;margin-top:1.5rem"><a href={`/resources/${r.id}`}>Back to {d.name}</a> · <a href="/legal">Content policy</a></p>
@@ -42,7 +44,7 @@ const seconds = site.downloadCountdown;
     const gate = document.getElementById('gate')!;
     const timer = document.getElementById('timer')!;
     const bar = document.getElementById('bar')!;
-    const go = document.getElementById('go') as HTMLAnchorElement;
+    const links = [...document.querySelectorAll<HTMLAnchorElement>('#gate .go')];
     const total = Number(gate.dataset.seconds);
     let left = total;
     const tick = () => {
@@ -51,10 +53,10 @@ const seconds = site.downloadCountdown;
       bar.style.width = `${((total - left) / total) * 100}%`;
       if (left <= 0) {
         clearInterval(iv);
-        go.href = atob(gate.dataset.url!);
-        go.removeAttribute('aria-disabled');
+        const urls: string[] = JSON.parse(atob(gate.dataset.urls!));
+        links.forEach((a, i) => { a.href = urls[i]; a.removeAttribute('aria-disabled'); });
         timer.textContent = 'Ready';
-        go.focus();
+        links[0].focus();
       }
     };
     // Pause when the tab is hidden so the ad is actually on screen.
@@ -65,7 +67,7 @@ const seconds = site.downloadCountdown;
       else iv = setInterval(tick, 1000);
     });
     // Network direct link: opens in a second tab on the real click, the download itself continues as normal.
-    go.addEventListener('click', () => { if (left <= 0 && gate.dataset.direct) window.open(gate.dataset.direct, '_blank', 'noopener'); });
+    links.forEach((a) => a.addEventListener('click', () => { if (left <= 0 && gate.dataset.direct) window.open(gate.dataset.direct, '_blank', 'noopener'); }));
     requestAnimationFrame(() => (bar.style.width = '0%'));
   </script>
 </Base>

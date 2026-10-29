@@ -118,9 +118,14 @@ const resources = defineCollection({
     license: z.string(),
     homepage: link.optional(),
     tutorial: link.optional(),
-    download: z.string().url(),
+    // Society mirrors. Empty means "official download only" and no /download gate is built.
+    downloads: z.array(z.object({ label: z.string(), url: z.string().url(), size: z.string().optional() })).default([]),
     host: z.string().default('Google Drive'),
     updated: z.string(),
+    image: z.string().optional(),
+    about: z.array(z.string()).default([]),
+    requirements: z.array(z.string()).default([]),
+    licensing: z.string().optional(),
   }),
 });
 

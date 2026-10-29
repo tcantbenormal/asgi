@@ -12,8 +12,10 @@ const categories = [...new Set(items.map((i) => i.data.category))].sort();
 <div class="grid" id="rlist">
   {items.map((i) => (
     <article class="card" data-cat={i.data.category} data-text={`${i.data.name} ${i.data.description} ${i.data.category}`.toLowerCase()}>
-      <span class="tag grey">{i.data.category}</span>
-      <h3><a href={`/resources/${i.id}`}>{i.data.name}</a></h3>
+      <div class="res-head">
+        {i.data.image && <img class="res-logo" src={i.data.image} alt="" width="40" height="40" loading="lazy" />}
+        <div><span class="tag grey">{i.data.category}</span><h3><a href={`/resources/${i.id}`}>{i.data.name}</a></h3></div>
+      </div>
       <p>{i.data.description}</p>
       <div class="meta">
         {i.data.version && <span>v{i.data.version}</span>}
@@ -22,7 +24,9 @@ const categories = [...new Set(items.map((i) => i.data.category))].sort();
       </div>
       <div class="foot">
         <small class="muted">{i.data.license}</small>
-        <a class="btn btn-primary btn-sm" href={`/download/${i.id}`}>Download</a>
+        {i.data.downloads.length > 0
+          ? <a class="btn btn-primary btn-sm" href={`/download/${i.id}`}>Download</a>
+          : <a class="btn btn-ghost btn-sm" href={i.data.homepage} rel="noopener">Official site</a>}
       </div>
     </article>
   ))}

@@ -2,156 +2,472 @@
   {
     "id": "qgis",
     "name": "QGIS",
-    "kind": "software",
     "category": "Desktop GIS",
-    "description": "The free desktop GIS used across the course. Long-term release recommended for coursework.",
-    "version": "3.40 LTR",
+    "image": "/img/software/qgis.svg",
+    "description": "The free desktop GIS used across the course. Install the long-term release for coursework.",
+    "version": "LTR (long-term release)",
     "size": "1.2 GB",
-    "os": ["Windows", "macOS", "Linux"],
+    "os": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
     "license": "GPL v2",
     "homepage": "https://qgis.org/download/",
     "tutorial": "https://docs.qgis.org/latest/en/docs/training_manual/",
-    "download": "https://drive.google.com/REPLACE",
+    "about": [
+      "QGIS is a complete desktop GIS: it reads nearly every vector and raster format through GDAL, edits data with snapping and topology tools, runs analysis through its Processing toolbox, and produces print-quality maps from its layout composer. It is the software most Pakistani employers now run alongside or instead of ArcGIS, and it is the one you can keep using after graduation without a licence.",
+      "It works as a host for other open-source engines. GRASS, SAGA and GDAL algorithms appear inside the Processing toolbox, so one install gives you several hundred tools. Python is built in through the console and plugin system, and the plugin repository adds things like Semi-Automatic Classification for imagery, QuickMapServices for basemaps and DataPlotly for charts.",
+      "Two versions are published at any time. The long-term release (LTR) changes only for bug fixes for a year and is what the course, the tutorials and most organisations use. The latest release has newer features and more surprises. Install the LTR unless a tutorial tells you otherwise."
+    ],
+    "requirements": [
+      "Windows 10 or 11, 64-bit; macOS 12 or later; or any current Linux distribution",
+      "4 GB RAM minimum, 8 GB recommended for raster work",
+      "About 2 GB of disk space for the install, plus space for your data",
+      "A graphics driver with OpenGL 2.0 support; integrated graphics are fine",
+      "On Windows use the standalone installer (.msi), not OSGeo4W, unless you need a custom GDAL build"
+    ],
+    "kind": "software",
+    "host": "Official site",
+    "downloads": [],
+    "updated": "2026-10"
+  },
+  {
+    "id": "arcgis-pro",
+    "name": "ArcGIS Pro",
+    "category": "Desktop GIS",
+    "image": "/img/software/arcgis-pro.svg",
+    "description": "Esri's current desktop GIS. Installers for 3.7 and 3.6 are mirrored for students who hold a licence through the institute.",
+    "version": "3.7 and 3.6",
+    "os": [
+      "Windows"
+    ],
+    "license": "Commercial, licensed through the institute",
+    "homepage": "https://pro.arcgis.com/en/pro-app/latest/get-started/get-started.htm",
+    "tutorial": "https://www.esri.com/training/catalog/search/",
     "host": "Google Drive",
+    "downloads": [
+      {
+        "label": "ArcGIS Pro 3.7 installer",
+        "url": "https://drive.google.com/file/d/1h1Oz1QtuK4WUbSIqg9qQyUkG3PFSHE6_/view?usp=drive_link"
+      },
+      {
+        "label": "ArcGIS Pro 3.6 installer",
+        "url": "https://drive.google.com/file/d/1ZVxR_PnRtHz26Ara3ozxHBpXDIz_1gEJ/view?usp=drive_link"
+      }
+    ],
+    "about": [
+      "ArcGIS Pro is the 64-bit successor to ArcMap and the desktop half of Esri's platform. It combines 2D and 3D mapping in one project, uses a ribbon interface, and runs geoprocessing tools from the same toolbox you can call from Python through the arcpy library. Projects hold maps, layouts, toolboxes and connections together in a single .aprx file.",
+      "Its strengths are the depth of the geoprocessing library, the cartographic and layout tools, the tight connection to ArcGIS Online for sharing web maps, and the extensions for network, spatial statistics, image analysis and 3D. Most government departments, NESPAK and the large consultancies in Pakistan run it, and the Esri certificate is the one job adverts name.",
+      "Choose 3.7 unless a course or a plugin you depend on requires 3.6. Both need a licence before they will open. The installer is the same one Esri distributes; nothing here unlocks it."
+    ],
+    "requirements": [
+      "Windows 11 or Windows 10 (version 22H2 or later), 64-bit; Windows Server 2019 or later also supported",
+      "Processor with at least four cores; eight or more recommended for imagery and 3D",
+      "8 GB RAM minimum, 16 GB recommended, 32 GB for large rasters and scene layers",
+      "32 GB of free disk space, SSD strongly recommended",
+      "DirectX 12 capable graphics card with 4 GB of dedicated memory; 8 GB for 3D scenes",
+      "Microsoft .NET Desktop Runtime 8, which the installer prompts for if missing",
+      "Screen resolution of 1024 x 768 or higher; a 1080p display is realistic for the ribbon"
+    ],
+    "licensing": "The institute holds an education licence. Sign in with a named-user account on the university's ArcGIS Online organisation, or ask the GIS lab for a single-use authorisation file. If you have no account, request one from the lab coordinator with your registration number. Esri also offers a free Learn ArcGIS trial for course MOOCs, which lasts for the duration of the course.",
+    "kind": "software",
+    "updated": "2026-10"
+  },
+  {
+    "id": "arcgis-desktop",
+    "name": "ArcGIS Desktop (ArcMap) 10.8.2",
+    "category": "Desktop GIS",
+    "image": "/img/software/arcgis-desktop.png",
+    "description": "The retired 32-bit ArcMap, still used in older labs and by some departments. Mirror coming; use ArcGIS Pro for new work.",
+    "version": "10.8.2",
+    "os": [
+      "Windows"
+    ],
+    "license": "Commercial, licensed through the institute",
+    "homepage": "https://desktop.arcgis.com/en/arcmap/latest/get-started/setup/arcgis-desktop-system-requirements.htm",
+    "about": [
+      "ArcGIS Desktop is the previous generation of Esri's desktop software: ArcMap for 2D mapping and editing, ArcCatalog for data management, ArcScene and ArcGlobe for 3D. It is 32-bit, single-threaded for most tools, and uses .mxd documents rather than projects.",
+      "Esri ended support for ArcMap on 1 March 2026. It no longer receives fixes and will not open newer ArcGIS Pro formats, but a great deal of training material, older tutorials and departmental workflows in Pakistan were written for it, which is why some labs still have it installed. Learn it only if a course requires it; learn ArcGIS Pro for everything else.",
+      "A society mirror of the 10.8.2 installer will be added here. Until then, ask the GIS lab for the installation media."
+    ],
+    "requirements": [
+      "Windows 10 or 11, 64-bit (the application itself is 32-bit)",
+      "4 GB RAM minimum, 8 GB recommended",
+      "About 5 GB of disk space",
+      "Microsoft .NET Framework 4.5 or later",
+      "A graphics card with 24-bit colour; 3D extensions need OpenGL 2.0"
+    ],
+    "licensing": "Needs a licence from the institute's education site licence, either an ArcGIS Administrator single-use authorisation or a concurrent licence from the lab's licence manager. Ask the lab coordinator.",
+    "kind": "software",
+    "host": "Official site",
+    "downloads": [],
+    "updated": "2026-10"
+  },
+  {
+    "id": "envi",
+    "name": "ENVI",
+    "category": "Remote sensing",
+    "image": "/img/software/envi.png",
+    "description": "NV5's image analysis software, the standard commercial package for classification, spectral analysis and hyperspectral work.",
+    "version": "6.5",
+    "os": [
+      "Windows",
+      "Linux"
+    ],
+    "license": "Commercial, licensed through the institute",
+    "homepage": "https://www.nv5geospatialsoftware.com/Products/ENVI",
+    "tutorial": "https://www.nv5geospatialsoftware.com/Support/Self-Help-Tools/Tutorials",
+    "host": "Google Drive",
+    "downloads": [
+      {
+        "label": "ENVI 6.5 installer",
+        "url": "https://drive.google.com/file/d/1giJ5YP7e4h4Niprebi6pW-pT5rn2G3kA/view?usp=drive_link"
+      }
+    ],
+    "about": [
+      "ENVI (Environment for Visualizing Images) is built around the spectral side of remote sensing. It reads imagery from almost every satellite and airborne sensor, handles radiometric and atmospheric correction (FLAASH and QUAC), and offers a full workflow for supervised and unsupervised classification, change detection, spectral unmixing, target detection and hyperspectral analysis. Its feature extraction module does object-based segmentation and classification.",
+      "It runs on IDL, a scientific programming language, so every tool can be scripted, and newer versions also expose the ENVI API to Python. ENVI Modeler lets you chain tools into a reusable graph without code. Compared with SNAP or QGIS it is faster and better documented for spectral work, and it is the package most Pakistani remote sensing theses in the last two decades were produced with.",
+      "Version 6.5 is a 64-bit release with the modern workflow-based interface. The Deep Learning module is a separate licensed add-on and is not included."
+    ],
+    "requirements": [
+      "Windows 10 or 11, 64-bit; also available for Linux",
+      "8 GB RAM minimum, 16 GB or more recommended for hyperspectral cubes",
+      "About 5 GB of disk space for the install; imagery needs far more",
+      "A graphics card with OpenGL 2.0 support; dedicated memory helps for large displays",
+      "Administrator rights for the installer and the licence tool"
+    ],
+    "licensing": "ENVI will not run without a licence. The institute's licence is served through the NV5 licence administrator; ask the remote sensing lab for the activation code or licence server address and enter it in the ENVI Licence Administrator after installing.",
+    "kind": "software",
+    "updated": "2026-10"
+  },
+  {
+    "id": "erdas-imagine",
+    "name": "ERDAS IMAGINE 2025",
+    "category": "Remote sensing",
+    "image": "/img/software/erdas-imagine.png",
+    "description": "Hexagon's image processing suite for photogrammetry, classification, orthorectification and large production workflows.",
+    "version": "2025",
+    "os": [
+      "Windows"
+    ],
+    "license": "Commercial, licensed through the institute",
+    "homepage": "https://hexagon.com/products/erdas-imagine",
+    "tutorial": "https://hexagon.com/resources/resource-library",
+    "host": "Google Drive",
+    "downloads": [
+      {
+        "label": "ERDAS IMAGINE 2025 installer",
+        "url": "https://drive.google.com/file/d/1VVVdC4S9qK6q4XrifYaz-tDmLBhWU1ve/view?usp=drive_link"
+      }
+    ],
+    "about": [
+      "ERDAS IMAGINE is a raster-first remote sensing system that has been in production use since the 1980s. It covers image enhancement, mosaicking, orthorectification, pan-sharpening, classification (including the machine-learning operators added in recent versions), radar processing and terrain analysis. Spatial Modeler is its visual programming environment: tools are dragged into a graph, chained and run as batch processes on thousands of images.",
+      "Its photogrammetry side, IMAGINE Photogrammetry (formerly LPS), handles aerial triangulation, DEM extraction and orthophoto production for aerial and satellite stereo imagery, and is one reason survey organisations and mapping agencies use it. The 2025 release updates the interface, the sensor model library and the deep learning operators.",
+      "In Pakistan it is common in organisations that produce orthophotos and large mosaics, and in older remote sensing courses. ENVI is stronger for spectral analysis; IMAGINE is stronger for production and photogrammetry."
+    ],
+    "requirements": [
+      "Windows 10 or 11, 64-bit; Windows Server 2019 or later also supported",
+      "16 GB RAM recommended, 32 GB for photogrammetry and large mosaics",
+      "About 8 GB of disk space for the install, plus fast storage for imagery",
+      "A dedicated OpenGL 4.x graphics card with at least 4 GB of memory for stereo and 3D views",
+      "Microsoft .NET Framework 4.8 and Visual C++ runtimes, included with the installer"
+    ],
+    "licensing": "Licences are issued through the Hexagon Geospatial Licence Administration tool, either as a node-locked key or from the lab's licence server. Ask the remote sensing lab for the key or server address before installing; the installer alone does not run.",
+    "kind": "software",
+    "updated": "2026-10"
+  },
+  {
+    "id": "arcgis-reality-studio",
+    "name": "ArcGIS Reality Studio",
+    "category": "Photogrammetry",
+    "image": "/img/software/arcgis-reality-studio.svg",
+    "description": "Esri's photogrammetry application for turning aerial and drone imagery into true orthos, meshes, point clouds and surface models.",
+    "os": [
+      "Windows"
+    ],
+    "license": "Commercial, licensed through the institute",
+    "homepage": "https://www.esri.com/en-us/arcgis/products/arcgis-reality/reality-studio",
+    "tutorial": "https://doc.arcgis.com/en/reality-studio/latest/get-started/what-is-arcgis-reality-studio.htm",
+    "host": "Google Drive",
+    "downloads": [
+      {
+        "label": "ArcGIS Reality Studio installer",
+        "url": "https://drive.google.com/file/d/1HotOPNo05a-Z955M25eCKEEJPRgB68-P/view?usp=drive_link"
+      }
+    ],
+    "about": [
+      "ArcGIS Reality Studio is a standalone photogrammetry application in Esri's ArcGIS Reality family. It takes large collections of overlapping images from drones, aircraft or satellites, runs aerial triangulation against ground control, and produces true orthophotos, digital surface models, dense point clouds and textured 3D meshes that load directly into ArcGIS Pro and ArcGIS Online.",
+      "It is designed for city- and district-scale projects, so it is built to process tens of thousands of images on a workstation with a strong GPU and to produce outputs in Esri's scene layer formats. For small drone surveys, WebODM (free) or ArcGIS Drone2Map do the same job with far lower hardware demands; use Reality Studio when the project is large or when the deliverable must be an Esri mesh or scene layer.",
+      "Typical student uses are the campus 3D model, a true-ortho of a survey area, and comparing its surface model against GNSS check points."
+    ],
+    "requirements": [
+      "Windows 11 or Windows 10 (version 22H2 or later), 64-bit",
+      "Eight or more processor cores; this is a workstation product",
+      "32 GB RAM minimum, 64 GB or more recommended",
+      "An NVIDIA graphics card with CUDA support and at least 8 GB of memory; more memory shortens mesh generation",
+      "Fast SSD storage: a medium drone project easily needs 100 GB of working space",
+      "Microsoft .NET Desktop Runtime 8"
+    ],
+    "licensing": "Reality Studio is licensed as a user type extension on the university's ArcGIS Online organisation. Ask the GIS lab to assign the licence to your named-user account; without it the application opens but will not process.",
+    "kind": "software",
     "updated": "2026-10"
   },
   {
     "id": "grass-gis",
     "name": "GRASS GIS",
-    "kind": "software",
     "category": "Desktop GIS",
-    "description": "Raster, vector and terrain analysis powerhouse. Also available inside QGIS through the processing toolbox.",
+    "image": "/img/software/grass-gis.svg",
+    "description": "Raster, vector and terrain analysis powerhouse. Also available inside QGIS through the Processing toolbox.",
     "version": "8.4",
     "size": "350 MB",
-    "os": ["Windows", "macOS", "Linux"],
+    "os": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
     "license": "GPL v2",
     "homepage": "https://grass.osgeo.org/download/",
     "tutorial": "https://grass.osgeo.org/learn/",
-    "download": "https://drive.google.com/REPLACE",
-    "host": "Google Drive",
+    "about": [
+      "GRASS (Geographic Resources Analysis Support System) is the oldest open-source GIS still in active development and the one with the deepest raster and terrain toolset: hydrology (watersheds, flow accumulation, stream extraction), solar radiation, cost surfaces, landscape metrics, image classification and time-series modules. Everything is a command with documented parameters, which makes it natural to script in shell or Python.",
+      "It keeps data in its own location and mapset structure rather than opening files directly, which confuses first-time users but is what makes its analysis fast and its results reproducible. Most students meet it through QGIS, where the GRASS provider in the Processing toolbox exposes the same tools on ordinary files without the mapset setup.",
+      "Install it standalone when you need the full module set, large rasters, or the r.watershed and r.sim family of tools for hydrology and erosion modelling, which are the parts that have no equal in other free packages."
+    ],
+    "requirements": [
+      "Windows 10 or 11, macOS 11 or later, or Linux",
+      "4 GB RAM minimum; more for large DEMs",
+      "About 1 GB of disk space",
+      "On Windows, the standalone installer bundles Python and wxPython; the OSGeo4W installer is the alternative"
+    ],
+    "kind": "software",
+    "host": "Official site",
+    "downloads": [],
     "updated": "2026-10"
   },
   {
     "id": "saga-gis",
     "name": "SAGA GIS",
-    "kind": "software",
     "category": "Desktop GIS",
-    "description": "Fast terrain and hydrological analysis, with hundreds of modules, used in hydrology and geomorphology modules.",
-    "version": "9.5",
+    "image": "/img/software/saga-gis.png",
+    "description": "Fast terrain and hydrological analysis with hundreds of modules, used in hydrology and geomorphology courses.",
+    "version": "9.x",
     "size": "120 MB",
-    "os": ["Windows", "Linux"],
+    "os": [
+      "Windows",
+      "Linux"
+    ],
     "license": "GPL v2",
     "homepage": "https://saga-gis.sourceforge.io/",
-    "download": "https://drive.google.com/REPLACE",
-    "host": "Google Drive",
+    "tutorial": "https://sagatutorials.wordpress.com/",
+    "about": [
+      "SAGA (System for Automated Geoscientific Analyses) is a lightweight GIS written for geoscientists. Its tool library is organised by theme: terrain analysis (morphometry, channels, hydrology, lighting), grid processing, geostatistics, image classification and climate tools. It is known for speed on large grids and for terrain indices (TWI, LS factor, curvature families, SAGA wetness index) that other packages lack or compute slowly.",
+      "The interface is plain, and SAGA uses its own grid format, but every tool is also available through the SAGA provider in QGIS Processing, where most students use it. Standalone SAGA is worth installing for terrain-heavy projects and for its tool chains, which can batch a whole terrain analysis from one dialog.",
+      "It has no licence cost, runs well on modest laptops, and is portable: unzip and run."
+    ],
+    "requirements": [
+      "Windows 10 or 11, 64-bit, or Linux",
+      "4 GB RAM minimum",
+      "Under 500 MB of disk space; the Windows build is a zip that needs no installer",
+      "Microsoft Visual C++ runtimes, usually already present"
+    ],
+    "kind": "software",
+    "host": "Official site",
+    "downloads": [],
     "updated": "2026-10"
   },
   {
     "id": "snap",
     "name": "ESA SNAP",
-    "kind": "software",
     "category": "Remote sensing",
+    "image": "/img/software/snap.png",
     "description": "The Sentinel Application Platform for processing Sentinel-1 radar and Sentinel-2 optical imagery.",
-    "version": "11",
+    "version": "12",
     "size": "900 MB",
-    "os": ["Windows", "macOS", "Linux"],
+    "os": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
     "license": "GPL v3",
     "homepage": "https://step.esa.int/main/download/snap-download/",
     "tutorial": "https://step.esa.int/main/doc/tutorials/",
-    "download": "https://drive.google.com/REPLACE",
-    "host": "Google Drive",
+    "about": [
+      "SNAP is ESA's free toolbox for the Sentinel missions and most other Earth observation sensors. It is the standard desktop tool for Sentinel-1 radar: calibration, speckle filtering, terrain correction, interferometry (InSAR) and polarimetry are all built in, and the processing graphs that do them can be saved and run in batch from the Graph Processing Tool.",
+      "For Sentinel-2 and Sentinel-3 it provides resampling, subsetting, band maths, indices, atmospheric correction through the Sen2Cor plugin, and a classification toolbox. Everything works on the .SAFE products you download from the Copernicus Data Space, with no conversion step.",
+      "SNAP is written in Java and feels slower than ENVI for display, but it is the only free package that covers the radar workflow end to end, which matters for flood mapping in the monsoon when optical imagery is cloud. The snappy and esa_snappy modules let you drive it from Python."
+    ],
+    "requirements": [
+      "Windows 10 or 11, macOS or Linux, 64-bit",
+      "8 GB RAM minimum, 16 GB recommended for Sentinel-1 interferometry",
+      "About 1 GB for the install; each Sentinel-1 scene is 4 to 8 GB, so plan for 50 GB or more of working space",
+      "Java is bundled with the installer; do not install it separately",
+      "A screen of at least 1280 x 800; the toolbox panels are dense"
+    ],
+    "kind": "software",
+    "host": "Official site",
+    "downloads": [],
     "updated": "2026-10"
   },
   {
     "id": "postgis",
     "name": "PostgreSQL with PostGIS",
-    "kind": "software",
     "category": "Database",
-    "description": "Spatial database for the database and web GIS courses. Installer bundle with Stack Builder for PostGIS.",
+    "image": "/img/software/postgis.png",
+    "description": "Spatial database for the database and web GIS courses. Install PostgreSQL, then add PostGIS from Stack Builder.",
     "version": "17 / 3.5",
     "size": "400 MB",
-    "os": ["Windows", "macOS", "Linux"],
+    "os": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
     "license": "PostgreSQL / GPL v2",
     "homepage": "https://postgis.net/documentation/getting_started/",
     "tutorial": "https://postgis.net/workshops/postgis-intro/",
-    "download": "https://drive.google.com/REPLACE",
-    "host": "Google Drive",
+    "about": [
+      "PostgreSQL is a general-purpose relational database, and PostGIS is the extension that teaches it geometry: spatial types, indexes, several hundred ST_ functions for measurement, overlay, buffering, routing with pgRouting, and raster storage. Together they are the back end of almost every serious web GIS and of most organisational data stores, and spatial SQL is the single most valuable skill in the GIS Analyst and GIS Developer roadmaps.",
+      "The workflow is: install PostgreSQL, run Stack Builder to add PostGIS, create a database, run CREATE EXTENSION postgis, and connect from QGIS, pgAdmin or Python. Data loads with the shp2pgsql tool, the QGIS DB Manager, or ogr2ogr. Queries that take minutes on shapefiles run in seconds once a spatial index exists.",
+      "Learn it with the PostGIS workshop linked above. The whole workshop runs on a laptop with the default install."
+    ],
+    "requirements": [
+      "Windows 10 or 11, macOS or Linux",
+      "4 GB RAM is plenty for coursework; the server is light",
+      "About 1 GB of disk space plus your data",
+      "Administrator rights to install the Windows service",
+      "Remember the postgres superuser password you set during installation; it is needed for every connection"
+    ],
+    "kind": "software",
+    "host": "Official site",
+    "downloads": [],
     "updated": "2026-10"
   },
   {
     "id": "qfield",
     "name": "QField",
-    "kind": "software",
     "category": "Field data collection",
+    "image": "/img/software/qfield.svg",
     "description": "Take a QGIS project to the field on Android or iOS. Offline capable, GNSS aware.",
-    "version": "3.5",
+    "version": "3.x",
     "size": "150 MB",
-    "os": ["Android", "iOS"],
+    "os": [
+      "Android",
+      "iOS",
+      "Windows"
+    ],
     "license": "GPL v2",
     "homepage": "https://qfield.org/",
     "tutorial": "https://docs.qfield.org/",
-    "download": "https://drive.google.com/REPLACE",
-    "host": "Google Drive",
+    "about": [
+      "QField is the mobile companion to QGIS. You prepare a project on the desktop with the layers, forms, symbology and basemaps you want, copy it to the phone (or sync through QFieldCloud), and in the field you capture points, lines and polygons with the phone's GNSS or an external receiver, fill the same attribute forms, attach photos, and bring the edits back to QGIS.",
+      "It works fully offline, which matters in rural survey areas, and it supports external RTK receivers over Bluetooth for centimetre work. Field data collection with QField, a GeoPackage and an attribute form is the standard survey workflow in the Surveying and Precision Agriculture roadmaps.",
+      "Install it from the Play Store or App Store; the QField Sync plugin in QGIS packages the project."
+    ],
+    "requirements": [
+      "Android 9 or later, or iOS 15 or later; a Windows build exists for tablets",
+      "A phone with GNSS and at least 3 GB RAM; a large basemap benefits from more storage",
+      "QGIS on the desktop with the QField Sync plugin to package projects",
+      "For sub-metre accuracy, an external GNSS receiver with Bluetooth"
+    ],
+    "kind": "software",
+    "host": "Official site",
+    "downloads": [],
     "updated": "2026-10"
   },
   {
     "id": "webodm",
     "name": "WebODM",
-    "kind": "software",
     "category": "Photogrammetry",
+    "image": "/img/software/webodm.png",
     "description": "Open-source drone image processing: orthomosaics, DEMs, point clouds and 3D models from UAV photos.",
-    "version": "2.6",
-    "size": "2.5 GB",
-    "os": ["Windows", "macOS", "Linux"],
+    "version": "2.x",
+    "os": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
     "license": "AGPL v3",
     "homepage": "https://www.opendronemap.org/webodm/",
     "tutorial": "https://docs.opendronemap.org/",
-    "download": "https://drive.google.com/REPLACE",
-    "host": "Google Drive",
+    "about": [
+      "WebODM is the browser interface to OpenDroneMap, a free photogrammetry pipeline. Upload the photos from a drone flight, optionally add ground control points, and it runs structure-from-motion and multi-view stereo to produce an orthomosaic, a digital surface and terrain model, a dense point cloud and a textured mesh, with a viewer for each. Plant health indices and volume measurement are built in.",
+      "It runs as a set of Docker containers, so the free install on Windows means installing Docker Desktop with WSL 2 first and then running WebODM from a terminal. Processing is slow on a laptop (a 300-image flight can take an hour or more) but the results are comparable with Pix4D and Agisoft for mapping work, and the pipeline is fully documented.",
+      "The paid native Windows installer from the OpenDroneMap project is a convenience, not a different product. The Docker route is free."
+    ],
+    "requirements": [
+      "Windows 10 or 11 with WSL 2 and Docker Desktop, or macOS, or Linux (the simplest)",
+      "16 GB RAM recommended; 8 GB works for small flights with the split-merge option",
+      "A 64-bit processor; a GPU is optional and only speeds up part of the pipeline",
+      "20 GB free for the containers plus 5 to 10 times the size of your photos for working space",
+      "Virtualisation enabled in the BIOS for WSL 2"
+    ],
+    "kind": "software",
+    "host": "Official site",
+    "downloads": [],
     "updated": "2026-10"
   },
   {
     "id": "google-earth-pro",
     "name": "Google Earth Pro",
-    "kind": "software",
     "category": "Visualisation",
+    "image": "/img/software/google-earth-pro.png",
     "description": "Free desktop version with historical imagery, KML editing, and area and path measurement.",
     "version": "7.3",
     "size": "60 MB",
-    "os": ["Windows", "macOS", "Linux"],
+    "os": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
     "license": "Freeware",
     "homepage": "https://www.google.com/earth/about/versions/",
-    "download": "https://drive.google.com/REPLACE",
-    "host": "Google Drive",
+    "about": [
+      "Google Earth Pro is the desktop edition of Google Earth and has been free since 2015. Its value to a GIS student is the historical imagery slider, which shows how a site has changed over twenty years of satellite and aerial images, and the ability to draw and measure placemarks, paths and polygons and save them as KML or KMZ for import into QGIS or ArcGIS.",
+      "It also imports shapefiles and GPS tracks, exports high-resolution images for reports, records tours, and shows 3D buildings and terrain. It is not an analysis tool and the imagery cannot be downloaded for processing, but for site reconnaissance, ground-truth planning and quick visual checks of a classified map it is used daily in practice.",
+      "Sign-in is not required."
+    ],
+    "requirements": [
+      "Windows 10 or 11, macOS 11 or later, or Linux",
+      "4 GB RAM",
+      "About 2 GB of disk space for the install and cache",
+      "A graphics card with OpenGL or DirectX 9 support",
+      "An internet connection; imagery streams from Google and only a cache is stored locally"
+    ],
+    "kind": "software",
+    "host": "Official site",
+    "downloads": [],
     "updated": "2026-10"
   },
   {
     "id": "r-rstudio",
     "name": "R and RStudio",
-    "kind": "software",
     "category": "Statistics and scripting",
+    "image": "/img/software/r-rstudio.svg",
     "description": "R with the sf, terra and tmap packages for spatial statistics and publication-quality figures.",
     "version": "R 4.5",
     "size": "500 MB",
-    "os": ["Windows", "macOS", "Linux"],
+    "os": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
     "license": "GPL v2 / AGPL v3",
     "homepage": "https://posit.co/download/rstudio-desktop/",
     "tutorial": "https://r.geocompx.org/",
-    "download": "https://drive.google.com/REPLACE",
-    "host": "Google Drive",
-    "updated": "2026-10"
-  },
-  {
-    "id": "arcgis-student",
-    "name": "ArcGIS Pro, student licence",
+    "about": [
+      "R is a programming language for statistics, and RStudio (from Posit) is the editor most people use it in. For spatial work the sf package handles vector data with the same simple-features model as PostGIS, terra handles rasters, tmap and ggplot2 make maps, and spdep, gstat and spatialreg cover spatial autocorrelation, interpolation and spatial regression. R is the standard tool for the statistical side of a thesis: sampling design, accuracy assessment, regression and figures that a journal will accept.",
+      "It overlaps with Python; Python is stronger for deep learning and for integration with GIS software, R is stronger for statistics, reproducible reports (Quarto and R Markdown) and plotting. Many researchers use both. The free book Geocomputation with R, linked above, is the complete course.",
+      "Install R first from CRAN, then RStudio. Packages install from inside R with install.packages()."
+    ],
+    "requirements": [
+      "Windows 10 or 11, macOS 12 or later, or Linux",
+      "4 GB RAM minimum, 8 GB for raster work with terra",
+      "About 1 GB for R and RStudio plus packages",
+      "On Windows, install Rtools as well if a package needs compiling"
+    ],
     "kind": "software",
-    "category": "Desktop GIS",
-    "description": "Not hosted here. This entry explains how to obtain a legitimate one-year student licence through Esri's Learn ArcGIS programme or the university's education site licence.",
-    "os": ["Windows"],
-    "license": "Commercial, student licence",
-    "homepage": "https://www.esri.com/en-us/industries/education/students",
-    "download": "https://www.esri.com/en-us/industries/education/students",
-    "host": "Esri",
+    "host": "Official site",
+    "downloads": [],
     "updated": "2026-10"
   },
   {
@@ -163,9 +479,14 @@
     "size": "25 MB",
     "license": "GADM academic use / CC BY",
     "homepage": "https://gadm.org/",
-    "download": "https://drive.google.com/REPLACE",
     "host": "Google Drive",
-    "updated": "2026-09"
+    "updated": "2026-09",
+    "downloads": [
+      {
+        "label": "Download from Google Drive",
+        "url": "https://drive.google.com/REPLACE"
+      }
+    ]
   },
   {
     "id": "srtm-pakistan",
@@ -176,9 +497,14 @@
     "size": "1.8 GB",
     "license": "Public domain, NASA",
     "homepage": "https://earthexplorer.usgs.gov/",
-    "download": "https://archive.org/details/REPLACE",
     "host": "Internet Archive",
-    "updated": "2026-09"
+    "updated": "2026-09",
+    "downloads": [
+      {
+        "label": "Download from Internet Archive",
+        "url": "https://archive.org/details/REPLACE"
+      }
+    ]
   },
   {
     "id": "esa-worldcover-pakistan",
@@ -189,9 +515,14 @@
     "size": "600 MB",
     "license": "CC BY 4.0",
     "homepage": "https://esa-worldcover.org/",
-    "download": "https://archive.org/details/REPLACE",
     "host": "Internet Archive",
-    "updated": "2026-09"
+    "updated": "2026-09",
+    "downloads": [
+      {
+        "label": "Download from Internet Archive",
+        "url": "https://archive.org/details/REPLACE"
+      }
+    ]
   },
   {
     "id": "chirps-pakistan",
@@ -202,9 +533,14 @@
     "size": "300 MB",
     "license": "CC BY 4.0",
     "homepage": "https://www.chc.ucsb.edu/data/chirps",
-    "download": "https://mega.nz/REPLACE",
     "host": "MEGA",
-    "updated": "2026-09"
+    "updated": "2026-09",
+    "downloads": [
+      {
+        "label": "Download from MEGA",
+        "url": "https://mega.nz/REPLACE"
+      }
+    ]
   },
   {
     "id": "osm-pakistan-roads",
@@ -215,9 +551,14 @@
     "size": "450 MB",
     "license": "ODbL",
     "homepage": "https://download.geofabrik.de/asia/pakistan.html",
-    "download": "https://drive.google.com/REPLACE",
     "host": "Google Drive",
-    "updated": "2026-09"
+    "updated": "2026-09",
+    "downloads": [
+      {
+        "label": "Download from Google Drive",
+        "url": "https://drive.google.com/REPLACE"
+      }
+    ]
   },
   {
     "id": "worldpop-pakistan",
@@ -228,9 +569,14 @@
     "size": "200 MB",
     "license": "CC BY 4.0",
     "homepage": "https://www.worldpop.org/",
-    "download": "https://drive.google.com/REPLACE",
     "host": "Google Drive",
-    "updated": "2026-09"
+    "updated": "2026-09",
+    "downloads": [
+      {
+        "label": "Download from Google Drive",
+        "url": "https://drive.google.com/REPLACE"
+      }
+    ]
   },
   {
     "id": "map-layout-template",
@@ -240,9 +586,14 @@
     "description": "QGIS print layout with the institute logo, north arrow, scale bar, legend and metadata block, A4 and A3.",
     "size": "5 MB",
     "license": "CC BY 4.0",
-    "download": "https://drive.google.com/REPLACE",
     "host": "Google Drive",
-    "updated": "2026-08"
+    "updated": "2026-08",
+    "downloads": [
+      {
+        "label": "Download from Google Drive",
+        "url": "https://drive.google.com/REPLACE"
+      }
+    ]
   },
   {
     "id": "fyp-report-template",
@@ -252,8 +603,13 @@
     "description": "Word and LaTeX templates following the institute's formatting rules, with a sample chapter structure.",
     "size": "2 MB",
     "license": "CC BY 4.0",
-    "download": "https://drive.google.com/REPLACE",
     "host": "Google Drive",
-    "updated": "2026-08"
+    "updated": "2026-08",
+    "downloads": [
+      {
+        "label": "Download from Google Drive",
+        "url": "https://drive.google.com/REPLACE"
+      }
+    ]
   }
 ]

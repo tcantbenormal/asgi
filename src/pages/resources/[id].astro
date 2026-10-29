@@ -9,21 +9,31 @@ export async function getStaticPaths() {
 const { r } = Astro.props;
 const d = r.data;
 const back = d.kind === 'software' ? '/software' : '/datasets';
+const mirrored = d.downloads.length > 0;
 ---
 <Base title={d.name} description={d.description}>
-  <header class="page-head">
-    <div class="eyebrow"><a href={back} style="color:inherit;text-decoration:none">{d.kind}</a> · {d.category}</div>
-    <h1>{d.name}</h1>
-    <p class="lead">{d.description}</p>
+  <header class="page-head res-title">
+    {d.image && <img class="res-logo lg" src={d.image} alt="" width="72" height="72" />}
+    <div>
+      <div class="eyebrow"><a href={back} style="color:inherit;text-decoration:none">{d.kind}</a> · {d.category}</div>
+      <h1>{d.name}</h1>
+      <p class="lead">{d.description}</p>
+    </div>
   </header>
   <div style="display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:2.5rem;align-items:start" class="res-grid">
     <div class="prose">
+      {d.about.length > 0 && <h2>What it is</h2>}
+      {d.about.map((p) => <p>{p}</p>)}
+      {d.requirements.length > 0 && <><h2>System requirements</h2><ul>{d.requirements.map((x) => <li>{x}</li>)}</ul></>}
+      {d.licensing && <><h2>Licence</h2><p class="notice navy">{d.licensing}</p></>}
       <h2>Before you download</h2>
       <ul>
         <li>Licence: <strong>{d.license}</strong>. Read it if you plan to redistribute or publish.</li>
         {d.homepage && <li>Official site: <a href={d.homepage} rel="noopener">{d.homepage}</a>. Check there for the newest version.</li>}
         {d.tutorial && <li>Getting started: <a href={d.tutorial} rel="noopener">tutorial</a>.</li>}
-        <li>Files are hosted on {d.host}. If the link is dead, <a href="/contact">tell us</a> and we will fix it.</li>
+        {mirrored
+          ? <li>Society mirror hosted on {d.host}. If the link is dead, <a href="/contact">tell us</a> and we will fix it.</li>
+          : <li>No society mirror; download from the official site above.</li>}
       </ul>
     </div>
     <aside class="card">
@@ -31,10 +41,14 @@ const back = d.kind === 'software' ? '/software' : '/datasets';
         {d.version && <><dt>Version</dt><dd>{d.version}</dd></>}
         {d.size && <><dt>Size</dt><dd>{d.size}</dd></>}
         {d.os.length > 0 && <><dt>Platform</dt><dd>{d.os.join(', ')}</dd></>}
-        <dt>Host</dt><dd>{d.host}</dd>
+        <dt>Licence</dt><dd>{d.license}</dd>
+        {mirrored && <><dt>Mirror</dt><dd>{d.host}</dd></>}
         <dt>Updated</dt><dd>{d.updated}</dd>
       </dl>
-      <a class="btn btn-primary" href={`/download/${r.id}`} style="margin-top:.75rem;justify-content:center">Download</a>
+      {mirrored
+        ? <a class="btn btn-primary" href={`/download/${r.id}`} style="margin-top:.75rem;justify-content:center">Download{d.downloads.length > 1 && ` (${d.downloads.length} versions)`}</a>
+        : d.homepage && <a class="btn btn-primary" href={d.homepage} rel="noopener" style="margin-top:.75rem;justify-content:center">Official download</a>}
+      {d.tutorial && <a class="btn btn-ghost" href={d.tutorial} rel="noopener" style="margin-top:.5rem;justify-content:center">Tutorials</a>}
     </aside>
   </div>
   <style>@media (max-width: 800px) { .res-grid { grid-template-columns: 1fr !important; } }</style>

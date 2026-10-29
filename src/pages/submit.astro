@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { site } from '../config/site';
+---
+<Base title="Suggest a resource" description="Suggest a tool, share a dataset, post an opportunity or add a project to the ASGI portal.">
+  <PageHead eyebrow="Contribute" title="Suggest a resource" lead="Tools, datasets, opportunities and projects on this site come from members. Tell us what to add. The editorial team checks every suggestion before it is published, usually within a week." />
+  <div style="max-width:720px">
+    <form id="f" class="card forum-form">
+      <label>What are you suggesting?
+        <select name="kind" required>
+          <option value="tool">A tool or software</option>
+          <option value="dataset">A dataset</option>
+          <option value="opportunity">An opportunity: job, internship, scholarship, course</option>
+          <option value="project">A project to showcase</option>
+          <option value="other">Something else</option>
+        </select>
+      </label>
+      <label>Title <input name="title" required minlength="3" maxlength="160" placeholder="Name of the tool, dataset, position or project" /></label>
+      <label>Link, if there is one <input name="url" type="url" maxlength="500" placeholder="https://" /></label>
+      <label>Details <textarea name="body" required minlength="10" maxlength="5000" rows="6" placeholder="What it is, why it is useful to students or alumni, licence or deadline if relevant. For a dataset: area, time period, source and format."></textarea></label>
+      <div class="two">
+        <label>Your name <input name="name" maxlength="120" autocomplete="name" /></label>
+        <label>Your email <input name="email" type="email" maxlength="200" autocomplete="email" placeholder="So we can credit you or ask a question" /></label>
+      </div>
+      <input name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
+      <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
+        <button class="btn btn-primary" type="submit">Send suggestion</button>
+        <span id="msg" class="status" hidden></span>
+      </div>
+    </form>
+    <p class="muted" style="margin-top:1rem;font-size:.9rem">Prefer email? Write to <a href={`mailto:${site.email}`}>{site.email}</a>. Suggestions are not public until published.</p>
+  </div>
+  <style>.two { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; } @media (max-width: 600px) { .two { grid-template-columns: 1fr; } }</style>
+
+  <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    const sb = createClient(url, key);
+    const f = document.getElementById('f'), msg = document.getElementById('msg');
+    const kinds = ['tool', 'dataset', 'opportunity', 'project', 'other'];
+    const want = new URLSearchParams(location.search).get('type');
+    if (kinds.includes(want)) f.kind.value = want;
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) {
+      const m = session.user.user_metadata || {};
+      f.name.value ||= m.full_name || m.name || '';
+      f.email.value ||= session.user.email || '';
+    }
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (f.website.value) return; // honeypot
+      msg.hidden = false; msg.className = 'status'; msg.textContent = 'Sending…';
+      const row = { kind: f.kind.value, title: f.title.value.trim(), url: f.url.value.trim() || null, body: f.body.value.trim(),
+        name: f.name.value.trim() || null, email: f.email.value.trim() || null, user_id: session?.user.id ?? null };
+      const { error } = await sb.from('submissions').insert(row);
+      if (error) { msg.className = 'status err'; msg.textContent = error.message; return; }
+      msg.className = 'status ok'; msg.textContent = 'Thank you. We will review it and email you if we publish it.';
+      f.reset(); if (kinds.includes(want)) f.kind.value = want;
+    });
+  </script>
+</Base>

@@ -10,7 +10,7 @@ export const site = {
   forms: {
     mentorship: 'https://forms.gle/REPLACE_MENTORSHIP_FORM',
     membership: 'https://forms.gle/REPLACE_MEMBERSHIP_FORM',
-    submitResource: '/forum?new=1', // opens the forum's new-post form; no Google Form needed
+    submitResource: '/submit', // in-site form writing to the Supabase submissions table (migration 005)
   },
   social: {
     linkedin: 'https://www.linkedin.com/company/REPLACE',

@@ -8,7 +8,7 @@ const items = (await getCollection('resources')).filter((r) => r.data.kind !== '
 ---
 <Base title="Datasets and templates" description="Pakistan-focused spatial datasets, boundaries, DEMs, land cover and climate data, plus map and report templates.">
   <PageHead eyebrow="Datasets" title="Datasets and templates" lead="Open spatial data for Pakistan and the region, plus society templates for maps, posters and reports. Check each licence before publishing.">
-    <p class="notice navy" style="margin:1rem 0 0">Have a cleaned dataset from your project? <a href={site.forms.submitResource}>Submit it</a> and it will be credited to you.</p>
+    <p class="notice navy" style="margin:1rem 0 0">Have a cleaned dataset from your project? <a href={`${site.forms.submitResource}?type=dataset`}>Submit it</a> and it will be credited to you.</p>
   </PageHead>
   <ResourceList items={items} />
 </Base>

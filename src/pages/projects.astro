@@ -8,7 +8,7 @@ const domains = [...new Set(projects.map((p) => p.data.domain))].sort();
 ---
 <Base title="Final year projects" description="Archive of final year projects from the institute: abstracts, tools used, and supervisors, to help juniors choose and scope their own.">
   <PageHead eyebrow="Academia" title="Final year project archive" lead="What seniors built, which tools they used, and who supervised. Read a few before you pick your own topic, and avoid repeating one.">
-    <p style="margin-top:1rem"><a class="btn btn-primary btn-sm" href={site.forms.submitResource}>Add your project</a></p>
+    <p style="margin-top:1rem"><a class="btn btn-primary btn-sm" href={`${site.forms.submitResource}?type=project`}>Add your project</a></p>
   </PageHead>
   <div class="filters" data-pagefind-ignore>
     <select id="pdom" aria-label="Domain"><option value="">All domains</option>{domains.map((d) => <option>{d}</option>)}</select>

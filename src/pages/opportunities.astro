@@ -14,7 +14,7 @@ const groups: [string, string, string][] = [
 ---
 <Base title="Opportunities" description="Scholarships, free courses, certifications, jobs and internships for GIS and remote sensing students.">
   <PageHead eyebrow="Opportunities" title="Scholarships, courses and jobs" lead="Curated, not scraped. Every link was checked by a person. Alumni can post openings through the form below.">
-    <p style="margin-top:1rem"><a class="btn btn-primary btn-sm" href={site.forms.submitResource}>Post an opportunity</a></p>
+    <p style="margin-top:1rem"><a class="btn btn-primary btn-sm" href={`${site.forms.submitResource}?type=opportunity`}>Post an opportunity</a></p>
   </PageHead>
   <nav class="filters" aria-label="Sections" data-pagefind-ignore>
     {groups.map(([k, label]) => <a class="btn btn-ghost btn-sm" href={`#${k}`}>{label}</a>)}

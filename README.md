@@ -30,13 +30,13 @@ Field names and allowed values are defined in `src/content.config.ts`. The build
 
 Alumni create and edit their own profiles at `/alumni/join`. Data lives in a Supabase Postgres table; the site reads approved rows at build time and renders them as static pages.
 
-Profile pages live at the site root: `/<username>`, where the username is chosen in the editor and validated by the database against a reserved list. Any new top-level page you add to `src/pages/` must also be added to that list in `supabase/migrations/002_portfolio.sql`.
+Profile pages live at the site root: `/<username>`, where the username is chosen in the editor and validated by the database against a reserved list. Any new top-level page you add to `src/pages/` must also be added to that list; the latest copy is in `supabase/migrations/005_submissions.sql`.
 
 See `docs/decisions.md` for why things are the way they are and `docs/flow.md` for how a build and a request move through the files.
 
 One-time setup:
 
-1. In the Supabase dashboard open SQL Editor, paste `supabase/schema.sql`, run it. Then paste and run each file in `supabase/migrations/` in order (002 portfolio fields, 003 forum, 004 accounts).
+1. In the Supabase dashboard open SQL Editor, paste `supabase/schema.sql`, run it. Then paste and run each file in `supabase/migrations/` in order (002 portfolio fields, 003 forum, 004 accounts, 005 submissions).
 2. Authentication > Providers: enable Google and GitHub (each needs an OAuth client id and secret from that provider; the dashboard shows the callback URL to register). Email sign-in links work without setup but are rate-limited on the free plan.
 3. Authentication > URL Configuration: add the site URL and `http://localhost:4321/alumni/join` to redirect URLs.
 4. Project URL and publishable key go in `src/config/site.ts`. Never put the secret key anywhere in this repository.
@@ -83,3 +83,7 @@ Live at https://asgi.app. The domain is registered at Name.com (free first year 
 ## Handover
 
 The GitHub organisation, Cloudflare account, Google account that owns the forms and Drive, domain registrar login, and ad network accounts must all be registered to the society email, with recovery codes stored by the outgoing and incoming president. Update `cabinet.json` at each election.
+
+## Suggestions from visitors
+
+`/submit` (linked as "Suggest a tool", "Submit it", "Post an opportunity", "Add your project") writes to the `submissions` table. Nobody can read it through the API; review rows in the Supabase dashboard under Table editor, then add the item to the right JSON or content file by hand and set `status` to `accepted` or `rejected` for your own bookkeeping.

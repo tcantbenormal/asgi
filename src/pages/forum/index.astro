@@ -79,7 +79,6 @@ import { site } from '../../config/site';
     const { data: { session } } = await sb.auth.getSession();
     $('new-toggle').addEventListener('click', () => { if (session) { $('new').hidden = false; $('new').title.focus(); } else $('signin').hidden = false; });
     $('new-cancel').addEventListener('click', () => { $('new').hidden = true; });
-    if (new URLSearchParams(location.search).has('new')) $('new-toggle').click();
     $('new').addEventListener('submit', async (e) => {
       e.preventDefault();
       const f = e.target.elements, msg = $('new-msg');

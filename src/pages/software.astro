@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
 import ResourceList from '../components/ResourceList.astro';
 import { site } from '../config/site';
-const items = (await getCollection('resources')).filter((r) => r.data.kind === 'software').sort((a, b) => a.data.name.localeCompare(b.data.name));
+const items = (await getCollection('resources')).filter((r) => r.data.kind === 'software').sort((a, b) => (a.data.order ?? 1e9) - (b.data.order ?? 1e9) || a.data.name.localeCompare(b.data.name));
 ---
 <Base title="GIS software" description="Free and open-source GIS, remote sensing and surveying software with tutorials, curated for students.">
   <PageHead eyebrow="Software" title="GIS and remote sensing software" lead="What each package does, what it needs to run, and where to get it. Open-source tools link to their official downloads. Commercial tools are mirrored only where the institute holds a licence, and the licence itself comes from the lab, not from here.">

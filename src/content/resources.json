@@ -472,20 +472,34 @@
   },
   {
     "id": "pakistan-admin-boundaries",
-    "name": "Pakistan administrative boundaries",
+    "name": "Pakistan administrative boundaries, including IIOJK",
     "kind": "dataset",
     "category": "Boundaries",
-    "description": "Province, division, district and tehsil polygons from GADM 4.1 and OCHA COD, cleaned and projected, GeoPackage.",
-    "size": "25 MB",
-    "license": "GADM academic use / CC BY",
-    "homepage": "https://gadm.org/",
+    "description": "National, provincial, district and tehsil polygons that follow the official Survey of Pakistan map, with Indian Illegally Occupied Jammu and Kashmir included as its own feature. Shapefiles in WGS 84 with full metadata.",
+    "size": "7 MB",
+    "license": "CC BY 4.0",
+    "homepage": "",
     "host": "Google Drive",
-    "updated": "2026-09",
+    "updated": "2026-10",
     "downloads": [
       {
         "label": "Download from Google Drive",
         "url": "https://drive.google.com/REPLACE"
       }
+    ],
+    "order": 1,
+    "credit": "Muhammad Taimoor Ashfaq",
+    "image": "/img/datasets/pakistan-admin-boundaries.png",
+    "about": [
+      "Most boundary files in circulation, GADM and the OCHA common operational datasets included, draw Pakistan without the Indian Illegally Occupied Jammu and Kashmir, or draw the Line of Control as if it were an international border. Any map made from them contradicts the official political map of Pakistan published by the Survey of Pakistan, which government departments, universities and most clients in the country expect. This dataset was created to fix that for student and research work.",
+      "Four shapefile layers, all in WGS 84 (EPSG:4326): National_Boundary with two features, Pakistan and IIOJK, so the outline can be drawn with or without the disputed territory; Provincial_Boundary with eight features (Punjab, Sindh, Khyber Pakhtunkhwa, Balochistan, Gilgit Baltistan, Azad Jammu and Kashmir, the Federal Capital Territory and IIOJK) with areas in square kilometres in geographic, UTM 41N and UTM 43N terms; District_Boundary with 161 districts; and Tehsil_Boundary with 554 tehsils.",
+      "The IIOJK polygon and the national and provincial outlines that include it were digitised by Muhammad Taimoor Ashfaq against the Survey of Pakistan political map and merged with district and tehsil lines derived from the OCHA Pakistan and Population Census Organisation boundary data. Each layer carries the same metadata in ArcGIS (.shp.xml) and QGIS (.qmd) form, so the source, creator and licence travel with the file."
+    ],
+    "requirements": [
+      "Any GIS that reads shapefiles: QGIS, ArcGIS Pro, ArcMap, GeoPandas, R sf",
+      "Reproject to UTM 42N (EPSG:32642) or a national equal-area projection before measuring areas; the stored areas were computed in UTM 41N and 43N",
+      "Districts reflect the 2017 census-era boundaries; districts created since then (for example in Khyber Pakhtunkhwa and Balochistan) are not split out",
+      "Cite as: Muhammad Taimoor Ashfaq (2021), Pakistan administrative boundaries including IIOJK, Arid Society of GIS, with the OCHA/PCO base acknowledged"
     ]
   },
   {

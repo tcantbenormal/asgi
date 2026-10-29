@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
 import ResourceList from '../components/ResourceList.astro';
 import { site } from '../config/site';
-const items = (await getCollection('resources')).filter((r) => r.data.kind !== 'software').sort((a, b) => a.data.name.localeCompare(b.data.name));
+const items = (await getCollection('resources')).filter((r) => r.data.kind !== 'software').sort((a, b) => (a.data.order ?? 1e9) - (b.data.order ?? 1e9) || a.data.name.localeCompare(b.data.name));
 ---
 <Base title="Datasets and templates" description="Pakistan-focused spatial datasets, boundaries, DEMs, land cover and climate data, plus map and report templates.">
   <PageHead eyebrow="Datasets" title="Datasets and templates" lead="Open spatial data for Pakistan and the region, plus society templates for maps, posters and reports. Check each licence before publishing.">

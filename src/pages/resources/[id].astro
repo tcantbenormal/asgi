@@ -13,18 +13,20 @@ const mirrored = d.downloads.length > 0;
 ---
 <Base title={d.name} description={d.description}>
   <header class="page-head res-title">
-    {d.image && <img class="res-logo lg" src={d.image} alt="" width="72" height="72" />}
+    {d.image && d.kind === 'software' && <img class="res-logo lg" src={d.image} alt="" width="72" height="72" />}
     <div>
       <div class="eyebrow"><a href={back} style="color:inherit;text-decoration:none">{d.kind}</a> · {d.category}</div>
       <h1>{d.name}</h1>
       <p class="lead">{d.description}</p>
+      {d.credit && <p class="credit">Created by <strong>{d.credit}</strong></p>}
     </div>
   </header>
   <div style="display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:2.5rem;align-items:start" class="res-grid">
     <div class="prose">
+      {d.image && d.kind !== 'software' && <figure class="res-figure"><img src={d.image} alt={`Preview of ${d.name}`} loading="lazy" /><figcaption>Preview drawn from the dataset.</figcaption></figure>}
       {d.about.length > 0 && <h2>What it is</h2>}
       {d.about.map((p) => <p>{p}</p>)}
-      {d.requirements.length > 0 && <><h2>System requirements</h2><ul>{d.requirements.map((x) => <li>{x}</li>)}</ul></>}
+      {d.requirements.length > 0 && <><h2>{d.kind === 'software' ? 'System requirements' : 'Before you use it'}</h2><ul>{d.requirements.map((x) => <li>{x}</li>)}</ul></>}
       {d.licensing && <><h2>Licence</h2><p class="notice navy">{d.licensing}</p></>}
       <h2>Before you download</h2>
       <ul>
@@ -41,6 +43,7 @@ const mirrored = d.downloads.length > 0;
         {d.version && <><dt>Version</dt><dd>{d.version}</dd></>}
         {d.size && <><dt>Size</dt><dd>{d.size}</dd></>}
         {d.os.length > 0 && <><dt>Platform</dt><dd>{d.os.join(', ')}</dd></>}
+        {d.credit && <><dt>Creator</dt><dd>{d.credit}</dd></>}
         <dt>Licence</dt><dd>{d.license}</dd>
         {mirrored && <><dt>Mirror</dt><dd>{d.host}</dd></>}
         <dt>Updated</dt><dd>{d.updated}</dd>

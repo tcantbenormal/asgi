@@ -13,7 +13,7 @@ const categories = [...new Set(items.map((i) => i.data.category))].sort();
   {items.map((i) => (
     <article class="card" data-cat={i.data.category} data-text={`${i.data.name} ${i.data.description} ${i.data.category}`.toLowerCase()}>
       <div class="res-head">
-        {i.data.image && <img class="res-logo" src={i.data.image} alt="" width="40" height="40" loading="lazy" />}
+        {i.data.image && i.data.kind === 'software' && <img class="res-logo" src={i.data.image} alt="" width="40" height="40" loading="lazy" />}
         <div><span class="tag grey">{i.data.category}</span><h3><a href={`/resources/${i.id}`}>{i.data.name}</a></h3></div>
       </div>
       <p>{i.data.description}</p>
@@ -21,6 +21,7 @@ const categories = [...new Set(items.map((i) => i.data.category))].sort();
         {i.data.version && <span>v{i.data.version}</span>}
         {i.data.size && <span>{i.data.size}</span>}
         {i.data.os.length > 0 && <span>{i.data.os.join(' · ')}</span>}
+        {i.data.credit && <span>by {i.data.credit}</span>}
       </div>
       <div class="foot">
         <small class="muted">{i.data.license}</small>

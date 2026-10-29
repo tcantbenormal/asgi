@@ -292,3 +292,8 @@ model-viewer { width: 100%; height: 440px; background: transparent; --poster-col
 .res-title > div { min-width: 0; }
 .prose a { overflow-wrap: anywhere; }
 .gate-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
+
+.res-figure { margin: 0 0 1.5rem; }
+.res-figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+.res-figure figcaption { font-size: 0.82rem; color: var(--ink-3); margin-top: 0.4rem; }
+.page-head .credit { margin: 0.5rem 0 0; color: var(--ink-2); font-size: 0.95rem; }

@@ -476,15 +476,16 @@
     "kind": "dataset",
     "category": "Boundaries",
     "description": "National, provincial, district and tehsil polygons that follow the official Survey of Pakistan map, with Indian Illegally Occupied Jammu and Kashmir included as its own feature. Shapefiles in WGS 84 with full metadata.",
-    "size": "7 MB",
+    "size": "4.7 MB zip, 7 MB unpacked",
     "license": "CC BY 4.0",
     "homepage": "",
     "host": "Google Drive",
     "updated": "2026-10",
     "downloads": [
       {
-        "label": "Download from Google Drive",
-        "url": "https://drive.google.com/REPLACE"
+        "label": "Download shapefiles (national, provincial, district, tehsil)",
+        "url": "https://drive.google.com/file/d/1MWyLEt4E3o284Q9-upJmDQrTUMRPx-y8/view?usp=sharing",
+        "size": "4.7 MB zip"
       }
     ],
     "order": 1,

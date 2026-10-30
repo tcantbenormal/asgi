@@ -59,7 +59,7 @@ Google sign-in: paste the Google OAuth client ID into `googleClientId` in `src/c
 
 ## Downloads and the countdown gate
 
-Every item in `resources.json` gets a page at `/resources/<id>` and a gate at `/download/<id>`. The gate shows ads for `downloadCountdown` seconds, then reveals the link. `downloads` is a list of `{ label, url, size? }` mirrors (one button each after the countdown); leave it empty for official-download-only entries and no gate page is built. `about`, `requirements`, `licensing` and `image` (a logo under `public/img/software/`) fill the resource page.
+Every item in `resources.json` gets a page at `/resources/<id>` and a gate at `/download/<id>`. The gate shows ads for `downloadCountdown` seconds, then reveals the link. `downloads` is a list of `{ label, url, size? }` mirrors (one button each after the countdown); leave it empty for official-download-only entries and no gate page is built. `about`, `requirements`, `licensing`, `credit`, `image` (a logo under `public/img/software/`, or a preview map for datasets), `figures` (screenshots with captions) and `order` fill the resource page and card.
 
 Only list software that is legally free to redistribute. See `/legal`.
 

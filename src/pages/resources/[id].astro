@@ -24,10 +24,12 @@ const mirrored = d.downloads.length > 0;
   <div style="display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:2.5rem;align-items:start" class="res-grid">
     <div class="prose">
       {d.image && d.kind !== 'software' && <figure class="res-figure"><img src={d.image} alt={`Preview of ${d.name}`} loading="lazy" /><figcaption>Preview drawn from the dataset.</figcaption></figure>}
+      {d.figures.slice(0, 1).map((g) => <figure class="res-figure"><img src={g.src} alt={g.caption} loading="lazy" /><figcaption>{g.caption}</figcaption></figure>)}
       {d.about.length > 0 && <h2>What it is</h2>}
       {d.about.map((p) => <p>{p}</p>)}
       {d.requirements.length > 0 && <><h2>{d.kind === 'software' ? 'System requirements' : 'Before you use it'}</h2><ul>{d.requirements.map((x) => <li>{x}</li>)}</ul></>}
       {d.licensing && <><h2>Licence</h2><p class="notice navy">{d.licensing}</p></>}
+      {d.figures.slice(1).map((g) => <figure class="res-figure"><img src={g.src} alt={g.caption} loading="lazy" /><figcaption>{g.caption}</figcaption></figure>)}
       <h2>Before you download</h2>
       <ul>
         <li>Licence: <strong>{d.license}</strong>. Read it if you plan to redistribute or publish.</li>

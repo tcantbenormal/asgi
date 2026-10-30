@@ -1,5 +1,53 @@
 [
   {
+    "id": "ahp-fahp-analyzer",
+    "name": "AHP / FAHP Spatial Analyzer for ArcGIS Pro",
+    "kind": "software",
+    "category": "Add-ins and extensions",
+    "credit": "Muhammad Taimoor Ashfaq",
+    "description": "An ArcGIS Pro add-in for multi-criteria decision analysis: AHP and fuzzy AHP weights from a pairwise matrix, consistency checking, reclassification, weighted-overlay suitability maps and Monte Carlo sensitivity analysis, all in one dockpane.",
+    "version": "1.0.0",
+    "size": "66 KB",
+    "os": [
+      "Windows"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/tcantbenormal/Ahp-Fahp-Analyzer-Add-in-For-ArcGIS-Pro",
+    "tutorial": "https://github.com/tcantbenormal/Ahp-Fahp-Analyzer-Add-in-For-ArcGIS-Pro#-usage-workflow",
+    "host": "GitHub",
+    "updated": "2026-10",
+    "downloads": [
+      {
+        "label": "AhpFahpAnalyzer.esriAddinX (v1.0.0)",
+        "url": "https://github.com/tcantbenormal/Ahp-Fahp-Analyzer-Add-in-For-ArcGIS-Pro/releases/download/v1.0.0/AhpFahpAnalyzer.esriAddinX",
+        "size": "66 KB"
+      }
+    ],
+    "about": [
+      "Site suitability, groundwater potential, landslide susceptibility, facility location: most final year projects at the institute end in a weighted overlay, and the weights usually come from the Analytic Hierarchy Process. Doing AHP by hand means a spreadsheet for the pairwise matrix, another for the eigenvector and consistency ratio, then copying weights into the Weighted Sum tool and repeating the whole thing for every change. This add-in puts the entire workflow inside ArcGIS Pro as a single dockpane under an MCDA Tools tab.",
+      "You pick the criteria rasters from the map, fill the upper triangle of the pairwise matrix (reciprocals are computed for you) or import it from CSV, and choose classical AHP or fuzzy AHP. AHP uses the eigenvector (power) method with convergence detection; FAHP models judgement uncertainty with triangular fuzzy numbers using either Chang's extent analysis or Buckley's geometric mean with centroid defuzzification. The consistency ratio is computed with Saaty's random index and flagged above 0.10. A reclassification manager handles unclassified rasters with equal, geometric, defined or manual intervals onto a 1 to 5 or 1 to 10 scale. One click then runs the bundled Python toolbox, which calls Spatial Analyst's Weighted Sum and adds the suitability raster to the map. A Monte Carlo sensitivity analysis perturbs the weight of a chosen criterion across N simulations to show how stable the ranking is.",
+      "It is written in C# with WPF on the ArcGIS Pro SDK, with the spatial step in an ArcPy Python toolbox, and released under the MIT licence with a citation file, so it can be cited in a thesis and extended for your own study. The methodology document in the repository gives the full mathematics of AHP, both FAHP variants and the sensitivity analysis."
+    ],
+    "requirements": [
+      "ArcGIS Pro 3.5 or later on Windows, with the Spatial Analyst extension licensed",
+      ".NET 8.0 Desktop Runtime, which ArcGIS Pro 3.5 and later already require",
+      "At least three criteria rasters in the same coordinate system and cell size, pre-classified or raw",
+      "To install: close ArcGIS Pro, double-click the .esriAddinX file, click Install Add-in, then open the MCDA Tools tab",
+      "To build from source: Visual Studio 2022 and the Esri.ArcGISPro.Extensions30 NuGet package 3.5 or later"
+    ],
+    "licensing": "Free and open source under the MIT licence. If you use it in research, cite: Ashfaq, T. (2026). AHP/FAHP Spatial Analyzer for ArcGIS Pro (Version 1.0.0) [Computer software]. The repository has a Cite this repository button. Bugs and feature requests go to the GitHub issues page.",
+    "figures": [
+      {
+        "src": "/img/software/ahp-fahp-analyzer.png",
+        "caption": "The AHP Analysis dockpane in ArcGIS Pro: criteria on the left, the pairwise comparison matrix in the centre, sensitivity analysis on the right."
+      },
+      {
+        "src": "/img/software/ahp-fahp-analyzer-map.jpg",
+        "caption": "A fuzzy AHP suitability raster produced by the add-in, added straight to the map."
+      }
+    ]
+  },
+  {
     "id": "qgis",
     "name": "QGIS",
     "category": "Desktop GIS",

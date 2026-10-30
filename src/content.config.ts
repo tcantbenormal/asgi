@@ -126,6 +126,7 @@ const resources = defineCollection({
     about: z.array(z.string()).default([]),
     requirements: z.array(z.string()).default([]),
     licensing: z.string().optional(),
+    figures: z.array(z.object({ src: z.string(), caption: z.string() })).default([]), // screenshots on the resource page; `image` stays the logo for software
     credit: z.string().optional(),   // person who created the dataset; shown on the card and page
     order: z.number().optional(),    // lower first; unset items sort by name after ordered ones
   }),

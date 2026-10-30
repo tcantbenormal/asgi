@@ -1,0 +1,122 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { site } from '../config/site';
+
+const employers = await getCollection('employers');
+const alumni = await getCollection('alumni');
+
+// Organisations from approved profiles. Only people in a GIS-centred role count; students and
+// freelancers are skipped because there is no employer to target.
+const GIS_ROLE = /gis|geo|remote|spatial|survey|cartograph|map|earth|lidar|photogramm|drone|uav|planner|planning|hydro|environment|climate|forest|agri|urban|imagery|satellite|data|analyst|scientist|engineer|research|lecturer|professor/i;
+const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+type A = (typeof alumni)[number];
+const byOrg = new Map<string, { name: string; people: A[] }>();
+for (const a of alumni) {
+  const org = a.data.organization?.trim();
+  if (!org || a.data.sector === 'Student' || a.data.sector === 'Freelance' || !GIS_ROLE.test(a.data.role)) continue;
+  const k = norm(org);
+  if (!byOrg.has(k)) byOrg.set(k, { name: org, people: [] });
+  byOrg.get(k)!.people.push(a);
+}
+
+// Match profile organisations to curated employers by name or alias (either contains the other).
+const matched = new Set<string>();
+const peopleFor = (e: (typeof employers)[number]) => {
+  const names = [e.data.name, ...e.data.aliases].map(norm).filter((n) => n.length > 2);
+  const out: A[] = [];
+  for (const [k, v] of byOrg) {
+    if (names.some((n) => k === n || k.includes(n) || n.includes(k))) { out.push(...v.people); matched.add(k); }
+  }
+  return out;
+};
+const cards = employers.map((e) => ({ e, i: e.data.order ?? 1e9, people: peopleFor(e) }));
+const sectorOrder = ['Government', 'Private', 'NGO / UN', 'International', 'Academia'];
+cards.sort((a, b) => sectorOrder.indexOf(a.e.data.sector) - sectorOrder.indexOf(b.e.data.sector) || a.i - b.i); // file order within a sector
+const fromProfiles = [...byOrg.entries()].filter(([k]) => !matched.has(k)).map(([, v]) => v).sort((a, b) => b.people.length - a.people.length || a.name.localeCompare(b.name));
+const sectors = sectorOrder.filter((s) => cards.some((c) => c.e.data.sector === s));
+const initials = (n: string) => n.split(/\s+/).filter((w) => /^[A-Z]/.test(w)).slice(0, 2).map((w) => w[0]).join('') || n.slice(0, 2).toUpperCase();
+---
+<Base title="Industry" description="Organisations in Pakistan, the Gulf and abroad that hire GIS and remote sensing graduates: what they do, the roles, indicative pay and how they recruit. Linked to alumni who work there.">
+  <PageHead eyebrow="Industry" title="Who hires GIS and remote sensing graduates" lead="Public bodies, companies, NGOs and international agencies that employ people with our degree, with the roles they advertise, what they pay and how to get in. Alumni working at each one are listed so you know who to ask.">
+    <p style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
+      <a class="btn btn-primary btn-sm" href={`${site.forms.submitResource}?type=employer`}>Suggest an employer</a>
+      <a class="btn btn-ghost btn-sm" href="/alumni">Alumni directory</a>
+      <a class="btn btn-ghost btn-sm" href="/opportunities#job">Current openings</a>
+    </p>
+  </PageHead>
+
+  <div class="filters" data-pagefind-ignore>
+    <label class="sr-only" for="eq">Search</label>
+    <input id="eq" type="search" placeholder="Search by name, role, city or tag" />
+    <select id="esec" aria-label="Sector"><option value="">All sectors</option>{sectors.map((s) => <option>{s}</option>)}</select>
+  </div>
+  <p class="notice navy" style="margin-bottom:1.5rem">Pay figures are indicative monthly ranges from recent advertisements and alumni reports (2025–26), gross, before tax. They vary with grade, city and project funding. Treat them as a starting point for negotiation, not a promise.</p>
+
+  <div class="grid grid-2" id="elist">
+    {cards.map(({ e, people }) => (
+      <article class="card emp" data-sector={e.data.sector} data-text={`${e.data.name} ${e.data.aliases.join(' ')} ${e.data.kind} ${e.data.hq} ${e.data.locations.join(' ')} ${e.data.roles.join(' ')} ${e.data.tags.join(' ')}`.toLowerCase()}>
+        <div class="res-head">
+          {e.data.logo
+            ? <img class="res-logo" src={e.data.logo} alt="" width="40" height="40" loading="lazy" />
+            : <span class="res-logo emp-initials" aria-hidden="true">{initials(e.data.name)}</span>}
+          <div>
+            <span class={`tag ${e.data.sector === 'Government' ? '' : 'grey'}`}>{e.data.sector}</span>
+            <h3><a href={e.data.website} rel="noopener">{e.data.name}</a></h3>
+            <small class="muted">{e.data.kind} · {e.data.hq}</small>
+          </div>
+        </div>
+        <p>{e.data.about}</p>
+        <dl class="facts sm">
+          {e.data.roles.length > 0 && <><dt>Roles</dt><dd>{e.data.roles.join(', ')}</dd></>}
+          {e.data.locations.length > 0 && <><dt>Where</dt><dd>{e.data.locations.join(', ')}</dd></>}
+          {e.data.pay && <><dt>Pay</dt><dd>{e.data.pay}</dd></>}
+          {e.data.hiring && <><dt>Hiring</dt><dd>{e.data.hiring}</dd></>}
+        </dl>
+        {people.length > 0 && (
+          <p class="emp-people"><strong>Alumni here:</strong> {people.slice(0, 6).map((a, i) => <><a href={`/${a.id}`}>{a.data.name}</a>{i < Math.min(people.length, 6) - 1 ? ', ' : ''}</>)}{people.length > 6 && ` and ${people.length - 6} more`}</p>
+        )}
+        <div class="foot">
+          <div class="tags">{e.data.tags.map((t) => <span class="tag grey">{t}</span>)}</div>
+          {e.data.careers ? <a class="btn btn-ghost btn-sm" href={e.data.careers} rel="noopener">Careers</a> : <a class="btn btn-ghost btn-sm" href={e.data.website} rel="noopener">Website</a>}
+        </div>
+      </article>
+    ))}
+  </div>
+  <p class="empty-state" id="eempty" hidden>Nothing matches.</p>
+
+  <section class="section">
+    <h2>Where alumni work</h2>
+    <p class="lead" style="margin-bottom:1.5rem">Organisations named in approved alumni profiles that are not yet in the list above. Built from the directory at every rebuild; add or update your profile and it appears here.</p>
+    {fromProfiles.length === 0 ? <p class="empty-state">Every organisation in the alumni directory is already listed above. <a href="/join">Add your profile</a> to put yours on the map.</p> : (
+      <div class="grid">
+        {fromProfiles.map((o) => (
+          <article class="card">
+            <h3>{o.name}</h3>
+            <p class="meta"><span>{o.people[0].data.sector}</span><span>{o.people[0].data.city}, {o.people[0].data.country}</span></p>
+            <p class="emp-people">{o.people.slice(0, 5).map((a, i) => <><a href={`/${a.id}`}>{a.data.name}</a> ({a.data.role}){i < Math.min(o.people.length, 5) - 1 ? '; ' : ''}</>)}{o.people.length > 5 && ` and ${o.people.length - 5} more`}</p>
+          </article>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <script>
+    const q = document.getElementById('eq') as HTMLInputElement;
+    const sec = document.getElementById('esec') as HTMLSelectElement;
+    const cards = [...document.querySelectorAll<HTMLElement>('#elist .card')];
+    const apply = () => {
+      const t = q.value.trim().toLowerCase();
+      let n = 0;
+      for (const c of cards) {
+        const ok = (!t || c.dataset.text!.includes(t)) && (!sec.value || c.dataset.sector === sec.value);
+        c.hidden = !ok;
+        if (ok) n++;
+      }
+      document.getElementById('eempty')!.hidden = n > 0;
+    };
+    q.addEventListener('input', apply);
+    sec.addEventListener('change', apply);
+  </script>
+</Base>

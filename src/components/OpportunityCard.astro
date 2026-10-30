@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { item: CollectionEntry<'links'> }
+const { item: l } = Astro.props;
+const d = l.data;
+const detailed = d.details.length > 0;
+const href = detailed ? `/opportunities/${l.id}` : d.url;
+// Show the facts a reader scans a card for; the rest live on the detail page.
+const want = ['Ranking', 'Scholarship', 'Funding', 'Stipend', 'Awards', 'Selectivity', 'Time', 'Certificate', 'Cost', 'Requirements'];
+const facts = want.map((w) => d.facts.find((f) => f.label === w)).filter(Boolean).slice(0, 3) as { label: string; value: string }[];
+---
+<article class="card opp">
+  <h3><a href={href} rel={detailed ? undefined : 'noopener'}>{d.title}</a></h3>
+  <p>{d.description}</p>
+  {facts.length > 0 && <dl class="facts sm">{facts.map((f) => <><dt>{f.label}</dt><dd>{f.value}</dd></>)}</dl>}
+  <div class="meta">
+    <span>{d.provider}</span>
+    {d.location && <span>{d.location}</span>}
+    {d.cost && <span>{d.cost}</span>}
+    {d.deadline && <span>Deadline: {d.deadline}</span>}
+  </div>
+  {d.tags.length > 0 && <div class="tags">{d.tags.map((t) => <span class="tag grey">{t}</span>)}</div>}
+  <div class="foot">
+    <small class="muted">{d.updated ? `Checked ${d.updated}` : ''}</small>
+    {detailed
+      ? <a class="btn btn-ghost btn-sm" href={href}>Details</a>
+      : <a class="btn btn-ghost btn-sm" href={d.url} rel="noopener">Open</a>}
+  </div>
+</article>

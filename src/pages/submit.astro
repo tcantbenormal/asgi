@@ -13,6 +13,7 @@ import { site } from '../config/site';
           <option value="dataset">A dataset</option>
           <option value="opportunity">An opportunity: job, internship, scholarship, course</option>
           <option value="project">A project to showcase</option>
+          <option value="employer">An employer for the Industry page</option>
           <option value="other">Something else</option>
         </select>
       </label>
@@ -37,7 +38,7 @@ import { site } from '../config/site';
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
     const sb = createClient(url, key);
     const f = document.getElementById('f'), msg = document.getElementById('msg');
-    const kinds = ['tool', 'dataset', 'opportunity', 'project', 'other'];
+    const kinds = ['tool', 'dataset', 'opportunity', 'project', 'employer', 'other'];
     const want = new URLSearchParams(location.search).get('type');
     if (kinds.includes(want)) f.kind.value = want;
     const { data: { session } } = await sb.auth.getSession();

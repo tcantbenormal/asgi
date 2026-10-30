@@ -2,45 +2,36 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
+import OpportunityCard from '../components/OpportunityCard.astro';
 import { site } from '../config/site';
 
 const all = await getCollection('links');
 const groups: [string, string, string][] = [
-  ['scholarship', 'Scholarships and funded programmes', 'Fully or partially funded master\'s and PhD routes that GIS graduates from Pakistan regularly win.'],
-  ['course', 'Free courses', 'Self-paced courses you can finish in a semester. Most issue a certificate at no cost.'],
-  ['certification', 'Certifications', 'Credentials that employers in the region actually recognise.'],
-  ['job', 'Jobs and internships', 'Openings shared by alumni and the cabinet. Listings older than sixty days are removed.'],
+  ['scholarship', 'Scholarships and funded programmes', 'Master\'s and PhD routes abroad that geoinformatics graduates from Pakistan actually win, with the institution, ranking, money and odds for each. Open the card for the full picture and the exact programme page.'],
+  ['course', 'Courses', 'Free courses first, a few paid ones marked as such. Hours, level and whether a certificate comes with it are listed on each.'],
+  ['certification', 'Certifications', 'Credentials employers in Pakistan, the Gulf and international organisations recognise, with cost, requirements and who they suit.'],
+  ['job', 'Jobs and internships', 'Openings shared by alumni and the cabinet. Listings older than sixty days are removed. See the Industry page for who hires and what they pay.'],
 ];
+const counts = Object.fromEntries(groups.map(([k]) => [k, all.filter((l) => l.data.category === k).length]));
 ---
-<Base title="Opportunities" description="Scholarships, free courses, certifications, jobs and internships for GIS and remote sensing students.">
-  <PageHead eyebrow="Opportunities" title="Scholarships, courses and jobs" lead="Curated, not scraped. Every link was checked by a person. Alumni can post openings through the form below.">
-    <p style="margin-top:1rem"><a class="btn btn-primary btn-sm" href={`${site.forms.submitResource}?type=opportunity`}>Post an opportunity</a></p>
+<Base title="Opportunities" description="Scholarships, courses, certifications, jobs and internships for GIS and remote sensing students, with rankings, funding and odds.">
+  <PageHead eyebrow="Opportunities" title="Scholarships, courses, certifications and jobs" lead="Curated, not scraped. Every link goes to the programme itself, not the provider's home page, and the facts were checked by a person in October 2026. If something has changed, tell us.">
+    <p style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
+      <a class="btn btn-primary btn-sm" href={`${site.forms.submitResource}?type=opportunity`}>Post an opportunity</a>
+      <a class="btn btn-ghost btn-sm" href="/industry">Who hires GIS graduates</a>
+    </p>
   </PageHead>
   <nav class="filters" aria-label="Sections" data-pagefind-ignore>
-    {groups.map(([k, label]) => <a class="btn btn-ghost btn-sm" href={`#${k}`}>{label}</a>)}
+    {groups.map(([k, label]) => <a class="btn btn-ghost btn-sm" href={`#${k}`}>{label} <span class="count">{counts[k]}</span></a>)}
   </nav>
   {groups.map(([k, label, lead]) => {
-    const items = all.filter((l) => l.data.category === k);
+    const items = all.filter((l) => l.data.category === k).sort((a, b) => (a.data.order ?? 1e9) - (b.data.order ?? 1e9) || a.data.title.localeCompare(b.data.title));
     return (
       <section class="section" id={k}>
         <h2>{label}</h2>
         <p class="lead" style="margin-bottom:1.5rem">{lead}</p>
         {items.length === 0 ? <p class="empty-state">Nothing listed right now.</p> : (
-          <div class="grid grid-2">
-            {items.map((l) => (
-              <article class="card">
-                <h3><a href={l.data.url} rel="noopener">{l.data.title}</a></h3>
-                <p>{l.data.description}</p>
-                <div class="meta">
-                  <span>{l.data.provider}</span>
-                  {l.data.location && <span>{l.data.location}</span>}
-                  {l.data.cost && <span>{l.data.cost}</span>}
-                  {l.data.deadline && <span>Deadline: {l.data.deadline}</span>}
-                </div>
-                {l.data.tags.length > 0 && <div class="tags">{l.data.tags.map((t) => <span class="tag grey">{t}</span>)}</div>}
-              </article>
-            ))}
-          </div>
+          <div class="grid grid-2">{items.map((l) => <OpportunityCard item={l} />)}</div>
         )}
       </section>
     );

@@ -1,143 +1,2540 @@
 [
   {
-    "id": "erasmus-mundus-gem",
+    "id": "itc-twente-mgeo",
     "category": "scholarship",
-    "title": "Erasmus Mundus Joint Master's in Geo-information Science and Earth Observation",
-    "provider": "European Union",
-    "url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
-    "description": "Fully funded two-year master's across European universities. Several GIS and remote sensing programmes in the catalogue. Pakistani applicants are regularly selected.",
-    "deadline": "January each year",
-    "location": "Europe",
+    "title": "MSc Geo-information Science and Earth Observation at ITC, University of Twente",
+    "provider": "ITC, University of Twente",
+    "url": "https://www.utwente.nl/en/itc/education/study-finder/geo-information-science-earth-observation/",
+    "description": "The largest dedicated geo-information faculty in the world. Partial ITC Excellence Scholarships and a 40 percent Early Bird fee waiver go to the strongest non-EU applicants.",
+    "deadline": "Scholarship rounds close in the first months of the year; programme starts September",
+    "location": "Enschede, Netherlands",
+    "cost": "Partial scholarship",
+    "tags": [
+      "master's",
+      "Netherlands",
+      "remote sensing",
+      "GIS"
+    ],
+    "facts": [
+      {
+        "label": "Ranking",
+        "value": "University of Twente =223 in QS World University Rankings 2027; ITC is the largest postgraduate geo-information faculty worldwide, founded 1950"
+      },
+      {
+        "label": "Level and length",
+        "value": "MSc, two years, 120 ECTS, taught in English"
+      },
+      {
+        "label": "Tuition",
+        "value": "€21,700 per year for non-EU students in 2025–26, plus roughly €15,000 a year living costs"
+      },
+      {
+        "label": "Scholarship",
+        "value": "ITC Excellence Scholarship: about €32,000 of the two-year tuition plus €25,000 towards living costs; you still fund about €17,000 yourself"
+      },
+      {
+        "label": "Fee waiver",
+        "value": "Early Bird: 40 percent tuition waiver for a limited number of unconditionally admitted candidates"
+      },
+      {
+        "label": "Selectivity",
+        "value": "Only a handful of Excellence scholarships per intake; academic record in the top 10 percent of your class is required"
+      },
+      {
+        "label": "Pakistani alumni",
+        "value": "ITC has trained Pakistani staff of SUPARCO, Survey of Pakistan, NESPAK and provincial departments for decades"
+      }
+    ],
+    "programmes": [
+      "Geo-information Science and Earth Observation (M-GEO), specialisations in Natural Resources, Water, Urban Planning, Disaster Risk, Geoinformatics, Earth Sciences",
+      "Spatial Engineering (MSc)"
+    ],
+    "details": [
+      "ITC is a faculty of the University of Twente and the single most GIS-focused graduate school you can apply to. Its M-GEO programme lets you pick a specialisation after a common first quarter, so a geoinformatics graduate from Arid can go into water resources, natural resources, urban planning, disaster risk or earth sciences without changing degree.",
+      "Funding is partial. The ITC Excellence Scholarship covers most of the tuition and a share of living costs, but admitted students must prove the remaining amount (around €17,000) before the 1 May payment deadline. The general University of Twente Scholarship does not apply to ITC programmes. The Early Bird 40 percent waiver is a separate route for early, unconditional admits.",
+      "Apply for admission first, then for the scholarship in a separate procedure. Strong IELTS (6.5 overall), a bachelor's thesis you can talk about and a clear specialisation choice matter more than the motivation letter."
+    ],
+    "links": [
+      {
+        "label": "ITC Excellence Scholarship",
+        "url": "https://www.utwente.nl/en/education/scholarship-finder/itc-excellence-scholarship-programme/"
+      },
+      {
+        "label": "Scholarship finder for ITC",
+        "url": "https://www.itc.nl/education/study-costs/scholarships/scholarship-finder/"
+      },
+      {
+        "label": "Tuition and living costs",
+        "url": "https://www.utwente.nl/en/itc/education/study-finder/geo-information-science-earth-observation/financial-matters/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 1
+  },
+  {
+    "id": "copernicus-master-digital-earth",
+    "category": "scholarship",
+    "title": "Copernicus Master in Digital Earth (Erasmus Mundus Joint Master)",
+    "provider": "University of Salzburg with Palacký University Olomouc and Université Bretagne Sud",
+    "url": "https://master-cde.eu/",
+    "description": "EU-funded joint master's in Earth observation and geoinformatics. Scholarship holders get €1,400 a month for two years plus a full fee waiver.",
+    "deadline": "2 November 2026 to 22 January 2027 for the 2027 intake",
+    "location": "Austria, Czechia, France",
     "cost": "Fully funded",
-    "tags": ["master's", "Europe"]
+    "tags": [
+      "master's",
+      "Europe",
+      "Erasmus Mundus",
+      "Copernicus"
+    ],
+    "facts": [
+      {
+        "label": "Consortium",
+        "value": "University of Salzburg (Z_GIS) leads; second year in Olomouc (Geovisualisation and Geocommunication) or Vannes, Bretagne Sud (Geodata Science)"
+      },
+      {
+        "label": "Level and length",
+        "value": "Erasmus Mundus Joint MSc, two years, 120 ECTS, English"
+      },
+      {
+        "label": "Scholarship",
+        "value": "€1,400 per month for 24 months, participation costs waived; self-funded places also offered"
+      },
+      {
+        "label": "Selectivity",
+        "value": "Only the best-ranked applicants receive a scholarship; several hundred apply each year for a small number of funded places"
+      },
+      {
+        "label": "Rule",
+        "value": "You cannot hold a second Erasmus Mundus scholarship if you already had one"
+      }
+    ],
+    "programmes": [
+      "Copernicus Master in Digital Earth"
+    ],
+    "details": [
+      "The Copernicus Master in Digital Earth is the Erasmus Mundus programme closest to what the institute teaches: satellite Earth observation, spatial analysis and geodata science, built around the EU Copernicus programme. The first year is in Salzburg at Z_GIS, one of Europe's best-known GIS research groups; the second year is either in Olomouc for cartography and geovisualisation or in Vannes for data science.",
+      "Erasmus Mundus scholarships are the most generous master's funding available to Pakistani students: tuition is waived and the €1,400 monthly allowance covers living, travel and visa costs. Scholarships go strictly by ranking, so a high CGPA, a relevant thesis and a precise statement of why Digital Earth (not GIS in general) beat polished essays.",
+      "Applications for non-European candidates open in November and close in late January. Prepare the IELTS or TOEFL and reference letters before the call opens."
+    ],
+    "links": [
+      {
+        "label": "Calls and deadlines",
+        "url": "https://master-cde.eu/admission/procedures-deadlines/calls/"
+      },
+      {
+        "label": "Erasmus Mundus catalogue",
+        "url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 2
+  },
+  {
+    "id": "erasmus-mundus-geospatial-technologies",
+    "category": "scholarship",
+    "title": "Master of Science in Geospatial Technologies (Münster, NOVA Lisbon, Jaume I)",
+    "provider": "Universität Münster, NOVA IMS, Universitat Jaume I",
+    "url": "https://mastergeotech.info/",
+    "description": "Long-running Erasmus Mundus GIS master's. No scholarships for the 2026 intake; EU funding resumes for the 2027–29 edition, so prepare for the next call.",
+    "deadline": "Scholarship call expected late 2026 for the 2027 intake",
+    "location": "Germany, Portugal, Spain",
+    "cost": "Fully funded (2027 intake onwards)",
+    "tags": [
+      "master's",
+      "Europe",
+      "Erasmus Mundus",
+      "GIS"
+    ],
+    "facts": [
+      {
+        "label": "Consortium",
+        "value": "First semester in Castellón (Jaume I) or Lisbon (NOVA IMS), then Münster's Institute for Geoinformatics, thesis at any partner"
+      },
+      {
+        "label": "Level and length",
+        "value": "Joint MSc, 18 months, 90 ECTS, English"
+      },
+      {
+        "label": "Funding status",
+        "value": "Erasmus Mundus scholarships (€1,400 a month plus fee waiver) for the editions 2025–27 and 2027–29 onwards; none for 2026–28"
+      },
+      {
+        "label": "Ranking",
+        "value": "Universität Münster and NOVA are in the QS top 400; Münster's ifgi is one of the strongest geoinformatics research institutes in Europe"
+      },
+      {
+        "label": "Selectivity",
+        "value": "Historically about 20 scholarships per funded intake from several hundred applicants"
+      }
+    ],
+    "programmes": [
+      "Master of Science in Geospatial Technologies"
+    ],
+    "details": [
+      "This programme has been taking students from Pakistan since the early 2010s and its alumni list includes staff of SUPARCO and several Pakistani universities. It is more software and geoinformatics oriented than the Copernicus master's: spatial databases, geospatial programming, geostatistics and a research thesis at Münster's Institute for Geoinformatics.",
+      "The official site states that no scholarships are available for the 2026 intake. A new EU grant covers 2026–2032, with funded editions listed from 2027–29, so the next scholarship call should open in late 2026 for a September 2027 start. Self-funded admission is also possible, with non-EU deadlines at the end of May.",
+      "Keep this on the list for the 2027 cycle and apply to the Copernicus Master in Digital Earth in the meantime, since the two calls overlap."
+    ],
+    "links": [
+      {
+        "label": "Fees and funding",
+        "url": "https://mastergeotech.info/fees-fundings/"
+      },
+      {
+        "label": "Dates and deadlines",
+        "url": "https://mastergeotech.info/how-to-apply/dates-and-deadlines/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 3
+  },
+  {
+    "id": "daad-epos-photogrammetry-stuttgart",
+    "category": "scholarship",
+    "title": "DAAD EPOS: MSc Photogrammetry and Geoinformatics, HFT Stuttgart",
+    "provider": "DAAD with Hochschule für Technik Stuttgart",
+    "url": "https://www2.daad.de/deutschland/studienangebote/international-programmes/en/detail/6963/",
+    "description": "Eight full DAAD scholarships a year for this 18-month English-taught master's in photogrammetry, remote sensing and GIS. Needs two years of work experience.",
+    "deadline": "15 October each year (scholarship and admission together)",
+    "location": "Stuttgart, Germany",
+    "cost": "Fully funded",
+    "tags": [
+      "master's",
+      "Germany",
+      "DAAD",
+      "photogrammetry",
+      "work experience"
+    ],
+    "facts": [
+      {
+        "label": "Scholarships",
+        "value": "8 full EPOS scholarships per intake, confirmed by DAAD until at least 2029"
+      },
+      {
+        "label": "Stipend",
+        "value": "€992 a month, health insurance, travel allowance, rent subsidy where applicable; no tuition (about €192 semester contribution)"
+      },
+      {
+        "label": "Level and length",
+        "value": "MSc, 3 semesters (18 months), starts winter semester, English"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Bachelor's with above-average grades, at least two years of relevant professional experience, last degree no older than six years"
+      },
+      {
+        "label": "Institution",
+        "value": "HFT Stuttgart is a university of applied sciences; it is not in QS, but the programme has run since 1996 and is the longest-standing DAAD-funded geomatics master's"
+      }
+    ],
+    "programmes": [
+      "Photogrammetry and Geoinformatics (MSc)"
+    ],
+    "details": [
+      "EPOS (Development-Related Postgraduate Courses) is DAAD's scholarship scheme for professionals from developing countries. This HFT Stuttgart master's is the course in the scheme that matches a geoinformatics degree most closely: digital photogrammetry, laser scanning, remote sensing, spatial databases and web GIS, with a thesis often done with German industry or the German Aerospace Center.",
+      "The two years of work experience is a hard requirement, so this suits graduates who have worked at SUPARCO, a provincial GIS cell, NESPAK or a survey firm. Applications go to the university, which forwards a shortlist to DAAD; one application covers both admission and the scholarship.",
+      "Since the stipend is paid directly to you and tuition is waived, this is a genuinely full scholarship. Competition is lower than for Erasmus Mundus because of the work-experience filter."
+    ],
+    "links": [
+      {
+        "label": "DAAD EPOS brochure 2026–27 (PDF)",
+        "url": "https://static.daad.de/media/daad_de/pdfs_nicht_barrierefrei/in-deutschland-studieren-forschen-lehren/daad_programmbroschuere_epos_2026-27.pdf"
+      },
+      {
+        "label": "HFT Stuttgart geomatics news on EPOS",
+        "url": "https://www.hft-stuttgart.com/geomatics/news/erfolgreiche-wiederbewerbung-um-daad-epos-foerderung"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 4
   },
   {
     "id": "daad-epos",
     "category": "scholarship",
-    "title": "DAAD EPOS development-related postgraduate courses",
+    "title": "DAAD EPOS: other development-related master's in Germany",
     "provider": "DAAD, Germany",
-    "url": "https://www.daad.de/en/study-and-research-in-germany/scholarships/development-related-postgraduate-courses/",
-    "description": "Funded master's in Germany for applicants with two years of work experience. Includes geodesy, photogrammetry and environmental programmes.",
-    "deadline": "August to October",
+    "url": "https://www2.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/?detail=50026200",
+    "description": "Around 40 funded master's courses for professionals with two years of experience. Several take geoinformatics graduates: water, environmental risk, land management and agriculture.",
+    "deadline": "August to October, set by each course",
     "location": "Germany",
     "cost": "Fully funded",
-    "tags": ["master's", "Germany", "work experience"]
-  },
-  {
-    "id": "csc-china",
-    "category": "scholarship",
-    "title": "Chinese Government Scholarship, CSC",
-    "provider": "China Scholarship Council via HEC",
-    "url": "https://www.hec.gov.pk/english/scholarshipsgrants/",
-    "description": "Master's and PhD in Chinese universities with strong remote sensing groups, including Wuhan, Beijing Normal and CAS institutes. Apply through HEC or directly to the university.",
-    "deadline": "December to March",
-    "location": "China",
-    "cost": "Fully funded",
-    "tags": ["master's", "PhD", "China"]
+    "tags": [
+      "master's",
+      "Germany",
+      "DAAD",
+      "work experience"
+    ],
+    "facts": [
+      {
+        "label": "Stipend",
+        "value": "€992 a month for master's, €1,400 for PhD, plus insurance, travel and where applicable rent and family allowances"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Bachelor's (four years) with above-average result, at least two years of professional experience, degree not older than six years"
+      },
+      {
+        "label": "Selectivity",
+        "value": "Each course awards roughly 5 to 15 scholarships a year; acceptance is far better than open scholarships because of the experience filter"
+      },
+      {
+        "label": "Apply",
+        "value": "Directly to the course, not to DAAD; the university nominates you"
+      }
+    ],
+    "programmes": [
+      "Geography of Environmental Risks and Human Security, University of Bonn and UNU-EHS",
+      "Hydro Science and Engineering, TU Dresden",
+      "Integrated Water Resources Management, TH Köln",
+      "Infrastructure Planning, University of Stuttgart",
+      "Agricultural Sciences and Resource Management in the Tropics and Subtropics (ARTS), University of Bonn",
+      "Land Management and Land Tenure, TU Munich"
+    ],
+    "details": [
+      "The EPOS brochure lists every funded course with its deadline and contact. Apart from the Stuttgart photogrammetry master's, the courses above regularly admit GIS and remote sensing graduates because they need people who can handle spatial data for floods, water, land and risk.",
+      "Pick one or two courses whose thesis topics you can argue from your own work experience. Each course has its own application date, usually between August and October, for a start the following autumn.",
+      "Note that the professional experience must be from after your bachelor's, and it must be relevant to the course; internships during study do not count."
+    ],
+    "links": [
+      {
+        "label": "EPOS brochure 2026–27 (PDF)",
+        "url": "https://static.daad.de/media/daad_de/pdfs_nicht_barrierefrei/in-deutschland-studieren-forschen-lehren/daad_programmbroschuere_epos_2026-27.pdf"
+      },
+      {
+        "label": "EPOS deadlines for intake 2027–28 (PDF)",
+        "url": "https://static.daad.de/media/daad_de/pdfs_nicht_barrierefrei/in-deutschland-studieren-forschen-lehren/daad_epos_deadlines.pdf"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 5
   },
   {
     "id": "fulbright-pakistan",
     "category": "scholarship",
-    "title": "Fulbright Master's and PhD Programme for Pakistan",
+    "title": "Fulbright Degree Programme for Pakistan (master's and PhD in the United States)",
     "provider": "USEFP",
-    "url": "https://www.usefp.org/",
-    "description": "The largest Fulbright programme in the world. Geography, environmental science and urban planning are eligible fields.",
-    "deadline": "May each year",
+    "url": "https://www.usefp.org/scholarships/fulbright-degree.cfm",
+    "description": "The largest Fulbright programme in the world. Geography, environmental science, urban planning and remote sensing are eligible. About 85 awards in the 2026 cycle.",
+    "deadline": "Opens February, closes 1 April for the following year's intake",
     "location": "United States",
     "cost": "Fully funded",
-    "tags": ["master's", "PhD", "USA"]
+    "tags": [
+      "master's",
+      "PhD",
+      "USA",
+      "Fulbright"
+    ],
+    "facts": [
+      {
+        "label": "Awards",
+        "value": "2026 cycle: 85 awards (71 master's, 14 PhD) from roughly 900 applications, about 1 in 10"
+      },
+      {
+        "label": "Funding",
+        "value": "Full tuition, monthly stipend, airfare, health insurance, books; placement at a US university chosen by the Institute of International Education"
+      },
+      {
+        "label": "Eligibility",
+        "value": "16 years of education, GRE General (check the current call), Pakistani citizen; PhD applicants sign an HEC bond to return"
+      },
+      {
+        "label": "Continuity",
+        "value": "Fulbright–HEC partnership renewed for financial years 2026–27 to 2031–32"
+      },
+      {
+        "label": "Typical placements",
+        "value": "Clark University, Penn State, University of Maryland (GRAS Remote Sensing top 10 in 2024), University of Arizona, Boston University, Texas A&M"
+      }
+    ],
+    "programmes": [
+      "Any master's or PhD except clinical medicine; relevant fields include Geography, GIS, Remote Sensing, Environmental Science, Urban and Regional Planning, Natural Resources"
+    ],
+    "details": [
+      "USEFP runs Fulbright for Pakistan and has placed geoinformatics graduates in geography and environmental departments across the United States. You do not choose the university yourself: you list preferences and the programme places you based on your record and field.",
+      "The 2025 funding freeze in Washington disrupted stipends for scholars already in the US, but USEFP continued the cycle and the 2026 awards were announced. The 2027 cycle closed on 1 April 2026; expect the next application window to open in February 2027.",
+      "Prepare the GRE early, since scores are part of the competition, and write the study objective around a concrete problem in Pakistan (floods, urban growth, crop monitoring) that your degree will address."
+    ],
+    "links": [
+      {
+        "label": "USEFP home",
+        "url": "https://www.usefp.org/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 6
   },
   {
-    "id": "hec-overseas",
+    "id": "chevening-pakistan",
     "category": "scholarship",
-    "title": "HEC Overseas Scholarships and Indigenous PhD Fellowships",
-    "provider": "Higher Education Commission",
-    "url": "https://www.hec.gov.pk/english/scholarshipsgrants/",
-    "description": "Rolling programmes for MS and PhD abroad and in Pakistan. Check the current phase and the list of eligible fields.",
+    "title": "Chevening Scholarships for one-year master's in the United Kingdom",
+    "provider": "UK Foreign, Commonwealth and Development Office",
+    "url": "https://www.chevening.org/scholarship/pakistan/",
+    "description": "Fully funded one-year master's at any UK university for professionals with two years of experience. The UK has more GIS and Earth observation master's than any other country.",
+    "deadline": "Applications open early August and close in early October",
+    "location": "United Kingdom",
+    "cost": "Fully funded",
+    "tags": [
+      "master's",
+      "UK",
+      "work experience"
+    ],
+    "facts": [
+      {
+        "label": "Awards",
+        "value": "About 1,500 scholarships worldwide each year; Pakistan is consistently one of the largest cohorts, typically several dozen scholars"
+      },
+      {
+        "label": "Selectivity",
+        "value": "Roughly 2 to 3 percent of applicants worldwide are selected"
+      },
+      {
+        "label": "Funding",
+        "value": "Full tuition, monthly living allowance, return flights, visa and one-off arrival allowance"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Bachelor's degree, at least two years (2,800 hours) of work experience, must return to Pakistan for two years afterwards"
+      },
+      {
+        "label": "Rankings",
+        "value": "UCL (QS 2027 top 10) and Edinburgh (QS top 40) both run GIS and Earth observation master's that Chevening funds"
+      }
+    ],
+    "programmes": [
+      "MSc Geospatial Sciences, UCL",
+      "MSc Earth Observation and Geoinformation Management, University of Edinburgh",
+      "MSc Geographical Information Science, University of Leeds",
+      "MSc Applied GIS and Remote Sensing, University of Southampton",
+      "MSc Geographical Information Science, University of Leicester",
+      "MSc Geospatial and Mapping Sciences, University of Glasgow",
+      "MSc Remote Sensing and GIS, Aberystwyth University"
+    ],
+    "details": [
+      "Chevening is the most flexible UK route because you choose three courses yourself and the scholarship follows you. One-year master's keep the opportunity cost low, and the UK has strong Earth observation groups at Edinburgh, Leicester, UCL and Southampton.",
+      "Selection weighs leadership, networking and a plan to use the degree back in Pakistan. Four short essays and an interview at the British High Commission decide it. Applicants from government departments, NGOs and the private sector all compete in the same pool.",
+      "Apply for the course admissions in parallel; you must hold an unconditional offer from one of your three choices by the summer deadline."
+    ],
+    "links": [
+      {
+        "label": "Chevening course finder",
+        "url": "https://www.chevening.org/scholarships/guidance/choosing-your-courses/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 7
+  },
+  {
+    "id": "commonwealth-masters-pakistan",
+    "category": "scholarship",
+    "title": "Commonwealth Master's and PhD Scholarships (nominated by HEC)",
+    "provider": "Commonwealth Scholarship Commission in the UK",
+    "url": "https://cscuk.fcdo.gov.uk/scholarships/commonwealth-masters-scholarships/",
+    "description": "Fully funded UK master's and PhD under six development themes. Pakistan's nominations go through HEC: 26 master's and 30 PhD for 2027–28.",
+    "deadline": "Mid-October on both the HEC and CSC portals",
+    "location": "United Kingdom",
+    "cost": "Fully funded",
+    "tags": [
+      "master's",
+      "PhD",
+      "UK",
+      "HEC"
+    ],
+    "facts": [
+      {
+        "label": "Nominations",
+        "value": "26 master's and 30 general PhD nominations for Pakistan in the 2027–28 cycle"
+      },
+      {
+        "label": "Funding",
+        "value": "Tuition, monthly stipend (about £1,400, higher in London), return airfare, thesis grant, warm clothing allowance"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Pakistani or AJK national, first-class or 60 percent undergraduate degree, HAT score of at least 60; cannot afford to study in the UK without the award"
+      },
+      {
+        "label": "Themes",
+        "value": "Science and technology for development; strengthening resilience and response to crises; access, inclusion and opportunity; and three others"
+      },
+      {
+        "label": "Process",
+        "value": "Apply twice: on CSC Central and on the HEC scholarship portal; HEC nominates in December, results in July"
+      }
+    ],
+    "programmes": [
+      "Any taught master's or PhD at a UK university under the CSC themes, for example GIS, Earth observation, water and environmental management, disaster risk reduction"
+    ],
+    "details": [
+      "The Commonwealth Scholarship Commission does not accept direct applications from Pakistan; HEC is the nominating agency and filters by merit and HAT score before the Commission makes the final decision. That makes the HEC stage the real competition.",
+      "Frame your application around a development theme. A remote sensing master's for flood early warning fits 'resilience and response to crises'; a GIS degree for land administration fits 'science and technology for development'.",
+      "The 2027–28 round closed on 20 October 2026. The next call is expected in August or September 2027."
+    ],
+    "links": [
+      {
+        "label": "HEC announcement for 2027–28",
+        "url": "https://www.hec.gov.pk/english/HECAnnouncements/Pages/CW-Scholarship.aspx"
+      },
+      {
+        "label": "Commonwealth PhD Scholarships",
+        "url": "https://cscuk.fcdo.gov.uk/scholarships/commonwealth-phd-scholarships-for-least-developed-countries-and-fragile-states/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 8
+  },
+  {
+    "id": "csc-china-hec",
+    "category": "scholarship",
+    "title": "Chinese Government Scholarship (HEC Type A and direct Type B)",
+    "provider": "China Scholarship Council via HEC",
+    "url": "https://www.hec.gov.pk/site/CGSP",
+    "description": "Master's and PhD at Chinese universities with the strongest remote sensing groups in the world, including Wuhan University, ranked first in Remote Sensing for nine consecutive years.",
+    "deadline": "HEC portal early January; universities' own Type B calls from January to April",
+    "location": "China",
+    "cost": "Fully funded",
+    "tags": [
+      "master's",
+      "PhD",
+      "China",
+      "HEC",
+      "remote sensing"
+    ],
+    "facts": [
+      {
+        "label": "HEC quota",
+        "value": "75 seats in 2026–27: 35 bachelor's, 25 master's, 15 PhD; Type B (direct to universities) adds many more"
+      },
+      {
+        "label": "Funding",
+        "value": "Tuition waived, university dormitory, medical insurance, stipend CNY 3,000 a month for master's and CNY 3,500 for PhD"
+      },
+      {
+        "label": "Ranking",
+        "value": "Wuhan University =165 in QS 2027 and number one worldwide in ShanghaiRanking Remote Sensing 2026 for the ninth year; Tongji, Beijing Normal, Tsinghua and Beijing Institute of Technology also in the Remote Sensing top 10"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Under 35 for master's, under 40 for PhD; 16-year degree; HAT 50 percent for the HEC route"
+      },
+      {
+        "label": "Process",
+        "value": "Two applications: HEC portal and the CSC portal with agency number 5861 (Type A); or apply directly to a university for Type B"
+      }
+    ],
+    "programmes": [
+      "Photogrammetry and Remote Sensing, LIESMARS, Wuhan University",
+      "Cartography and GIS, Beijing Normal University",
+      "Remote Sensing, Aerospace Information Research Institute, University of Chinese Academy of Sciences",
+      "Surveying and Mapping, China University of Geosciences (Wuhan)",
+      "Geomatics, Tongji University"
+    ],
+    "details": [
+      "China is the single largest destination for Arid geoinformatics graduates going abroad. Its universities dominate the remote sensing subject rankings, laboratories have their own satellites and data, and the funding covers everything except flights.",
+      "Type A goes through HEC with a quota of 25 master's and 15 PhD seats; Type B is applied for directly with the university and is where most Pakistani students actually get in, because every major university has its own CSC quota. Contact a supervisor first: a professor's acceptance letter is what moves a Type B application.",
+      "Many programmes for international students are in English, but a year of Chinese is sometimes added. Check the language of instruction before you accept."
+    ],
+    "links": [
+      {
+        "label": "China Scholarship Council (official)",
+        "url": "https://www.csc.edu.cn/"
+      },
+      {
+        "label": "LIESMARS, Wuhan University",
+        "url": "https://liesmars.whu.edu.cn/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 9
+  },
+  {
+    "id": "cas-anso-scholarship",
+    "category": "scholarship",
+    "title": "CAS-ANSO Scholarship and ANSO-CAS-TWAS/UNESCO PhD Scholarship, Chinese Academy of Sciences",
+    "provider": "Chinese Academy of Sciences with ANSO, TWAS and UNESCO",
+    "url": "https://www.twas.org/opportunity/anso-cas-twasunesco-phd-scholarship",
+    "description": "The successor of the CAS-TWAS President's Fellowship. Hundreds of funded master's and PhD places a year at CAS institutes including the Aerospace Information Research Institute; the TWAS/UNESCO track adds 40 PhD places for developing countries.",
+    "deadline": "31 January each year on the UCAS or USTC admission system",
+    "location": "China",
+    "cost": "Fully funded",
+    "tags": [
+      "PhD",
+      "China",
+      "remote sensing"
+    ],
+    "facts": [
+      {
+        "label": "Places",
+        "value": "CAS-ANSO Scholarship: 100 to 200 master's and 300 PhD a year at UCAS, USTC and CAS institutes; ANSO-CAS-TWAS/UNESCO track: up to 40 PhD, 10 reserved for climate research"
+      },
+      {
+        "label": "Stipend",
+        "value": "PhD CNY 6,000 a month rising to CNY 7,000 after the qualifying exam (TWAS/UNESCO track); master's lower; tuition, insurance and accommodation covered; up to 48 months for PhD"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Master's degree for PhD, 35 or younger; bachelor's for master's, 30 or younger; from a developing country; not already studying in China"
+      },
+      {
+        "label": "Process",
+        "value": "Apply in the UCAS or USTC international admission system (not both), choose CAS-ANSO Scholarship and tick the TWAS/UNESCO box; a CAS supervisor must accept you first"
+      },
+      {
+        "label": "Host institutes",
+        "value": "Aerospace Information Research Institute (AIR), Institute of Geographic Sciences and Natural Resources Research, Institute of Tibetan Plateau Research, Institute of Mountain Hazards and Environment, Northwest Institute of Eco-Environment and Resources"
+      }
+    ],
+    "programmes": [
+      "Master's or PhD through the University of Chinese Academy of Sciences at any CAS institute"
+    ],
+    "details": [
+      "CAS institutes are research organisations rather than teaching universities, so a scholarship here is closer to a paid research job: you join a lab, publish and defend. The Aerospace Information Research Institute in Beijing is one of the largest remote sensing labs in the world, and Pakistani students are a large cohort there.",
+      "The old CAS-TWAS President's Fellowship was folded into the ANSO scheme in 2022; third-party sites still advertise it under the old name with the old 31 March deadline. The current deadline is 31 January and the application lives in the UCAS admission system.",
+      "You must secure a supervisor before applying. Write to professors in November with a short proposal that cites their papers; the institute then endorses your application."
+    ],
+    "links": [
+      {
+        "label": "University of Chinese Academy of Sciences international admissions",
+        "url": "https://english.ucas.ac.cn/"
+      },
+      {
+        "label": "ANSO scholarship (official)",
+        "url": "https://www.anso.org.cn/programmes/talent/scholarship/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 10
+  },
+  {
+    "id": "hong-kong-phd-fellowship",
+    "category": "scholarship",
+    "title": "Hong Kong PhD Fellowship Scheme",
+    "provider": "Research Grants Council of Hong Kong",
+    "url": "https://cerg1.ugc.edu.hk/hkpfs/index.html",
+    "description": "400 fellowships for 2027–28 with HK$344,400 a year for three years. PolyU's Land Surveying and Geo-Informatics department and HKU Geography are top-ranked in remote sensing.",
+    "deadline": "1 December 2026, noon Hong Kong time",
+    "location": "Hong Kong",
+    "cost": "Fully funded",
+    "tags": [
+      "PhD",
+      "Hong Kong",
+      "remote sensing"
+    ],
+    "facts": [
+      {
+        "label": "Fellowships",
+        "value": "400 for the 2027–28 academic year"
+      },
+      {
+        "label": "Stipend",
+        "value": "HK$344,400 a year (about US$44,000) plus HK$14,400 conference and travel allowance, for up to three years; universities often top up later years"
+      },
+      {
+        "label": "Ranking",
+        "value": "Hong Kong Polytechnic University 50 in QS 2027; HKU Geography 14th worldwide in ShanghaiRanking Remote Sensing 2026"
+      },
+      {
+        "label": "Selectivity",
+        "value": "Universities nominate only their strongest applicants; most awardees have a master's degree and publications"
+      },
+      {
+        "label": "Process",
+        "value": "Submit an initial application on the RGC system, then full applications to up to two programmes at one or two universities"
+      }
+    ],
+    "programmes": [
+      "PhD, Department of Land Surveying and Geo-Informatics, Hong Kong Polytechnic University",
+      "PhD, Department of Geography, University of Hong Kong",
+      "PhD, Department of Geography and Resource Management, Chinese University of Hong Kong"
+    ],
+    "details": [
+      "This is the best-paid PhD route in Asia and one of the best anywhere. The stipend is set by the Research Grants Council and does not depend on the supervisor's grant, which removes the usual uncertainty.",
+      "PolyU's LSGI department is unusual in combining geodesy, photogrammetry, remote sensing and GIS under one roof, with its own satellite positioning and lidar labs. HKU and CUHK geography departments are strong on urban remote sensing and climate.",
+      "A supervisor's support is essential. Email potential supervisors in September with a proposal; the university's own deadline for the fellowship is usually the same 1 December date."
+    ],
+    "links": [
+      {
+        "label": "Department of Land Surveying and Geo-Informatics, PolyU",
+        "url": "https://www.polyu.edu.hk/lsgs/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 11
+  },
+  {
+    "id": "kaust-fellowship",
+    "category": "scholarship",
+    "title": "KAUST Fellowship for MS and PhD, Saudi Arabia",
+    "provider": "King Abdullah University of Science and Technology",
+    "url": "https://admissions.kaust.edu.sa/",
+    "description": "Every admitted graduate student is funded: full tuition, free housing, medical cover and US$20,000 a year for MS or US$25,000 to 30,000 for PhD. Earth Science and Engineering covers hydrology and remote sensing.",
+    "deadline": "Round 2 for autumn 2027 closes 3 January 2027",
+    "location": "Thuwal, Saudi Arabia",
+    "cost": "Fully funded",
+    "tags": [
+      "master's",
+      "PhD",
+      "Saudi Arabia",
+      "hydrology"
+    ],
+    "facts": [
+      {
+        "label": "Funding",
+        "value": "Automatic for all full-time MS and PhD admits: tuition, on-campus housing, health insurance, relocation; stipend US$20,000 (MS) and US$25,000 to 30,000 (PhD) a year"
+      },
+      {
+        "label": "Ranking",
+        "value": "Graduate-only university, so absent from QS overall tables; consistently among the world's top institutions for citations per faculty"
+      },
+      {
+        "label": "Selectivity",
+        "value": "Competitive; typical admits have a CGPA above 3.5 and research experience; GRE is optional"
+      },
+      {
+        "label": "Programmes",
+        "value": "Earth Science and Engineering (hydrology, remote sensing of land and atmosphere, geophysics); Environmental Science and Engineering"
+      },
+      {
+        "label": "Language",
+        "value": "English; TOEFL 79 or IELTS 6.5 required"
+      }
+    ],
+    "programmes": [
+      "MS, MS/PhD and PhD in Earth Science and Engineering",
+      "MS and PhD in Environmental Science and Engineering"
+    ],
+    "details": [
+      "KAUST is a research university on the Red Sea with resources few places can match: its own supercomputer, a hydrology and land-observation group that uses drones, satellites and field sensors, and faculty recruited from top US and European departments.",
+      "Because the fellowship is automatic, admission is the whole game. Applications are reviewed by faculty, so identify a professor whose work matches your thesis and mention them in the statement.",
+      "Pakistani students form one of the larger nationalities on campus. Life is on a closed campus, which some find isolating; visit the student stories before deciding."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 12
+  },
+  {
+    "id": "stipendium-hungaricum-hec",
+    "category": "scholarship",
+    "title": "Stipendium Hungaricum (400 seats for Pakistan through HEC)",
+    "provider": "Tempus Public Foundation, Hungary, with HEC",
+    "url": "https://www.hec.gov.pk/english/scholarshipsgrants/lao/SHSP/Pages/default.aspx",
+    "description": "Hungary's state scholarship gives Pakistan 400 seats a year including 100 master's and 30 PhD. Tuition free, stipend, housing allowance and insurance. ELTE's cartography master's is the best fit.",
+    "deadline": "15 January on both HEC and Hungarian portals",
+    "location": "Hungary",
+    "cost": "Fully funded",
+    "tags": [
+      "master's",
+      "PhD",
+      "Hungary",
+      "HEC"
+    ],
+    "facts": [
+      {
+        "label": "Quota",
+        "value": "400 seats for Pakistan in 2026–27: 200 bachelor's, 70 one-tier master's, 100 master's, 30 PhD"
+      },
+      {
+        "label": "Funding",
+        "value": "Tuition waived, monthly stipend HUF 43,700 for master's and HUF 140,000 for PhD, housing allowance or dormitory, medical insurance"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Pakistani or AJK national, 16-year degree for master's, HAT 50 percent; nominated by HEC, final selection by the Hungarian university"
+      },
+      {
+        "label": "Selectivity",
+        "value": "Thousands apply to HEC for the 400 nominations; master's seats in geography and cartography are less contested than medicine or computing"
+      },
+      {
+        "label": "Provincial split",
+        "value": "HEC applies the federal quota: Punjab 50 percent, KP 11.5, Sindh rural 11.4, Sindh urban 7.6, Balochistan 6, with merit and other shares"
+      }
+    ],
+    "programmes": [
+      "MSc Cartography, ELTE Eötvös Loránd University, Budapest",
+      "MSc Geography with GIS, University of Debrecen",
+      "MSc Geography (geoinformatics track), University of Szeged",
+      "PhD in Earth Sciences at ELTE, Debrecen, Szeged or Pécs"
+    ],
+    "details": [
+      "Stipendium Hungaricum has the largest seat count of any bilateral scholarship for Pakistan, and HEC runs the nomination. The master's stipend is modest by European standards (HUF 43,700 is roughly PKR 35,000), but tuition and housing are covered and Budapest is cheaper than western Europe.",
+      "ELTE's Department of Cartography and Geoinformatics runs an English-language MSc that trains in map design, web mapping and GIS programming; it also co-ordinates the Erasmus Mundus cartography master's. Debrecen and Szeged take GIS students into geography programmes.",
+      "The round for 2026–27 closed in January 2026. Expect the 2027–28 call in November 2026 with a mid-January deadline; HAT must be sat before you apply."
+    ],
+    "links": [
+      {
+        "label": "Stipendium Hungaricum official site",
+        "url": "https://stipendiumhungaricum.hu/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 13
+  },
+  {
+    "id": "turkiye-burslari",
+    "category": "scholarship",
+    "title": "Türkiye Scholarships (Türkiye Bursları)",
+    "provider": "Presidency for Turks Abroad and Related Communities (YTB)",
+    "url": "https://www.turkiyeburslari.gov.tr/",
+    "description": "About 5,000 awards a year from nearly 200,000 applications. Covers tuition, housing, insurance, flights, a year of Turkish and a monthly stipend. ITU, METU and Hacettepe have geomatics departments.",
+    "deadline": "10 January to 20 February each year",
+    "location": "Türkiye",
+    "cost": "Fully funded",
+    "tags": [
+      "master's",
+      "PhD",
+      "Türkiye",
+      "geomatics"
+    ],
+    "facts": [
+      {
+        "label": "Awards",
+        "value": "Around 5,000 scholarships a year at all levels from nearly 200,000 applications in 2026 (about 2 to 3 percent)"
+      },
+      {
+        "label": "Stipend",
+        "value": "TRY 9,500 a month for master's and TRY 13,000 for PhD in 2026–27, plus tuition, dormitory, health insurance and a return flight"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Under 30 for master's, under 35 for PhD; minimum 75 percent for master's applicants"
+      },
+      {
+        "label": "Language",
+        "value": "One year of Turkish is included even for English-taught programmes"
+      },
+      {
+        "label": "Ranking",
+        "value": "Middle East Technical University and Istanbul Technical University are Türkiye's top-ranked technical universities (QS top 400)"
+      }
+    ],
+    "programmes": [
+      "MSc Geomatics Engineering, Istanbul Technical University",
+      "MSc Geodetic and Geographic Information Technologies, Middle East Technical University, Ankara",
+      "MSc Geomatics Engineering, Hacettepe University, Ankara",
+      "MSc Geomatic Engineering, Yıldız Technical University, Istanbul"
+    ],
+    "details": [
+      "Türkiye Bursları is a single online application in which you rank up to twelve programmes. The numbers are large, so the selection relies on grades, the statement and an interview at the Turkish consulate or embassy.",
+      "Turkish geomatics departments come out of a surveying tradition: strong geodesy, GNSS and photogrammetry, with GIS and remote sensing added. METU's GGIT programme is the most GIS-oriented and is taught in English.",
+      "Results are announced in early August; the Turkish language year starts in September."
+    ],
+    "links": [
+      {
+        "label": "Geodetic and Geographic Information Technologies, METU",
+        "url": "https://ggit.metu.edu.tr/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 14
+  },
+  {
+    "id": "mext-japan-pakistan",
+    "category": "scholarship",
+    "title": "MEXT Research Student Scholarship (Embassy recommendation)",
+    "provider": "Japanese Government through the Embassy of Japan in Pakistan",
+    "url": "https://www.pk.emb-japan.go.jp/itpr_en/MEXT.html",
+    "description": "Japan's government scholarship for master's and PhD research students. JPY 144,000 a month, no tuition, flights paid. Eleven Pakistani research students were selected for 2026.",
+    "deadline": "Late May each year at the Embassy in Islamabad",
+    "location": "Japan",
+    "cost": "Fully funded",
+    "tags": [
+      "master's",
+      "PhD",
+      "Japan"
+    ],
+    "facts": [
+      {
+        "label": "Awards",
+        "value": "11 Pakistani research-student awards for 2026 through the Embassy track; the university-recommendation track adds a few more"
+      },
+      {
+        "label": "Stipend",
+        "value": "JPY 143,000 for research students, 144,000 for master's, 145,000 for PhD per month; tuition and exam fees waived; return airfare"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Under 35, bachelor's degree; no IELTS needed, English and Japanese tests are taken at the Embassy"
+      },
+      {
+        "label": "Process",
+        "value": "Embassy screening (documents, written tests, interview) then MEXT placement; you must obtain a letter of acceptance from a Japanese professor"
+      },
+      {
+        "label": "Ranking",
+        "value": "University of Tokyo (QS 2027 top 40), Kyoto, Chiba's Center for Environmental Remote Sensing, Tokyo Institute of Science and Technology"
+      }
+    ],
+    "programmes": [
+      "Center for Spatial Information Science, University of Tokyo",
+      "Center for Environmental Remote Sensing (CEReS), Chiba University",
+      "Disaster Prevention Research Institute, Kyoto University",
+      "Graduate School of Life and Environmental Sciences, University of Tsukuba"
+    ],
+    "details": [
+      "MEXT places you first as a research student, then you sit the regular entrance exam for the master's or PhD, which almost everyone passes. The stipend is generous for Japan's cost of living outside Tokyo, and the airfare is covered both ways.",
+      "The Embassy track for the 2027 intake closed on 26 May 2026. The next call opens in April 2027. Begin emailing Japanese professors in January; a letter of acceptance is required at the second screening.",
+      "Japanese laboratories value a clear research plan over grades. Chiba's CEReS and Tokyo's CSIS have hosted several Pakistani students in remote sensing."
+    ],
+    "links": [
+      {
+        "label": "Study in Japan: research students",
+        "url": "https://www.studyinjapan.go.jp/en/smap-stopj-applications-research.html"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 15
+  },
+  {
+    "id": "gks-korea-pakistan",
+    "category": "scholarship",
+    "title": "Global Korea Scholarship for graduate degrees",
+    "provider": "National Institute for International Education, Republic of Korea",
+    "url": "https://pak-islamabad.mofa.go.kr/pk-en/brd/m_3150/view.do?seq=762165&page=1",
+    "description": "Korea's state scholarship: a year of Korean plus a master's or PhD, with tuition, flights, insurance and a monthly allowance. Pakistan had 8 Embassy-track and 17 university-track places in 2026.",
+    "deadline": "Embassy track late February; university track September to October",
+    "location": "South Korea",
+    "cost": "Fully funded",
+    "tags": [
+      "master's",
+      "PhD",
+      "Korea"
+    ],
+    "facts": [
+      {
+        "label": "Awards",
+        "value": "2,000 worldwide in 2026 (800 Embassy, 1,200 university track); Pakistan quota 8 Embassy and 17 university track"
+      },
+      {
+        "label": "Funding",
+        "value": "Tuition, a year of Korean language, flights, settlement allowance, medical insurance and a monthly living allowance of roughly KRW 1 to 1.5 million"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Under 40, bachelor's with CGPA 80 percent or above; not previously a GKS awardee"
+      },
+      {
+        "label": "Rule",
+        "value": "If you pass the Embassy first round you cannot also apply via a university in the same year"
+      },
+      {
+        "label": "Ranking",
+        "value": "Seoul National University (QS 2027 top 40), KAIST, Yonsei and Korea University are top 100"
+      }
+    ],
+    "programmes": [
+      "Geography (GIS and remote sensing), Seoul National University",
+      "Geoinformatic Engineering, Inha University",
+      "Spatial Information Engineering, Pukyong National University",
+      "Civil and Environmental Engineering (geospatial), KAIST"
+    ],
+    "details": [
+      "GKS is one of the few scholarships that includes a full language year, which makes a Korean degree realistic even with no prior Korean. Degree programmes themselves are often taught in English at the graduate level.",
+      "The Embassy track is screened in Islamabad with document review and an interview, then forwarded to Korea. The university track is applied for directly at the university's international office; Korea's regional universities are easier to enter and the scholarship is identical.",
+      "The 2026 Embassy deadline was 25 February. Watch the Embassy of Korea in Islamabad notice board from early February 2027."
+    ],
+    "links": [
+      {
+        "label": "Study in Korea (GKS portal)",
+        "url": "https://www.studyinkorea.go.kr/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 16
+  },
+  {
+    "id": "eiffel-france",
+    "category": "scholarship",
+    "title": "France Excellence Eiffel Scholarship",
+    "provider": "Campus France for the French Ministry for Europe and Foreign Affairs",
+    "url": "https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence",
+    "description": "€1,200 a month for master's students nominated by a French university. Toulouse's SIGMA and Strasbourg's Earth observation master's are the geomatics programmes to target.",
+    "deadline": "University internal deadlines October to December; Campus France 6 January 2027",
+    "location": "France",
+    "cost": "Stipend; tuition set by the university",
+    "tags": [
+      "master's",
+      "France",
+      "PhD"
+    ],
+    "facts": [
+      {
+        "label": "Allowance",
+        "value": "€1,200 a month for master's (up to 24 months), about €2,000 for PhD (12 months); international travel, insurance and housing help"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Under 29 for master's, under 35 for PhD; not already studying in France; nominated by the French institution, you cannot apply alone"
+      },
+      {
+        "label": "Selectivity",
+        "value": "Around 350 to 400 master's awards a year worldwide; priority to engineering, science and sustainable development"
+      },
+      {
+        "label": "Tuition",
+        "value": "Not covered by Eiffel; public universities charge about €3,900 a year to non-EU master's students, often waived for Eiffel laureates"
+      },
+      {
+        "label": "Language",
+        "value": "Several geomatics master's are French-taught; check each programme"
+      }
+    ],
+    "programmes": [
+      "Master SIGMA (Science de l'Information Géographique pour la Maîtrise de l'Aménagement), Université Toulouse III and ENSAT",
+      "Master Observation de la Terre et Géomatique, Université de Strasbourg",
+      "Master Géomatique, Université Paris 1 and ENSG (École nationale des sciences géographiques)",
+      "Master Earth and Planetary Sciences (remote sensing track), Université Paris-Saclay"
+    ],
+    "details": [
+      "Eiffel is a nomination scholarship. You apply to the French master's in the autumn and ask the programme to put you forward; the university then submits your file to Campus France by early January. Results arrive in April.",
+      "France's strength is Earth observation science: CNES, the French space agency, co-funds many labs, and Toulouse is Europe's space capital. SIGMA is the best-known applied GIS master's, taught mainly in French with some English.",
+      "The allowance does not cover tuition, but most universities waive fees for Eiffel laureates. Budget for the French language requirement in the programmes that need it."
+    ],
+    "links": [
+      {
+        "label": "Campus France Pakistan",
+        "url": "https://www.pakistan.campusfrance.org/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 17
+  },
+  {
+    "id": "polimi-geoinformatics",
+    "category": "scholarship",
+    "title": "MSc Geoinformatics Engineering with merit scholarships, Politecnico di Milano",
+    "provider": "Politecnico di Milano",
+    "url": "https://www.polimi.it/en/education/laurea-magistrale-programmes/programme-detail/geoinformatics-engineering",
+    "description": "English-taught geoinformatics master's at Italy's top university (QS 2027 =87). Platinum scholarships pay €10,000 a year plus a tuition waiver; the regional DSU grant adds housing and meals for low-income students.",
+    "deadline": "Early Bird application 1 October to 1 December for the next academic year",
+    "location": "Milan, Italy",
+    "cost": "Merit scholarship or tuition waiver",
+    "tags": [
+      "master's",
+      "Italy",
+      "GIS",
+      "geodesy"
+    ],
+    "facts": [
+      {
+        "label": "Ranking",
+        "value": "Politecnico di Milano =87 in QS 2027 (98 in 2026, the first Italian university in the top 100)"
+      },
+      {
+        "label": "Scholarships",
+        "value": "Platinum €10,000 a year plus tuition waiver; Gold €8,000 plus waiver; Silver tuition waiver only; renewable with credit thresholds"
+      },
+      {
+        "label": "DSU grant",
+        "value": "Regional right-to-study grant for low-income students: cash, free dormitory and canteen; apply after admission with income documents"
+      },
+      {
+        "label": "Tuition",
+        "value": "About €3,900 a year for non-EU students without a waiver"
+      },
+      {
+        "label": "Selectivity",
+        "value": "Scholarships are decided on the admission ranking; a CGPA above 3.5 and a good GRE or strong transcript matter"
+      }
+    ],
+    "programmes": [
+      "Geoinformatics Engineering (Laurea Magistrale), Milan Leonardo campus"
+    ],
+    "details": [
+      "Polimi's geoinformatics master's comes from its geodesy and photogrammetry school and covers GNSS, geostatistics, image analysis, spatial databases and web GIS, with a strong computing core. It is taught fully in English.",
+      "Apply in the Early Bird window (fee paid between 1 October and 1 December) to be considered for merit scholarships; the scholarship form is separate but has no fee. Later applicants can still be admitted but miss the merit round.",
+      "Milan is expensive, so the DSU grant matters: students whose family income falls within the regional thresholds get cash, housing and meals regardless of merit scholarships."
+    ],
+    "links": [
+      {
+        "label": "Merit-based international scholarships call 2026–27 (PDF)",
+        "url": "https://www.polimi.it/fileadmin/user_upload/futuri_studenti/borse-di-studio/Call_for_Application_for_Merit_2026-2027.pdf"
+      },
+      {
+        "label": "Programme site, geoinformatics.polimi.it",
+        "url": "https://www.geoinformatics.polimi.it/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 18
+  },
+  {
+    "id": "lund-gis-remote-sensing",
+    "category": "scholarship",
+    "title": "MSc GIS and Remote Sensing with the Lund University Global Scholarship",
+    "provider": "Lund University",
+    "url": "https://www.lunduniversity.lu.se/study/gis-and-remote-sensing-master-programme-NAGIS",
+    "description": "Two-year master's at a QS top-75 university. The Global Scholarship covers 25 to 100 percent of tuition for top non-EU applicants; living costs are your own.",
+    "deadline": "Programme application mid-January; scholarship early February",
+    "location": "Lund, Sweden",
+    "cost": "Partial to full tuition waiver",
+    "tags": [
+      "master's",
+      "Sweden",
+      "GIS",
+      "remote sensing"
+    ],
+    "facts": [
+      {
+        "label": "Ranking",
+        "value": "Lund University 71 in QS 2027"
+      },
+      {
+        "label": "Tuition",
+        "value": "SEK 370,000 for the whole programme (about €33,000); the online GIS master's (NAGIV) is SEK 290,000"
+      },
+      {
+        "label": "Scholarship",
+        "value": "Lund University Global Scholarship: 25, 50, 75 or 100 percent of tuition; 110 awarded in 2026 from SEK 26 million; no living allowance"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Non-EU fee-paying applicants with Lund as first choice on universityadmissions.se; 600-word motivation"
+      },
+      {
+        "label": "Note",
+        "value": "Pakistan is not on the 2026 list for the Swedish Institute scholarship, so this is the main funding route to Sweden"
+      }
+    ],
+    "programmes": [
+      "GIS and Remote Sensing, Master Programme (NAGIS)",
+      "Geographical Information Science, Master's Programme, distance learning (NAGIV)"
+    ],
+    "details": [
+      "Lund's physical geography department runs one of Europe's oldest GIS and remote sensing master's, with courses in programming for GIS, satellite remote sensing and ecosystem modelling. The department is also behind the long-running distance GIS master's, which can be studied from Pakistan.",
+      "The Global Scholarship is tuition only. With a full waiver, you still need roughly SEK 10,000 a month for living costs, which the Swedish Migration Agency requires you to show.",
+      "Apply on universityadmissions.se by mid-January with Lund as first choice, then submit the scholarship motivation in the February window."
+    ],
+    "links": [
+      {
+        "label": "Lund University scholarships and awards",
+        "url": "https://www.lunduniversity.lu.se/study/admission-degree-studies/scholarships-and-awards"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 19
+  },
+  {
+    "id": "ait-thailand-rsgis",
+    "category": "scholarship",
+    "title": "Remote Sensing and GIS at the Asian Institute of Technology, with AIT scholarships",
+    "provider": "Asian Institute of Technology, Thailand",
+    "url": "https://ait.ac.th/program/remote-sensing-and-gis/",
+    "description": "Asia's oldest dedicated RS and GIS master's. AIT gives partial to full tuition scholarships to strong applicants from the region; Pakistani students have studied here since the 1980s.",
+    "deadline": "August intake applications by March to May; January intake by October",
+    "location": "Pathum Thani, Thailand",
+    "cost": "Partial to full scholarship",
+    "tags": [
+      "master's",
+      "PhD",
+      "Thailand",
+      "remote sensing"
+    ],
+    "facts": [
+      {
+        "label": "Institution",
+        "value": "International postgraduate institute founded 1959; the RS and GIS programme started in 1980 and hosts the GeoInformatics Center"
+      },
+      {
+        "label": "Scholarships",
+        "value": "AIT Fellowships and His Majesty the King's Scholarships cover tuition partly or fully based on CGPA; some add living allowance"
+      },
+      {
+        "label": "Tuition",
+        "value": "Around US$20,000 for the two-year master's before scholarships"
+      },
+      {
+        "label": "Selectivity",
+        "value": "Admission is moderate; full scholarships need a CGPA around 3.5 or higher"
+      },
+      {
+        "label": "Language",
+        "value": "English; IELTS 6.0 or AIT's own test"
+      }
+    ],
+    "programmes": [
+      "Master of Science in Remote Sensing and Geographic Information Systems",
+      "PhD in Remote Sensing and GIS"
+    ],
+    "details": [
+      "AIT is a regional institute rather than a national university, so it does not appear in QS rankings, but its RS and GIS programme is known across Asia and has trained staff of SUPARCO, SPARCENT and Pakistani universities.",
+      "The scholarship amount is decided with the admission offer, so there is no separate application. Scholarships scale with your CGPA and the department's budget that term.",
+      "Thailand is inexpensive and the campus is residential. It is a sound choice for a professional master's if European funding does not come through."
+    ],
+    "links": [
+      {
+        "label": "AIT scholarships",
+        "url": "https://ait.ac.th/admissions/scholarships/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 20
+  },
+  {
+    "id": "hec-overseas-phase3",
+    "category": "scholarship",
+    "title": "HEC Overseas Scholarships for MS/MPhil leading to PhD (Phase III)",
+    "provider": "Higher Education Commission of Pakistan",
+    "url": "https://www.hec.gov.pk/english/scholarshipsgrants/OSSPhase-III/Pages/default.aspx",
+    "description": "HEC's own fully funded route to QS or THE top-200 universities. Climate, environment, agri-tech and digital transformation are among the thematic areas. Batch IV ran in August 2026.",
+    "deadline": "Batch IV closed 28 August 2026; watch for the next batch",
     "location": "Various",
     "cost": "Fully funded",
-    "tags": ["PhD", "HEC"]
+    "tags": [
+      "master's",
+      "PhD",
+      "HEC"
+    ],
+    "facts": [
+      {
+        "label": "Universities",
+        "value": "Any university in the QS or Times Higher Education top 200 in an eligible field"
+      },
+      {
+        "label": "Themes",
+        "value": "Energy, climate change and environment; agriculture, food security and agri-tech; digital transformation; natural and physical sciences; engineering; and others"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Pakistani or AJK national; CGPA 3.0 or first division; age 35 (40 for public-sector employees); HAT test; PKR 3,000 processing fee"
+      },
+      {
+        "label": "Exemption",
+        "value": "Applicants holding an unconditional admission to a top-200 university may skip the test and interview"
+      },
+      {
+        "label": "Obligation",
+        "value": "Scholars sign a bond to return and serve in Pakistan"
+      }
+    ],
+    "programmes": [
+      "MS leading to PhD, or direct PhD, in the listed thematic areas at a top-200 university"
+    ],
+    "details": [
+      "This is the only large scholarship where HEC itself pays the full cost at a university of your choosing, so a confirmed admission from a top-200 university is the strongest card you can hold. Edinburgh, Leeds, Wuhan, KU Leuven, Melbourne and many US state universities fall within the list.",
+      "Applications are through the HEC e-Services portal, followed by the HEC Aptitude Test and an interview. Batches are announced irregularly, roughly once a year, so set an alert on the HEC announcements page.",
+      "Previous HEC MS scholars must complete two years in Pakistan before reapplying."
+    ],
+    "links": [
+      {
+        "label": "HEC scholarships and grants",
+        "url": "https://www.hec.gov.pk/english/scholarshipsgrants/Pages/default.aspx"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 21
   },
   {
-    "id": "gee-intro-course",
+    "id": "australia-rtp-phd",
+    "category": "scholarship",
+    "title": "Australian Research Training Program PhD scholarships",
+    "provider": "Australian Government through each university",
+    "url": "https://www.education.gov.au/research-block-grants/research-training-program",
+    "description": "Tax-free stipend of about AUD 33,000 to 35,000 a year plus fee offset for international PhD students. Curtin, UQ, UNSW, Tasmania and RMIT have strong spatial science groups.",
+    "deadline": "Usually August to October for the following year; set by each university",
+    "location": "Australia",
+    "cost": "Fully funded",
+    "tags": [
+      "PhD",
+      "Australia",
+      "remote sensing"
+    ],
+    "facts": [
+      {
+        "label": "Funding",
+        "value": "RTP stipend (about AUD 33,500 a year in 2025, indexed), tuition fee offset and overseas health cover, for 3 to 3.5 years"
+      },
+      {
+        "label": "Selectivity",
+        "value": "International RTP places are limited; universities rank applicants by publications, thesis and supervisor support"
+      },
+      {
+        "label": "Ranking",
+        "value": "University of Queensland, UNSW and University of Melbourne are in the QS top 40; Curtin's spatial sciences and Tasmania's geography and spatial sciences are well-regarded"
+      },
+      {
+        "label": "Process",
+        "value": "Secure a supervisor, then apply for admission and scholarship together through the university's graduate research office"
+      }
+    ],
+    "programmes": [
+      "PhD, School of Earth and Planetary Sciences (Spatial Sciences), Curtin University",
+      "PhD, School of the Environment, University of Queensland",
+      "PhD, School of Geography, Planning and Spatial Sciences, University of Tasmania",
+      "PhD, Geospatial Science, RMIT University",
+      "PhD, Faculty of Science and Engineering, University of New South Wales"
+    ],
+    "details": [
+      "Australia funds its PhD students through the Research Training Program, which each university allocates. There is no central application: you find a supervisor, agree on a project and apply in the university's scholarship round, usually between August and October for a start the following year.",
+      "Australian groups lead in agricultural remote sensing, bushfire and drought monitoring, and lidar and photogrammetry, all directly relevant to Pakistan's problems. Several Arid graduates have taken this route through CSIRO-linked supervisors.",
+      "Some universities supplement RTP with their own scholarships, for example Curtin's International Postgraduate Research Scholarship and UQ's Graduate School Scholarship."
+    ],
+    "links": [
+      {
+        "label": "Curtin spatial sciences research",
+        "url": "https://www.curtin.edu.au/study/research/"
+      },
+      {
+        "label": "UQ Graduate School scholarships",
+        "url": "https://scholarships.uq.edu.au/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 22
+  },
+  {
+    "id": "ucalgary-geomatics",
+    "category": "scholarship",
+    "title": "Funded MSc and PhD in Geomatics Engineering, University of Calgary",
+    "provider": "Schulich School of Engineering, University of Calgary",
+    "url": "https://schulich.ucalgary.ca/geomatics",
+    "description": "One of the largest geomatics departments in North America. Thesis-based graduate students receive guaranteed minimum funding from supervisors, teaching assistantships and awards.",
+    "deadline": "15 January for September admission with full funding consideration",
+    "location": "Calgary, Canada",
+    "cost": "Funded through supervisor and assistantships",
+    "tags": [
+      "master's",
+      "PhD",
+      "Canada",
+      "geomatics"
+    ],
+    "facts": [
+      {
+        "label": "Institution",
+        "value": "Department of Geomatics Engineering: GNSS, photogrammetry, lidar, remote sensing, GIS and land tenure; roughly 30 faculty"
+      },
+      {
+        "label": "Funding",
+        "value": "Thesis-based MSc and PhD students get a guaranteed minimum stipend (around CAD 20,000 to 26,000 a year) from research grants and teaching assistantships; international tuition is deducted from it"
+      },
+      {
+        "label": "Ranking",
+        "value": "University of Calgary in the QS top 200; the geomatics department is among the best-known in Canada alongside UNB and Laval"
+      },
+      {
+        "label": "Process",
+        "value": "Email a professor with a proposal and CV; applications without a supervisor's interest are rarely funded"
+      }
+    ],
+    "programmes": [
+      "MSc and PhD in Geomatics Engineering"
+    ],
+    "details": [
+      "Canadian research degrees are paid for by the supervisor's grant, so the application is really a job application to a professor. Calgary's geomatics department has a long record of taking students from Pakistan, several of whom now teach at NUST and UET.",
+      "Funding is enough to live on in Calgary if you budget carefully; international tuition is around CAD 12,000 a year and comes out of the stipend package.",
+      "Apply by 15 January with IELTS 7.0 (6.5 in each band) and a research statement; GRE is not required."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 23
+  },
+  {
+    "id": "open-doors-russia",
+    "category": "scholarship",
+    "title": "Open Doors Russian Scholarship Project (tuition-free master's and PhD)",
+    "provider": "Global Universities Association, Russian Ministry of Science and Higher Education",
+    "url": "https://od.globaluni.ru/",
+    "description": "Online olympiad whose winners study free at 24 Russian universities. The Earth and Environmental Sciences track covers geography, geoinformatics and remote sensing.",
+    "deadline": "Registration 20 August to 1 November 2026; second round by 16 November",
+    "location": "Russia",
+    "cost": "Tuition free; small stipend",
+    "tags": [
+      "master's",
+      "PhD",
+      "Russia"
+    ],
+    "facts": [
+      {
+        "label": "Funding",
+        "value": "Tuition-free study under the Russian government quota; monthly stipend set by the university (small); accommodation not guaranteed"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Master's track: aged 20 to 33, no prior master's; PhD track: master's degree"
+      },
+      {
+        "label": "Selection",
+        "value": "Stage 1 portfolio, stage 2 proctored 180-minute subject test online; PhD applicants also interview with a supervisor"
+      },
+      {
+        "label": "Track",
+        "value": "Earth and Environmental Sciences for Sustainability; also Urbanism and Civil Engineering"
+      },
+      {
+        "label": "Universities",
+        "value": "24 including Moscow State, Saint Petersburg State, HSE, ITMO, Tomsk State and Ural Federal"
+      }
+    ],
+    "programmes": [
+      "Master's or PhD in the Earth and Environmental Sciences track at a participating university"
+    ],
+    "details": [
+      "Open Doors is unusual in that selection is an exam rather than an essay, which suits strong students without work experience. Winners choose a university and programme from the participating list.",
+      "The stipend is nominal, so you need savings for living costs, and many programmes are Russian-taught with a preparatory year. Check the language of instruction for the specific programme before you commit.",
+      "Registration for the 2026–27 edition closes 1 November 2026, with a second-round registration deadline on 16 November for bachelor's, master's and PhD tracks."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 24
+  },
+  {
+    "id": "schlumberger-faculty-for-the-future",
+    "category": "scholarship",
+    "title": "Schlumberger Foundation Faculty for the Future (women in STEM, PhD and postdoc)",
+    "provider": "Schlumberger Foundation",
+    "url": "https://www.fftf.slb.com/",
+    "description": "Fellowships of up to US$50,000 a year for women from developing countries doing a PhD or postdoc in science and engineering abroad, on condition they return to teach or research at home.",
+    "deadline": "September to November each year",
+    "location": "Any top university abroad",
+    "cost": "Up to US$50,000 a year",
+    "tags": [
+      "PhD",
+      "women",
+      "postdoc"
+    ],
+    "facts": [
+      {
+        "label": "Award",
+        "value": "Up to US$50,000 a year for PhD, up to US$40,000 for postdoc, renewable"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Women from developing and emerging countries (Pakistan eligible), admitted to or enrolled in a PhD or postdoc abroad in a STEM field, committed to returning home"
+      },
+      {
+        "label": "Selectivity",
+        "value": "Around 50 new fellows a year worldwide from several hundred applicants"
+      },
+      {
+        "label": "Fields",
+        "value": "Earth sciences, environmental science, geoinformatics and remote sensing qualify"
+      }
+    ],
+    "programmes": [
+      "Any PhD or postdoc abroad; the fellowship is portable"
+    ],
+    "details": [
+      "Faculty for the Future targets women who will become faculty at universities in their home countries. Pakistani fellows have studied geosciences and environmental science at universities in Europe, Australia and North America.",
+      "You need an admission or a current enrolment first; the fellowship then funds the remaining years. Pair it with a partial scholarship such as ITC Excellence or Lund to close the gap.",
+      "Applications open in September and close in November for the following academic year."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 25
+  },
+  {
+    "id": "ernst-mach-worldwide",
+    "category": "scholarship",
+    "title": "Ernst Mach Grant worldwide: research stays in Austria",
+    "provider": "OeAD, Austria",
+    "url": "https://grants.at/en",
+    "description": "€1,300 a month for one to nine months of research at an Austrian university, for MS or PhD students and postdocs from any country. A door into Salzburg's Z_GIS and TU Wien's geoinformation group.",
+    "deadline": "1 March each year",
+    "location": "Austria",
+    "cost": "Monthly grant plus insurance",
+    "tags": [
+      "research stay",
+      "Austria",
+      "PhD"
+    ],
+    "facts": [
+      {
+        "label": "Grant",
+        "value": "€1,300 a month, accident and health insurance, up to nine months; travel costs sometimes subsidised"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Postgraduate or doctoral students and postdocs under 35 (45 for postdocs) from any country except Austria; invitation letter from an Austrian host"
+      },
+      {
+        "label": "Hosts",
+        "value": "Z_GIS at the University of Salzburg, Department of Geodesy and Geoinformation at TU Wien, BOKU Vienna, TU Graz"
+      },
+      {
+        "label": "Note",
+        "value": "The ASEA-UNINET version of this grant is limited to South-East Asian countries; Pakistan uses the worldwide call"
+      }
+    ],
+    "programmes": [
+      "Research stay of 1 to 9 months as part of an MS thesis, PhD or postdoc"
+    ],
+    "details": [
+      "This is not a degree scholarship but a paid research visit, which is how many PhD students in Pakistan collect data, co-author papers and build the contact that later turns into a funded PhD or postdoc.",
+      "Apply on grants.at with a research plan and a letter from the Austrian host. Z_GIS has hosted Pakistani researchers in object-based image analysis and disaster mapping.",
+      "The HEC and the Austrian government also run a joint scholarship from time to time; check HEC announcements."
+    ],
+    "links": [
+      {
+        "label": "OeAD grants and scholarships",
+        "url": "https://oead.at/en/to-austria/grants-and-scholarships"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 26
+  },
+  {
+    "id": "erasmus-mundus-catalogue",
+    "category": "scholarship",
+    "title": "Erasmus Mundus Joint Master catalogue: other programmes for geo graduates",
+    "provider": "European Education and Culture Executive Agency",
+    "url": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
+    "description": "Search the official catalogue for water, environment, climate, forestry and urban programmes that take geoinformatics graduates. Every scholarship pays €1,400 a month plus fees.",
+    "deadline": "Mostly December to February for the following autumn",
+    "location": "Europe",
+    "cost": "Fully funded",
+    "tags": [
+      "master's",
+      "Europe",
+      "Erasmus Mundus"
+    ],
+    "facts": [
+      {
+        "label": "Scholarship",
+        "value": "€1,400 a month for the whole programme, participation costs waived; the same package across all joint master's"
+      },
+      {
+        "label": "Selectivity",
+        "value": "Each programme funds roughly 10 to 25 students a year; several hundred apply"
+      },
+      {
+        "label": "Rule",
+        "value": "Apply to up to three joint master's per year; one Erasmus Mundus scholarship per lifetime"
+      }
+    ],
+    "programmes": [
+      "Copernicus Master in Digital Earth (Salzburg, Olomouc, Bretagne Sud)",
+      "Geospatial Technologies (Münster, NOVA, Jaume I), funded again from the 2027 intake",
+      "Cartography M.Sc. (TU Munich, TU Vienna, TU Dresden, Twente), scholarships depend on the current grant",
+      "Environmental Sciences, Policy and Management (MESPOM)",
+      "Flood Risk Management or water-focused joint master's, check the catalogue",
+      "Sustainable Forest and Nature Management (SUFONAMA)"
+    ],
+    "details": [
+      "The catalogue lists every programme currently funded and links to each consortium's own site, where the application lives. Filter by keyword ('earth', 'environment', 'water', 'urban') since the field labels are broad.",
+      "Scholarship decisions are ranked lists per programme. The same application quality that fails at one consortium can win at another with fewer applicants, so use all three of your yearly choices.",
+      "Funding is for the programme's whole length; there is no separate travel allowance any more, the monthly amount covers it."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 27
+  },
+  {
+    "id": "end-to-end-gee",
     "category": "course",
     "title": "End-to-End Google Earth Engine",
     "provider": "Spatial Thoughts",
     "url": "https://courses.spatialthoughts.com/end-to-end-gee.html",
-    "description": "The most complete free Earth Engine course, from basics to supervised classification and time series. Self-paced with full materials.",
-    "cost": "Free",
-    "tags": ["GEE", "remote sensing"]
+    "description": "The most complete free Earth Engine course: from the code editor to supervised classification, time series and change detection, with Earth Engine apps at the end.",
+    "cost": "Free; paid certificate option",
+    "tags": [
+      "Earth Engine",
+      "remote sensing",
+      "JavaScript"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Self-paced text and video with runnable scripts; also run as a paid live class"
+      },
+      {
+        "label": "Time",
+        "value": "About 30 hours"
+      },
+      {
+        "label": "Level",
+        "value": "Beginner to intermediate; no programming required at the start"
+      },
+      {
+        "label": "Certificate",
+        "value": "Free material; certificate only through the paid instructor-led version"
+      }
+    ],
+    "details": [
+      "Ujaval Gandhi's course is the standard introduction to Earth Engine and is updated with every API change. Modules cover cloud masking, Sentinel and Landsat composites, classification and accuracy assessment, time series analysis and exporting results.",
+      "Do every exercise rather than just reading. The quiz-style assignments translate directly into final-year project chapters."
+    ],
+    "links": [
+      {
+        "label": "All Spatial Thoughts courses",
+        "url": "https://spatialthoughts.com/courses/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 1
   },
   {
     "id": "nasa-arset",
     "category": "course",
     "title": "NASA ARSET applied remote sensing trainings",
-    "provider": "NASA",
-    "url": "https://appliedsciences.nasa.gov/get-involved/training",
-    "description": "Free webinar series on floods, agriculture, air quality, and disasters, with certificates of completion.",
+    "provider": "NASA Applied Sciences",
+    "url": "https://www.earthdata.nasa.gov/data/projects/arset",
+    "description": "Free live and recorded trainings on floods, drought, air quality, agriculture and land cover using NASA data. Certificates of completion for live sessions.",
     "cost": "Free",
-    "tags": ["remote sensing", "certificate"]
+    "tags": [
+      "remote sensing",
+      "NASA",
+      "certificate"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Webinar series of 3 to 5 sessions, English and Spanish, recordings available"
+      },
+      {
+        "label": "Time",
+        "value": "4 to 10 hours per training"
+      },
+      {
+        "label": "Level",
+        "value": "Introductory and advanced tracks"
+      },
+      {
+        "label": "Certificate",
+        "value": "Certificate of completion for live attendees who finish the homework"
+      }
+    ],
+    "details": [
+      "ARSET trainings are built by NASA scientists around real applications: SAR for flood mapping, MODIS and VIIRS for fire and drought, Landsat and HLS for crops, and GPM for rainfall. Each session comes with step-by-step exercises in QGIS, SNAP or Earth Engine.",
+      "ARSET moved from appliedsciences.nasa.gov to NASA Earthdata in July 2025; old links still redirect. The SAR, NISAR and hydrology series are the most useful for Pakistan's flood and water work. Register for live sessions to earn the certificate; the recordings are free any time."
+    ],
+    "links": [
+      {
+        "label": "Upcoming and past trainings",
+        "url": "https://www.earthdata.nasa.gov/learn/trainings"
+      },
+      {
+        "label": "Fundamentals of Remote Sensing (self-paced)",
+        "url": "https://www.earthdata.nasa.gov/learn/trainings/fundamentals-remote-sensing"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 2
   },
   {
     "id": "esri-mooc",
     "category": "course",
-    "title": "Esri MOOCs",
+    "title": "Esri MOOCs: Cartography, Spatial Data Science, Imagery in Action and more",
     "provider": "Esri",
     "url": "https://www.esri.com/training/mooc/",
-    "description": "Six-week courses with a free temporary ArcGIS licence. Cartography, spatial data science, and imagery courses run several times a year.",
-    "cost": "Free",
-    "tags": ["ArcGIS", "certificate"]
+    "description": "Six-week free courses with a temporary ArcGIS Pro and ArcGIS Online licence included. A certificate at the end.",
+    "cost": "Free, includes ArcGIS licence",
+    "tags": [
+      "ArcGIS",
+      "certificate",
+      "cartography"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Six-week cohorts, two or three runs a year; about 2 to 3 hours a week"
+      },
+      {
+        "label": "Courses",
+        "value": "Cartography., Spatial Data Science: The New Frontier in Analytics, Imagery in Action, Going Places with Spatial Analysis, Do-It-Yourself Geo Apps"
+      },
+      {
+        "label": "Certificate",
+        "value": "Esri certificate of completion, recognised on LinkedIn"
+      },
+      {
+        "label": "Licence",
+        "value": "ArcGIS Pro and ArcGIS Online access for the course duration at no cost"
+      }
+    ],
+    "details": [
+      "Esri's MOOCs are the only free way to use the full ArcGIS Pro stack with Esri's own training data. 'Cartography.' is the one every GIS student should take; 'Imagery in Action' covers deep learning on imagery inside ArcGIS Pro.",
+      "Cohorts fill quickly. Register a free Esri public account first and watch the schedule page."
+    ],
+    "links": [
+      {
+        "label": "Esri Academy catalogue (many free web courses)",
+        "url": "https://www.esri.com/training/catalog/search/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 3
   },
   {
-    "id": "geocomputation-r",
+    "id": "eo-college-echoes-in-space",
     "category": "course",
-    "title": "Geocomputation with R",
-    "provider": "Lovelace, Nowosad, Muenchow",
-    "url": "https://r.geocompx.org/",
-    "description": "Open textbook for spatial analysis in R. Pairs well with the statistics modules.",
+    "title": "Echoes in Space: radar remote sensing (SAR)",
+    "provider": "EO College, ESA and DLR",
+    "url": "https://eo-college.org/courses/echoes-in-space/",
+    "description": "The reference free course on synthetic aperture radar: physics, Sentinel-1 processing in SNAP, interferometry and polarimetry. Essential for flood and subsidence mapping.",
     "cost": "Free",
-    "tags": ["R", "textbook"]
+    "tags": [
+      "SAR",
+      "Sentinel-1",
+      "remote sensing"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Video lectures, readings and SNAP exercises; self-paced"
+      },
+      {
+        "label": "Time",
+        "value": "About 25 hours"
+      },
+      {
+        "label": "Level",
+        "value": "Intermediate; some remote sensing background helps"
+      },
+      {
+        "label": "Certificate",
+        "value": "Certificate of completion on passing the quizzes"
+      }
+    ],
+    "details": [
+      "Radar is the data source that works through monsoon clouds, which is why Sentinel-1 drove most of Pakistan's 2022 flood mapping. This course, run by the German Aerospace Center and ESA on the EO College platform, is the most thorough free introduction.",
+      "EO College also hosts 'Hyperspectral: Beyond the Visible', 'Cubes and Clouds' on cloud-native EO, and 'Land in Focus' on land cover and biodiversity."
+    ],
+    "links": [
+      {
+        "label": "All EO College courses",
+        "url": "https://eo-college.org/courses/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 4
+  },
+  {
+    "id": "futurelearn-optical-eo",
+    "category": "course",
+    "title": "Earth Observation from Space: the Optical View",
+    "provider": "ESA on FutureLearn",
+    "url": "https://www.futurelearn.com/courses/optical-earth-observation",
+    "description": "ESA's five-week introduction to optical satellites, from radiation physics to land, ocean and atmosphere applications. Free to study during the run; certificate paid.",
+    "cost": "Free to study; certificate paid",
+    "tags": [
+      "remote sensing",
+      "ESA"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Five weeks, 3 hours a week, videos and discussions"
+      },
+      {
+        "label": "Level",
+        "value": "Beginner"
+      },
+      {
+        "label": "Certificate",
+        "value": "Paid upgrade (about £40 to £60) for the certificate and permanent access"
+      }
+    ],
+    "details": [
+      "A gentle conceptual course that explains what the sensors measure before any software. Good in first or second year alongside the physics of remote sensing course.",
+      "FutureLearn restricts free access to the course run plus two weeks, so finish it in the window or pay for the upgrade."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 5
+  },
+  {
+    "id": "gee-developer-tutorials",
+    "category": "course",
+    "title": "Google Earth Engine official tutorials and guides",
+    "provider": "Google",
+    "url": "https://developers.google.com/earth-engine/tutorials/tutorials",
+    "description": "Google's own tutorials, from the beginner's cookbook to machine learning with TensorFlow and the Python API. The reference you return to after any course.",
+    "cost": "Free",
+    "tags": [
+      "Earth Engine",
+      "Python",
+      "JavaScript"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Written tutorials with code; community tutorials included"
+      },
+      {
+        "label": "Level",
+        "value": "All levels"
+      },
+      {
+        "label": "Certificate",
+        "value": "None"
+      }
+    ],
+    "details": [
+      "Pair this with the Spatial Thoughts course. The 'Beginner's Cookbook', 'Introduction to the Python API' and the geemap tutorials cover everything needed for a thesis pipeline.",
+      "Earth Engine is free for non-commercial and research use; register a project under the non-commercial tier with your university email."
+    ],
+    "links": [
+      {
+        "label": "Cloud-Based Remote Sensing with Google Earth Engine (free book)",
+        "url": "https://www.eefabook.org/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 6
+  },
+  {
+    "id": "coursera-toronto-gis",
+    "category": "course",
+    "title": "GIS, Mapping, and Spatial Analysis Specialization",
+    "provider": "University of Toronto on Coursera",
+    "url": "https://www.coursera.org/specializations/gis-mapping-spatial-analysis",
+    "description": "Four courses with ArcGIS Pro covering GIS fundamentals, data, spatial analysis and a capstone. Audit free; certificate about US$49 a month.",
+    "cost": "Free to audit; certificate paid",
+    "tags": [
+      "ArcGIS",
+      "GIS",
+      "certificate"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Four courses, video and assignments, ArcGIS Pro trial included"
+      },
+      {
+        "label": "Time",
+        "value": "About 60 hours"
+      },
+      {
+        "label": "Level",
+        "value": "Beginner"
+      },
+      {
+        "label": "Certificate",
+        "value": "Coursera specialization certificate with the paid plan; financial aid available on each course"
+      }
+    ],
+    "details": [
+      "Don Boyes' specialization is the best-reviewed introductory GIS sequence on Coursera and uses ArcGIS Pro throughout, so it doubles as practice for the Esri certification.",
+      "Coursera financial aid is approved for most students from Pakistan who write a short justification; apply per course, about two weeks in advance."
+    ],
+    "links": [
+      {
+        "label": "Geographic Information Systems Specialization, UC Davis (QGIS)",
+        "url": "https://www.coursera.org/specializations/gis"
+      },
+      {
+        "label": "Spatial Data Science and Applications, Yonsei",
+        "url": "https://www.coursera.org/learn/spatial-data-science"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 7
+  },
+  {
+    "id": "penn-state-open-courses",
+    "category": "course",
+    "title": "Penn State open courseware in GIS and remote sensing",
+    "provider": "Penn State College of Earth and Mineral Sciences",
+    "url": "https://www.e-education.psu.edu/",
+    "description": "Full master's-level course material from Penn State's online GIS programme, free to read: GIS programming, remote sensing image analysis, lidar, cartography and spatial databases.",
+    "cost": "Free",
+    "tags": [
+      "GIS",
+      "remote sensing",
+      "Python"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Complete lesson texts, assignments and readings; no instructor"
+      },
+      {
+        "label": "Courses",
+        "value": "GEOG 485 GIS Programming and Software Development, GEOG 480 Exploring Imagery and Elevation Data, GEOG 883 Remote Sensing Image Analysis, GEOG 486 Cartography and Visualization, GEOG 868 Spatial Database Management"
+      },
+      {
+        "label": "Level",
+        "value": "Intermediate to advanced"
+      },
+      {
+        "label": "Certificate",
+        "value": "None; the paid Penn State certificate is listed under Certifications"
+      }
+    ],
+    "details": [
+      "These are the actual course pages Penn State uses for its ranked online master's, published openly. GEOG 485 is one of the best introductions to Python for ArcGIS; GEOG 883 is a full object-based image analysis course.",
+      "Use them to go deeper than the semester allows, or as structured reading for a thesis method."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 8
+  },
+  {
+    "id": "qgis-training-manual",
+    "category": "course",
+    "title": "QGIS Training Manual and A Gentle Introduction to GIS",
+    "provider": "QGIS project",
+    "url": "https://docs.qgis.org/latest/en/docs/training_manual/",
+    "description": "The official QGIS course, with sample data, from the interface to vector analysis, rasters, databases, forestry applications and plugins.",
+    "cost": "Free",
+    "tags": [
+      "QGIS",
+      "GIS"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Written modules with downloadable exercise data"
+      },
+      {
+        "label": "Time",
+        "value": "About 40 hours for the full manual"
+      },
+      {
+        "label": "Level",
+        "value": "Beginner to intermediate"
+      },
+      {
+        "label": "Certificate",
+        "value": "None; QGIS certified trainers (see Certifications) issue certificates for their own courses"
+      }
+    ],
+    "details": [
+      "The manual is maintained by the QGIS community and matches the current long-term release. It is the text behind most QGIS certified training worldwide.",
+      "Spatial Thoughts' 'Advanced QGIS' and 'Python Foundation for Spatial Analysis' are the natural next steps."
+    ],
+    "links": [
+      {
+        "label": "Advanced QGIS, Spatial Thoughts",
+        "url": "https://courses.spatialthoughts.com/advanced-qgis.html"
+      },
+      {
+        "label": "Python Foundation for Spatial Analysis",
+        "url": "https://courses.spatialthoughts.com/python-foundation.html"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 9
+  },
+  {
+    "id": "autogis-helsinki",
+    "category": "course",
+    "title": "Automating GIS Processes and Geo-Python",
+    "provider": "University of Helsinki",
+    "url": "https://autogis-site.readthedocs.io/",
+    "description": "Helsinki's open master's course on Python for GIS: GeoPandas, Shapely, rasterio, OSMnx and network analysis. Preceded by Geo-Python for programming basics.",
+    "cost": "Free",
+    "tags": [
+      "Python",
+      "GIS",
+      "open source"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Lessons with Jupyter notebooks and weekly exercises"
+      },
+      {
+        "label": "Time",
+        "value": "About 50 hours across both courses"
+      },
+      {
+        "label": "Level",
+        "value": "Beginner (Geo-Python) to intermediate (AutoGIS)"
+      },
+      {
+        "label": "Certificate",
+        "value": "None"
+      }
+    ],
+    "details": [
+      "This is the course most open-source geospatial developers recommend for learning the Python stack properly. Every lesson runs in a browser notebook, so nothing needs to be installed to start.",
+      "After AutoGIS, the free books 'Geographic Data Science with Python' and 'Geocomputation with R' take you into modelling."
+    ],
+    "links": [
+      {
+        "label": "Geo-Python",
+        "url": "https://geo-python-site.readthedocs.io/"
+      },
+      {
+        "label": "Geographic Data Science with Python (book)",
+        "url": "https://geographicdata.science/book/"
+      },
+      {
+        "label": "Geocomputation with R (book)",
+        "url": "https://r.geocompx.org/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 10
+  },
+  {
+    "id": "earth-lab-earthdatascience",
+    "category": "course",
+    "title": "Earth Data Science courses and textbooks",
+    "provider": "Earth Lab, University of Colorado Boulder",
+    "url": "https://www.earthdatascience.org/",
+    "description": "Free textbooks and courses on Earth data analytics in Python: Landsat and NAIP processing, lidar, time series, with the data provided.",
+    "cost": "Free",
+    "tags": [
+      "Python",
+      "remote sensing",
+      "lidar"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Online textbook chapters with code and datasets"
+      },
+      {
+        "label": "Level",
+        "value": "Intermediate"
+      },
+      {
+        "label": "Certificate",
+        "value": "None (CU Boulder's paid professional certificate uses the same material)"
+      }
+    ],
+    "details": [
+      "Earth Lab's material is the base for CU Boulder's Earth Data Analytics professional certificate, and all of it is open. The lidar and raster chapters are particularly strong.",
+      "Good companion to AutoGIS once you are comfortable with Python."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 11
+  },
+  {
+    "id": "snap-tutorials",
+    "category": "course",
+    "title": "ESA SNAP tutorials",
+    "provider": "ESA Science Toolbox Exploitation Platform",
+    "url": "https://step.esa.int/main/doc/tutorials/",
+    "description": "Official step-by-step tutorials for processing Sentinel-1, Sentinel-2 and Sentinel-3 data in SNAP, including interferometry and ship detection.",
+    "cost": "Free",
+    "tags": [
+      "SNAP",
+      "Sentinel",
+      "SAR"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "PDF and video tutorials with sample products"
+      },
+      {
+        "label": "Level",
+        "value": "Beginner to advanced"
+      },
+      {
+        "label": "Certificate",
+        "value": "None"
+      }
+    ],
+    "details": [
+      "SNAP is the free software ESA built for Sentinel data, and these tutorials are written by the toolbox developers. Start with 'Sentinel-1 flood mapping' and 'Sentinel-2 land cover classification'.",
+      "The RUS Copernicus training archive on the same site has recorded webinars with full datasets."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 12
+  },
+  {
+    "id": "un-spider-recommended-practices",
+    "category": "course",
+    "title": "UN-SPIDER recommended practices for disaster mapping",
+    "provider": "UN Office for Outer Space Affairs",
+    "url": "https://www.un-spider.org/advisory-support/recommended-practices",
+    "description": "Step-by-step workflows for flood, drought, landslide and burn mapping with free data and software, written for national disaster agencies.",
+    "cost": "Free",
+    "tags": [
+      "disaster",
+      "SAR",
+      "QGIS",
+      "Earth Engine"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Written workflows with sample data, QGIS, SNAP and Earth Engine"
+      },
+      {
+        "label": "Level",
+        "value": "Intermediate"
+      },
+      {
+        "label": "Certificate",
+        "value": "None"
+      }
+    ],
+    "details": [
+      "These are the workflows NDMA, PDMAs and UN agencies in Pakistan actually use for rapid mapping. The Sentinel-1 flood mapping practice in Earth Engine and the drought monitoring practice are the two to master before applying for a disaster-management GIS job.",
+      "Each practice lists the data, the steps and the limitations, which makes them good templates for methodology chapters."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 13
+  },
+  {
+    "id": "learnosm",
+    "category": "course",
+    "title": "LearnOSM: OpenStreetMap mapping and data",
+    "provider": "Humanitarian OpenStreetMap Team",
+    "url": "https://learnosm.org/",
+    "description": "How to map in OpenStreetMap, use JOSM and field tools, and pull OSM data into QGIS. Relevant for humanitarian GIS jobs and base mapping in Pakistan.",
+    "cost": "Free",
+    "tags": [
+      "OpenStreetMap",
+      "humanitarian"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Written guides in several languages"
+      },
+      {
+        "label": "Level",
+        "value": "Beginner"
+      },
+      {
+        "label": "Certificate",
+        "value": "None; your OSM contribution history is the credential"
+      }
+    ],
+    "details": [
+      "iMMAP, REACH and UN agencies look for OSM experience in GIS officer postings. Mapping your own district and validating in the HOT Tasking Manager is free evidence of skill.",
+      "The guides also cover the Overpass API and QGIS QuickOSM plugin for extracting roads, buildings and amenities."
+    ],
+    "links": [
+      {
+        "label": "HOT Tasking Manager",
+        "url": "https://tasks.hotosm.org/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 14
+  },
+  {
+    "id": "spatial-thoughts-paid",
+    "category": "course",
+    "title": "Spatial Thoughts instructor-led classes (paid)",
+    "provider": "Spatial Thoughts",
+    "url": "https://spatialthoughts.com/courses/",
+    "description": "Live online cohorts for Earth Engine, Python, QGIS and mapping with graded assignments and a certificate. Fees in Indian rupees; student discounts offered.",
+    "cost": "Paid, roughly US$100 to 200 per course",
+    "tags": [
+      "Earth Engine",
+      "Python",
+      "certificate",
+      "paid"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Four to eight weeks, live sessions with recordings, assignments reviewed by instructors"
+      },
+      {
+        "label": "Certificate",
+        "value": "Certificate of completion on passing the assignments"
+      },
+      {
+        "label": "Courses",
+        "value": "End-to-End Google Earth Engine, Python Foundation for Spatial Analysis, Mapping and Data Visualization with Python, Advanced QGIS"
+      }
+    ],
+    "details": [
+      "The same free material taught live, with feedback on your code. Worth it if you want the certificate and an instructor looking at your work; otherwise the free versions are complete.",
+      "Spatial Thoughts offers discounted or free seats to students and to people from low-income countries; ask before paying."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 15
+  },
+  {
+    "id": "rspatial",
+    "category": "course",
+    "title": "Spatial data science with R (rspatial.org)",
+    "provider": "Robert Hijmans, UC Davis",
+    "url": "https://rspatial.org/",
+    "description": "The terra and raster package author's own tutorials: spatial data in R, remote sensing, species distribution modelling and spatial regression.",
+    "cost": "Free",
+    "tags": [
+      "R",
+      "remote sensing",
+      "statistics"
+    ],
+    "facts": [
+      {
+        "label": "Format",
+        "value": "Written tutorials with R code and data"
+      },
+      {
+        "label": "Level",
+        "value": "Intermediate"
+      },
+      {
+        "label": "Certificate",
+        "value": "None"
+      }
+    ],
+    "details": [
+      "If your thesis statistics live in R, this is where to learn to keep the rasters there too. The remote sensing chapter covers Landsat classification and NDVI time series in terra.",
+      "Pair with 'Geocomputation with R' for sf and tmap."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 16
   },
   {
     "id": "gisp",
     "category": "certification",
-    "title": "GISP, Certified GIS Professional",
-    "provider": "GIS Certification Institute",
+    "title": "GISP: Certified GIS Professional",
+    "provider": "GIS Certification Institute (GISCI)",
     "url": "https://www.gisci.org/",
-    "description": "Portfolio plus exam based certification recognised by international employers. Worth planning for after a few years of work.",
-    "cost": "Paid",
-    "tags": ["professional"]
+    "description": "The main vendor-neutral GIS credential, held by more than 10,000 professionals. Needs an exam plus a portfolio of education, four years of experience and contributions to the profession.",
+    "cost": "US$250 exam plus US$250 portfolio review",
+    "tags": [
+      "GIS",
+      "professional",
+      "vendor-neutral"
+    ],
+    "facts": [
+      {
+        "label": "Requirements",
+        "value": "Pass the GISCI Geospatial Core Technical Knowledge Exam, then a portfolio: education points, at least four years of professional experience, and contributions (presentations, volunteering, publications)"
+      },
+      {
+        "label": "Exam",
+        "value": "150 multiple-choice questions, four hours, at Pearson VUE centres including Islamabad, Lahore and Karachi"
+      },
+      {
+        "label": "Cost",
+        "value": "Exam US$250, portfolio review US$250, renewal every three years US$95 plus continuing-education points"
+      },
+      {
+        "label": "Recognition",
+        "value": "Required or preferred in many US, Canadian and Gulf GIS job postings; recognised by UN agencies"
+      },
+      {
+        "label": "Timing",
+        "value": "You can sit the exam as a student and submit the portfolio after you reach four years of experience; the exam result is valid for six years"
+      }
+    ],
+    "details": [
+      "The GISP exam tests the Geospatial Technology Competency Model: conceptual foundations, cartography, data, analysis, GIS design and professional practice, with no software vendor bias. Sitting it in final year, while the coursework is fresh, is a sensible plan.",
+      "Pakistan's job market does not ask for GISP yet, but Gulf consultancies and international organisations do, and it carries weight when competing for remote roles."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 1
   },
   {
-    "id": "esri-technical-cert",
+    "id": "esri-technical-certification",
     "category": "certification",
-    "title": "Esri Technical Certification",
+    "title": "Esri Technical Certification (ArcGIS Pro, Enterprise, Developer)",
     "provider": "Esri",
     "url": "https://www.esri.com/training/certification/",
-    "description": "Role-based exams for ArcGIS Pro and ArcGIS Enterprise. Useful for Esri partner employers in the Gulf.",
-    "cost": "Paid",
-    "tags": ["ArcGIS", "professional"]
+    "description": "Esri's own exams at Foundation, Associate and Professional levels for ArcGIS Pro, ArcGIS Enterprise, ArcGIS Online and developer tracks. The credential employers in Pakistan and the Gulf recognise most.",
+    "cost": "US$250 per exam",
+    "tags": [
+      "ArcGIS",
+      "Esri",
+      "vendor"
+    ],
+    "facts": [
+      {
+        "label": "Exams",
+        "value": "ArcGIS Pro Foundation, Associate and Professional; ArcGIS Enterprise Administration Associate and Professional; ArcGIS Online Administration; ArcGIS Developer Associate; Image Analyst and Utility Network specialties"
+      },
+      {
+        "label": "Format",
+        "value": "About 90 multiple-choice questions, two hours, online proctored or Pearson VUE"
+      },
+      {
+        "label": "Cost",
+        "value": "US$250 per exam; Esri occasionally discounts for students and at the User Conference"
+      },
+      {
+        "label": "Validity",
+        "value": "Tied to a product version; Esri lists which versions are current"
+      },
+      {
+        "label": "Preparation",
+        "value": "Free Esri Academy web courses and the MOOCs cover most of the Associate syllabus"
+      }
+    ],
+    "details": [
+      "ArcGIS Pro Associate is the sensible first target: it certifies day-to-day editing, analysis and map production. The Professional exam adds geoprocessing design, data management and automation with ModelBuilder and Python.",
+      "Pakistani employers using ArcGIS (SUPARCO, Urban Unit, NESPAK, oil and gas, utilities) and Gulf consultancies list Esri certification as a plus. Pay in US dollars; an international card is needed."
+    ],
+    "links": [
+      {
+        "label": "Esri Academy",
+        "url": "https://www.esri.com/training/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 2
+  },
+  {
+    "id": "asprs-certification",
+    "category": "certification",
+    "title": "ASPRS Certified Photogrammetrist, Mapping Scientist and Technologist",
+    "provider": "American Society for Photogrammetry and Remote Sensing",
+    "url": "https://www.asprs.org/certification",
+    "description": "The oldest geospatial certification (since 1975) in photogrammetry, remote sensing, GIS/LIS, lidar and UAS. Technologist level is open with three years' experience; full certification needs six.",
+    "cost": "About US$250 application plus exam",
+    "tags": [
+      "photogrammetry",
+      "remote sensing",
+      "lidar",
+      "UAS"
+    ],
+    "facts": [
+      {
+        "label": "Tracks",
+        "value": "Certified Photogrammetrist; Certified Mapping Scientist in Remote Sensing, GIS/LIS, Lidar or UAS; Certified Technologist in each (entry level)"
+      },
+      {
+        "label": "Requirements",
+        "value": "Technologist: three years of experience; full certification: six years with references; written exam in all cases"
+      },
+      {
+        "label": "Cost",
+        "value": "Application fee around US$250 (member) and exam fee; recertification every five years"
+      },
+      {
+        "label": "Recognition",
+        "value": "Standard in US and Canadian survey and mapping contracts; valued by drone and lidar companies"
+      }
+    ],
+    "details": [
+      "ASPRS certification is for people who produce measured products: orthophotos, DEMs, lidar classifications, drone surveys. If you are heading into photogrammetry or UAS mapping, the Technologist exam is attainable within three years of graduation.",
+      "Exams can be proctored remotely for international candidates; contact ASPRS certification staff to arrange it."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 3
+  },
+  {
+    "id": "usgif-cgp",
+    "category": "certification",
+    "title": "USGIF Certified GEOINT Professional (CGP)",
+    "provider": "United States Geospatial Intelligence Foundation",
+    "url": "https://usgif.org/certification/",
+    "description": "Three exams, in GIS and analysis tools, remote sensing and imagery analysis, and geospatial data management, for geospatial intelligence analysts. Also a general CGP-G exam.",
+    "cost": "US$225 to 300 per exam",
+    "tags": [
+      "GEOINT",
+      "remote sensing",
+      "analysis"
+    ],
+    "facts": [
+      {
+        "label": "Exams",
+        "value": "CGP-G (general), CGP-GA (GIS and analysis tools), CGP-RS (remote sensing and imagery analysis), CGP-GD (geospatial data management)"
+      },
+      {
+        "label": "Format",
+        "value": "Computer-based, about 100 questions; no experience requirement for sitting, a degree in a geospatial field recommended"
+      },
+      {
+        "label": "Cost",
+        "value": "Roughly US$225 to 300 per exam, discounts for USGIF members and students"
+      },
+      {
+        "label": "Recognition",
+        "value": "Mainly US defence and intelligence contractors; useful evidence of imagery-analysis skill for international applications"
+      }
+    ],
+    "details": [
+      "The CGP-RS exam is the most relevant to a remote sensing graduate: sensor types, image interpretation, change detection, SAR and multispectral analysis. It is one of the few certifications that test remote sensing directly rather than GIS software.",
+      "Some exams require a US citizenship check for the GEOINT-specific tracks; check eligibility for international candidates before paying."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 4
+  },
+  {
+    "id": "unigis",
+    "category": "certification",
+    "title": "UNIGIS professional and MSc in Geographical Information Science (distance)",
+    "provider": "UNIGIS International, University of Salzburg",
+    "url": "https://unigis.net/",
+    "description": "Part-time distance diploma and MSc from Salzburg's Z_GIS and partner universities, studied from Pakistan while working. Paid, with occasional partial waivers.",
+    "cost": "UNIGIS professional about €5,000; MSc about €10,000 to 12,000",
+    "tags": [
+      "distance",
+      "MSc",
+      "GIS",
+      "paid"
+    ],
+    "facts": [
+      {
+        "label": "Levels",
+        "value": "UNIGIS professional (postgraduate diploma, 18 months, 60 ECTS) and MSc GIS (two to three years, 120 ECTS), both part-time online"
+      },
+      {
+        "label": "Institution",
+        "value": "University of Salzburg (Z_GIS), with the Erasmus Mundus Copernicus master's run by the same department; UNIGIS partners in Latin America, Europe and Asia"
+      },
+      {
+        "label": "Cost",
+        "value": "Fees paid per module; Salzburg's professional programme is roughly €5,000, the MSc roughly €10,000 to 12,000; small scholarships announced on the site"
+      },
+      {
+        "label": "Recognition",
+        "value": "A full Austrian university degree; accepted for PhD admission across Europe"
+      }
+    ],
+    "details": [
+      "UNIGIS has been running since 1990 and is the most established way to earn a European GIS master's without leaving your job. Modules cover data modelling, spatial analysis, remote sensing, geovisualisation, web GIS and a thesis.",
+      "The cost is high for Pakistan but far below moving abroad. Employers such as NGOs sometimes co-fund it."
+    ],
+    "links": [
+      {
+        "label": "UNIGIS Salzburg programmes",
+        "url": "https://unigis.at/en/"
+      }
+    ],
+    "updated": "October 2026",
+    "order": 5
+  },
+  {
+    "id": "penn-state-gis-certificate",
+    "category": "certification",
+    "title": "Penn State online Postbaccalaureate Certificate in GIS",
+    "provider": "Penn State World Campus",
+    "url": "https://www.worldcampus.psu.edu/degrees-and-certificates/penn-state-online-gis-geographic-information-systems-postbaccalaureate-certificate",
+    "description": "Four graduate courses (12 credits) from the top-ranked US online GIS programme, counting towards the Penn State MGIS. Paid, around US$12,000.",
+    "cost": "About US$1,000 per credit, 12 credits",
+    "tags": [
+      "distance",
+      "GIS",
+      "paid",
+      "USA"
+    ],
+    "facts": [
+      {
+        "label": "Content",
+        "value": "GIS fundamentals, cartography and visualization, GIS programming, plus one elective such as remote sensing, lidar or spatial databases"
+      },
+      {
+        "label": "Time",
+        "value": "About 12 to 18 months part-time"
+      },
+      {
+        "label": "Cost",
+        "value": "Roughly US$1,000 per credit for 12 credits; no scholarships for international students"
+      },
+      {
+        "label": "Recognition",
+        "value": "Penn State's online GIS programme is consistently ranked first among US online master's; credits transfer to the MGIS"
+      }
+    ],
+    "details": [
+      "The same lessons are published free in the open courseware listed under Courses; the certificate pays for grading, instructors and the Penn State transcript. It makes sense for professionals whose employer pays or who plan to continue into the MGIS.",
+      "Admission needs a bachelor's with a 3.0 GPA and TOEFL or IELTS."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 6
+  },
+  {
+    "id": "qgis-certification",
+    "category": "certification",
+    "title": "QGIS certified training certificates",
+    "provider": "QGIS.org through certified organisations",
+    "url": "https://www.qgis.org/community/certification/",
+    "description": "QGIS.org endorses training organisations whose courses issue official QGIS certificates, with a small fee that funds the project. Several trainers run online cohorts open to Pakistan.",
+    "cost": "Course fee set by the trainer, typically US$100 to 500; €20 per certificate to QGIS.org",
+    "tags": [
+      "QGIS",
+      "open source",
+      "training"
+    ],
+    "facts": [
+      {
+        "label": "How it works",
+        "value": "Complete a course at a QGIS certified organisation; the certificate is issued through QGIS.org's registry and is verifiable online"
+      },
+      {
+        "label": "Providers",
+        "value": "Kartoza (South Africa), Lutra Consulting (UK), OPENGIS.ch (Switzerland), Geocodis and others run remote courses"
+      },
+      {
+        "label": "Cost",
+        "value": "Set by each provider; the certificate fee is a donation to QGIS development"
+      },
+      {
+        "label": "Recognition",
+        "value": "The only official credential tied to QGIS; useful for NGO and UN postings that run on open-source software"
+      }
+    ],
+    "details": [
+      "There is no QGIS exam. The certificate attests that you took a course from an organisation vetted by QGIS.org. Choose a provider whose course syllabus matches the job you want: Kartoza's courses for general GIS, Lutra for QGIS and Mergin Maps field work.",
+      "Combine it with public work: plugins, contributions to the QGIS documentation or translated training material are visible evidence."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 7
+  },
+  {
+    "id": "rgs-chartered-geographer",
+    "category": "certification",
+    "title": "Chartered Geographer (GIS), Royal Geographical Society",
+    "provider": "Royal Geographical Society with IBG",
+    "url": "https://www.rgs.org/professionals/chartered-geographer",
+    "description": "The UK's professional charter for geographers, with a GIS specialism. Requires a geography-related degree and six years of experience (less with a master's). Recognised across the Commonwealth.",
+    "cost": "About £100 application; annual RGS fellowship fee",
+    "tags": [
+      "professional",
+      "UK",
+      "GIS"
+    ],
+    "facts": [
+      {
+        "label": "Requirements",
+        "value": "A relevant degree plus six years of professional experience (reduced for postgraduate degrees), a professional report and a referee; continuing professional development each year"
+      },
+      {
+        "label": "Cost",
+        "value": "Application around £100 plus Fellowship of the RGS (about £130 a year)"
+      },
+      {
+        "label": "Recognition",
+        "value": "Chartered status protected by Royal Charter; used by UK and Commonwealth consultancies and government geospatial posts"
+      },
+      {
+        "label": "Suits",
+        "value": "Alumni working in the UK, Gulf or for British consultancies, or planning a Chevening route"
+      }
+    ],
+    "details": [
+      "CGeog (GIS) is a career-stage credential rather than an exam: it proves sustained professional practice and ethics. Start logging continuing professional development early if you want it later.",
+      "Membership of the RGS also gives access to the journal archive and the Geographical Information Science Research UK community."
+    ],
+    "links": [],
+    "updated": "October 2026",
+    "order": 8
   },
   {
     "id": "sample-job-gis-analyst",
     "category": "job",
-    "title": "GIS Analyst, urban planning consultancy",
-    "provider": "Sample listing, replace with real posts",
+    "title": "GIS Analyst (sample listing)",
+    "provider": "Replace with a real employer",
     "url": "https://www.rozee.pk/",
-    "description": "Fresh graduates with QGIS or ArcGIS Pro and basic Python. Islamabad based. Shared by an alumnus.",
-    "deadline": "2026-11-30",
+    "description": "Sample entry. Cabinet members post real openings through the form; each listing stays for sixty days.",
+    "deadline": "Rolling",
     "location": "Islamabad",
-    "tags": ["fresh graduate", "full time"]
+    "tags": [
+      "GIS",
+      "full-time"
+    ],
+    "order": 1
   },
   {
     "id": "sample-internship-rs",
     "category": "job",
-    "title": "Remote sensing internship, summer 2027",
-    "provider": "Sample listing, replace with real posts",
+    "title": "Remote sensing intern (sample listing)",
+    "provider": "Replace with a real employer",
     "url": "https://www.linkedin.com/jobs/",
-    "description": "Eight-week paid internship on crop monitoring with Sentinel-2. Earth Engine experience preferred.",
-    "deadline": "2027-03-15",
-    "location": "Lahore",
-    "tags": ["internship"]
+    "description": "Sample entry. Summer internship for third-year students; replace with a live posting.",
+    "deadline": "Rolling",
+    "location": "Remote",
+    "tags": [
+      "remote sensing",
+      "internship"
+    ],
+    "order": 2
   }
 ]

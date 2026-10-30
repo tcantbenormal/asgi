@@ -9,13 +9,13 @@ alter table public.profiles add constraint profiles_username_format check (
     and username not in ('alumni','map','stories','roadmaps','software','datasets','opportunities','projects','society',
                          'events','contact','privacy','legal','search','mentorship','download','resources','admin','api',
                          'img','models','pagefind','join','login','settings','about','blog','forum','institutions','u',
-                         'account','profile','signin','signout','auth','members','student','students','sw','submit')
+                         'account','profile','signin','signout','auth','members','student','students','sw','submit','industry')
   )
 );
 
 create table if not exists public.submissions (
   id          uuid primary key default gen_random_uuid(),
-  kind        text not null check (kind in ('tool','dataset','opportunity','project','other')),
+  kind        text not null check (kind in ('tool','dataset','opportunity','project','employer','other')),
   title       text not null check (length(title) between 3 and 160),
   url         text check (url is null or url ~ '^https?://'),
   body        text not null check (length(body) between 10 and 5000),

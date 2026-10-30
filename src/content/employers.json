@@ -1,0 +1,1386 @@
+[
+  {
+    "id": "suparco",
+    "name": "SUPARCO",
+    "aliases": [
+      "Pakistan Space and Upper Atmosphere Research Commission",
+      "Space & Upper Atmosphere Research Commission",
+      "SPARCENT"
+    ],
+    "sector": "Government",
+    "kind": "National space agency",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad",
+      "Karachi",
+      "Lahore",
+      "Peshawar",
+      "Quetta"
+    ],
+    "website": "https://suparco.gov.pk/",
+    "roles": [
+      "Remote sensing scientist",
+      "GIS analyst",
+      "Image processing engineer",
+      "Space applications engineer",
+      "Research assistant (contract)"
+    ],
+    "pay": "Entry grade (SPS-7, equivalent to BPS-17) roughly PKR 100,000 to 160,000 a month with allowances; contract research staff lower. Indicative, from recent advertisements.",
+    "hiring": "Posts advertised on suparco.gov.pk and in national newspapers; written test then interview. Internships for final-year students through the university.",
+    "about": "Pakistan's space agency operates the PRSS-1 and PakTES satellites and runs the country's largest remote sensing applications group: crop estimation, flood and glacier monitoring, land cover and urban mapping. The largest single employer of Arid geoinformatics graduates.",
+    "tags": [
+      "remote sensing",
+      "satellites",
+      "public sector"
+    ],
+    "logo": "/img/employers/suparco.png",
+    "order": 1
+  },
+  {
+    "id": "survey-of-pakistan",
+    "name": "Survey of Pakistan",
+    "aliases": [
+      "SoP"
+    ],
+    "sector": "Government",
+    "kind": "National mapping agency",
+    "hq": "Rawalpindi",
+    "locations": [
+      "Rawalpindi",
+      "Karachi",
+      "Lahore",
+      "Peshawar",
+      "Quetta"
+    ],
+    "website": "https://surveyofpakistan.gov.pk/",
+    "roles": [
+      "Cartographer",
+      "GIS officer",
+      "Surveyor",
+      "Photogrammetrist",
+      "Geodesist"
+    ],
+    "pay": "BPS-16 and BPS-17 posts, roughly PKR 80,000 to 130,000 a month gross with allowances. Indicative.",
+    "hiring": "Through the Federal Public Service Commission for gazetted posts and departmental advertisements for others; defence-administered.",
+    "about": "The official mapping authority, responsible for topographic sheets, geodetic control, the national spatial data infrastructure and boundary demarcation. Technical work spans photogrammetry, digital cartography and GNSS.",
+    "tags": [
+      "cartography",
+      "geodesy",
+      "public sector"
+    ],
+    "logo": "/img/employers/survey-of-pakistan.png",
+    "order": 2
+  },
+  {
+    "id": "pbs",
+    "name": "Pakistan Bureau of Statistics",
+    "aliases": [
+      "PBS",
+      "Bureau of Statistics"
+    ],
+    "sector": "Government",
+    "kind": "National statistics office",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad",
+      "provincial and district offices"
+    ],
+    "website": "https://www.pbs.gov.pk/",
+    "roles": [
+      "GIS analyst",
+      "Census mapping officer",
+      "Data analyst"
+    ],
+    "pay": "BPS-16 to BPS-17 and project-based contracts, roughly PKR 70,000 to 150,000 a month. Indicative.",
+    "hiring": "Project posts advertised on the PBS site around census and survey cycles; permanent posts through FPSC.",
+    "about": "Ran the 2023 digital census with a GIS-based enumeration block frame and now maintains geocoded census and survey data. Hires mapping staff heavily before each census and large survey.",
+    "tags": [
+      "census",
+      "data",
+      "public sector"
+    ],
+    "logo": "/img/employers/pbs.png",
+    "order": 3
+  },
+  {
+    "id": "ndma",
+    "name": "NDMA and provincial disaster management authorities",
+    "aliases": [
+      "National Disaster Management Authority",
+      "PDMA",
+      "PDMA Punjab",
+      "PDMA KP",
+      "PDMA Sindh",
+      "PDMA Balochistan",
+      "GBDMA",
+      "SDMA"
+    ],
+    "sector": "Government",
+    "kind": "Disaster management",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad",
+      "Lahore",
+      "Peshawar",
+      "Karachi",
+      "Quetta",
+      "Gilgit",
+      "Muzaffarabad"
+    ],
+    "website": "https://www.ndma.gov.pk/",
+    "roles": [
+      "GIS specialist",
+      "Risk and hazard mapping officer",
+      "Early warning analyst",
+      "Information management officer"
+    ],
+    "pay": "Project pay scales (PPS) and donor-funded contracts, roughly PKR 150,000 to 350,000 a month for specialists. Indicative.",
+    "hiring": "Contract posts advertised on the NDMA and PDMA sites and on Rozee; often tied to World Bank, ADB or UN-funded projects.",
+    "about": "The national and provincial authorities that commission flood, landslide, drought and earthquake hazard maps and run the National Emergencies Operation Centre. Demand for GIS staff peaks after every disaster season.",
+    "tags": [
+      "disaster",
+      "hazard mapping",
+      "public sector"
+    ],
+    "logo": "/img/employers/ndma.png",
+    "order": 4
+  },
+  {
+    "id": "urban-unit",
+    "name": "The Urban Unit",
+    "aliases": [
+      "Urban Unit",
+      "Urban Sector Planning and Management Services Unit",
+      "USPMSU"
+    ],
+    "sector": "Government",
+    "kind": "Punjab government planning company",
+    "hq": "Lahore",
+    "locations": [
+      "Lahore",
+      "project offices across Punjab"
+    ],
+    "website": "https://www.urbanunit.gov.pk/",
+    "careers": "https://www.urbanunit.gov.pk/careers",
+    "roles": [
+      "GIS analyst",
+      "Remote sensing analyst",
+      "Spatial data developer",
+      "Urban planner",
+      "Surveyor"
+    ],
+    "pay": "Roughly PKR 60,000 to 90,000 a month for fresh graduates, PKR 100,000 to 200,000 for analysts with three to five years. Indicative, from recent postings and alumni.",
+    "hiring": "Vacancies on the Urban Unit careers page and Rozee; test and interview. One of the few employers that hires GIS graduates in batches.",
+    "about": "A Punjab government-owned company that delivers GIS for property tax, land use, master plans, urban immovable property surveys and agriculture. It runs one of the largest GIS teams in the country and has absorbed many Arid graduates.",
+    "tags": [
+      "urban planning",
+      "GIS",
+      "Punjab"
+    ],
+    "logo": "/img/employers/urban-unit.png",
+    "order": 5
+  },
+  {
+    "id": "pitb",
+    "name": "Punjab Information Technology Board",
+    "aliases": [
+      "PITB"
+    ],
+    "sector": "Government",
+    "kind": "Provincial IT agency",
+    "hq": "Lahore",
+    "locations": [
+      "Lahore"
+    ],
+    "website": "https://pitb.gov.pk/",
+    "roles": [
+      "GIS developer",
+      "Spatial database administrator",
+      "Web GIS engineer"
+    ],
+    "pay": "Roughly PKR 100,000 to 250,000 a month for developers depending on stack. Indicative.",
+    "hiring": "Posted on the PITB jobs page; technical test.",
+    "about": "Builds Punjab's e-government systems, many of which carry a map: land records, health facility mapping, police and complaint dashboards. GIS roles lean towards PostGIS, web mapping and Python.",
+    "tags": [
+      "web GIS",
+      "development",
+      "Punjab"
+    ],
+    "order": 6
+  },
+  {
+    "id": "pmd",
+    "name": "Pakistan Meteorological Department",
+    "aliases": [
+      "PMD",
+      "Met Office"
+    ],
+    "sector": "Government",
+    "kind": "National weather and climate service",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad",
+      "Karachi",
+      "Lahore",
+      "regional centres"
+    ],
+    "website": "https://www.pmd.gov.pk/",
+    "roles": [
+      "Meteorologist",
+      "Remote sensing officer",
+      "Climate data analyst",
+      "Flood forecasting officer"
+    ],
+    "pay": "BPS-17 entry, roughly PKR 90,000 to 130,000 a month gross. Indicative.",
+    "hiring": "Through FPSC for meteorologist posts; project contracts for the Flood Forecasting Division and climate projects.",
+    "about": "Runs weather forecasting, the Flood Forecasting Division in Lahore, the drought monitoring centre and satellite reception for Pakistan. Uses satellite rainfall, snow cover and cloud products daily.",
+    "tags": [
+      "climate",
+      "hydrology",
+      "public sector"
+    ],
+    "order": 7
+  },
+  {
+    "id": "pcrwr",
+    "name": "Pakistan Council of Research in Water Resources",
+    "aliases": [
+      "PCRWR"
+    ],
+    "sector": "Government",
+    "kind": "Water research council",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad",
+      "regional offices"
+    ],
+    "website": "https://pcrwr.gov.pk/",
+    "roles": [
+      "Research officer (GIS and remote sensing)",
+      "Hydrologist",
+      "Groundwater modeller"
+    ],
+    "pay": "BPS-17 research posts and project contracts, roughly PKR 90,000 to 150,000 a month. Indicative.",
+    "hiring": "Advertised on the PCRWR site; test and interview.",
+    "about": "The federal water research body: groundwater mapping, water quality, irrigation efficiency and drought. GIS and remote sensing staff map aquifers, canal command areas and evapotranspiration.",
+    "tags": [
+      "water",
+      "research",
+      "public sector"
+    ],
+    "logo": "/img/employers/pcrwr.png",
+    "order": 8
+  },
+  {
+    "id": "parc",
+    "name": "Pakistan Agricultural Research Council",
+    "aliases": [
+      "PARC",
+      "NARC",
+      "National Agricultural Research Centre"
+    ],
+    "sector": "Government",
+    "kind": "Agricultural research council",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad (NARC)",
+      "research stations nationwide"
+    ],
+    "website": "https://www.parc.gov.pk/",
+    "roles": [
+      "Scientific officer (remote sensing and GIS)",
+      "Agro-meteorologist",
+      "Research associate"
+    ],
+    "pay": "BPS-17 scientific officer, roughly PKR 90,000 to 140,000 a month gross. Indicative.",
+    "hiring": "Advertised on the PARC site and newspapers; test and interview.",
+    "about": "PARC and its National Agricultural Research Centre use satellite data for crop monitoring, drought, land degradation and climate-smart agriculture, through institutes such as the Climate, Energy and Water Research Institute.",
+    "tags": [
+      "agriculture",
+      "research",
+      "public sector"
+    ],
+    "logo": "/img/employers/parc.png",
+    "order": 9
+  },
+  {
+    "id": "crop-reporting-service-punjab",
+    "name": "Crop Reporting Service, Punjab",
+    "aliases": [
+      "CRS Punjab",
+      "Crop Reporting Service"
+    ],
+    "sector": "Government",
+    "kind": "Provincial agriculture statistics",
+    "hq": "Lahore",
+    "locations": [
+      "Lahore",
+      "district offices across Punjab"
+    ],
+    "website": "https://agripunjab.gov.pk/",
+    "roles": [
+      "Agriculture officer (remote sensing)",
+      "GIS analyst",
+      "Statistical officer"
+    ],
+    "pay": "BPS-17 posts, roughly PKR 90,000 to 130,000 a month gross; project staff on contract. Indicative.",
+    "hiring": "Through the Punjab Public Service Commission and departmental project advertisements.",
+    "about": "Produces Punjab's crop area and yield estimates and has moved to satellite-based acreage estimation with SUPARCO and international partners. Comparable units exist in Sindh and KP. Listed under the Agriculture Department Punjab site; the CRS site itself is often offline.",
+    "tags": [
+      "agriculture",
+      "remote sensing",
+      "Punjab"
+    ],
+    "logo": "/img/employers/crop-reporting-service-punjab.png",
+    "order": 10
+  },
+  {
+    "id": "plra",
+    "name": "Punjab Land Records Authority",
+    "aliases": [
+      "PLRA",
+      "Board of Revenue Punjab",
+      "Board of Revenue"
+    ],
+    "sector": "Government",
+    "kind": "Land administration",
+    "hq": "Lahore",
+    "locations": [
+      "Lahore",
+      "Arazi Record Centres in every tehsil"
+    ],
+    "website": "https://www.punjab-zameen.gov.pk/",
+    "roles": [
+      "GIS analyst",
+      "Cadastral mapping officer",
+      "Survey and digitisation staff"
+    ],
+    "pay": "Contract posts roughly PKR 60,000 to 150,000 a month. Indicative.",
+    "hiring": "Advertised on the PLRA site and Rozee; linked to cadastral mapping and digitisation projects. Boards of Revenue in Sindh, KP and Balochistan run similar programmes.",
+    "about": "Maintains Punjab's computerised land records and is digitising cadastral maps (the Punjab cadastre project), one of the biggest GIS data jobs in the country.",
+    "tags": [
+      "cadastre",
+      "land administration",
+      "Punjab"
+    ],
+    "logo": "/img/employers/plra.png",
+    "order": 11
+  },
+  {
+    "id": "development-authorities",
+    "name": "Development authorities (CDA, LDA, RDA, KDA, PDA)",
+    "aliases": [
+      "Capital Development Authority",
+      "CDA",
+      "Lahore Development Authority",
+      "LDA",
+      "Rawalpindi Development Authority",
+      "RDA",
+      "Karachi Development Authority",
+      "KDA",
+      "Peshawar Development Authority",
+      "PDA",
+      "Multan Development Authority",
+      "Faisalabad Development Authority"
+    ],
+    "sector": "Government",
+    "kind": "City development authorities",
+    "hq": "Islamabad (CDA)",
+    "locations": [
+      "Islamabad",
+      "Lahore",
+      "Rawalpindi",
+      "Karachi",
+      "Peshawar",
+      "Multan",
+      "Faisalabad"
+    ],
+    "website": "https://www.cda.gov.pk/",
+    "roles": [
+      "GIS analyst",
+      "Town planner",
+      "Survey officer",
+      "Building control mapping staff"
+    ],
+    "pay": "Contract and regular posts roughly PKR 70,000 to 180,000 a month. Indicative.",
+    "hiring": "Each authority advertises its own posts; several have GIS cells created under master plan projects.",
+    "about": "City development authorities hold the master plans, zoning, land use and building control records for the major cities, and have built GIS wings to manage them. Work is urban planning oriented.",
+    "tags": [
+      "urban planning",
+      "GIS",
+      "cities"
+    ],
+    "logo": "/img/employers/development-authorities.png",
+    "order": 12
+  },
+  {
+    "id": "wapda",
+    "name": "WAPDA",
+    "aliases": [
+      "Water and Power Development Authority"
+    ],
+    "sector": "Government",
+    "kind": "Water and hydropower authority",
+    "hq": "Lahore",
+    "locations": [
+      "Lahore",
+      "Tarbela",
+      "Mangla",
+      "Dasu",
+      "Diamer Bhasha",
+      "Mohmand"
+    ],
+    "website": "https://www.wapda.gov.pk/",
+    "roles": [
+      "GIS engineer",
+      "Hydrologist",
+      "Glacier monitoring officer",
+      "Survey engineer"
+    ],
+    "pay": "Regular posts roughly PKR 100,000 to 200,000 a month with allowances; project staff higher. Indicative.",
+    "hiring": "Advertised on the WAPDA careers page; tests by WAPDA or a testing service.",
+    "about": "Builds and operates dams and hydropower and runs the Glacier Monitoring Research Centre. GIS and remote sensing staff work on catchment hydrology, reservoir sedimentation, land acquisition and glacier lake monitoring.",
+    "tags": [
+      "water",
+      "hydropower",
+      "public sector"
+    ],
+    "logo": "/img/employers/wapda.png",
+    "order": 13
+  },
+  {
+    "id": "nespak",
+    "name": "NESPAK",
+    "aliases": [
+      "National Engineering Services Pakistan"
+    ],
+    "sector": "Private",
+    "kind": "Engineering consultancy (state-owned)",
+    "hq": "Lahore",
+    "locations": [
+      "Lahore",
+      "Islamabad",
+      "Karachi",
+      "Peshawar",
+      "Quetta",
+      "overseas offices"
+    ],
+    "website": "https://www.nespak.com.pk/",
+    "careers": "https://nespak.com.pk/careers/",
+    "roles": [
+      "GIS engineer",
+      "Remote sensing specialist",
+      "Surveyor",
+      "Environmental specialist"
+    ],
+    "pay": "Roughly PKR 80,000 to 120,000 a month for fresh engineers, PKR 150,000 to 300,000 for specialists. Indicative, from alumni.",
+    "hiring": "Careers page and newspaper advertisements; also hires through its environment and planning divisions.",
+    "about": "Pakistan's largest engineering consultancy, with a GIS and remote sensing section serving water, transport, urban and environmental projects at home and in the Gulf and Africa.",
+    "tags": [
+      "engineering",
+      "consultancy",
+      "infrastructure"
+    ],
+    "logo": "/img/employers/nespak.png",
+    "order": 14
+  },
+  {
+    "id": "gsp",
+    "name": "Geological Survey of Pakistan",
+    "aliases": [
+      "GSP"
+    ],
+    "sector": "Government",
+    "kind": "Geological survey",
+    "hq": "Quetta",
+    "locations": [
+      "Quetta",
+      "Islamabad",
+      "Lahore",
+      "Karachi",
+      "Peshawar"
+    ],
+    "website": "https://gsp.gov.pk/",
+    "roles": [
+      "Geologist",
+      "Remote sensing geologist",
+      "GIS officer"
+    ],
+    "pay": "BPS-17 entry, roughly PKR 90,000 to 130,000 a month gross. Indicative.",
+    "hiring": "Through FPSC and departmental advertisements.",
+    "about": "National geological mapping, mineral exploration and geohazard assessment. Remote sensing staff work on lithological and structural mapping and landslide inventories.",
+    "tags": [
+      "geology",
+      "minerals",
+      "public sector"
+    ],
+    "logo": "/img/employers/gsp.png",
+    "order": 15
+  },
+  {
+    "id": "universities",
+    "name": "Universities with GIS departments",
+    "aliases": [
+      "NUST",
+      "IGIS NUST",
+      "Institute of Geographical Information Systems",
+      "Institute of Space Technology",
+      "IST",
+      "PMAS-Arid Agriculture University",
+      "Arid Agriculture University",
+      "University of Peshawar",
+      "COMSATS",
+      "University of the Punjab",
+      "UET Lahore",
+      "University of Karachi",
+      "Bahria University",
+      "Government College University",
+      "GCU Lahore",
+      "Quaid-i-Azam University",
+      "University of Haripur",
+      "Karakoram International University"
+    ],
+    "sector": "Academia",
+    "kind": "Teaching and research",
+    "hq": "Islamabad (NUST, IST)",
+    "locations": [
+      "Islamabad",
+      "Rawalpindi",
+      "Lahore",
+      "Peshawar",
+      "Karachi",
+      "Faisalabad",
+      "Haripur",
+      "Gilgit"
+    ],
+    "website": "https://igis.nust.edu.pk/",
+    "roles": [
+      "Lecturer",
+      "Research associate",
+      "Lab engineer",
+      "Project research assistant"
+    ],
+    "pay": "Lecturer (BPS-18 or equivalent) roughly PKR 100,000 to 180,000 a month; research associates on HEC and NRPU projects PKR 50,000 to 120,000. Indicative.",
+    "hiring": "Advertised on each university's site; lecturer posts need an MS or MPhil, most now prefer a PhD.",
+    "about": "NUST's IGIS, IST's space science department, Arid's own institute, Peshawar's Centre for GIS, COMSATS, Punjab University's Centre for GIS and others teach and research GIS. Research associate posts on funded projects are the usual first academic job.",
+    "tags": [
+      "academia",
+      "research",
+      "teaching"
+    ],
+    "logo": "/img/employers/universities.png",
+    "order": 16
+  },
+  {
+    "id": "icimod",
+    "name": "ICIMOD",
+    "aliases": [
+      "International Centre for Integrated Mountain Development"
+    ],
+    "sector": "International",
+    "kind": "Intergovernmental mountain research centre",
+    "hq": "Kathmandu, Nepal",
+    "locations": [
+      "Kathmandu",
+      "programmes in Pakistan"
+    ],
+    "website": "https://www.icimod.org/",
+    "careers": "https://www.icimod.org/get-involved/vacancies/",
+    "roles": [
+      "Remote sensing and geoinformation analyst",
+      "Geospatial application developer",
+      "Cryosphere analyst",
+      "Intern"
+    ],
+    "pay": "Regional professional scale paid in US dollars, roughly US$1,500 to 4,000 a month depending on grade; interns receive a stipend. Indicative.",
+    "hiring": "Careers page with online application; competitive, English, regional candidates from the eight member countries preferred.",
+    "about": "The Hindu Kush Himalaya research centre, of which Pakistan is a member. Runs SERVIR Hindu Kush Himalaya, glacier and glacial lake monitoring and regional land cover, and has employed many Pakistani remote sensing specialists.",
+    "tags": [
+      "mountains",
+      "cryosphere",
+      "international"
+    ],
+    "logo": "/img/employers/icimod.png",
+    "order": 17
+  },
+  {
+    "id": "iwmi",
+    "name": "IWMI Pakistan",
+    "aliases": [
+      "International Water Management Institute"
+    ],
+    "sector": "International",
+    "kind": "CGIAR research centre",
+    "hq": "Colombo, Sri Lanka",
+    "locations": [
+      "Lahore",
+      "Islamabad"
+    ],
+    "website": "https://www.iwmi.org/",
+    "careers": "https://www.iwmi.org/about/careers/",
+    "roles": [
+      "Remote sensing and GIS researcher",
+      "Water accounting analyst",
+      "Research officer",
+      "Intern"
+    ],
+    "pay": "National researcher contracts roughly PKR 150,000 to 400,000 a month; internationally recruited staff on US dollar scales. Indicative.",
+    "hiring": "Careers page; many Pakistani staff started as interns or research officers in the Lahore office.",
+    "about": "Water research institute with one of its largest country offices in Lahore, working on irrigation, groundwater, water accounting and flood recovery with remote sensing and GIS at the core.",
+    "tags": [
+      "water",
+      "research",
+      "international"
+    ],
+    "logo": "/img/employers/iwmi.png",
+    "order": 18
+  },
+  {
+    "id": "wwf-pakistan",
+    "name": "WWF-Pakistan",
+    "aliases": [
+      "WWF",
+      "World Wide Fund for Nature Pakistan"
+    ],
+    "sector": "NGO / UN",
+    "kind": "Conservation NGO",
+    "hq": "Lahore",
+    "locations": [
+      "Lahore",
+      "Islamabad",
+      "Karachi",
+      "Gilgit",
+      "Peshawar"
+    ],
+    "website": "https://www.wwfpak.org/",
+    "careers": "https://www.wwfpak.org/careers/",
+    "roles": [
+      "GIS and remote sensing officer",
+      "Forest and wildlife mapping specialist",
+      "Project officer"
+    ],
+    "pay": "Roughly PKR 80,000 to 200,000 a month depending on grade and project. Indicative.",
+    "hiring": "Careers page; project-linked contracts.",
+    "about": "Pakistan's largest conservation NGO, with a GIS lab mapping forests, mangroves, protected areas and freshwater systems, and running REDD+ and nature-based solutions projects.",
+    "tags": [
+      "conservation",
+      "forests",
+      "NGO"
+    ],
+    "logo": "/img/employers/wwf-pakistan.png",
+    "order": 19
+  },
+  {
+    "id": "iucn-pakistan",
+    "name": "IUCN Pakistan",
+    "aliases": [
+      "IUCN",
+      "International Union for Conservation of Nature"
+    ],
+    "sector": "NGO / UN",
+    "kind": "Conservation union",
+    "hq": "Karachi",
+    "locations": [
+      "Karachi",
+      "Islamabad",
+      "Gilgit"
+    ],
+    "website": "https://www.iucn.org/our-work/region/asia/countries/pakistan",
+    "careers": "https://www.iucn.org/careers",
+    "roles": [
+      "GIS consultant",
+      "Natural resource management officer",
+      "Coastal and mangrove mapping specialist"
+    ],
+    "pay": "Consultancies and project posts roughly PKR 120,000 to 300,000 a month. Indicative.",
+    "hiring": "IUCN global careers portal and consultancy calls.",
+    "about": "Works on coastal ecosystems, mangrove restoration, protected areas and climate adaptation in Pakistan, frequently through short GIS consultancies.",
+    "tags": [
+      "conservation",
+      "coastal",
+      "NGO"
+    ],
+    "logo": "/img/employers/iucn-pakistan.png",
+    "order": 20
+  },
+  {
+    "id": "undp-pakistan",
+    "name": "UNDP Pakistan",
+    "aliases": [
+      "UNDP",
+      "United Nations Development Programme"
+    ],
+    "sector": "NGO / UN",
+    "kind": "UN agency",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad",
+      "provincial offices"
+    ],
+    "website": "https://www.undp.org/pakistan",
+    "careers": "https://www.undp.org/careers",
+    "roles": [
+      "GIS analyst",
+      "Information management officer",
+      "Disaster risk reduction specialist",
+      "UN Volunteer"
+    ],
+    "pay": "Service contracts and national personnel: roughly PKR 150,000 to 350,000 a month at junior to mid level; National Officer grades (NO-A and above) start around PKR 400,000. UN Volunteers receive a fixed living allowance. Indicative.",
+    "hiring": "UNDP jobs portal; UN Volunteers programme for early-career roles.",
+    "about": "Runs disaster risk, climate, governance and recovery programmes in Pakistan, including GLOF and flood resilience projects that employ GIS and remote sensing specialists.",
+    "tags": [
+      "UN",
+      "disaster",
+      "development"
+    ],
+    "order": 21
+  },
+  {
+    "id": "fao-pakistan",
+    "name": "FAO Pakistan",
+    "aliases": [
+      "FAO",
+      "Food and Agriculture Organization"
+    ],
+    "sector": "NGO / UN",
+    "kind": "UN agency",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad",
+      "provincial offices"
+    ],
+    "website": "https://www.fao.org/pakistan",
+    "careers": "https://jobs.fao.org/",
+    "roles": [
+      "GIS and remote sensing specialist",
+      "Crop monitoring analyst",
+      "Water accounting consultant",
+      "Land cover mapping specialist"
+    ],
+    "pay": "National consultants and personnel services agreements roughly PKR 200,000 to 500,000 a month depending on level. Indicative.",
+    "hiring": "FAO jobs portal; consultancy calls are frequent and short.",
+    "about": "Leads crop and land cover mapping, water productivity (WaPOR), locust and flood damage assessment in Pakistan, and has produced national land cover atlases with provincial partners.",
+    "tags": [
+      "UN",
+      "agriculture",
+      "land cover"
+    ],
+    "logo": "/img/employers/fao-pakistan.png",
+    "order": 22
+  },
+  {
+    "id": "wfp-pakistan",
+    "name": "WFP Pakistan",
+    "aliases": [
+      "WFP",
+      "World Food Programme"
+    ],
+    "sector": "NGO / UN",
+    "kind": "UN agency",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad",
+      "Karachi",
+      "Peshawar",
+      "Quetta",
+      "Sukkur"
+    ],
+    "website": "https://www.wfp.org/countries/pakistan",
+    "careers": "https://www.wfp.org/careers",
+    "roles": [
+      "GIS officer",
+      "Vulnerability analysis and mapping (VAM) officer",
+      "Information management associate"
+    ],
+    "pay": "National staff roughly PKR 180,000 to 450,000 a month by grade. Indicative.",
+    "hiring": "WFP careers portal; GIS roles usually sit in the VAM or emergency preparedness units.",
+    "about": "Food security analysis, emergency logistics and resilience programmes, with a mapping unit that produces access, flood and food security maps.",
+    "tags": [
+      "UN",
+      "food security",
+      "emergency"
+    ],
+    "logo": "/img/employers/wfp-pakistan.png",
+    "order": 23
+  },
+  {
+    "id": "immap",
+    "name": "iMMAP",
+    "aliases": [
+      "iMMAP Inc",
+      "iMMAP Pakistan"
+    ],
+    "sector": "NGO / UN",
+    "kind": "Information management NGO",
+    "hq": "Washington DC",
+    "locations": [
+      "Islamabad",
+      "field offices during emergencies"
+    ],
+    "website": "https://immap.org/",
+    "careers": "https://immap.org/careers/",
+    "roles": [
+      "GIS officer",
+      "Information management officer",
+      "Data analyst",
+      "Remote sensing analyst"
+    ],
+    "pay": "Roughly PKR 150,000 to 350,000 a month for national GIS and IM officers. Indicative, from alumni.",
+    "hiring": "Careers page; expands rapidly after floods and other emergencies.",
+    "about": "Provides mapping and information management to the humanitarian system in Pakistan, often embedded in UN OCHA and clusters. One of the most common first employers of GIS graduates in the humanitarian sector.",
+    "tags": [
+      "humanitarian",
+      "information management",
+      "NGO"
+    ],
+    "logo": "/img/employers/immap.png",
+    "order": 24
+  },
+  {
+    "id": "impact-reach",
+    "name": "IMPACT Initiatives and REACH",
+    "aliases": [
+      "REACH",
+      "IMPACT",
+      "REACH Initiative",
+      "ACTED"
+    ],
+    "sector": "NGO / UN",
+    "kind": "Humanitarian research NGO",
+    "hq": "Geneva",
+    "locations": [
+      "Islamabad",
+      "field assessments nationwide"
+    ],
+    "website": "https://www.impact-initiatives.org/",
+    "careers": "https://www.impact-initiatives.org/work-with-us/",
+    "roles": [
+      "GIS officer",
+      "GIS specialist",
+      "Assessment officer",
+      "Data officer"
+    ],
+    "pay": "National GIS officers roughly PKR 150,000 to 300,000 a month; international roles paid in euros. Indicative.",
+    "hiring": "Careers page; GIS officers are recruited for each country mission, including Pakistan since the 2022 floods.",
+    "about": "REACH produces humanitarian assessments, flood extent maps and settlement data for the response community; its GIS officers are known for high output and strong QGIS, R and Python skills.",
+    "tags": [
+      "humanitarian",
+      "assessment",
+      "NGO"
+    ],
+    "logo": "/img/employers/impact-reach.png",
+    "order": 25
+  },
+  {
+    "id": "tplmaps",
+    "name": "TPL Maps",
+    "aliases": [
+      "TPL Trakker",
+      "TPL"
+    ],
+    "sector": "Private",
+    "kind": "Mapping and location data company",
+    "hq": "Karachi",
+    "locations": [
+      "Karachi",
+      "Lahore",
+      "Islamabad"
+    ],
+    "website": "https://tplmaps.com/",
+    "roles": [
+      "GIS data analyst",
+      "Cartographer",
+      "Field data collector",
+      "Map QA analyst",
+      "Software engineer"
+    ],
+    "pay": "Roughly PKR 50,000 to 80,000 a month for data roles, PKR 100,000 to 200,000 for engineers. Indicative.",
+    "hiring": "LinkedIn and Rozee; batch hiring for data production.",
+    "about": "Pakistan's own digital map provider, producing navigation data, points of interest and location APIs; part of the TPL group with the tracking company TPL Trakker.",
+    "tags": [
+      "mapping",
+      "navigation",
+      "private"
+    ],
+    "logo": "/img/employers/tplmaps.png",
+    "order": 26
+  },
+  {
+    "id": "farmdar",
+    "name": "Farmdar",
+    "aliases": [],
+    "sector": "Private",
+    "kind": "Agri-tech startup",
+    "hq": "Lahore",
+    "locations": [
+      "Lahore",
+      "remote"
+    ],
+    "website": "https://farmdar.ai/",
+    "roles": [
+      "Remote sensing scientist",
+      "Machine learning engineer",
+      "GIS analyst",
+      "Field agronomist"
+    ],
+    "pay": "Roughly PKR 100,000 to 250,000 a month for technical staff; startup equity in some roles. Indicative.",
+    "hiring": "LinkedIn; small team, takes interns.",
+    "about": "Uses satellite imagery and machine learning to map crops, estimate yield and monitor fields for growers, sugar mills and banks in Pakistan. The best-known geospatial startup in the country.",
+    "tags": [
+      "agri-tech",
+      "startup",
+      "remote sensing"
+    ],
+    "logo": "/img/employers/farmdar.png",
+    "order": 27
+  },
+  {
+    "id": "jazz-telecom",
+    "name": "Telecom operators (Jazz, Telenor, Zong, Ufone) and tower companies",
+    "aliases": [
+      "Jazz",
+      "Telenor Pakistan",
+      "Zong",
+      "Ufone",
+      "PTCL",
+      "Engro Enfrashare",
+      "Edotco"
+    ],
+    "sector": "Private",
+    "kind": "Telecommunications",
+    "hq": "Islamabad (Jazz)",
+    "locations": [
+      "Islamabad",
+      "Lahore",
+      "Karachi"
+    ],
+    "website": "https://jazz.com.pk/",
+    "careers": "https://jazz.com.pk/careers",
+    "roles": [
+      "RF planning engineer",
+      "Network GIS analyst",
+      "Fibre route designer",
+      "Geo-marketing analyst"
+    ],
+    "pay": "Roughly PKR 80,000 to 150,000 a month for junior engineers, PKR 200,000 and up for senior. Indicative.",
+    "hiring": "Each operator's careers page and LinkedIn; graduate trainee programmes.",
+    "about": "Mobile and fibre networks are planned on GIS: coverage, site selection, fibre routes and customer analytics. Telecom is one of the better-paying private employers of GIS graduates.",
+    "tags": [
+      "telecom",
+      "network planning",
+      "private"
+    ],
+    "logo": "/img/employers/jazz-telecom.png",
+    "order": 28
+  },
+  {
+    "id": "k-electric",
+    "name": "K-Electric",
+    "aliases": [
+      "KE"
+    ],
+    "sector": "Private",
+    "kind": "Electricity utility",
+    "hq": "Karachi",
+    "locations": [
+      "Karachi"
+    ],
+    "website": "https://www.ke.com.pk/",
+    "careers": "https://www.ke.com.pk/careers/",
+    "roles": [
+      "GIS engineer",
+      "Network mapping analyst",
+      "Asset data specialist"
+    ],
+    "pay": "Roughly PKR 80,000 to 200,000 a month. Indicative.",
+    "hiring": "Careers page and LinkedIn; graduate trainee engineer intake.",
+    "about": "Karachi's vertically integrated power company runs an enterprise GIS for its distribution network, a model the public distribution companies are following.",
+    "tags": [
+      "utility",
+      "enterprise GIS",
+      "private"
+    ],
+    "logo": "/img/employers/k-electric.png",
+    "order": 29
+  },
+  {
+    "id": "discos",
+    "name": "Power distribution companies (LESCO, IESCO, FESCO, MEPCO, PESCO and others)",
+    "aliases": [
+      "LESCO",
+      "IESCO",
+      "FESCO",
+      "MEPCO",
+      "PESCO",
+      "GEPCO",
+      "HESCO",
+      "SEPCO",
+      "QESCO",
+      "TESCO",
+      "NTDC"
+    ],
+    "sector": "Government",
+    "kind": "Electricity distribution utilities",
+    "hq": "Lahore (LESCO)",
+    "locations": [
+      "Lahore",
+      "Islamabad",
+      "Faisalabad",
+      "Multan",
+      "Peshawar",
+      "Gujranwala",
+      "Hyderabad",
+      "Sukkur",
+      "Quetta"
+    ],
+    "website": "https://www.lesco.gov.pk/",
+    "roles": [
+      "GIS engineer",
+      "Network mapping staff",
+      "Loss analysis analyst"
+    ],
+    "pay": "Contract and regular posts roughly PKR 70,000 to 180,000 a month. Indicative.",
+    "hiring": "Each company advertises separately; GIS cells were created under USAID and World Bank distribution projects.",
+    "about": "The ten public distribution companies and the transmission company have GIS cells that map feeders, transformers and consumers for loss reduction and planning.",
+    "tags": [
+      "utility",
+      "enterprise GIS",
+      "public sector"
+    ],
+    "logo": "/img/employers/discos.png",
+    "order": 30
+  },
+  {
+    "id": "sngpl",
+    "name": "SNGPL and SSGC (gas utilities)",
+    "aliases": [
+      "Sui Northern Gas Pipelines",
+      "SNGPL",
+      "Sui Southern Gas Company",
+      "SSGC"
+    ],
+    "sector": "Government",
+    "kind": "Gas utilities",
+    "hq": "Lahore (SNGPL), Karachi (SSGC)",
+    "locations": [
+      "Lahore",
+      "Karachi",
+      "regional offices"
+    ],
+    "website": "https://www.sngpl.com.pk/",
+    "roles": [
+      "GIS engineer",
+      "Pipeline mapping officer",
+      "Survey officer"
+    ],
+    "pay": "Roughly PKR 90,000 to 200,000 a month. Indicative.",
+    "hiring": "Advertised on each company's site; tests through a testing service.",
+    "about": "Both gas utilities maintain enterprise GIS of their pipeline networks and consumer connections and run periodic recruitment for GIS staff.",
+    "tags": [
+      "utility",
+      "pipelines",
+      "public sector"
+    ],
+    "logo": "/img/employers/sngpl.png",
+    "order": 31
+  },
+  {
+    "id": "ogdcl",
+    "name": "Oil and gas (OGDCL, PPL, MOL, OMV and service firms)",
+    "aliases": [
+      "OGDCL",
+      "Oil and Gas Development Company",
+      "Pakistan Petroleum",
+      "PPL",
+      "MOL Pakistan",
+      "OMV",
+      "United Energy Pakistan",
+      "UEP",
+      "Mari Petroleum",
+      "Mari Energies"
+    ],
+    "sector": "Private",
+    "kind": "Exploration and production",
+    "hq": "Islamabad (OGDCL)",
+    "locations": [
+      "Islamabad",
+      "Karachi",
+      "field locations in Sindh, KP and Balochistan"
+    ],
+    "website": "https://ogdcl.com/",
+    "careers": "https://ogdcl.com/careers",
+    "roles": [
+      "GIS analyst",
+      "Geophysical data technician",
+      "Remote sensing geologist",
+      "Survey engineer"
+    ],
+    "pay": "Among the highest in Pakistan for GIS roles: roughly PKR 150,000 to 400,000 a month. Indicative.",
+    "hiring": "Company careers pages, often through testing services; competitive.",
+    "about": "Exploration companies use GIS for lease management, seismic survey planning, pipeline routing and environmental compliance. Hiring is cyclical and competitive.",
+    "tags": [
+      "oil and gas",
+      "energy",
+      "private"
+    ],
+    "logo": "/img/employers/ogdcl.png",
+    "order": 32
+  },
+  {
+    "id": "khatib-alami",
+    "name": "Khatib & Alami",
+    "aliases": [
+      "Khatib and Alami",
+      "K&A"
+    ],
+    "sector": "Private",
+    "kind": "Engineering and GIS consultancy (Gulf)",
+    "hq": "Beirut, Lebanon",
+    "locations": [
+      "Riyadh",
+      "Jeddah",
+      "Dubai",
+      "Abu Dhabi",
+      "Doha",
+      "Muscat"
+    ],
+    "website": "https://www.khatibalami.com/",
+    "careers": "https://www.khatibalami.com/careers",
+    "roles": [
+      "GIS specialist",
+      "GIS developer",
+      "Geodatabase administrator",
+      "Remote sensing analyst",
+      "Survey engineer"
+    ],
+    "pay": "Roughly SAR 6,000 to 15,000 a month in Saudi Arabia for GIS specialists, more for developers; housing often included. Indicative, from alumni.",
+    "hiring": "Careers portal and LinkedIn; recruits Pakistani GIS professionals directly and through agencies.",
+    "about": "One of the largest GIS consultancies in the Middle East, delivering enterprise GIS for Saudi and Gulf ministries, municipalities and utilities. A major employer of Pakistani GIS staff in the Gulf.",
+    "tags": [
+      "Gulf",
+      "enterprise GIS",
+      "consultancy"
+    ],
+    "logo": "/img/employers/khatib-alami.png",
+    "order": 33
+  },
+  {
+    "id": "aecom",
+    "name": "AECOM and global engineering consultancies in the Gulf",
+    "aliases": [
+      "AECOM",
+      "WSP",
+      "Parsons",
+      "Jacobs",
+      "Dar Al-Handasah",
+      "Dar",
+      "Atkins",
+      "AtkinsRéalis"
+    ],
+    "sector": "Private",
+    "kind": "Engineering consultancies",
+    "hq": "Dallas, United States (AECOM)",
+    "locations": [
+      "Riyadh",
+      "Dubai",
+      "Abu Dhabi",
+      "Doha",
+      "NEOM"
+    ],
+    "website": "https://aecom.com/",
+    "careers": "https://aecom.com/careers/",
+    "roles": [
+      "GIS analyst",
+      "Geospatial engineer",
+      "Digital twin specialist",
+      "Survey and mapping lead"
+    ],
+    "pay": "Roughly AED or SAR 8,000 to 20,000 a month for analysts to senior analysts. Indicative.",
+    "hiring": "Global careers portals; giga-projects in Saudi Arabia (NEOM, Red Sea, Diriyah) drive GIS demand.",
+    "about": "The large engineering firms running Gulf infrastructure and master-planning projects all maintain geospatial teams; AECOM, WSP, Parsons, Jacobs, Dar and Atkins recruit GIS staff from Pakistan regularly.",
+    "tags": [
+      "Gulf",
+      "infrastructure",
+      "consultancy"
+    ],
+    "logo": "/img/employers/aecom.png",
+    "order": 34
+  },
+  {
+    "id": "geosa",
+    "name": "General Authority for Survey and Geospatial Information (GEOSA), Saudi Arabia",
+    "aliases": [
+      "GEOSA",
+      "Saudi Geological Survey"
+    ],
+    "sector": "Government",
+    "kind": "National geospatial authority",
+    "hq": "Riyadh",
+    "locations": [
+      "Riyadh"
+    ],
+    "website": "https://geosa.gov.sa/",
+    "roles": [
+      "Geospatial data specialist (via contractors)",
+      "Photogrammetrist",
+      "Hydrographic surveyor"
+    ],
+    "pay": "Contractor roles roughly SAR 8,000 to 18,000 a month. Indicative.",
+    "hiring": "Mostly through contractors (Khatib & Alami, Esri Saudi Arabia and others) rather than direct hiring of foreigners.",
+    "about": "Saudi Arabia's national mapping and geospatial agency, running the national spatial data infrastructure, base mapping and geodetic network, which creates a large contractor market for GIS staff.",
+    "tags": [
+      "Gulf",
+      "national mapping",
+      "public sector"
+    ],
+    "logo": "/img/employers/geosa.png",
+    "order": 35
+  },
+  {
+    "id": "esri",
+    "name": "Esri",
+    "aliases": [
+      "Environmental Systems Research Institute",
+      "Esri Saudi Arabia",
+      "Esri Northeast Africa",
+      "Esri UK"
+    ],
+    "sector": "Private",
+    "kind": "GIS software company",
+    "hq": "Redlands, California",
+    "locations": [
+      "Redlands",
+      "Washington DC",
+      "international distributors in 100+ countries"
+    ],
+    "website": "https://www.esri.com/",
+    "careers": "https://www.esri.com/en-us/about/careers/overview",
+    "roles": [
+      "Solution engineer",
+      "Product engineer",
+      "Technical support analyst",
+      "Technical consultant",
+      "Software developer"
+    ],
+    "pay": "Roughly US$70,000 to 130,000 a year in the United States; regional distributors pay local scales. Indicative.",
+    "hiring": "Esri careers portal; most roles need work authorisation in the country; distributors (Esri Saudi Arabia, Esri UK, Esri India) hire regionally.",
+    "about": "The maker of ArcGIS. Direct hiring from Pakistan is rare, but Esri's Gulf distributors and partner firms recruit Pakistani staff, and Esri's Young Scholars Award brings students to the User Conference.",
+    "tags": [
+      "software",
+      "ArcGIS",
+      "international"
+    ],
+    "logo": "/img/employers/esri.png",
+    "order": 36
+  },
+  {
+    "id": "planet",
+    "name": "Planet Labs",
+    "aliases": [
+      "Planet"
+    ],
+    "sector": "Private",
+    "kind": "Earth observation company",
+    "hq": "San Francisco",
+    "locations": [
+      "San Francisco",
+      "Berlin",
+      "Amsterdam",
+      "Singapore",
+      "remote"
+    ],
+    "website": "https://www.planet.com/",
+    "careers": "https://www.planet.com/company/careers/",
+    "roles": [
+      "Geospatial data scientist",
+      "Customer solutions engineer",
+      "Imagery analyst",
+      "Software engineer"
+    ],
+    "pay": "Roughly US$90,000 to 160,000 a year in the United States and Europe. Indicative.",
+    "hiring": "Careers page; some remote roles in Europe; strong Python and machine learning expected.",
+    "about": "Operates the largest fleet of Earth imaging satellites (PlanetScope and SkySat) with daily global coverage. Its data is used in Pakistan for crop monitoring and flood mapping; hiring is international.",
+    "tags": [
+      "satellites",
+      "Earth observation",
+      "international"
+    ],
+    "logo": "/img/employers/planet.png",
+    "order": 37
+  },
+  {
+    "id": "vantor",
+    "name": "Vantor (formerly Maxar Intelligence)",
+    "aliases": [
+      "Maxar",
+      "Maxar Intelligence",
+      "Maxar Technologies",
+      "DigitalGlobe",
+      "Vantor"
+    ],
+    "sector": "Private",
+    "kind": "Earth observation company",
+    "hq": "Westminster, Colorado",
+    "locations": [
+      "United States",
+      "United Kingdom",
+      "Singapore",
+      "remote"
+    ],
+    "website": "https://vantor.com/",
+    "careers": "https://vantor.com/careers/",
+    "roles": [
+      "Imagery analyst",
+      "Geospatial data engineer",
+      "Photogrammetry engineer",
+      "Machine learning engineer"
+    ],
+    "pay": "Roughly US$80,000 to 150,000 a year. Indicative.",
+    "hiring": "Careers page; many US roles require security clearance, international roles are fewer.",
+    "about": "Maxar Intelligence was renamed Vantor in 2025. It provides WorldView very-high-resolution imagery and 3D terrain products; its open data programme publishes free imagery after major disasters including Pakistan's floods.",
+    "tags": [
+      "satellites",
+      "Earth observation",
+      "international"
+    ],
+    "logo": "/img/employers/vantor.png",
+    "order": 38
+  },
+  {
+    "id": "tomtom",
+    "name": "TomTom and HERE Technologies",
+    "aliases": [
+      "TomTom",
+      "HERE",
+      "HERE Technologies"
+    ],
+    "sector": "Private",
+    "kind": "Map data companies",
+    "hq": "Amsterdam (TomTom), Eindhoven (HERE)",
+    "locations": [
+      "Amsterdam",
+      "Pune",
+      "Berlin",
+      "Chicago",
+      "remote"
+    ],
+    "website": "https://www.tomtom.com/",
+    "careers": "https://www.tomtom.com/careers/",
+    "roles": [
+      "Map data analyst",
+      "Geospatial software engineer",
+      "Map quality analyst",
+      "Data scientist"
+    ],
+    "pay": "Roughly €45,000 to 90,000 a year in the Netherlands and Germany; India offices on local scales. Indicative.",
+    "hiring": "Careers pages; both have large map production centres in India and recruit globally for engineering.",
+    "about": "The two largest independent map data companies, supplying navigation and location platforms to car makers and apps. Map production and quality roles value GIS graduates.",
+    "tags": [
+      "mapping",
+      "navigation",
+      "international"
+    ],
+    "logo": "/img/employers/tomtom.png",
+    "order": 39
+  }
+]

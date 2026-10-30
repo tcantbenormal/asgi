@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const items = await getCollection('links');
+  return items.filter((l) => l.data.details.length > 0).map((l) => ({ params: { id: l.id }, props: { l } }));
+}
+const { l } = Astro.props;
+const d = l.data;
+const kind = { scholarship: 'Scholarship', course: 'Course', certification: 'Certification', job: 'Job' }[d.category];
+const cta = { scholarship: 'Programme page', course: 'Start the course', certification: 'Certification page', job: 'Apply' }[d.category];
+const host = new URL(d.url).hostname.replace(/^www\./, '');
+---
+<Base title={d.title} description={d.description}>
+  <header class="page-head">
+    <div class="eyebrow"><a href={`/opportunities#${d.category}`} style="color:inherit;text-decoration:none">{kind}</a></div>
+    <h1>{d.title}</h1>
+    <p class="lead">{d.description}</p>
+    <p class="credit">Offered by <strong>{d.provider}</strong></p>
+  </header>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:2.5rem;align-items:start" class="res-grid">
+    <div class="prose">
+      {d.details.map((p) => <p>{p}</p>)}
+      {d.programmes.length > 0 && <><h2>{d.category === 'scholarship' ? 'Programmes this funds' : 'What is included'}</h2><ul>{d.programmes.map((x) => <li>{x}</li>)}</ul></>}
+      {d.facts.length > 0 && <><h2>At a glance</h2><dl class="facts">{d.facts.map((f) => <><dt>{f.label}</dt><dd>{f.value}</dd></>)}</dl></>}
+      <h2>Links</h2>
+      <ul>
+        <li><a href={d.url} rel="noopener">{cta}</a> on {host}</li>
+        {d.links.map((x) => <li><a href={x.url} rel="noopener">{x.label}</a></li>)}
+      </ul>
+      <p class="notice navy">Facts were checked in {d.updated ?? 'the month this was listed'}. Deadlines, stipends and quotas change every cycle; the official page wins if it says something different. Spotted a change? <a href="/contact">Tell us</a>.</p>
+    </div>
+    <aside class="card">
+      <dl class="facts">
+        <dt>Provider</dt><dd>{d.provider}</dd>
+        {d.location && <><dt>Where</dt><dd>{d.location}</dd></>}
+        {d.cost && <><dt>Cost</dt><dd>{d.cost}</dd></>}
+        {d.deadline && <><dt>Deadline</dt><dd>{d.deadline}</dd></>}
+        {d.updated && <><dt>Checked</dt><dd>{d.updated}</dd></>}
+      </dl>
+      <a class="btn btn-primary" href={d.url} rel="noopener" style="margin-top:.75rem;justify-content:center">{cta}</a>
+      {d.tags.length > 0 && <div class="tags" style="margin-top:.75rem">{d.tags.map((t) => <span class="tag grey">{t}</span>)}</div>}
+    </aside>
+  </div>
+  <style>@media (max-width: 800px) { .res-grid { grid-template-columns: 1fr !important; } }</style>
+</Base>

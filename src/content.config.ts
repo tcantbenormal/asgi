@@ -145,6 +145,37 @@ const links = defineCollection({
     location: z.string().optional(),
     cost: z.string().optional(),
     tags: z.array(z.string()).default([]),
+    // Detail page (/opportunities/<id>) is built only when `details` has text.
+    facts: z.array(z.object({ label: z.string(), value: z.string() })).default([]), // institution, ranking, funding, selectivity...
+    details: z.array(z.string()).default([]),   // paragraphs
+    programmes: z.array(z.string()).default([]), // named degree programmes or courses this route pays for
+    links: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]), // extra official pages
+    updated: z.string().optional(),            // when a person last checked the facts, e.g. "October 2026"
+    order: z.number().optional(),              // position within its category; unset sorts last by title
+  }),
+});
+
+// Organisations that hire GIS and remote sensing graduates. Merged on /industry with
+// the organisations named in approved alumni profiles.
+const employers = defineCollection({
+  loader: file('./src/content/employers.json'),
+  schema: z.object({
+    id: z.string(),
+    name: z.string(),
+    aliases: z.array(z.string()).default([]), // other spellings alumni use in their profiles
+    sector: z.enum(['Government', 'Private', 'NGO / UN', 'Academia', 'International']),
+    kind: z.string(),                          // one-line type, e.g. "Space agency"
+    hq: z.string(),
+    locations: z.array(z.string()).default([]),
+    website: z.string().url(),
+    careers: link.optional(),
+    logo: z.string().optional(),
+    roles: z.array(z.string()).default([]),
+    pay: z.string().optional(),                // indicative range, say where it comes from
+    hiring: z.string().optional(),             // how they recruit
+    about: z.string(),
+    tags: z.array(z.string()).default([]),
+    order: z.number().optional(),              // position on the page within its sector
   }),
 });
 
@@ -186,4 +217,4 @@ const cabinet = defineCollection({
   }),
 });
 
-export const collections = { alumni, posts, roadmaps, resources, links, projects, events, cabinet };
+export const collections = { alumni, posts, roadmaps, resources, links, employers, projects, events, cabinet };

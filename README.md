@@ -21,22 +21,31 @@ npm run build      # outputs dist/ and builds the search index
 | Skills roadmaps | `src/content/roadmaps/` |
 | Software, datasets, templates | `src/content/resources.json` |
 | Scholarships, courses, certifications, jobs | `src/content/links.json` |
+| Employers for the Industry page | `src/content/employers.json`, logos in `public/img/employers/` |
 | FYP archive, events, cabinet | `src/content/projects.json`, `events.json`, `cabinet.json` |
 | Colours and typography | `src/styles/global.css` |
 
 Field names and allowed values are defined in `src/content.config.ts`. The build fails with a clear message if a file has a typo in a field.
 
+### Opportunities
+
+Each entry in `links.json` has a `url` that should point at the programme itself, not the provider's home page. Entries with `details` paragraphs get their own page at `/opportunities/<id>`; `facts` (label/value pairs such as Ranking, Stipend, Selectivity) show on the card and the page, `programmes` lists the named degrees or courses, `links` are extra official pages, `updated` is the month a person last checked the facts, and `order` is the position within the category. Jobs need only title, provider, url and description.
+
+### Industry
+
+`employers.json` lists organisations that hire GIS graduates: sector, kind, HQ, locations, website, careers page, roles, indicative pay (say where the figure comes from), how they recruit and a short description. `aliases` are the other spellings alumni use in their profiles. At build time the page groups approved alumni profiles by organisation (students and freelancers excluded, role must look GIS-related) and attaches them to the matching employer; organisations that match nothing appear in a "Where alumni work" section. Logos were pulled from each site's favicon or logo; add `logo` with a path under `public/img/employers/` for new entries.
+
 ## Alumni profiles (Supabase)
 
 Alumni create and edit their own profiles at `/alumni/join`. Data lives in a Supabase Postgres table; the site reads approved rows at build time and renders them as static pages.
 
-Profile pages live at the site root: `/<username>`, where the username is chosen in the editor and validated by the database against a reserved list. Any new top-level page you add to `src/pages/` must also be added to that list; the latest copy is in `supabase/migrations/005_submissions.sql`.
+Profile pages live at the site root: `/<username>`, where the username is chosen in the editor and validated by the database against a reserved list. Any new top-level page you add to `src/pages/` must also be added to that list; the latest copy is in `supabase/migrations/006_submissions_employer.sql`.
 
 See `docs/decisions.md` for why things are the way they are and `docs/flow.md` for how a build and a request move through the files.
 
 One-time setup:
 
-1. In the Supabase dashboard open SQL Editor, paste `supabase/schema.sql`, run it. Then paste and run each file in `supabase/migrations/` in order (002 portfolio fields, 003 forum, 004 accounts, 005 submissions).
+1. In the Supabase dashboard open SQL Editor, paste `supabase/schema.sql`, run it. Then paste and run each file in `supabase/migrations/` in order (002 portfolio fields, 003 forum, 004 accounts, 005 submissions, 006 only if 005 was run before the employer kind was added).
 2. Authentication > Providers: enable Google and GitHub (each needs an OAuth client id and secret from that provider; the dashboard shows the callback URL to register). Email sign-in links work without setup but are rate-limited on the free plan.
 3. Authentication > URL Configuration: add the site URL and `http://localhost:4321/alumni/join` to redirect URLs.
 4. Project URL and publishable key go in `src/config/site.ts`. Never put the secret key anywhere in this repository.
@@ -86,4 +95,4 @@ The GitHub organisation, Cloudflare account, Google account that owns the forms 
 
 ## Suggestions from visitors
 
-`/submit` (linked as "Suggest a tool", "Submit it", "Post an opportunity", "Add your project") writes to the `submissions` table. Nobody can read it through the API; review rows in the Supabase dashboard under Table editor, then add the item to the right JSON or content file by hand and set `status` to `accepted` or `rejected` for your own bookkeeping.
+`/submit` (linked as "Suggest a tool", "Submit it", "Post an opportunity", "Add your project", "Suggest an employer") writes to the `submissions` table. Nobody can read it through the API; review rows in the Supabase dashboard under Table editor, then add the item to the right JSON or content file by hand and set `status` to `accepted` or `rejected` for your own bookkeeping.

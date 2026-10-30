@@ -504,6 +504,40 @@
     ]
   },
   {
+    "id": "galiyat-boundary",
+    "name": "Galiyat boundary, Galiyat Development Authority jurisdiction",
+    "kind": "dataset",
+    "category": "Boundaries",
+    "order": 2,
+    "credit": "Muhammad Taimoor Ashfaq",
+    "image": "/img/datasets/galiyat-boundary.png",
+    "description": "The Galiyat Development Authority's area of responsibility in Abbottabad district, from Murree Road through Ayubia, Nathia Gali and Thandiani, as one clean polygon. Shapefile in WGS 84 with metadata.",
+    "size": "32 KB zip",
+    "license": "CC BY 4.0",
+    "homepage": "",
+    "host": "Google Drive",
+    "updated": "2026-10",
+    "downloads": [
+      {
+        "label": "Download shapefile (GDA boundary)",
+        "url": "https://drive.google.com/drive/folders/11FZQVKFPxTjTebdplQEaBBxJPQqZFVKc?usp=sharing",
+        "size": "32 KB"
+      }
+    ],
+    "about": [
+      "The Galiyat is the hill-station belt of Abbottabad district in Khyber Pakhtunkhwa: Ayubia, Nathia Gali, Dunga Gali, Khaira Gali, Changla Gali, Bara Gali and Thandiani, on the ridge that runs north from Murree. Since 1996 it has been administered for planning, tourism, building control and services by the Galiyat Development Authority (GDA), a provincial body whose jurisdiction is a planning boundary rather than a tehsil or union council. Because it is not a census or revenue unit, it does not appear in the national administrative datasets, and anyone studying tourism, forest change, landslides or construction in the Galiyat has had to redraw it.",
+      "This file is that boundary as a single polygon of about 636 square kilometres with a perimeter of about 221 kilometres, in WGS 84 (EPSG:4326). The attribute table holds the name, authority, province, district, area, perimeter, source, creator and year, replacing the empty 27-field land use template the original digitising carried.",
+      "The boundary was digitised in May 2025 during the Galiyat land use survey against the GDA's notified limits and high-resolution imagery, and was cleaned, documented and published by Muhammad Taimoor Ashfaq for the Arid Society of GIS. Metadata travels with the file in ArcGIS (.shp.xml) and QGIS (.qmd) form."
+    ],
+    "requirements": [
+      "Any GIS that reads shapefiles: QGIS, ArcGIS Pro, ArcMap, GeoPandas, R sf",
+      "Use with the Pakistan administrative boundaries dataset above for tehsil and district context; the Galiyat crosses tehsil lines",
+      "Areas were computed on the WGS 84 sphere; reproject to UTM 43N (EPSG:32643) for engineering-grade measurements",
+      "This is the GDA jurisdiction, not the Ayubia National Park or the Galiyat forest division; those have their own, smaller boundaries",
+      "Cite as: Muhammad Taimoor Ashfaq (2025), Galiyat boundary, Galiyat Development Authority jurisdiction, Arid Society of GIS"
+    ]
+  },
+  {
     "id": "srtm-pakistan",
     "name": "SRTM 30 m DEM, Pakistan mosaic",
     "kind": "dataset",

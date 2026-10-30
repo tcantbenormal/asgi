@@ -1,0 +1,53 @@
+---
+// Small request form that writes one row to the submissions table (kind = mentorship, membership…).
+// Name and email fields are stored in their own columns; every other field goes into the body as
+// "Label: value" lines so the cabinet can read it in the dashboard.
+import { site } from '../config/site';
+type Field = { name: string; label: string; type?: 'text' | 'email' | 'select' | 'textarea'; required?: boolean; placeholder?: string; options?: string[]; pattern?: string };
+interface Props { kind: string; title: string; cta: string; fields: Field[]; thanks: string; id?: string }
+const { kind, title, cta, fields, thanks, id = 'request' } = Astro.props;
+---
+<form id={id} class="card forum-form" data-kind={kind} data-title={title} data-thanks={thanks} style="max-width:720px">
+  {fields.map((f) => (
+    <label>{f.label}
+      {f.type === 'textarea'
+        ? <textarea name={f.name} required={f.required} minlength="10" maxlength="3000" rows="5" placeholder={f.placeholder}></textarea>
+        : f.type === 'select'
+          ? <select name={f.name} required={f.required}><option value="">Choose…</option>{f.options?.map((o) => <option>{o}</option>)}</select>
+          : <input name={f.name} type={f.type ?? 'text'} required={f.required} maxlength="200" placeholder={f.placeholder} pattern={f.pattern} autocomplete={f.name === 'email' ? 'email' : f.name === 'name' ? 'name' : undefined} />}
+    </label>
+  ))}
+  <input name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
+  <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
+    <button class="btn btn-primary" type="submit">{cta}</button>
+    <span class="status" data-msg hidden></span>
+  </div>
+</form>
+
+<script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key, id }}>
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+  const sb = createClient(url, key);
+  const f = document.getElementById(id), msg = f.querySelector('[data-msg]');
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    const m = session.user.user_metadata || {};
+    if (f.name) f.name.value ||= m.full_name || m.name || '';
+    if (f.email) f.email.value ||= session.user.email || '';
+  }
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (f.website.value) return; // honeypot
+    msg.hidden = false; msg.className = 'status'; msg.textContent = 'Sending…';
+    const lines = [];
+    for (const el of f.elements) {
+      if (!el.name || ['name', 'email', 'website'].includes(el.name) || el.type === 'submit') continue;
+      const label = el.closest('label')?.firstChild?.textContent?.trim() || el.name;
+      lines.push(`${label}: ${el.value.trim()}`);
+    }
+    const name = f.name?.value.trim() || null, email = f.email?.value.trim() || null;
+    const row = { kind: f.dataset.kind, title: `${f.dataset.title}: ${name || email || 'anonymous'}`.slice(0, 160), body: lines.join('\n').slice(0, 5000), name, email, user_id: session?.user.id ?? null };
+    const { error } = await sb.from('submissions').insert(row);
+    if (error) { msg.className = 'status err'; msg.textContent = error.message; return; }
+    msg.className = 'status ok'; msg.textContent = f.dataset.thanks; f.reset();
+  });
+</script>

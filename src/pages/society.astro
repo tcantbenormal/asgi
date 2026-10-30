@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
 import Avatar from '../components/Avatar.astro';
+import RequestForm from '../components/RequestForm.astro';
 import { site } from '../config/site';
 const cabinet = await getCollection('cabinet');
 const sessions = [...new Set(cabinet.map((c) => c.data.session))].sort().reverse();
@@ -14,8 +15,16 @@ const sessions = [...new Set(cabinet.map((c) => c.data.session))].sort().reverse
     <p>The society exists to connect students of GIS and remote sensing with each other, with alumni, and with the profession. We run workshops, invite guest speakers, organise field visits, celebrate GIS Day, and maintain this portal so that every batch leaves something behind for the next.</p>
     <h2>Membership</h2>
     <p>Any enrolled student of the institute can join. Membership is free. Members get early access to workshops, can propose events, and may stand for the cabinet.</p>
-    <p><a class="btn btn-primary" href={site.forms.membership} rel="noopener">Membership form</a></p>
+    <h3 id="join">Join the society</h3>
   </div>
+  <RequestForm kind="membership" title="Membership application" cta="Apply for membership" thanks="Application received. The cabinet will confirm your membership by email." fields={[
+    { name: 'name', label: 'Full name', required: true },
+    { name: 'email', label: 'Email', type: 'email', required: true },
+    { name: 'batch', label: 'Batch', required: true, placeholder: '2024-28', pattern: '\\d{4}-\\d{2}' },
+    { name: 'programme', label: 'Degree programme', required: true, placeholder: 'BS Geoinformatics' },
+    { name: 'reg', label: 'University registration number', placeholder: 'Optional, helps the cabinet verify enrolment' },
+    { name: 'interests', label: 'What would you like to do in the society?', type: 'textarea', required: true, placeholder: 'Workshops you want, skills you can teach, events you would help run.' },
+  ]} />
 
   {sessions.map((s, i) => (
     <section class="section" style={i === 0 ? '' : 'padding-top:2rem'}>

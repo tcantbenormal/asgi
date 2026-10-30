@@ -3,19 +3,31 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
 import AlumniCard from '../components/AlumniCard.astro';
-import { site } from '../config/site';
+import RequestForm from '../components/RequestForm.astro';
 const mentors = (await getCollection('alumni')).filter((a) => a.data.mentor);
+const mentorOptions = ['Any mentor the cabinet suggests', ...mentors.map((a) => `${a.data.name} (${a.data.role}, ${a.data.organization})`)];
+const sectors = ['Government', 'Private', 'NGO / UN', 'Academia', 'Freelance', 'Studying abroad', 'Not sure yet'];
 ---
 <Base title="Mentorship" description="Request guidance from an alumnus working in the field you want to enter.">
   <PageHead eyebrow="Alumni" title="Ask an alumnus" lead="A short email exchange or a thirty-minute call with a senior who has been where you are. Free, and run by the society." />
   <div class="prose">
     <h2>How it works</h2>
     <ol>
-      <li>Fill the request form. Say what you want to ask and which sector or organisation you are interested in.</li>
+      <li>Fill the request form below. Say what you want to ask and which sector or organisation you are interested in.</li>
       <li>The cabinet matches you with an alumnus who has opted in, usually within two weeks.</li>
       <li>You get an introduction by email. Be specific, be on time, and send a thank-you note afterwards.</li>
     </ol>
-    <p><a class="btn btn-primary" href={site.forms.mentorship} rel="noopener">Request a mentor</a></p>
+    <h2 id="request">Request a mentor</h2>
+  </div>
+  <RequestForm kind="mentorship" title="Mentorship request" cta="Send request" thanks="Request sent. The cabinet will introduce you by email, usually within two weeks." fields={[
+    { name: 'name', label: 'Your name', required: true },
+    { name: 'email', label: 'Your email', type: 'email', required: true, placeholder: 'The introduction is sent here' },
+    { name: 'batch', label: 'Batch or current semester', required: true, placeholder: '2023-27, 5th semester' },
+    { name: 'mentor', label: 'Who would you like to talk to?', type: 'select', required: true, options: mentorOptions },
+    { name: 'sector', label: 'Sector or path you are interested in', type: 'select', required: true, options: sectors },
+    { name: 'topic', label: 'What do you want to ask?', type: 'textarea', required: true, placeholder: 'Two or three concrete questions. Mention the organisation, scholarship or skill you are aiming for.' },
+  ]} />
+  <div class="prose" style="margin-top:2rem">
     <h2>Good questions to ask</h2>
     <ul>
       <li>How did you get your first role, and what would you do differently?</li>

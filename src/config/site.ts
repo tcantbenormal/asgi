@@ -8,8 +8,8 @@ export const site = {
   email: 'aridsocietyofgis@gmail.com',
   // Google Forms. Replace with the society's own forms.
   forms: {
-    mentorship: 'https://forms.gle/REPLACE_MENTORSHIP_FORM',
-    membership: 'https://forms.gle/REPLACE_MEMBERSHIP_FORM',
+    mentorship: '/mentorship#request', // in-site forms writing to the submissions table (migration 010)
+    membership: '/society#join',
     submitResource: '/submit', // in-site form writing to the Supabase submissions table (migration 005)
   },
   social: {

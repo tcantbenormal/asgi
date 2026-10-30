@@ -90,7 +90,7 @@ import { site } from '../../config/site';
       catch (err) { msg.textContent = err.message; msg.className = 'status err'; return; }
       const { error } = await sb.from('replies').insert({ post_id: id, user_id: me, body });
       if (error) { msg.textContent = error.message; msg.className = 'status err'; return; }
-      e.target.reset(); msg.hidden = true; render();
+      e.target.reset(); $('reply-files').textContent = ''; msg.hidden = true; render();
     });
   </script>
 </Base>

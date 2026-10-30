@@ -9,10 +9,13 @@ const alumni = (await getCollection('alumni')).filter((a) => a.data.sector !== '
 type A = (typeof alumni)[number];
 const count = (key: (a: A) => string | undefined): [string, number][] =>
   Object.entries(alumni.reduce<Record<string, number>>((m, a) => { const k = key(a); if (k) m[k] = (m[k] || 0) + 1; return m; }, {})).sort((a, b) => b[1] - a[1]);
+// City names are typed by members; collapse case, spacing and the common misspellings so one city counts once.
+const CITY_ALIAS: Record<string, string> = { islambad: 'Islamabad', islamabd: 'Islamabad', isb: 'Islamabad', pindi: 'Rawalpindi', rwp: 'Rawalpindi', khi: 'Karachi', lhr: 'Lahore', pesh: 'Peshawar', qta: 'Quetta', fsd: 'Faisalabad', mux: 'Multan' };
+const city = (a: A) => { const raw = (a.data.city || '').trim(); const k = raw.toLowerCase().replace(/[^a-z]/g, ''); return CITY_ALIAS[k] || raw.replace(/\s+/g, ' ').replace(/\w/g, (c) => c.toUpperCase()); };
 const tables: [string, [string, number][]][] = [
   ['By country', count((a) => a.data.country)],
   ['Pakistan by province', count((a) => (a.data.country === 'Pakistan' ? a.data.province || 'Province not set' : undefined))],
-  ['Top cities', count((a) => `${a.data.city}, ${a.data.country}`).slice(0, 10)],
+  ['Top cities', count((a) => `${city(a)}, ${a.data.country}`).slice(0, 10)],
   ['By sector', count((a) => a.data.sector)],
 ];
 const countries = tables[0]![1].length;

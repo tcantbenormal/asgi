@@ -133,6 +133,12 @@ import { site } from '../config/site';
       $('delete-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         if (e.target.confirm.value !== 'DELETE') return say($('delete-msg'), 'Type DELETE in capitals to confirm.', 'err');
+        say($('delete-msg'), 'Removing your files…');
+        // Storage rows cannot be deleted from SQL any more, so clear the member's folders here first.
+        for (const bucket of ['avatars', 'cv', 'images']) {
+          const { data: files } = await sb.storage.from(bucket).list(u.id, { limit: 1000 });
+          if (files?.length) await sb.storage.from(bucket).remove(files.map((f) => `${u.id}/${f.name}`));
+        }
         const { error } = await sb.rpc('delete_my_account');
         if (error) return say($('delete-msg'), error.message, 'err');
         await sb.auth.signOut(); location.href = '/';

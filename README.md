@@ -45,7 +45,7 @@ See `docs/decisions.md` for why things are the way they are and `docs/flow.md` f
 
 One-time setup:
 
-1. In the Supabase dashboard open SQL Editor, paste `supabase/schema.sql`, run it. Then paste and run each file in `supabase/migrations/` in order (002 portfolio fields, 003 forum, 004 accounts, 005 submissions, 006 only if 005 was run before the employer kind was added, 007 images, 008 rebuild on profile save, after pasting a GitHub token into it).
+1. In the Supabase dashboard open SQL Editor, paste `supabase/schema.sql`, run it. Then paste and run each file in `supabase/migrations/` in order (002 portfolio fields, 003 forum, 004 accounts, 005 submissions, 006 only if 005 was run before the employer kind was added, 007 images, 008 rebuild on profile save, after pasting a GitHub token into it; 009 account deletion fix).
 2. Authentication > Providers: enable Google and GitHub (each needs an OAuth client id and secret from that provider; the dashboard shows the callback URL to register). Email sign-in links work without setup but are rate-limited on the free plan.
 3. Authentication > URL Configuration: add the site URL and `http://localhost:4321/alumni/join` to redirect URLs.
 4. Project URL and publishable key go in `src/config/site.ts`. Never put the secret key anywhere in this repository.

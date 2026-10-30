@@ -25,7 +25,8 @@ create or replace function public.delete_my_account() returns void
 language plpgsql security definer set search_path = public as $$
 begin
   if auth.uid() is null then raise exception 'Not signed in.'; end if;
-  delete from storage.objects where bucket_id in ('avatars', 'cv') and (storage.foldername(name))[1] = auth.uid()::text;
+  -- superseded by 009: storage rows are removed by the browser now
+  -- delete from storage.objects where bucket_id in ('avatars', 'cv') and (storage.foldername(name))[1] = auth.uid()::text;
   delete from auth.users where id = auth.uid();
 end $$;
 revoke all on function public.delete_my_account() from public, anon;

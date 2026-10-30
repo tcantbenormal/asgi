@@ -1,5 +1,6 @@
-# Rebuilds and redeploys every Monday so newly approved profiles appear and the
-# Supabase free project never idles for 7 days. Needs repository secrets
+# Rebuilds and redeploys every Monday (so the Supabase free project never idles for 7 days)
+# and whenever Supabase sends a repository_dispatch "rebuild" event after an approved profile
+# is saved (migration 008). Bursts of saves collapse into one queued build. Needs repository secrets
 # CLOUDFARE_API_TOKEN (template "Edit Cloudflare Workers") and CLOUDFARE_ACCOUNT_ID.
 # The secret names are spelled without the L on purpose: that is how they were
 # created in the repository settings. Rename both places together if you fix it.
@@ -8,6 +9,11 @@ on:
   schedule:
     - cron: '0 3 * * 1'
   workflow_dispatch:
+  repository_dispatch:
+    types: [rebuild]
+concurrency:
+  group: site-rebuild
+  cancel-in-progress: false
 jobs:
   deploy:
     runs-on: ubuntu-latest

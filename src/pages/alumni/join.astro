@@ -318,7 +318,7 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       (p.experience ?? []).forEach((v) => addRow('exp', v));
       (p.projects ?? []).forEach((v) => addRow('proj', v));
       const path = p.username || p.slug;
-      say(state, p.approved ? `Your page is live at ${location.origin}/${path}. Edits go live on the next site build.` : `Saved and waiting for cabinet approval. Your page will be ${location.origin}/${path}.`, p.approved ? 'ok' : '');
+      say(state, p.approved ? `Your page is live at ${location.origin}/${path}. Saved edits appear there within about five minutes.` : `Saved and waiting for cabinet approval. Your page will be ${location.origin}/${path}.`, p.approved ? 'ok' : '');
     };
     const { data: { session } } = await sb.auth.getSession();
     if (!session) location.replace('/account?next=/alumni/join');

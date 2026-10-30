@@ -58,6 +58,8 @@ Keeping the free project awake: Supabase pauses free projects after seven days w
 
 ## Accounts
 
+The profile editor can prefill from a CV (PDF or .docx). `public/js/cvparse.js` extracts the text in the browser (pdf.js and mammoth from jsDelivr, loaded only when used) and guesses name, email, links, education, experience and skills with regular expressions; nothing is uploaded and only empty fields are filled. It is a time-saver, not a parser you can trust blindly; the member checks every line before saving.
+
 `/join` offers "student" or "alumni" and sends both to `/account`, the only sign-in page: Google, GitHub, LinkedIn if enabled, or an email link. Students, alumni and faculty all use it; the `sector` field on the profile is what separates a current student from a graduate. Signed-in members see their name in the header with a sign-out button on every page, read from the session supabase-js stores in the browser. The account page shows profile status, lets a member change their email, and deletes the account outright through the `delete_my_account` database function, which removes uploads, profile, posts and replies. Other pages send people to `/account?next=<path>` and get them back after sign-in.
 
 ## Forum

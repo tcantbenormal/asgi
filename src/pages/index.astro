@@ -38,7 +38,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
           <ellipse cx="400" cy="300" rx="300" ry="120" stroke="#12325e" stroke-opacity=".12" stroke-width="1" transform="rotate(-18 400 300)" />
           <circle cx="780" cy="300" r="6" fill="#e3101c" />
         </svg>
-        <model-viewer src="/models/satellite.glb" alt="Rotating Earth observation satellite" auto-rotate rotation-per-second="18deg" camera-controls disable-zoom disable-pan interaction-prompt="none" shadow-intensity="0" exposure="1.1" loading="eager" camera-orbit="35deg 75deg auto"></model-viewer>
+        <model-viewer src="/models/satellite.glb" alt="Rotating Earth observation satellite" auto-rotate auto-rotate-delay="1000" rotation-per-second="18deg" camera-controls disable-zoom disable-pan interaction-prompt="none" shadow-intensity="0" exposure="1.1" loading="eager" camera-orbit="35deg 75deg auto"></model-viewer>
       </div>
     </div>
   </section>

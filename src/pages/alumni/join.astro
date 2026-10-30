@@ -90,6 +90,12 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       </fieldset>
 
       <fieldset>
+        <legend>Import from your CV</legend>
+        <p class="muted" style="margin:0;font-size:.88rem">Pick your CV as a PDF or Word file and the form fills in what it can find: name, email, links, education, experience and skills. It only fills fields that are still empty, and it guesses, so check every line before you save. The file is read in your browser and is not uploaded; use the CV field above if you also want it on your page.</p>
+        <label>CV file (PDF or .docx) <input type="file" id="cv-import" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" /></label>
+      </fieldset>
+
+      <fieldset>
         <legend>Experience</legend>
         <div id="exp"></div>
         <button type="button" class="btn btn-ghost btn-sm" data-add="exp" style="justify-self:start">Add position</button>
@@ -247,6 +253,29 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
         else if (name.startsWith('profile')) { const r = rows[0] || {}; if (!f.name.value) f.name.value = `${r['First Name'] || ''} ${r['Last Name'] || ''}`.trim(); if (!f.bio.value) f.bio.value = r['Summary'] || ''; if (!f.city.value) f.city.value = (r['Geo Location'] || '').split(',')[0]; n++; }
       }
       say(state, n ? `Imported ${n} items from LinkedIn. Check dates and remove anything you do not want public.` : 'No recognised files. Pick Positions.csv, Education.csv, Skills.csv or Profile.csv.', n ? 'ok' : 'err');
+      e.target.value = '';
+    });
+
+    // CV import: text extracted in the browser, fields guessed, only empty ones filled.
+    $('cv-import').addEventListener('change', async (e) => {
+      const file = e.target.files[0]; if (!file) return;
+      say(state, 'Reading your CV…');
+      try {
+        const { cvText, parseCv } = await import('/js/cvparse.js');
+        const cv = parseCv(await cvText(file));
+        let n = 0;
+        const put = (k, v) => { if (v && f[k] && !f[k].value) { f[k].value = v; n++; } };
+        put('name', cv.name); put('email_public', cv.email); put('orcid', cv.orcid); put('bio', cv.bio);
+        put('linkedin', cv.links.linkedin); put('github', cv.links.github); put('portfolio', cv.links.portfolio);
+        put('role', cv.role); put('organization', cv.organization);
+        if (cv.skills.length) { const have = f.skills.value.split(',').map((x) => x.trim()).filter(Boolean); const merged = [...new Set([...have, ...cv.skills])]; n += merged.length - have.length; f.skills.value = merged.join(', '); }
+        const haveEdu = readRows('edu').filter((r) => r.institution).length, haveExp = readRows('exp').filter((r) => r.title).length;
+        if (!haveEdu) cv.education.forEach((v) => { addRow('edu', v); n++; });
+        if (!haveExp) cv.experience.forEach((v) => { addRow('exp', v); n++; });
+        const arid = cv.education.find((x) => /arid|pmas/i.test(x.institution));
+        if (arid) { put('degree', [arid.degree, arid.program].filter(Boolean).join(' ')); if (arid.start && arid.end && /^\d{4}$/.test(arid.end)) put('batch', `${arid.start}-${arid.end.slice(2)}`); }
+        say(state, n ? `Filled ${n} items from your CV: ${cv.education.length} education, ${cv.experience.length} experience, ${cv.skills.length} skills. Check dates, titles and organisations; CV layouts vary and the guesses are rough.` : 'Could not find anything usable in that file. Fill the form by hand or try the LinkedIn export.', n ? 'ok' : 'err');
+      } catch (err) { say(state, err.message, 'err'); }
       e.target.value = '';
     });
 

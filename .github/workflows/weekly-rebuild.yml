@@ -19,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main # always build the current site, even when an old run is re-run from the Actions page
       - uses: actions/setup-node@v4
         with:
           node-version: 22

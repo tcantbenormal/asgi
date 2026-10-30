@@ -91,7 +91,7 @@ The site is static: profile pages are rendered at build time from Supabase. A sa
 Live at https://asgi.app. The domain is registered at Name.com (free first year through the GitHub Student Developer Pack, registered 2026-10-21) with DNS on Cloudflare. The site is served by Cloudflare Workers static assets, configured in `wrangler.jsonc`, and built by Workers Builds from the GitHub repository `tcantbenormal/asgi`.
 
 1. Every push to `main` rebuilds and redeploys. Build command `npm run build`, deploy command `npx wrangler deploy`.
-2. Custom domain: Worker > Settings > Domains & Routes > add `asgi.app` and `www.asgi.app`. If the domain ever changes, update `site` in `astro.config.mjs` and `public/robots.txt`.
+2. Custom domain: Worker > Settings > Domains & Routes > add `asgi.app` and `www.asgi.app`. `worker.js` redirects www to the bare domain; the CARTO basemap key in `site.ts` is locked to `asgi.app` as the referer, and the map falls back to OpenStreetMap tiles if CARTO refuses a request. If the domain ever changes, update `site` in `astro.config.mjs` and `public/robots.txt`.
 3. Weekly rebuild: `.github/workflows/weekly-rebuild.yml` builds and deploys every Monday so new approved profiles appear and the Supabase project is kept awake. It needs two repository secrets: `CLOUDFARE_API_TOKEN` (template "Edit Cloudflare Workers") and `CLOUDFARE_ACCOUNT_ID` (shown on the Workers & Pages overview page); the names are spelled without the L, matching the repository settings.
 4. Supabase > Authentication > URL Configuration: site URL `https://asgi.app`, redirect URLs `https://asgi.app/alumni/join` and `http://localhost:4321/alumni/join`.
 

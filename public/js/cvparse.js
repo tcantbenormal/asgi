@@ -87,8 +87,12 @@ export function parseCv(text) {
       if ((isDeg && (!cur || cur.degree)) || (isInst && (!cur || cur.institution))) { if (cur) out.education.push(cur); cur = { institution: '', degree: '', program: '', start: '', end: '' }; }
       if (!cur) continue;
       if (isInst && !cur.institution) cur.institution = l.replace(RANGE, '').replace(YEAR, '').replace(/[|,–—-]\s*$/, '').trim();
+      // A short plain line right after the degree is the institution even without "university" in it (PMAS AAUR).
+      else if (!isDeg && !isInst && !cur.institution && cur.degree && !RANGE.test(l) && !YEAR.test(l) && l.length < 70) { cur.institution = l.trim(); YEAR.lastIndex = 0; continue; }
+      YEAR.lastIndex = 0;
       if (isDeg && !cur.degree) {
-        const m = l.match(DEGREE); cur.degree = m[0].replace(/\./g, '').toUpperCase().replace("'S", '').replace(/^(BACHELOR|MASTER)$/, (x) => x === 'BACHELOR' ? 'BS' : 'MS');
+        const m = l.match(DEGREE); const up = m[0].replace(/\./g, '').toUpperCase().replace("'S", '');
+        cur.degree = { BACHELOR: 'BS', MASTER: 'MS', PHD: 'PhD', DOCTOR: 'PhD', DOCTORATE: 'PhD', MPHIL: 'MPhil', BSC: 'BSc', MSC: 'MSc', INTERMEDIATE: 'Intermediate', MATRIC: 'Matric', FSC: 'FSc' }[up] || up;
         const prog = l.slice(m.index + m[0].length).replace(/^[\s:,(in)]+/i, '').replace(RANGE, '').replace(YEAR, '').replace(INSTITUTION.source, '').split(/[|,(]| at | from /)[0].trim();
         if (prog && !/universit|college|institute/i.test(prog)) cur.program = prog;
       }

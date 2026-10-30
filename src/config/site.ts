@@ -14,7 +14,7 @@ export const site = {
   },
   social: {
     linkedin: 'https://www.linkedin.com/in/institute-of-geoinformation-and-earth-observation-pmas-arid-university-rawalpindi-18ba20426/',
-    facebook: '', // the Facebook link sent on 30 Oct 2026 was the LinkedIn URL again; paste the real page here to show it
+    facebook: 'https://www.facebook.com/share/1C6UG7p8FG/',
     instagram: 'https://www.instagram.com/igeoarid/',
     whatsapp: '',
   },

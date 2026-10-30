@@ -16,6 +16,7 @@ import { site } from '../../config/site';
     <p id="signin" class="notice" hidden style="margin-top:1.5rem">Sign in to reply. <a id="signin-link" href="/alumni/join">Sign in with Google, GitHub or email</a>, you will be sent back here.</p>
     <form id="reply" class="card forum-form" hidden style="margin-top:1.5rem">
       <label>Your reply <textarea name="body" required minlength="2" maxlength="10000" placeholder="Answer, link to the data, or ask for the detail you need."></textarea></label>
+      <label>Images, optional: up to 4, 2 MB each <input name="images" type="file" /><small class="muted" id="reply-files"></small></label>
       <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
         <button class="btn btn-primary" type="submit">Reply</button>
         <span id="reply-msg" class="status" hidden></span>
@@ -25,10 +26,14 @@ import { site } from '../../config/site';
 
   <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    import { uploadImages, watchPicker } from '/js/imgup.js';
     const sb = createClient(url, key);
     const $ = (id) => document.getElementById(id);
+    watchPicker($('reply').images, $('reply-files'));
     const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-    const rich = (s) => esc(s).replace(/https?:\/\/[^\s<]+/g, (u) => `<a href="${u}" rel="nofollow noopener">${u}</a>`);
+    // Only images from the site's own bucket become <img>; any other URL stays a link.
+    const IMG = `${url}/storage/v1/object/public/images/`;
+    const rich = (s) => esc(s).replace(/https?:\/\/[^\s<]+/g, (u) => u.startsWith(IMG) ? `<a href="${u}" target="_blank" rel="noopener"><img class="pimg" src="${u}" alt="" loading="lazy"></a>` : `<a href="${u}" rel="nofollow noopener">${u}</a>`);
     const KIND = { question: 'Question', data_request: 'Data request', discussion: 'Discussion' };
     const when = (d) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
     const authors = async (ids) => { const { data } = await sb.from('profiles').select('user_id,name,username,photo_url').in('user_id', [...new Set(ids)]); return Object.fromEntries((data || []).map((p) => [p.user_id, p])); };
@@ -80,7 +85,10 @@ import { site } from '../../config/site';
     $('reply').addEventListener('submit', async (e) => {
       e.preventDefault();
       const msg = $('reply-msg'); msg.hidden = false; msg.textContent = 'Posting…'; msg.className = 'status';
-      const { error } = await sb.from('replies').insert({ post_id: id, user_id: me, body: e.target.body.value.trim() });
+      let body = e.target.body.value.trim();
+      try { const urls = await uploadImages(sb, me, e.target.images.files, (t) => { msg.textContent = t; }); if (urls.length) body += '\n\n' + urls.join('\n'); }
+      catch (err) { msg.textContent = err.message; msg.className = 'status err'; return; }
+      const { error } = await sb.from('replies').insert({ post_id: id, user_id: me, body });
       if (error) { msg.textContent = error.message; msg.className = 'status err'; return; }
       e.target.reset(); msg.hidden = true; render();
     });

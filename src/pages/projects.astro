@@ -16,13 +16,14 @@ const domains = [...new Set(projects.map((p) => p.data.domain))].sort();
   <div class="grid grid-2" id="plist">
     {projects.map((p) => (
       <article class="card" data-dom={p.data.domain}>
+        {p.data.images[0] && <a href={p.data.images[0]} target="_blank" rel="noopener"><img class="proj-img" src={p.data.images[0]} alt={`Figure from ${p.data.title}`} loading="lazy" /></a>}
         <div class="meta"><span class="tag grey">{p.data.domain}</span><span>{p.data.year}</span></div>
         <h3>{p.data.title}</h3>
         <p>{p.data.abstract}</p>
         <div class="meta" style="margin-top:.4rem"><span>{p.data.students.join(', ')}</span><span>Supervisor: {p.data.supervisor}</span></div>
         <div class="foot">
           <div class="tags">{p.data.tools.map((t) => <span class="tag grey">{t}</span>)}</div>
-          {p.data.report && <a class="btn btn-ghost btn-sm" href={p.data.report} rel="noopener">Report</a>}
+          <span style="display:flex;gap:.4rem">{p.data.images.length > 1 && <a class="btn btn-ghost btn-sm" href={p.data.images[1]} target="_blank" rel="noopener">More figures</a>}{p.data.report && <a class="btn btn-ghost btn-sm" href={p.data.report} rel="noopener">Report</a>}</span>
         </div>
       </article>
     ))}

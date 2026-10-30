@@ -33,6 +33,7 @@ import { site } from '../../config/site';
       <label>Title <input name="title" required minlength="5" maxlength="160" placeholder="Short and specific, like a search query" /></label>
       <label>Details <textarea name="body" required minlength="10" maxlength="10000" placeholder="What you are trying to do, what you tried, area and time period if it is data. Links are fine."></textarea></label>
       <label>Tags, comma separated, up to five <input name="tags" placeholder="qgis, sentinel-2, punjab" /></label>
+      <label>Images, optional: up to 4, 2 MB each, resized before upload <input name="images" type="file" /><small class="muted" id="new-files"></small></label>
       <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
         <button class="btn btn-primary" type="submit">Post</button>
         <button class="btn btn-ghost" type="button" id="new-cancel">Cancel</button>
@@ -46,8 +47,10 @@ import { site } from '../../config/site';
 
   <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    import { uploadImages, watchPicker } from '/js/imgup.js';
     const sb = createClient(url, key);
     const $ = (id) => document.getElementById(id);
+    watchPicker($('new').images, $('new-files'));
     const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     const KIND = { question: 'Question', data_request: 'Data request', discussion: 'Discussion' };
     const ago = (d) => { const s = (Date.now() - new Date(d)) / 1000; const [n, u] = s < 3600 ? [s / 60, ' min'] : s < 86400 ? [s / 3600, ' h'] : [s / 86400, ' d']; return `${Math.max(1, Math.floor(n))}${u} ago`; };
@@ -84,7 +87,11 @@ import { site } from '../../config/site';
       const f = e.target.elements, msg = $('new-msg');
       msg.hidden = false; msg.textContent = 'Posting…'; msg.className = 'status';
       const tags = [...new Set(f.tags.value.toLowerCase().split(',').map((t) => t.trim()).filter(Boolean))].slice(0, 5);
-      const { data, error } = await sb.from('posts').insert({ user_id: session.user.id, kind: f.kind.value, title: f.title.value.trim(), body: f.body.value.trim(), tags }).select('id').single();
+      let body = f.body.value.trim();
+      try { const urls = await uploadImages(sb, session.user.id, f.images.files, (t) => { msg.textContent = t; }); if (urls.length) body += '\n\n' + urls.join('\n'); }
+      catch (err) { msg.textContent = err.message; msg.className = 'status err'; return; }
+      msg.textContent = 'Posting…';
+      const { data, error } = await sb.from('posts').insert({ user_id: session.user.id, kind: f.kind.value, title: f.title.value.trim(), body, tags }).select('id').single();
       if (error) { msg.textContent = error.message; msg.className = 'status err'; return; }
       location.href = `/forum/post?id=${data.id}`;
     });

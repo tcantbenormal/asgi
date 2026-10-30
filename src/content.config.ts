@@ -191,6 +191,7 @@ const projects = defineCollection({
     abstract: z.string(),
     tools: z.array(z.string()).default([]),
     report: link.optional(),
+    images: z.array(z.string()).default([]), // first one shows on the card; URLs from the images bucket or /img/projects/
   }),
 });
 

@@ -20,6 +20,8 @@ import { site } from '../config/site';
       <label>Title <input name="title" required minlength="3" maxlength="160" placeholder="Name of the tool, dataset, position or project" /></label>
       <label>Link, if there is one <input name="url" type="url" maxlength="500" placeholder="https://" /></label>
       <label>Details <textarea name="body" required minlength="10" maxlength="5000" rows="6" placeholder="What it is, why it is useful to students or alumni, licence or deadline if relevant. For a dataset: area, time period, source and format."></textarea></label>
+      <label id="imgwrap" hidden>Images, optional: up to 4, 2 MB each. Screenshots or maps for a project, a logo for a tool. <input name="images" type="file" /><small class="muted" id="files"></small></label>
+      <p class="muted" id="imghint" style="font-size:.9rem;margin:0"><a href="/account?next=/submit">Sign in</a> to attach images.</p>
       <div class="two">
         <label>Your name <input name="name" maxlength="120" autocomplete="name" /></label>
         <label>Your email <input name="email" type="email" maxlength="200" autocomplete="email" placeholder="So we can credit you or ask a question" /></label>
@@ -36,8 +38,10 @@ import { site } from '../config/site';
 
   <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    import { uploadImages, watchPicker } from '/js/imgup.js';
     const sb = createClient(url, key);
     const f = document.getElementById('f'), msg = document.getElementById('msg');
+    watchPicker(f.images, document.getElementById('files'));
     const kinds = ['tool', 'dataset', 'opportunity', 'project', 'employer', 'other'];
     const want = new URLSearchParams(location.search).get('type');
     if (kinds.includes(want)) f.kind.value = want;
@@ -46,13 +50,19 @@ import { site } from '../config/site';
       const m = session.user.user_metadata || {};
       f.name.value ||= m.full_name || m.name || '';
       f.email.value ||= session.user.email || '';
+      document.getElementById('imgwrap').hidden = false; document.getElementById('imghint').hidden = true;
     }
     f.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (f.website.value) return; // honeypot
       msg.hidden = false; msg.className = 'status'; msg.textContent = 'Sending…';
+      let images = [];
+      if (session && f.images.files.length) {
+        try { images = await uploadImages(sb, session.user.id, f.images.files, (t) => { msg.textContent = t; }); }
+        catch (err) { msg.className = 'status err'; msg.textContent = err.message; return; }
+      }
       const row = { kind: f.kind.value, title: f.title.value.trim(), url: f.url.value.trim() || null, body: f.body.value.trim(),
-        name: f.name.value.trim() || null, email: f.email.value.trim() || null, user_id: session?.user.id ?? null };
+        name: f.name.value.trim() || null, email: f.email.value.trim() || null, user_id: session?.user.id ?? null, images };
       const { error } = await sb.from('submissions').insert(row);
       if (error) { msg.className = 'status err'; msg.textContent = error.message; return; }
       msg.className = 'status ok'; msg.textContent = 'Thank you. We will review it and email you if we publish it.';

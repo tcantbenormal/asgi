@@ -13,9 +13,9 @@ export const site = {
     submitResource: '/submit', // in-site form writing to the Supabase submissions table (migration 005)
   },
   social: {
-    linkedin: 'https://www.linkedin.com/company/REPLACE',
-    facebook: 'https://www.facebook.com/REPLACE',
-    instagram: 'https://www.instagram.com/REPLACE',
+    linkedin: 'https://www.linkedin.com/in/institute-of-geoinformation-and-earth-observation-pmas-arid-university-rawalpindi-18ba20426/',
+    facebook: '', // the Facebook link sent on 30 Oct 2026 was the LinkedIn URL again; paste the real page here to show it
+    instagram: 'https://www.instagram.com/igeoarid/',
     whatsapp: '',
   },
   // Supabase project. The publishable key is designed to be public; row level security does the protecting.

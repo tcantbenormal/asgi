@@ -45,7 +45,7 @@ See `docs/decisions.md` for why things are the way they are and `docs/flow.md` f
 
 One-time setup:
 
-1. In the Supabase dashboard open SQL Editor, paste `supabase/schema.sql`, run it. Then paste and run each file in `supabase/migrations/` in order (002 portfolio fields, 003 forum, 004 accounts, 005 submissions, 006 only if 005 was run before the employer kind was added).
+1. In the Supabase dashboard open SQL Editor, paste `supabase/schema.sql`, run it. Then paste and run each file in `supabase/migrations/` in order (002 portfolio fields, 003 forum, 004 accounts, 005 submissions, 006 only if 005 was run before the employer kind was added, 007 images).
 2. Authentication > Providers: enable Google and GitHub (each needs an OAuth client id and secret from that provider; the dashboard shows the callback URL to register). Email sign-in links work without setup but are rate-limited on the free plan.
 3. Authentication > URL Configuration: add the site URL and `http://localhost:4321/alumni/join` to redirect URLs.
 4. Project URL and publishable key go in `src/config/site.ts`. Never put the secret key anywhere in this repository.
@@ -61,6 +61,8 @@ Keeping the free project awake: Supabase pauses free projects after seven days w
 `/join` offers "student" or "alumni" and sends both to `/account`, the only sign-in page: Google, GitHub, LinkedIn if enabled, or an email link. Students, alumni and faculty all use it; the `sector` field on the profile is what separates a current student from a graduate. Signed-in members see their name in the header with a sign-out button on every page, read from the session supabase-js stores in the browser. The account page shows profile status, lets a member change their email, and deletes the account outright through the `delete_my_account` database function, which removes uploads, profile, posts and replies. Other pages send people to `/account?next=<path>` and get them back after sign-in.
 
 ## Forum
+
+Posts and replies can carry up to four images each. The browser resizes them to 1600 px and encodes WebP (`public/js/imgup.js`), the `images` bucket refuses anything over 2 MB (migration 007), and the public URLs are appended to the post body; the post page turns URLs from that bucket into `<img>` and leaves every other URL as a plain link. Signed-in members can attach images to suggestions on `/submit` the same way; they land in the `images` column of `submissions`, and a project added to `projects.json` shows its first `images` entry on the card.
 
 `/forum` lists questions, data requests and discussions stored in the `posts` and `replies` tables; members post and reply after signing in. Moderation is the Table Editor: tick `hidden` on a post or reply to remove it from view. There is no rebuild involved; forum pages render in the browser.
 

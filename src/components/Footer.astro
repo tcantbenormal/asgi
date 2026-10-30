@@ -1,6 +1,7 @@
 ---
 import { site } from '../config/site';
 const year = new Date().getFullYear();
+const socials = [['LinkedIn', site.social.linkedin], ['Facebook', site.social.facebook], ['Instagram', site.social.instagram]].filter(([, u]) => u && !u.includes('REPLACE'));
 ---
 <footer class="site-footer" data-pagefind-ignore>
   <div class="wrap">
@@ -44,12 +45,8 @@ const year = new Date().getFullYear();
       </div>
     </div>
     <div class="legal">
-      <span>© {year} {site.name}. Built and maintained by students.</span>
-      <span>
-        {site.social.linkedin && <a href={site.social.linkedin}>LinkedIn</a>} ·
-        {site.social.facebook && <a href={site.social.facebook}>Facebook</a>} ·
-        {site.social.instagram && <a href={site.social.instagram}>Instagram</a>}
-      </span>
+      <span>© {year} {site.name}. Conceived, designed and built by <a href="/tcantbenormal">Muhammad Taimoor Ashfaq Malik</a>, with a helping hand from Fahad Karim.</span>
+      <span>{socials.map(([label, u], i) => <>{i > 0 && ' · '}<a href={u} rel="noopener">{label}</a></>)}</span>
     </div>
   </div>
 </footer>

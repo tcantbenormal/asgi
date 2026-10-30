@@ -50,7 +50,7 @@ small, .muted { color: var(--ink-2); }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: 68px; position: relative; }
 .brand { display: flex; flex: none; align-items: center; gap: 0.6rem; margin-left: -6px; text-decoration: none; color: var(--navy); font-family: var(--head); font-weight: 600; line-height: 1.15; }
 .brand img { width: 46px; height: 46px; border-radius: 8px; object-fit: cover; }
-.brand-name { display: inline-block; white-space: nowrap; font-size: 0.98rem; text-align: justify; text-align-last: justify; letter-spacing: 0.01em; }
+.brand-name { display: inline-block; white-space: nowrap; font-size: 0.98rem; text-align: left; letter-spacing: 0.01em; }
 .nav { display: flex; gap: 0.1rem; align-items: center; }
 .nav a { padding: 0.5rem 0.5rem; border-radius: 6px; text-decoration: none; color: var(--ink-2); font-size: 0.92rem; font-weight: 500; white-space: nowrap; }
 .nav a:hover, .nav a[aria-current="page"] { background: var(--paper-2); color: var(--navy); }

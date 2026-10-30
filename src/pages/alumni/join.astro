@@ -184,6 +184,8 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       row.querySelector('[data-remove]').addEventListener('click', () => row.remove());
       $(kind).appendChild(row);
     };
+    const rowKey = (r) => `${(r.degree || r.title || '').toLowerCase().replace(/[^a-z]/g, '')}|${(r.start || '').slice(0, 4)}|${(r.end || '').slice(0, 4)}`;
+    const dedupe = (rows) => rows.filter((r, i, a) => a.findIndex((o) => rowKey(o) === rowKey(r)) === i);
     const readRows = (kind) => [...$(kind).querySelectorAll('.rrow')].map((r) => Object.fromEntries([...r.querySelectorAll('[data-k]')].map((i) => [i.dataset.k, i.value.trim()])));
     document.querySelectorAll('[data-add]').forEach((b) => b.addEventListener('click', () => addRow(b.dataset.add)));
 
@@ -269,9 +271,10 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
         put('linkedin', cv.links.linkedin); put('github', cv.links.github); put('portfolio', cv.links.portfolio);
         put('role', cv.role); put('organization', cv.organization);
         if (cv.skills.length) { const have = f.skills.value.split(',').map((x) => x.trim()).filter(Boolean); const merged = [...new Set([...have, ...cv.skills])]; n += merged.length - have.length; f.skills.value = merged.join(', '); }
-        const haveEdu = readRows('edu').filter((r) => r.institution).length, haveExp = readRows('exp').filter((r) => r.title).length;
-        if (!haveEdu) cv.education.forEach((v) => { addRow('edu', v); n++; });
-        if (!haveExp) cv.experience.forEach((v) => { addRow('exp', v); n++; });
+        // Add only rows that do not match an existing one on years and degree or title.
+        const eduKeys = new Set(readRows('edu').map(rowKey)), expKeys = new Set(readRows('exp').map(rowKey));
+        cv.education.forEach((v) => { if (!eduKeys.has(rowKey(v))) { addRow('edu', v); eduKeys.add(rowKey(v)); n++; } });
+        cv.experience.forEach((v) => { if (!expKeys.has(rowKey(v))) { addRow('exp', v); expKeys.add(rowKey(v)); n++; } });
         const arid = cv.education.find((x) => /arid|pmas/i.test(x.institution));
         if (arid) { put('degree', [arid.degree, arid.program].filter(Boolean).join(' ')); if (arid.start && arid.end && /^\d{4}$/.test(arid.end)) put('batch', `${arid.start}-${arid.end.slice(2)}`); }
         say(state, n ? `Filled ${n} items from your CV: ${cv.education.length} education, ${cv.experience.length} experience, ${cv.skills.length} skills. Check dates, titles and organisations; CV layouts vary and the guesses are rough.` : 'Could not find anything usable in that file. Fill the form by hand or try the LinkedIn export.', n ? 'ok' : 'err');
@@ -370,8 +373,8 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
           advice: editor.dataset.mode === 'student' ? null : f.advice.value.trim() || null, bio: f.bio.value.trim() || null,
           mentor: editor.dataset.mode === 'student' ? false : f.mentor.checked,
           publications: readRows('pub').filter((p) => p.title),
-          education: readRows('edu').filter((p) => p.institution),
-          experience: readRows('exp').filter((p) => p.title).map((p) => ({ ...p, current: !p.end })),
+          education: dedupe(readRows('edu').filter((p) => p.institution)),
+          experience: dedupe(readRows('exp').filter((p) => p.title)).map((p) => ({ ...p, current: !p.end })),
           projects: readRows('proj').filter((p) => p.title).map((p) => ({ ...p, tags: p.tags.split(',').map((s) => s.trim()).filter(Boolean) })),
           ...extra,
         };

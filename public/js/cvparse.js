@@ -132,6 +132,9 @@ export function parseCv(text) {
   const inside = (s, o) => s.length >= 3 && o.length > s.length && new RegExp(`(^|\\s)${s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\s|$)`, 'i').test(o);
   out.skills = uniq.filter((s) => !uniq.some((o) => SKILLS.includes(o) && inside(s, o))).slice(0, 40);
 
+  const tidy = (s) => { s = s.replace(/[()[\]]+/g, '').replace(/\s+/g, ' ').trim(); return s.length > 3 && s === s.toUpperCase() ? s.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase()).replace(/\bGis\b/g, 'GIS').replace(/\bAnd\b/g, 'and').replace(/\bOf\b/g, 'of') : s; };
+  for (const e of out.education) { e.program = tidy(e.program); e.institution = tidy(e.institution); }
+  for (const e of out.experience) { e.title = tidy(e.title); e.organization = tidy(e.organization); }
   out.education = out.education.filter((e) => e.institution || e.degree).slice(0, 8);
   out.experience = out.experience.slice(0, 10);
   const cur = out.experience.find((e) => e.current) || out.experience[0];

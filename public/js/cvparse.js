@@ -136,7 +136,7 @@ export function parseCv(text) {
   const inside = (s, o) => s.length >= 3 && o.length > s.length && new RegExp(`(^|\\s)${s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\s|$)`, 'i').test(o);
   out.skills = uniq.filter((s) => !uniq.some((o) => SKILLS.includes(o) && inside(s, o))).slice(0, 40);
 
-  const tidy = (s) => { s = s.replace(/[()[\]]+/g, '').replace(/\s+/g, ' ').trim(); return s.length > 3 && s === s.toUpperCase() ? s.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase()).replace(/\bGis\b/g, 'GIS').replace(/\bAnd\b/g, 'and').replace(/\bOf\b/g, 'of') : s; };
+  const tidy = (s) => { s = s.replace(/[()[\]]+/g, '').replace(/\s+/g, ' ').trim(); return s.length > 3 && s === s.toUpperCase() ? s.split(' ').map((w) => w.length <= 4 ? w : w[0] + w.slice(1).toLowerCase()).join(' ').replace(/\bAND\b/g, 'and').replace(/\bOF\b/g, 'of').replace(/\bTHE\b/g, 'the') : s; };
   for (const e of out.education) { e.program = tidy(e.program); e.institution = tidy(e.institution); }
   for (const e of out.experience) { e.title = tidy(e.title); e.organization = tidy(e.organization); }
   out.education = out.education.filter((e) => e.institution || e.degree).slice(0, 8);

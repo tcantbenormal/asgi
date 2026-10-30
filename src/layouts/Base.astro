@@ -57,5 +57,13 @@ const canonical = new URL(Astro.url.pathname.replace(/(\/index)?\.html$/, '') ||
     </main>
     <div class="wrap" data-pagefind-ignore><AdSlot slot="footer" /></div>
     <Footer />
+    <script is:inline>
+      // Every link to another site opens in a new tab, including links rendered later (forum, replies).
+      document.addEventListener('click', (e) => {
+        const a = e.target.closest('a[href]');
+        if (!a || a.target || a.hasAttribute('download')) return;
+        if (a.origin && a.origin !== location.origin && /^https?:$/.test(a.protocol)) { a.target = '_blank'; a.rel = 'noopener'; }
+      }, true);
+    </script>
   </body>
 </html>

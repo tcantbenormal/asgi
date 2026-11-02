@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Lines from '../components/Lines.astro';
 import Avatar from '../components/Avatar.astro';
 import AlumniMap from '../components/AlumniMap.astro';
 import Comments from '../components/Comments.astro';
@@ -82,7 +83,7 @@ const jsonLd = {
               <li>
                 <div class="when">{[e.start, e.current ? 'present' : e.end].filter(Boolean).join(' – ')}</div>
                 <h3>{e.title}{e.organization && <span class="muted"> · {e.organization}</span>}</h3>
-                {e.description && <p>{e.description}</p>}
+                {e.description && <Lines text={e.description} />}
               </li>
             ))}
           </ol>
@@ -111,7 +112,7 @@ const jsonLd = {
             {d.projects.map((p) => (
               <article class="card">
                 <h3>{p.url ? <a href={p.url} rel="noopener" target="_blank">{p.title}</a> : p.title}</h3>
-                {p.description && <p>{p.description}</p>}
+                {p.description && <Lines text={p.description} />}
                 {p.tags.length > 0 && <div class="tags">{p.tags.map((t) => <span class="tag grey">{t}</span>)}</div>}
                 {p.repo && <div class="foot"><a class="btn btn-ghost btn-sm" href={p.repo} rel="noopener" target="_blank">Source</a></div>}
               </article>

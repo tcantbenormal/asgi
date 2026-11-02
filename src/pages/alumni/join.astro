@@ -195,7 +195,7 @@ const sections = [
     <label>Degree <input data-k="degree" placeholder="MS" /></label>
     <label>Programme <input data-k="program" placeholder="Remote Sensing & GIS" /></label>
     <label>Start <input data-k="start" placeholder="2025" pattern="\d{4}" /></label>
-    <label>End <input data-k="end" placeholder="2027 or present" /></label>
+    <label>End <input data-k="end" placeholder="2027 or present" /><span class="check" style="font-size:.8rem;margin-top:.2rem"><input type="checkbox" data-k="completed" /> completed</span></label>
     <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove this degree">×</button>
     <small class="dup" hidden>Looks like a duplicate of another degree with the same years.</small>
   </div></template>
@@ -204,7 +204,7 @@ const sections = [
     <label>Organisation <input data-k="organization" list="orgs" /></label>
     <label>Start <input data-k="start" type="month" /></label>
     <label>End <input data-k="end" type="month" /><span class="check" style="font-size:.8rem;margin-top:.2rem"><input type="checkbox" data-current /> current</span></label>
-    <label class="span">Description <textarea data-k="description" rows="2" maxlength="300" placeholder="One or two lines on what you did"></textarea><small class="muted ctr"></small></label>
+    <label class="span">Description <textarea data-k="description" rows="3" maxlength="600" placeholder="One or two lines, or bullet points, on what you did"></textarea><span class="ta-tools"><button type="button" class="linkish" data-bullet>• Add bullet</button><small class="muted ctr"></small></span></label>
     <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove this position">×</button>
     <small class="dup" hidden>Looks like a duplicate of another position with the same title and dates.</small>
   </div></template>
@@ -212,7 +212,7 @@ const sections = [
     <label>Title <input data-k="title" required /></label>
     <label>Live link <input data-k="url" type="url" placeholder="https://…" /></label>
     <label>Repository <input data-k="repo" type="url" placeholder="https://github.com/…" /></label>
-    <label class="span">Description <textarea data-k="description" rows="2" maxlength="300"></textarea><small class="muted ctr"></small></label>
+    <label class="span">Description <textarea data-k="description" rows="3" maxlength="600"></textarea><span class="ta-tools"><button type="button" class="linkish" data-bullet>• Add bullet</button><small class="muted ctr"></small></span></label>
     <label>Tags <input data-k="tags" placeholder="Leaflet, PostGIS" /></label>
     <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove this project">×</button>
   </div></template>
@@ -250,10 +250,20 @@ const sections = [
     const addRow = (kind, v = {}) => {
       const row = $(`t-${kind}`).content.firstElementChild.cloneNode(true);
       row.querySelectorAll('[data-k]').forEach((i) => {
+        if (i.type === 'checkbox') { // completed: explicit flag, else assume done when the end year has passed
+          const end = String(v.end ?? ''); const y = Number(end.slice(0, 4));
+          i.checked = v[i.dataset.k] ?? (!!y && y <= new Date().getFullYear() && !/present|current/i.test(end)); return;
+        }
         let val = Array.isArray(v[i.dataset.k]) ? v[i.dataset.k].join(', ') : v[i.dataset.k] ?? '';
         if (i.type === 'month') val = String(val).slice(0, 7).match(/^\d{4}-\d{2}$/) ? String(val).slice(0, 7) : '';
         i.value = val;
       });
+      row.querySelectorAll('[data-bullet]').forEach((b) => b.addEventListener('click', () => {
+        const t = b.closest('label').querySelector('textarea'); const at = t.selectionStart ?? t.value.length;
+        const before = t.value.slice(0, at), after = t.value.slice(at);
+        const ins = (before && !before.endsWith('\n') ? '\n' : '') + '• ';
+        t.value = before + ins + after; t.focus(); t.selectionStart = t.selectionEnd = before.length + ins.length; t.dispatchEvent(new Event('input', { bubbles: true }));
+      }));
       const curBox = row.querySelector('[data-current]');
       if (curBox) {
         const end = row.querySelector('[data-k="end"]');
@@ -271,7 +281,16 @@ const sections = [
     };
     const rowKey = (r) => `${(r.degree || r.title || '').toLowerCase().replace(/[^a-z]/g, '')}|${(r.start || '').slice(0, 4)}|${(r.end || '').slice(0, 4)}`;
     const dedupe = (rows) => rows.filter((r, i, a) => a.findIndex((o) => rowKey(o) === rowKey(r)) === i);
-    const readRows = (kind) => [...$(kind).querySelectorAll('.rrow')].map((r) => { const o = Object.fromEntries([...r.querySelectorAll('[data-k]')].map((i) => [i.dataset.k, i.value.trim()])); const c = r.querySelector('[data-current]'); if (c) o.current = c.checked; return o; });
+    const readRows = (kind) => [...$(kind).querySelectorAll('.rrow')].map((r) => { const o = Object.fromEntries([...r.querySelectorAll('[data-k]')].map((i) => [i.dataset.k, i.type === 'checkbox' ? i.checked : i.value.trim()])); const c = r.querySelector('[data-current]'); if (c) o.current = c.checked; return o; });
+    // Graduate rule: a completed degree from the institute spanning at least four years.
+    const INSTITUTE = /arid|pmas|aaur|igeo|geo-?information/i;
+    const graduateCheck = () => {
+      const rows = readRows('edu').filter((r) => INSTITUTE.test(r.institution));
+      if (!rows.length) return 'Add your degree from the institute under Education and mark it completed to be listed as a graduate.';
+      const ok = rows.find((r) => r.completed && Number(String(r.end).slice(0, 4)) - Number(String(r.start).slice(0, 4)) >= 4);
+      if (ok) return '';
+      return rows.some((r) => r.completed) ? 'A completed degree from the institute must span at least four years (start to end) to count as a graduate.' : 'Tick "completed" on your degree from the institute to be listed as a graduate.';
+    };
     const markDups = (kind) => { const rows = [...$(kind).querySelectorAll('.rrow')]; const keys = readRows(kind).map(rowKey); rows.forEach((r, i) => { r.querySelector('.dup').hidden = !(keys[i].split('|')[0] && keys.indexOf(keys[i]) !== i); }); };
     document.querySelectorAll('[data-add]').forEach((b) => b.addEventListener('click', () => { const r = addRow(b.dataset.add); r.querySelector('input,textarea')?.focus(); dirty(); }));
 
@@ -394,7 +413,10 @@ const sections = [
         : 'Graduates appear on the alumni map and can offer mentoring. Faculty choose the Academia sector.';
       refreshProgress();
     };
-    document.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => { setMode(b.dataset.mode); dirty(); }));
+    document.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => {
+      if (b.dataset.mode === 'alumni') { const why = graduateCheck(); if (why) { say(state, why, 'err'); setMode('student'); go('education'); dirty(); return; } }
+      setMode(b.dataset.mode); dirty();
+    }));
 
     // ---- LinkedIn data export ----
     const csv = (t) => { const rows = [[]]; let q = false, c = ''; for (let i = 0; i < t.length; i++) { const ch = t[i];
@@ -533,6 +555,7 @@ const sections = [
         if (off(el) || el.disabled) continue;
         if (!el.checkValidity()) { const sec = el.closest('.ed-sec')?.dataset.sec; if (sec) go(sec); el.reportValidity(); el.focus(); say(state, 'Fix the highlighted field, then save again.', 'err'); return; }
       }
+      if (editor.dataset.mode === 'alumni') { const why = graduateCheck(); if (why) { go('education'); say(state, why, 'err'); return; } }
       $('save').disabled = true; $('savebar').dataset.busy = '1'; savedText.textContent = 'Saving…'; say(state, '');
       try {
         const extra = {};
@@ -621,11 +644,14 @@ const sections = [
     .ed-savebar[data-busy] .ed-saved .dot { background: var(--navy); }
     .ed-photo { display: flex; gap: 0.75rem; align-items: center; font-weight: 400; }
     .ed-photo img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); }
-    .chips { display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0.35rem; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.45rem; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+    .ta-tools { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; font-weight: 400; }
     .chips input { border: 0; flex: 1; min-width: 160px; padding: 0.3rem 0.4rem; } .chips input:focus { outline: none; }
     .chips:focus-within { border-color: var(--navy); box-shadow: 0 0 0 3px var(--navy-soft); }
-    .chip { font: inherit; font-size: 0.82rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 999px; border: 0; background: var(--navy-soft); color: var(--navy); cursor: pointer; transition: background 0.15s, transform 0.15s; }
-    .chip:hover { background: var(--red-soft); color: var(--red); transform: scale(1.04); } .chip:hover::after { content: " ×"; }
+    .chip { font: inherit; font-size: 0.82rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.7rem 0.3rem 0.55rem; border-radius: 999px; border: 1px solid #cfdcf0; background: linear-gradient(180deg, #fff, var(--navy-soft)); color: var(--navy); cursor: pointer; box-shadow: 0 1px 2px rgba(18,50,94,0.08); transition: background 0.15s, transform 0.15s, border-color 0.15s, box-shadow 0.15s; }
+    .chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--red); flex: none; }
+    .chip::after { content: "×"; font-weight: 700; color: var(--ink-3); margin-left: 0.1rem; transition: color 0.15s; }
+    .chip:hover { border-color: var(--red); background: var(--red-soft); color: var(--red); transform: translateY(-1px); box-shadow: 0 3px 8px rgba(227,16,28,0.15); } .chip:hover::after { color: var(--red); }
     .form input:focus, .form select:focus, .form textarea:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px var(--navy-soft); transition: box-shadow 0.15s; }
     .form input:user-invalid { border-color: var(--red); }
     .ctr { text-align: right; font-weight: 400; }

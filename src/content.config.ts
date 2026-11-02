@@ -41,6 +41,7 @@ const alumni = defineCollection({
       program: z.string().optional(),
       start: z.coerce.string().optional(),
       end: z.coerce.string().optional(),
+      completed: z.boolean().default(false), // a graduate needs the institute degree completed, four years or more
     })).default([]),
     experience: z.array(z.object({
       title: z.string(),

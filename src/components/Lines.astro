@@ -1,0 +1,13 @@
+---
+// Plain text with optional bullet lines ("• ", "- " or "* ") rendered as a list; other lines as paragraphs.
+interface Props { text: string }
+const lines = Astro.props.text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+const blocks: { kind: 'p' | 'ul'; items: string[] }[] = [];
+for (const l of lines) {
+  const m = l.match(/^[•\-*]\s*(.+)$/);
+  if (m) { const last = blocks.at(-1); if (last?.kind === 'ul') last.items.push(m[1]); else blocks.push({ kind: 'ul', items: [m[1]] }); }
+  else blocks.push({ kind: 'p', items: [l] });
+}
+---
+{blocks.map((b) => b.kind === 'ul' ? <ul class="lines">{b.items.map((i) => <li>{i}</li>)}</ul> : <p>{b.items[0]}</p>)}
+<style>.lines { margin: 0.25rem 0 0.5rem 1.1rem; padding: 0; display: grid; gap: 0.15rem; } .lines li { font-size: 0.94rem; color: var(--ink-2); }</style>

@@ -646,12 +646,12 @@ const sections = [
     .ed-photo img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); }
     .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.45rem; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
     .ta-tools { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; font-weight: 400; }
-    .chips input { border: 0; flex: 1; min-width: 160px; padding: 0.3rem 0.4rem; } .chips input:focus { outline: none; }
+    .chips :global(input) { border: 0; flex: 1; min-width: 160px; padding: 0.3rem 0.4rem; } .chips :global(input:focus) { outline: none; }
     .chips:focus-within { border-color: var(--navy); box-shadow: 0 0 0 3px var(--navy-soft); }
-    .chip { font: inherit; font-size: 0.82rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.7rem 0.3rem 0.55rem; border-radius: 999px; border: 1px solid #cfdcf0; background: linear-gradient(180deg, #fff, var(--navy-soft)); color: var(--navy); cursor: pointer; box-shadow: 0 1px 2px rgba(18,50,94,0.08); transition: background 0.15s, transform 0.15s, border-color 0.15s, box-shadow 0.15s; }
-    .chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--red); flex: none; }
-    .chip::after { content: "×"; font-weight: 700; color: var(--ink-3); margin-left: 0.1rem; transition: color 0.15s; }
-    .chip:hover { border-color: var(--red); background: var(--red-soft); color: var(--red); transform: translateY(-1px); box-shadow: 0 3px 8px rgba(227,16,28,0.15); } .chip:hover::after { color: var(--red); }
+    :global(.chip) { font: inherit; font-size: 0.82rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.7rem 0.3rem 0.55rem; border-radius: 999px; border: 1px solid #cfdcf0; background: linear-gradient(180deg, #fff, var(--navy-soft)); color: var(--navy); cursor: pointer; box-shadow: 0 1px 2px rgba(18,50,94,0.08); transition: background 0.15s, transform 0.15s, border-color 0.15s, box-shadow 0.15s; }
+    :global(.chip)::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--red); flex: none; }
+    :global(.chip)::after { content: "×"; font-weight: 700; color: var(--ink-3); margin-left: 0.1rem; transition: color 0.15s; }
+    :global(.chip:hover) { border-color: var(--red); background: var(--red-soft); color: var(--red); transform: translateY(-1px); box-shadow: 0 3px 8px rgba(227,16,28,0.15); } :global(.chip:hover)::after { color: var(--red); }
     .form input:focus, .form select:focus, .form textarea:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px var(--navy-soft); transition: box-shadow 0.15s; }
     .form input:user-invalid { border-color: var(--red); }
     .ctr { text-align: right; font-weight: 400; }
@@ -667,6 +667,6 @@ const sections = [
     .rrow [data-remove] { align-self: start; }
     @media (max-width: 900px) { .editor { grid-template-columns: 1fr; } .ed-nav { position: static; } .ed-nav ul { display: flex; flex-wrap: wrap; gap: 0.25rem; } .ed-tab { width: auto; padding: 0.4rem 0.6rem; font-size: 0.85rem; } .ed-savebar { padding: 0.6rem 1rem; flex-wrap: wrap; } .ed-savebar > .muted { display: none; } }
     @media (max-width: 760px) { .rrow, .rrow.c3, .rrow.c4, .rrow.c4x, .rrow.c5 { grid-template-columns: 1fr; } .rrow .span { grid-column: auto; } }
-    @media (prefers-reduced-motion: reduce) { .ed-bar span, .ed-tab, .chip, .rrow { transition: none; } .ed-step b, .ed-saved .dot { animation: none; } }
+    @media (prefers-reduced-motion: reduce) { .ed-bar span, .ed-tab, :global(.chip), .rrow { transition: none; } .ed-step b, .ed-saved .dot { animation: none; } }
   </style>
 </Base>

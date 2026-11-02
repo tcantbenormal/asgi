@@ -127,7 +127,7 @@
     "name": "ArcGIS Desktop (ArcMap) 10.8.2",
     "category": "Desktop GIS",
     "image": "/img/software/arcgis-desktop.png",
-    "description": "The retired 32-bit ArcMap, still used in older labs and by some departments. Mirror coming; use ArcGIS Pro for new work.",
+    "description": "The retired 32-bit ArcMap, still used in older labs and by some departments. Society mirror of the 10.8.2 installer below; use ArcGIS Pro for new work.",
     "version": "10.8.2",
     "os": [
       "Windows"
@@ -136,8 +136,7 @@
     "homepage": "https://desktop.arcgis.com/en/arcmap/latest/get-started/setup/arcgis-desktop-system-requirements.htm",
     "about": [
       "ArcGIS Desktop is the previous generation of Esri's desktop software: ArcMap for 2D mapping and editing, ArcCatalog for data management, ArcScene and ArcGlobe for 3D. It is 32-bit, single-threaded for most tools, and uses .mxd documents rather than projects.",
-      "Esri ended support for ArcMap on 1 March 2026. It no longer receives fixes and will not open newer ArcGIS Pro formats, but a great deal of training material, older tutorials and departmental workflows in Pakistan were written for it, which is why some labs still have it installed. Learn it only if a course requires it; learn ArcGIS Pro for everything else.",
-      "A society mirror of the 10.8.2 installer will be added here. Until then, ask the GIS lab for the installation media."
+      "Esri ended support for ArcMap on 1 March 2026. It no longer receives fixes and will not open newer ArcGIS Pro formats, but a great deal of training material, older tutorials and departmental workflows in Pakistan were written for it, which is why some labs still have it installed. Learn it only if a course requires it; learn ArcGIS Pro for everything else."
     ],
     "requirements": [
       "Windows 10 or 11, 64-bit (the application itself is 32-bit)",
@@ -148,9 +147,14 @@
     ],
     "licensing": "Needs a licence from the institute's education site licence, either an ArcGIS Administrator single-use authorisation or a concurrent licence from the lab's licence manager. Ask the lab coordinator.",
     "kind": "software",
-    "host": "Official site",
-    "downloads": [],
-    "updated": "2026-10"
+    "host": "Google Drive",
+    "downloads": [
+      {
+        "label": "ArcGIS Desktop 10.8.2 installer",
+        "url": "https://drive.google.com/file/d/1ZfyRGkE5xPQ0_Zy3f1XvUQBxZFO-tlyp/view?usp=drive_link"
+      }
+    ],
+    "updated": "2026-11"
   },
   {
     "id": "envi",

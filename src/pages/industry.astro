@@ -3,24 +3,33 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
 import { site } from '../config/site';
-import { groupAlumniByOrg, matchEmployers, openingsFor, initials } from '../lib/industry';
+import { groupAlumniByOrg, matchEmployers, openingsFor, provincesOf, initials } from '../lib/industry';
 
 const employers = await getCollection('employers');
 const alumni = await getCollection('alumni');
 const jobs = (await getCollection('links')).filter((l) => l.data.category === 'job');
 
 const byOrg = groupAlumniByOrg(alumni);
-const { people, matchedOrgs, employerForOrg } = matchEmployers(employers, byOrg);
-const cards = employers.map((e) => ({ e, i: e.data.order ?? 1e9, people: people.get(e.id) ?? [], openings: openingsFor(e, jobs) }));
-const sectorOrder = ['Government', 'Private', 'NGO / UN', 'International', 'Academia'];
-cards.sort((a, b) => sectorOrder.indexOf(a.e.data.sector) - sectorOrder.indexOf(b.e.data.sector) || a.i - b.i); // file order within a sector
-const sectors = sectorOrder.filter((s) => cards.some((c) => c.e.data.sector === s));
-// Every organisation named in approved profiles, with the employer entry when one matches.
+const { people, employerForOrg } = matchEmployers(employers, byOrg);
+const cards = employers.map((e) => ({ e, i: e.data.order ?? 1e9, people: people.get(e.id) ?? [], openings: openingsFor(e, jobs), provinces: provincesOf(e) }));
+const sectorOrder: [string, string][] = [
+  ['Government', 'Government and public sector'],
+  ['Private', 'Companies'],
+  ['NGO / UN', 'NGOs and UN agencies'],
+  ['International', 'International research centres'],
+  ['Academia', 'Academia'],
+];
+cards.sort((a, b) => a.i - b.i);
+const groups = sectorOrder.map(([k, label]) => ({ k, label, cards: cards.filter((c) => c.e.data.sector === k) })).filter((g) => g.cards.length);
 const orgs = [...byOrg.values()].map((o) => ({ ...o, employer: employerForOrg.get(o.key) })).sort((a, b) => b.people.length - a.people.length || a.name.localeCompare(b.name));
+const placed = new Set(cards.flatMap((c) => c.people.map((a) => a.id))).size;
 const hiringCount = cards.filter((c) => c.openings.length || c.e.data.hiring_now).length;
+const countries = new Set(cards.map((c) => (c.provinces.includes('Abroad') ? 'abroad' : 'Pakistan'))).size;
+const provinces = [...new Set(cards.flatMap((c) => c.provinces))].sort((a, b) => (a === 'Abroad' ? 1 : b === 'Abroad' ? -1 : a.localeCompare(b)));
+const checked = [...new Set(cards.map((c) => c.e.data.checked).filter(Boolean))].at(-1);
 ---
-<Base title="Industry" description="Organisations in Pakistan, the Gulf and abroad that hire GIS and remote sensing graduates: what they do, the roles, indicative pay, who is hiring now, and which alumni work there.">
-  <PageHead eyebrow="Industry" title="Who hires GIS and remote sensing graduates" lead="Public bodies, companies, NGOs and international agencies that employ people with our degree. Each one has a page with the roles they advertise, what they pay, how to get in, current openings and the alumni who work there.">
+<Base title="Industry" description="Organisations in Pakistan, the Gulf and abroad that hire GIS and remote sensing graduates: what they do, the roles, indicative pay, who is hiring now, who takes interns and fresh graduates, and which alumni work there.">
+  <PageHead eyebrow="Industry" title="Who hires GIS and remote sensing graduates" lead="Public bodies, companies, NGOs and international agencies that employ people with our degree. Each one has a page with the roles they advertise, what they pay, how to get in, current openings and the alumni who work or worked there.">
     <p style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
       <a class="btn btn-primary btn-sm" href={`${site.forms.submitResource}?type=employer`}>Suggest an employer</a>
       <a class="btn btn-ghost btn-sm" href={`${site.forms.submitResource}?type=opportunity`}>Report an opening</a>
@@ -28,60 +37,74 @@ const hiringCount = cards.filter((c) => c.openings.length || c.e.data.hiring_now
     </p>
   </PageHead>
 
+  <div class="stats" style="margin-bottom:1.5rem">
+    <div class="stat"><b>{cards.length}</b><span>Employers listed</span></div>
+    <div class="stat"><b>{placed}</b><span>Alumni placed with them</span></div>
+    <div class="stat"><b>{hiringCount}</b><span>Hiring now</span></div>
+    <div class="stat"><b>{cards.filter((c) => c.e.data.hires.includes('interns')).length}</b><span>Take interns</span></div>
+  </div>
+
   <div class="filters" data-pagefind-ignore>
     <label class="sr-only" for="eq">Search</label>
     <input id="eq" type="search" placeholder="Search by name, role, city or tag" />
-    <select id="esec" aria-label="Sector"><option value="">All sectors</option>{sectors.map((s) => <option>{s}</option>)}</select>
-    <label class="check" style="margin:0;font-size:.9rem"><input type="checkbox" id="ehiring" /> Hiring now{hiringCount > 0 && ` (${hiringCount})`}</label>
+    <select id="esec" aria-label="Sector"><option value="">All sectors</option>{sectorOrder.map(([k, label]) => <option value={k}>{label}</option>)}</select>
+    <select id="eprov" aria-label="Province"><option value="">Anywhere</option>{provinces.map((p) => <option>{p}</option>)}</select>
+    <label class="check" style="margin:0;font-size:.9rem"><input type="checkbox" id="ehiring" /> Hiring now</label>
+    <label class="check" style="margin:0;font-size:.9rem"><input type="checkbox" id="einterns" /> Takes interns</label>
+    <label class="check" style="margin:0;font-size:.9rem"><input type="checkbox" id="efresh" /> Hires fresh graduates</label>
   </div>
-  <p class="notice navy" style="margin-bottom:1.5rem">Pay figures are indicative monthly ranges from recent advertisements and alumni reports (2025–26), gross, before tax. They vary with grade, city and project funding. Treat them as a starting point for negotiation, not a promise.</p>
+  <p class="notice navy" style="margin-bottom:1rem">Pay figures are indicative monthly ranges from recent advertisements and alumni reports, gross, before tax, last checked {checked}. They vary with grade, city and project funding. Treat them as a starting point for negotiation, not a promise.</p>
 
-  <div class="grid grid-2" id="elist">
-    {cards.map(({ e, people, openings }) => {
-      const hiring = openings.length > 0 || !!e.data.hiring_now;
-      return (
-      <article class="card emp" data-sector={e.data.sector} data-hiring={hiring ? '1' : '0'} data-text={`${e.data.name} ${e.data.aliases.join(' ')} ${e.data.kind} ${e.data.hq} ${e.data.locations.join(' ')} ${e.data.roles.join(' ')} ${e.data.tags.join(' ')}`.toLowerCase()}>
-        <div class="res-head">
-          {e.data.logo
-            ? <img class="res-logo" src={e.data.logo} alt="" width="40" height="40" loading="lazy" />
-            : <span class="res-logo emp-initials" aria-hidden="true">{initials(e.data.name)}</span>}
-          <div>
-            <span class={`tag ${e.data.sector === 'Government' ? '' : 'grey'}`}>{e.data.sector}</span>
-            {hiring && <span class="tag hiring">Hiring now</span>}
-            <h3><a href={`/industry/${e.id}`}>{e.data.name}</a></h3>
-            <small class="muted">{e.data.kind} · {e.data.hq}</small>
-          </div>
-        </div>
-        <p>{e.data.about}</p>
-        <dl class="facts sm">
-          {e.data.roles.length > 0 && <><dt>Roles</dt><dd>{e.data.roles.slice(0, 4).join(', ')}</dd></>}
-          {e.data.pay && <><dt>Pay</dt><dd>{e.data.pay}</dd></>}
-          {openings.length > 0 && <><dt>Openings</dt><dd>{openings.map((j, i) => <><a href={j.data.url} rel="noopener">{j.data.title}</a>{i < openings.length - 1 ? '; ' : ''}</>)}</dd></>}
-          {e.data.hiring_now && <><dt>Hiring</dt><dd>{e.data.hiring_now.url ? <a href={e.data.hiring_now.url} rel="noopener">{e.data.hiring_now.note}</a> : e.data.hiring_now.note}</dd></>}
-        </dl>
-        {people.length > 0 && (
-          <p class="emp-people"><strong>Alumni here:</strong> {people.slice(0, 6).map((a, i) => <><a href={`/${a.id}`}>{a.data.name}</a>{i < Math.min(people.length, 6) - 1 ? ', ' : ''}</>)}{people.length > 6 && ` and ${people.length - 6} more`}</p>
-        )}
-        <div class="foot">
-          <div class="tags">{e.data.tags.map((t) => <span class="tag grey">{t}</span>)}</div>
-          <a class="btn btn-ghost btn-sm" href={`/industry/${e.id}`}>Details</a>
-        </div>
-      </article>
-    ); })}
-  </div>
+  {groups.map((g) => (
+    <section class="emp-group" data-sector={g.k}>
+      <h2 class="emp-group-h">{g.label} <small class="muted">{g.cards.length}</small></h2>
+      <div class="grid grid-2">
+        {g.cards.map(({ e, people, openings, provinces }) => {
+          const hiring = openings.length > 0 || !!e.data.hiring_now;
+          return (
+          <article class="card emp" data-sector={e.data.sector} data-prov={provinces.join('|')} data-hiring={hiring ? '1' : '0'} data-interns={e.data.hires.includes('interns') ? '1' : '0'} data-fresh={e.data.hires.includes('fresh graduates') ? '1' : '0'} data-text={`${e.data.name} ${e.data.aliases.join(' ')} ${e.data.kind} ${e.data.hq} ${e.data.locations.join(' ')} ${e.data.roles.join(' ')} ${e.data.tags.join(' ')}`.toLowerCase()}>
+            <div class="res-head">
+              <span class="logo-tile">{e.data.logo ? <img src={e.data.logo} alt="" loading="lazy" /> : <span class="emp-initials" aria-hidden="true">{initials(e.data.name)}</span>}</span>
+              <div>
+                <div class="tags" style="margin-bottom:.25rem">
+                  {hiring && <span class="tag hiring">Hiring now</span>}
+                  {e.data.hires.includes('interns') && <span class="tag grey">Interns</span>}
+                  {e.data.hires.includes('fresh graduates') && <span class="tag grey">Fresh graduates</span>}
+                </div>
+                <h3><a href={`/industry/${e.id}`}>{e.data.name}</a></h3>
+                <small class="muted">{e.data.kind} · {e.data.hq}</small>
+              </div>
+            </div>
+            <p class="clamp-3">{e.data.about}</p>
+            <dl class="facts sm">
+              {e.data.roles.length > 0 && <><dt>Roles</dt><dd>{e.data.roles.slice(0, 4).join(', ')}</dd></>}
+              {e.data.pay && <><dt>Pay</dt><dd class="clamp-2">{e.data.pay.replace(/\s*Indicative[^.]*\.?$/, '')}</dd></>}
+              {openings.length > 0 && <><dt>Openings</dt><dd>{openings.map((j, i) => <><a href={j.data.url} rel="noopener">{j.data.title}</a>{i < openings.length - 1 ? '; ' : ''}</>)}</dd></>}
+              {e.data.hiring_now && <><dt>Hiring</dt><dd>{e.data.hiring_now.url ? <a href={e.data.hiring_now.url} rel="noopener">{e.data.hiring_now.note}</a> : e.data.hiring_now.note}</dd></>}
+            </dl>
+            {people.length > 0 && (
+              <p class="emp-people"><strong>Alumni here:</strong> {people.slice(0, 6).map((a, i) => <><a href={`/${a.id}`}>{a.data.name}</a>{i < Math.min(people.length, 6) - 1 ? ', ' : ''}</>)}{people.length > 6 && ` and ${people.length - 6} more`}</p>
+            )}
+            <div class="foot">
+              <div class="tags">{e.data.tags.slice(0, 3).map((t) => <span class="tag grey">{t}</span>)}</div>
+              <a class="btn btn-ghost btn-sm" href={`/industry/${e.id}`}>Details</a>
+            </div>
+          </article>
+        ); })}
+      </div>
+    </section>
+  ))}
   <p class="empty-state" id="eempty" hidden>Nothing matches.</p>
 
   <section class="section" id="alumni-work">
     <h2>Where alumni work</h2>
-    <p class="lead" style="margin-bottom:1.5rem">Every organisation named in an approved alumni profile, with the people there. This is built from the directory at each rebuild: update the organisation on your profile and it appears here within a week, or sooner when the site is rebuilt.</p>
+    <p class="lead" style="margin-bottom:1.5rem">Every organisation named in an approved alumni profile, with the people there. Built from the directory at each rebuild: update the organisation on your profile and it appears here at the next build.</p>
     {orgs.length === 0 ? <p class="empty-state">No working graduates in the directory yet. <a href="/join">Add your profile</a> to put your organisation here.</p> : (
       <div class="grid">
         {orgs.map((o) => (
           <article class="card">
             <div class="res-head">
-              {o.employer?.data.logo
-                ? <img class="res-logo" src={o.employer.data.logo} alt="" width="40" height="40" loading="lazy" />
-                : <span class="res-logo emp-initials" aria-hidden="true">{initials(o.name)}</span>}
+              <span class="logo-tile">{o.employer?.data.logo ? <img src={o.employer.data.logo} alt="" loading="lazy" /> : <span class="emp-initials" aria-hidden="true">{initials(o.name)}</span>}</span>
               <div>
                 <h3>{o.employer ? <a href={`/industry/${o.employer.id}`}>{o.employer.data.name}</a> : o.name}</h3>
                 <small class="muted">{o.people[0].data.sector} · {o.people[0].data.city}, {o.people[0].data.country}{o.people.length > 1 && ` · ${o.people.length} alumni`}</small>
@@ -96,22 +119,22 @@ const hiringCount = cards.filter((c) => c.openings.length || c.e.data.hiring_now
   </section>
 
   <script>
-    const q = document.getElementById('eq') as HTMLInputElement;
-    const sec = document.getElementById('esec') as HTMLSelectElement;
-    const hir = document.getElementById('ehiring') as HTMLInputElement;
-    const cards = [...document.querySelectorAll<HTMLElement>('#elist .card')];
+    const $ = (id: string) => document.getElementById(id) as HTMLInputElement & HTMLSelectElement;
+    const q = $('eq'), sec = $('esec'), prov = $('eprov'), hir = $('ehiring'), intern = $('einterns'), fresh = $('efresh');
+    const cards = [...document.querySelectorAll<HTMLElement>('.emp-group .card')];
+    const groups = [...document.querySelectorAll<HTMLElement>('.emp-group')];
     const apply = () => {
       const t = q.value.trim().toLowerCase();
       let n = 0;
       for (const c of cards) {
-        const ok = (!t || c.dataset.text!.includes(t)) && (!sec.value || c.dataset.sector === sec.value) && (!hir.checked || c.dataset.hiring === '1');
+        const ok = (!t || c.dataset.text!.includes(t)) && (!sec.value || c.dataset.sector === sec.value) && (!prov.value || c.dataset.prov!.split('|').includes(prov.value))
+          && (!hir.checked || c.dataset.hiring === '1') && (!intern.checked || c.dataset.interns === '1') && (!fresh.checked || c.dataset.fresh === '1');
         c.hidden = !ok;
         if (ok) n++;
       }
+      for (const g of groups) g.hidden = ![...g.querySelectorAll<HTMLElement>('.card')].some((c) => !c.hidden);
       document.getElementById('eempty')!.hidden = n > 0;
     };
-    q.addEventListener('input', apply);
-    sec.addEventListener('change', apply);
-    hir.addEventListener('change', apply);
+    for (const el of [q, sec, prov, hir, intern, fresh]) el.addEventListener(el === q ? 'input' : 'change', apply);
   </script>
 </Base>

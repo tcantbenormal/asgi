@@ -153,6 +153,7 @@ const links = defineCollection({
     updated: z.string().optional(),            // when a person last checked the facts, e.g. "October 2026"
     order: z.number().optional(),              // position within its category; unset sorts last by title
     employer: z.string().optional(),           // jobs only: employers.json id, shows the listing on that employer's page and marks it hiring
+    closes: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(), // jobs only: ISO date; the listing stops counting as an opening after it
   }),
 });
 
@@ -178,6 +179,8 @@ const employers = defineCollection({
     tags: z.array(z.string()).default([]),
     order: z.number().optional(),              // position on the page within its sector
     hiring_now: z.object({ note: z.string(), url: link.optional(), until: z.string().optional() }).optional(), // manual 'hiring now' flag; job listings in links.json also count
+    hires: z.array(z.enum(['interns', 'fresh graduates', 'experienced'])).default([]), // who they take; drives the Interns / Fresh graduates filters
+    checked: z.string().optional(),            // month a person last checked the facts and pay, e.g. "November 2026"
   }),
 });
 

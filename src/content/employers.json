@@ -34,7 +34,12 @@
       "public sector"
     ],
     "logo": "/img/employers/suparco.png",
-    "order": 1
+    "order": 1,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "survey-of-pakistan",
@@ -69,7 +74,11 @@
       "public sector"
     ],
     "logo": "/img/employers/survey-of-pakistan.png",
-    "order": 2
+    "order": 2,
+    "hires": [
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "pbs",
@@ -100,7 +109,11 @@
       "public sector"
     ],
     "logo": "/img/employers/pbs.png",
-    "order": 3
+    "order": 3,
+    "hires": [
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "ndma",
@@ -143,7 +156,12 @@
       "public sector"
     ],
     "logo": "/img/employers/ndma.png",
-    "order": 4
+    "order": 4,
+    "hires": [
+      "interns",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "urban-unit",
@@ -178,7 +196,12 @@
       "Punjab"
     ],
     "logo": "/img/employers/urban-unit.png",
-    "order": 5
+    "order": 5,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "pitb",
@@ -207,7 +230,12 @@
       "Punjab"
     ],
     "order": 6,
-    "logo": "/img/employers/pitb.png"
+    "logo": "/img/employers/pitb.png",
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "pmd",
@@ -241,7 +269,11 @@
       "public sector"
     ],
     "order": 7,
-    "logo": "/img/employers/pmd.png"
+    "logo": "/img/employers/pmd.png",
+    "hires": [
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "pcrwr",
@@ -271,7 +303,12 @@
       "public sector"
     ],
     "logo": "/img/employers/pcrwr.png",
-    "order": 8
+    "order": 8,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "parc",
@@ -303,7 +340,12 @@
       "public sector"
     ],
     "logo": "/img/employers/parc.png",
-    "order": 9
+    "order": 9,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "crop-reporting-service-punjab",
@@ -334,7 +376,11 @@
       "Punjab"
     ],
     "logo": "/img/employers/crop-reporting-service-punjab.png",
-    "order": 10
+    "order": 10,
+    "hires": [
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "plra",
@@ -366,7 +412,11 @@
       "Punjab"
     ],
     "logo": "/img/employers/plra.png",
-    "order": 11
+    "order": 11,
+    "hires": [
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "development-authorities",
@@ -413,7 +463,12 @@
       "cities"
     ],
     "logo": "/img/employers/development-authorities.png",
-    "order": 12
+    "order": 12,
+    "hires": [
+      "fresh graduates",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "wapda",
@@ -448,7 +503,12 @@
       "public sector"
     ],
     "logo": "/img/employers/wapda.png",
-    "order": 13
+    "order": 13,
+    "hires": [
+      "fresh graduates",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "nespak",
@@ -484,7 +544,12 @@
       "infrastructure"
     ],
     "logo": "/img/employers/nespak.png",
-    "order": 14
+    "order": 14,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "gsp",
@@ -517,7 +582,11 @@
       "public sector"
     ],
     "logo": "/img/employers/gsp.png",
-    "order": 15
+    "order": 15,
+    "hires": [
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "universities",
@@ -571,7 +640,12 @@
       "teaching"
     ],
     "logo": "/img/employers/universities.png",
-    "order": 16
+    "order": 16,
+    "hires": [
+      "fresh graduates",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "icimod",
@@ -603,7 +677,12 @@
       "international"
     ],
     "logo": "/img/employers/icimod.png",
-    "order": 17
+    "order": 17,
+    "hires": [
+      "interns",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "iwmi",
@@ -635,7 +714,13 @@
       "international"
     ],
     "logo": "/img/employers/iwmi.png",
-    "order": 18
+    "order": 18,
+    "hires": [
+      "interns",
+      "fresh graduates",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "wwf-pakistan",
@@ -670,7 +755,12 @@
       "NGO"
     ],
     "logo": "/img/employers/wwf-pakistan.png",
-    "order": 19
+    "order": 19,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "iucn-pakistan",
@@ -703,7 +793,11 @@
       "NGO"
     ],
     "logo": "/img/employers/iucn-pakistan.png",
-    "order": 20
+    "order": 20,
+    "hires": [
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "undp-pakistan",
@@ -736,7 +830,12 @@
       "development"
     ],
     "order": 21,
-    "logo": "/img/employers/undp-pakistan.png"
+    "logo": "/img/employers/undp-pakistan.png",
+    "hires": [
+      "interns",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "fao-pakistan",
@@ -769,7 +868,11 @@
       "land cover"
     ],
     "logo": "/img/employers/fao-pakistan.png",
-    "order": 22
+    "order": 22,
+    "hires": [
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "wfp-pakistan",
@@ -804,7 +907,12 @@
       "emergency"
     ],
     "logo": "/img/employers/wfp-pakistan.png",
-    "order": 23
+    "order": 23,
+    "hires": [
+      "interns",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "immap",
@@ -837,7 +945,12 @@
       "NGO"
     ],
     "logo": "/img/employers/immap.png",
-    "order": 24
+    "order": 24,
+    "hires": [
+      "fresh graduates",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "impact-reach",
@@ -872,7 +985,12 @@
       "NGO"
     ],
     "logo": "/img/employers/impact-reach.png",
-    "order": 25
+    "order": 25,
+    "hires": [
+      "fresh graduates",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "tplmaps",
@@ -906,7 +1024,12 @@
       "private"
     ],
     "logo": "/img/employers/tplmaps.png",
-    "order": 26
+    "order": 26,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "farmdar",
@@ -935,7 +1058,12 @@
       "remote sensing"
     ],
     "logo": "/img/employers/farmdar.png",
-    "order": 27
+    "order": 27,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "jazz-telecom",
@@ -974,7 +1102,12 @@
       "private"
     ],
     "logo": "/img/employers/jazz-telecom.png",
-    "order": 28
+    "order": 28,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "k-electric",
@@ -1004,7 +1137,12 @@
       "private"
     ],
     "logo": "/img/employers/k-electric.png",
-    "order": 29
+    "order": 29,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "discos",
@@ -1051,7 +1189,11 @@
       "public sector"
     ],
     "logo": "/img/employers/discos.png",
-    "order": 30
+    "order": 30,
+    "hires": [
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "sngpl",
@@ -1085,7 +1227,11 @@
       "public sector"
     ],
     "logo": "/img/employers/sngpl.png",
-    "order": 31
+    "order": 31,
+    "hires": [
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "ogdcl",
@@ -1127,7 +1273,13 @@
       "private"
     ],
     "logo": "/img/employers/ogdcl.png",
-    "order": 32
+    "order": 32,
+    "hires": [
+      "interns",
+      "fresh graduates",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "khatib-alami",
@@ -1165,7 +1317,11 @@
       "consultancy"
     ],
     "logo": "/img/employers/khatib-alami.png",
-    "order": 33
+    "order": 33,
+    "hires": [
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "aecom",
@@ -1207,7 +1363,11 @@
       "consultancy"
     ],
     "logo": "/img/employers/aecom.png",
-    "order": 34
+    "order": 34,
+    "hires": [
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "geosa",
@@ -1237,7 +1397,11 @@
       "public sector"
     ],
     "logo": "/img/employers/geosa.png",
-    "order": 35
+    "order": 35,
+    "hires": [
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "esri",
@@ -1274,7 +1438,12 @@
       "international"
     ],
     "logo": "/img/employers/esri.png",
-    "order": 36
+    "order": 36,
+    "hires": [
+      "interns",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "planet",
@@ -1309,7 +1478,12 @@
       "international"
     ],
     "logo": "/img/employers/planet.png",
-    "order": 37
+    "order": 37,
+    "hires": [
+      "interns",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "vantor",
@@ -1347,7 +1521,11 @@
       "international"
     ],
     "logo": "/img/employers/vantor.png",
-    "order": 38
+    "order": 38,
+    "hires": [
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "tomtom",
@@ -1384,7 +1562,12 @@
       "international"
     ],
     "logo": "/img/employers/tomtom.png",
-    "order": 39
+    "order": 39,
+    "hires": [
+      "fresh graduates",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "herald-analytics",
@@ -1417,7 +1600,12 @@
       "PostGIS"
     ],
     "logo": "/img/employers/herald-analytics.svg",
-    "order": 40
+    "order": 40,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "renewables-first",
@@ -1448,7 +1636,12 @@
       "research"
     ],
     "logo": "/img/employers/renewables-first.png",
-    "order": 41
+    "order": 41,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "nook-office-solutions",
@@ -1480,7 +1673,11 @@
       "private"
     ],
     "logo": "/img/employers/nook-office-solutions.png",
-    "order": 42
+    "order": 42,
+    "hires": [
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "lmkr",
@@ -1514,7 +1711,12 @@
       "geoscience"
     ],
     "logo": "/img/employers/lmkr.png",
-    "order": 43
+    "order": 43,
+    "hires": [
+      "fresh graduates",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "slb",
@@ -1548,7 +1750,12 @@
       "international"
     ],
     "logo": "/img/employers/slb.png",
-    "order": 44
+    "order": 44,
+    "hires": [
+      "fresh graduates",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "ndrmf",
@@ -1579,7 +1786,12 @@
       "public sector"
     ],
     "logo": "/img/employers/ndrmf.png",
-    "order": 45
+    "order": 45,
+    "hires": [
+      "interns",
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "gcisc",
@@ -1611,7 +1823,12 @@
       "public sector"
     ],
     "logo": "/img/employers/gcisc.png",
-    "order": 46
+    "order": 46,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "mocc",
@@ -1642,7 +1859,11 @@
       "public sector"
     ],
     "logo": "/img/employers/mocc.png",
-    "order": 47
+    "order": 47,
+    "hires": [
+      "experienced"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "ministry-of-defence",
@@ -1675,7 +1896,11 @@
       "public sector"
     ],
     "logo": "/img/employers/ministry-of-defence.png",
-    "order": 48
+    "order": 48,
+    "hires": [
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "gravity-solutions",
@@ -1704,7 +1929,12 @@
       "private"
     ],
     "logo": "/img/employers/gravity-solutions.png",
-    "order": 49
+    "order": 49,
+    "hires": [
+      "interns",
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "punjab-forest-department",
@@ -1737,7 +1967,11 @@
       "public sector"
     ],
     "logo": "/img/employers/punjab-forest-department.png",
-    "order": 50
+    "order": 50,
+    "hires": [
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
   },
   {
     "id": "pakistan-railways",
@@ -1768,6 +2002,167 @@
       "public sector"
     ],
     "logo": "/img/employers/pakistan-railways.png",
-    "order": 51
+    "order": 51,
+    "hires": [
+      "fresh graduates"
+    ],
+    "checked": "November 2026"
+  },
+  {
+    "id": "punjab-irrigation",
+    "name": "Provincial irrigation departments (Punjab, Sindh, KP, Balochistan)",
+    "aliases": [
+      "Punjab Irrigation Department",
+      "Irrigation Department",
+      "Sindh Irrigation",
+      "KP Irrigation",
+      "Balochistan Irrigation",
+      "PID"
+    ],
+    "sector": "Government",
+    "kind": "Provincial departments",
+    "hq": "Lahore (Punjab)",
+    "locations": [
+      "Lahore",
+      "Karachi",
+      "Peshawar",
+      "Quetta",
+      "canal divisions"
+    ],
+    "website": "https://irrigation.punjab.gov.pk/",
+    "roles": [
+      "GIS analyst",
+      "Remote sensing specialist",
+      "Survey engineer",
+      "Hydrologist"
+    ],
+    "pay": "Project posts roughly PKR 100,000 to 250,000 a month; regular posts BPS-17. Indicative.",
+    "hiring": "Provincial public service commissions for regular posts; World Bank and ADB-funded project units (Punjab Irrigated-Agriculture, Sindh barrages) advertise GIS staff directly.",
+    "about": "The irrigation departments run the canal networks and barrages and are mapping command areas, canal assets and flood plains in GIS under donor-funded modernisation projects.",
+    "tags": [
+      "water",
+      "irrigation",
+      "public sector"
+    ],
+    "hires": [
+      "fresh graduates",
+      "experienced"
+    ],
+    "order": 52,
+    "checked": "November 2026",
+    "logo": "/img/employers/punjab-irrigation.png"
+  },
+  {
+    "id": "psca",
+    "name": "Punjab Safe Cities Authority",
+    "aliases": [
+      "PSCA",
+      "Safe City",
+      "Safe Cities Authority"
+    ],
+    "sector": "Government",
+    "kind": "Public safety technology authority",
+    "hq": "Lahore",
+    "locations": [
+      "Lahore",
+      "other Punjab cities"
+    ],
+    "website": "https://psca.gop.pk/",
+    "roles": [
+      "GIS analyst",
+      "Geospatial developer",
+      "Data analyst"
+    ],
+    "pay": "Roughly PKR 90,000 to 200,000 a month. Indicative.",
+    "hiring": "Advertised on the PSCA site; test and interview.",
+    "about": "Runs the camera, dispatch and traffic systems for Lahore and other Punjab cities on a live GIS, with a geospatial unit maintaining the base map, camera inventory and incident mapping.",
+    "tags": [
+      "public safety",
+      "enterprise GIS",
+      "Punjab"
+    ],
+    "hires": [
+      "fresh graduates",
+      "experienced"
+    ],
+    "order": 53,
+    "checked": "November 2026",
+    "logo": "/img/employers/psca.png"
+  },
+  {
+    "id": "kwsc",
+    "name": "Karachi Water and Sewerage Corporation",
+    "aliases": [
+      "KWSC",
+      "KW&SC",
+      "KWSB",
+      "Karachi Water and Sewerage Board"
+    ],
+    "sector": "Government",
+    "kind": "Water utility",
+    "hq": "Karachi",
+    "locations": [
+      "Karachi"
+    ],
+    "website": "https://www.kwsc.gos.pk/",
+    "roles": [
+      "GIS engineer",
+      "Network mapping officer",
+      "Survey staff"
+    ],
+    "pay": "Roughly PKR 80,000 to 180,000 a month. Indicative.",
+    "hiring": "Advertised with World Bank-funded reform projects (KWSSIP); project contracts.",
+    "about": "Karachi's water utility is mapping its pipe and sewer network in GIS under the World Bank-funded Karachi Water and Sewerage Services Improvement Project, which creates survey and GIS posts.",
+    "tags": [
+      "utility",
+      "water",
+      "Karachi"
+    ],
+    "hires": [
+      "fresh graduates"
+    ],
+    "order": 54,
+    "checked": "November 2026"
+  },
+  {
+    "id": "boards-of-revenue",
+    "name": "Boards of Revenue, Sindh and Khyber Pakhtunkhwa",
+    "aliases": [
+      "Board of Revenue Sindh",
+      "Sindh Board of Revenue",
+      "Board of Revenue KP",
+      "KP Board of Revenue",
+      "Land Records Sindh",
+      "LRMIS"
+    ],
+    "sector": "Government",
+    "kind": "Land administration",
+    "hq": "Karachi and Peshawar",
+    "locations": [
+      "Karachi",
+      "Peshawar",
+      "district land record centres"
+    ],
+    "website": "https://bor.sindh.gov.pk/",
+    "careers": "https://bor.kp.gov.pk/",
+    "roles": [
+      "GIS analyst",
+      "Cadastral mapping officer",
+      "Digitisation staff"
+    ],
+    "pay": "Project posts roughly PKR 60,000 to 150,000 a month. Indicative.",
+    "hiring": "Project advertisements tied to land record computerisation and cadastral mapping programmes.",
+    "about": "The provincial land administration bodies outside Punjab, running land record computerisation and cadastral mapping of urban and rural land in Sindh and KP.",
+    "tags": [
+      "cadastre",
+      "land administration",
+      "public sector"
+    ],
+    "hires": [
+      "fresh graduates"
+    ],
+    "order": 55,
+    "checked": "November 2026",
+    "logo": "/img/employers/boards-of-revenue.png"
   }
 ]

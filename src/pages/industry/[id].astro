@@ -3,28 +3,37 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import AlumniCard from '../../components/AlumniCard.astro';
 import { site } from '../../config/site';
-import { groupAlumniByOrg, matchEmployers, openingsFor, initials } from '../../lib/industry';
+import { groupAlumniByOrg, matchEmployers, openingsFor, pastEmployeesFor, relatedEmployers, provincesOf, initials } from '../../lib/industry';
 
 export async function getStaticPaths() {
   const employers = await getCollection('employers');
   const alumni = await getCollection('alumni');
   const jobs = (await getCollection('links')).filter((l) => l.data.category === 'job');
   const { people } = matchEmployers(employers, groupAlumniByOrg(alumni));
-  return employers.map((e) => ({ params: { id: e.id }, props: { e, people: people.get(e.id) ?? [], openings: openingsFor(e, jobs) } }));
+  return employers.map((e) => {
+    const current = people.get(e.id) ?? [];
+    return { params: { id: e.id }, props: { e, people: current, past: pastEmployeesFor(e, alumni, current), openings: openingsFor(e, jobs), related: relatedEmployers(e, employers) } };
+  });
 }
-const { e, people, openings } = Astro.props;
+const { e, people, past, openings, related } = Astro.props;
 const d = e.data;
 const hiring = openings.length > 0 || !!d.hiring_now;
 const host = new URL(d.website).hostname.replace(/^www\./, '');
+const provinces = provincesOf(e);
 ---
 <Base title={d.name} description={`${d.kind} in ${d.hq}. ${d.about}`}>
   <header class="page-head res-title">
-    {d.logo ? <img class="res-logo lg" src={d.logo} alt="" width="72" height="72" /> : <span class="res-logo lg emp-initials" aria-hidden="true">{initials(d.name)}</span>}
+    <span class="logo-tile lg">{d.logo ? <img src={d.logo} alt="" /> : <span class="emp-initials" aria-hidden="true">{initials(d.name)}</span>}</span>
     <div>
       <div class="eyebrow"><a href="/industry" style="color:inherit;text-decoration:none">Industry</a> · {d.sector}</div>
       <h1>{d.name}</h1>
       <p class="lead">{d.about}</p>
-      <p class="credit">{d.kind} · {d.hq}{hiring && <> · <span class="tag hiring">Hiring now</span></>}</p>
+      <div class="tags" style="margin-top:.6rem">
+        {hiring && <span class="tag hiring">Hiring now</span>}
+        {d.hires.includes('interns') && <span class="tag">Takes interns</span>}
+        {d.hires.includes('fresh graduates') && <span class="tag">Hires fresh graduates</span>}
+        {d.hires.includes('experienced') && <span class="tag grey">Experienced hires</span>}
+      </div>
     </div>
   </header>
   <div style="display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:2.5rem;align-items:start" class="res-grid">
@@ -34,26 +43,46 @@ const host = new URL(d.website).hostname.replace(/^www\./, '');
         ? <p>No opening is listed for {d.name} right now. Check the {d.careers ? <a href={d.careers} rel="noopener">careers page</a> : <a href={d.website} rel="noopener">website</a>}, and if you see one, <a href={`${site.forms.submitResource}?type=opportunity`}>report it</a> so it shows here.</p>
         : <ul>
             {d.hiring_now && <li>{d.hiring_now.url ? <a href={d.hiring_now.url} rel="noopener">{d.hiring_now.note}</a> : d.hiring_now.note}{d.hiring_now.until && ` (until ${d.hiring_now.until})`}</li>}
-            {openings.map((j) => <li><a href={j.data.url} rel="noopener">{j.data.title}</a>{j.data.location && `, ${j.data.location}`}{j.data.deadline && ` · deadline ${j.data.deadline}`}<br /><small class="muted">{j.data.description}</small></li>)}
+            {openings.map((j) => <li><a href={j.data.url} rel="noopener">{j.data.title}</a>{j.data.location && `, ${j.data.location}`}{j.data.closes ? ` · closes ${j.data.closes}` : j.data.deadline && ` · deadline ${j.data.deadline}`}<br /><small class="muted">{j.data.description}</small></li>)}
           </ul>}
       <h2>Roles they hire for</h2>
       <ul>{d.roles.map((r) => <li>{r}</li>)}</ul>
-      {d.pay && <><h2>Pay</h2><p>{d.pay}</p><p class="muted" style="font-size:.9rem">Indicative monthly range, gross, from recent advertisements and alumni reports. It varies with grade, city and project funding.</p></>}
+      {d.pay && <><h2>Pay</h2><p>{d.pay}</p><p class="muted" style="font-size:.9rem">Indicative monthly range, gross, from recent advertisements and alumni reports{d.checked && `, last checked ${d.checked}`}. It varies with grade, city and project funding. Work there and know better? <a href="/contact">Tell us</a>.</p></>}
       {d.hiring && <><h2>How they recruit</h2><p>{d.hiring}</p></>}
       {d.locations.length > 0 && <><h2>Where</h2><p>{d.locations.join(', ')}</p></>}
       <h2>Alumni here</h2>
       {people.length === 0
         ? <p>No one in the directory lists {d.name} as their organisation yet. If you work there, <a href="/alumni/join">set it on your profile</a> and you will appear here at the next rebuild.</p>
         : <div class="grid" style="margin-top:1rem">{people.map((a) => <AlumniCard a={a} />)}</div>}
+      {past.length > 0 && <>
+        <h2>Worked here before</h2>
+        <p class="muted" style="font-size:.9rem">From the experience section of alumni profiles. Former staff are often the best people to ask about the hiring process.</p>
+        <ul>{past.map((p) => <li><a href={`/${p.a.id}`}>{p.a.data.name}</a>, {p.title}{(p.start || p.end) && ` (${[p.start, p.end || 'left'].filter(Boolean).join(' to ')})`}; now {p.a.data.role} at {p.a.data.organization}</li>)}</ul>
+      </>}
+      {related.length > 0 && <>
+        <h2>Similar employers</h2>
+        <div class="grid" style="margin-top:1rem">
+          {related.map((r) => (
+            <a class="card emp-related" href={`/industry/${r.id}`}>
+              <div class="res-head">
+                <span class="logo-tile">{r.data.logo ? <img src={r.data.logo} alt="" loading="lazy" /> : <span class="emp-initials" aria-hidden="true">{initials(r.data.name)}</span>}</span>
+                <div><strong>{r.data.name}</strong><br /><small class="muted">{r.data.kind} · {r.data.hq}</small></div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </>}
     </div>
     <aside class="card">
       <dl class="facts">
         <dt>Sector</dt><dd>{d.sector}</dd>
         <dt>Type</dt><dd>{d.kind}</dd>
         <dt>Head office</dt><dd>{d.hq}</dd>
+        {provinces.length > 0 && <><dt>Presence</dt><dd>{provinces.join(', ')}</dd></>}
         <dt>Website</dt><dd><a href={d.website} rel="noopener">{host}</a></dd>
-        <dt>Alumni</dt><dd>{people.length}</dd>
+        <dt>Alumni</dt><dd>{people.length} now{past.length > 0 && `, ${past.length} before`}</dd>
         <dt>Openings</dt><dd>{openings.length + (d.hiring_now ? 1 : 0)}</dd>
+        {d.checked && <><dt>Checked</dt><dd>{d.checked}</dd></>}
       </dl>
       {d.careers && <a class="btn btn-primary" href={d.careers} rel="noopener" style="margin-top:.75rem;justify-content:center">Careers page</a>}
       <a class={`btn ${d.careers ? 'btn-ghost' : 'btn-primary'}`} href={d.website} rel="noopener" style="margin-top:.5rem;justify-content:center">Website</a>

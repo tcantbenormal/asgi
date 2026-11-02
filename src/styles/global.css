@@ -314,3 +314,22 @@ model-viewer { width: 100%; height: 440px; background: transparent; --poster-col
 
 .tag.hiring { background: #e6f6ec; color: #166534; margin-left: 0.3rem; }
 .res-logo.emp-initials.lg { font-size: 1.3rem; }
+
+/* Industry: logo tiles, grouped sections, clamped card text */
+.logo-tile { flex: none; width: 48px; height: 48px; border-radius: 10px; border: 1px solid var(--line); background: #fff; display: inline-flex; align-items: center; justify-content: center; padding: 5px; overflow: hidden; }
+.logo-tile img { width: 100%; height: 100%; object-fit: contain; }
+.logo-tile .emp-initials { width: 100%; height: 100%; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; background: var(--navy-soft); color: var(--navy); font-weight: 700; font-size: 0.85rem; }
+.logo-tile.lg { width: 84px; height: 84px; padding: 8px; border-radius: 14px; }
+.logo-tile.lg .emp-initials { font-size: 1.3rem; }
+.emp-group { padding-top: 1.75rem; }
+.emp-group + .emp-group { margin-top: 1rem; border-top: 1px solid var(--line); }
+.emp-group-h { margin: 0 0 1rem; font-size: 1.3rem; }
+.emp-group-h small { font-family: var(--sans); font-size: 0.9rem; font-weight: 400; margin-left: 0.4rem; }
+.clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.emp-related { text-decoration: none; color: inherit; }
+.emp-related:hover { border-color: var(--navy); }
+.filters .check { display: inline-flex; align-items: center; gap: 0.35rem; white-space: nowrap; padding: 0; }
+.filters .check input { min-width: 0; width: auto; flex: none; margin: 0; }
+.filters select { max-width: 100%; }
+@media (max-width: 600px) { .filters input[type="search"] { min-width: 0; width: 100%; } }

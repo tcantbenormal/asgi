@@ -311,3 +311,6 @@ model-viewer { width: 100%; height: 440px; background: transparent; --poster-col
 .proj-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); margin-bottom: 0.35rem; }
 .forum-form input[type="file"] { padding: 0.4rem; background: #fff; }
 .forum-form label small { display: block; margin-top: 0.25rem; font-size: 0.8rem; }
+
+.tag.hiring { background: #e6f6ec; color: #166534; margin-left: 0.3rem; }
+.res-logo.emp-initials.lg { font-size: 1.3rem; }

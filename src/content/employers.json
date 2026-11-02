@@ -206,7 +206,8 @@
       "development",
       "Punjab"
     ],
-    "order": 6
+    "order": 6,
+    "logo": "/img/employers/pitb.png"
   },
   {
     "id": "pmd",
@@ -239,7 +240,8 @@
       "hydrology",
       "public sector"
     ],
-    "order": 7
+    "order": 7,
+    "logo": "/img/employers/pmd.png"
   },
   {
     "id": "pcrwr",
@@ -733,7 +735,8 @@
       "disaster",
       "development"
     ],
-    "order": 21
+    "order": 21,
+    "logo": "/img/employers/undp-pakistan.png"
   },
   {
     "id": "fao-pakistan",
@@ -1382,5 +1385,389 @@
     ],
     "logo": "/img/employers/tomtom.png",
     "order": 39
+  },
+  {
+    "id": "herald-analytics",
+    "name": "Herald Analytics",
+    "aliases": [
+      "HeraldX",
+      "Herald X",
+      "Herald Analytics (HeraldX)"
+    ],
+    "sector": "Private",
+    "kind": "Geospatial analytics company",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad",
+      "remote"
+    ],
+    "website": "https://heraldx.io/",
+    "roles": [
+      "Web GIS developer",
+      "Geospatial data engineer",
+      "Remote sensing analyst",
+      "Intern"
+    ],
+    "pay": "Roughly PKR 80,000 to 200,000 a month for developers and analysts; interns paid. Indicative.",
+    "hiring": "LinkedIn and the company site; small team, portfolio and code samples count more than the degree transcript.",
+    "about": "Islamabad geospatial analytics company building web GIS products such as rooftop-solar mapping for power distribution areas, PostGIS data platforms and automated reporting. Founded by alumni of the institute.",
+    "tags": [
+      "web GIS",
+      "startup",
+      "PostGIS"
+    ],
+    "logo": "/img/employers/herald-analytics.svg",
+    "order": 40
+  },
+  {
+    "id": "renewables-first",
+    "name": "Renewables First",
+    "aliases": [
+      "Renewables First Pakistan"
+    ],
+    "sector": "NGO / UN",
+    "kind": "Energy and climate think tank",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad"
+    ],
+    "website": "https://renewablesfirst.org/",
+    "careers": "https://renewablesfirst.org/careers/",
+    "roles": [
+      "GIS analyst",
+      "Energy data analyst",
+      "Research associate",
+      "Intern"
+    ],
+    "pay": "Roughly PKR 100,000 to 250,000 a month for analysts and research associates. Indicative.",
+    "hiring": "Careers page and LinkedIn; research-heavy roles, writing sample often requested.",
+    "about": "Think tank working on Pakistan's energy transition: solar and wind resource mapping, grid and power-sector analysis, air quality and climate policy. GIS underpins its resource and siting studies.",
+    "tags": [
+      "energy",
+      "climate",
+      "research"
+    ],
+    "logo": "/img/employers/renewables-first.png",
+    "order": 41
+  },
+  {
+    "id": "nook-office-solutions",
+    "name": "Nook Office Solutions (Zoneomics)",
+    "aliases": [
+      "Nook Office Solutions",
+      "Nook",
+      "Zoneomics"
+    ],
+    "sector": "Private",
+    "kind": "GIS data production for a US zoning platform",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad"
+    ],
+    "website": "https://www.zoneomics.com/",
+    "roles": [
+      "GIS analyst",
+      "Zoning data analyst",
+      "QA analyst",
+      "Python automation developer"
+    ],
+    "pay": "Roughly PKR 70,000 to 150,000 a month for analysts. Indicative.",
+    "hiring": "LinkedIn and Rozee; batch hiring of GIS graduates for data production, test on digitising and attribute work.",
+    "about": "Islamabad back office that produces the zoning and land-use data behind Zoneomics, a US property-zoning platform: translating municipal codes into spatial data, digitising parcels and running QA tools.",
+    "tags": [
+      "zoning",
+      "data production",
+      "private"
+    ],
+    "logo": "/img/employers/nook-office-solutions.png",
+    "order": 42
+  },
+  {
+    "id": "lmkr",
+    "name": "LMKR",
+    "aliases": [
+      "LMK Resources",
+      "Landmark Resources"
+    ],
+    "sector": "Private",
+    "kind": "Geoscience software and E&P data",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad",
+      "Dubai",
+      "Houston"
+    ],
+    "website": "https://www.lmkr.com/",
+    "careers": "https://www.lmkr.com/careers",
+    "roles": [
+      "Geoscience data analyst",
+      "GIS specialist",
+      "Software engineer",
+      "Technical support engineer"
+    ],
+    "pay": "Roughly PKR 120,000 to 300,000 a month for technical staff. Indicative.",
+    "hiring": "Careers page; technical tests for developers.",
+    "about": "Islamabad-headquartered company behind GeoGraphix and other petroleum geoscience software, plus exploration data management services for oil and gas clients worldwide.",
+    "tags": [
+      "oil and gas",
+      "software",
+      "geoscience"
+    ],
+    "logo": "/img/employers/lmkr.png",
+    "order": 43
+  },
+  {
+    "id": "slb",
+    "name": "SLB (Schlumberger)",
+    "aliases": [
+      "Schlumberger",
+      "Schlumberger Pakistan"
+    ],
+    "sector": "Private",
+    "kind": "Energy services",
+    "hq": "Houston, Paris and The Hague",
+    "locations": [
+      "Islamabad",
+      "Karachi",
+      "field bases"
+    ],
+    "website": "https://www.slb.com/",
+    "careers": "https://careers.slb.com/",
+    "roles": [
+      "Geoscience data technician",
+      "GIS and data management specialist",
+      "Field engineer",
+      "Digital solutions analyst"
+    ],
+    "pay": "Among the highest in the sector: roughly PKR 200,000 to 500,000 a month at entry to mid level, more for international assignments. Indicative.",
+    "hiring": "Global careers portal; structured graduate recruitment, assessment tests and interviews.",
+    "about": "The world's largest oilfield services company, operating in Pakistan for decades. Geoscience data, GIS, and digital roles sit in its data and digital solutions units.",
+    "tags": [
+      "oil and gas",
+      "energy",
+      "international"
+    ],
+    "logo": "/img/employers/slb.png",
+    "order": 44
+  },
+  {
+    "id": "ndrmf",
+    "name": "National Disaster Risk Management Fund",
+    "aliases": [
+      "NDRMF"
+    ],
+    "sector": "Government",
+    "kind": "Disaster risk financing fund",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad"
+    ],
+    "website": "https://ndrmf.pk/",
+    "careers": "https://ndrmf.pk/careers/",
+    "roles": [
+      "GIS officer",
+      "Risk assessment specialist",
+      "Monitoring and evaluation officer",
+      "Intern"
+    ],
+    "pay": "Project pay scales, roughly PKR 150,000 to 350,000 a month for specialists; internships paid. Indicative.",
+    "hiring": "Careers page; ADB-funded, so posts follow project cycles.",
+    "about": "Government-owned fund financing disaster risk reduction projects across Pakistan. Its GIS work covers hazard and exposure mapping of energy and other infrastructure and the appraisal of resilience projects.",
+    "tags": [
+      "disaster",
+      "risk financing",
+      "public sector"
+    ],
+    "logo": "/img/employers/ndrmf.png",
+    "order": 45
+  },
+  {
+    "id": "gcisc",
+    "name": "Global Change Impact Studies Centre",
+    "aliases": [
+      "GCISC",
+      "Global Climate-Change Impact Studies Centre",
+      "Global Climate Change Impact Studies Centre"
+    ],
+    "sector": "Government",
+    "kind": "Climate research centre",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad"
+    ],
+    "website": "https://gcisc.org.pk/",
+    "roles": [
+      "Research officer",
+      "Research intern",
+      "GIS and remote sensing analyst",
+      "Climate modeller"
+    ],
+    "pay": "Research officer posts around PKR 90,000 to 150,000 a month; internships modest or unpaid. Indicative.",
+    "hiring": "Advertised on the GCISC site; interns taken most semesters.",
+    "about": "The federal climate research centre under the Ministry of Climate Change: climate modelling, glacier and water studies, agriculture and ecosystem impacts. A common first research internship for the institute's students.",
+    "tags": [
+      "climate",
+      "research",
+      "public sector"
+    ],
+    "logo": "/img/employers/gcisc.png",
+    "order": 46
+  },
+  {
+    "id": "mocc",
+    "name": "Ministry of Climate Change and Environmental Coordination",
+    "aliases": [
+      "MoCC",
+      "Ministry of Climate Change",
+      "MOCC"
+    ],
+    "sector": "Government",
+    "kind": "Federal ministry",
+    "hq": "Islamabad",
+    "locations": [
+      "Islamabad"
+    ],
+    "website": "https://mocc.gov.pk/",
+    "roles": [
+      "GIS specialist (projects)",
+      "REDD+ and forest monitoring officer",
+      "Environmental analyst"
+    ],
+    "pay": "Project pay scales, roughly PKR 150,000 to 350,000 a month; regular posts on BPS scales. Indicative.",
+    "hiring": "Project posts advertised on the ministry site and newspapers; donor-funded units such as REDD+ and the Ten Billion Tree programme hire GIS staff.",
+    "about": "The ministry responsible for climate policy, forests, biodiversity and environmental coordination, with project units that run national forest monitoring, carbon accounting and climate adaptation programmes.",
+    "tags": [
+      "climate",
+      "forests",
+      "public sector"
+    ],
+    "logo": "/img/employers/mocc.png",
+    "order": 47
+  },
+  {
+    "id": "ministry-of-defence",
+    "name": "Ministry of Defence",
+    "aliases": [
+      "MoD",
+      "Ministry of Defense",
+      "Military Survey",
+      "Survey of Pakistan (MoD)"
+    ],
+    "sector": "Government",
+    "kind": "Federal ministry",
+    "hq": "Rawalpindi",
+    "locations": [
+      "Rawalpindi",
+      "Islamabad"
+    ],
+    "website": "https://mod.gov.pk/",
+    "roles": [
+      "GIS analyst",
+      "Cartographer",
+      "Image analyst",
+      "Survey officer"
+    ],
+    "pay": "BPS-16 and BPS-17 posts, roughly PKR 80,000 to 130,000 a month gross. Indicative.",
+    "hiring": "Through FPSC and the ministry's own advertisements; Survey of Pakistan and other mapping organisations sit under it.",
+    "about": "Parent ministry of Survey of Pakistan and other mapping, survey and geospatial organisations. Civilian GIS and cartography posts are advertised under the ministry and its attached departments.",
+    "tags": [
+      "mapping",
+      "public sector"
+    ],
+    "logo": "/img/employers/ministry-of-defence.png",
+    "order": 48
+  },
+  {
+    "id": "gravity-solutions",
+    "name": "Gravity Solutions",
+    "aliases": [
+      "Gravity Solutions Rawalpindi"
+    ],
+    "sector": "Private",
+    "kind": "GIS and cadastral mapping services",
+    "hq": "Rawalpindi",
+    "locations": [
+      "Rawalpindi"
+    ],
+    "website": "https://www.gravitysolutions.com.pk/",
+    "roles": [
+      "Cadastral mapping specialist",
+      "GIS analyst",
+      "Data entry and digitisation staff"
+    ],
+    "pay": "Roughly PKR 50,000 to 120,000 a month. Indicative.",
+    "hiring": "Walk-in and LinkedIn; project-based, takes fresh graduates and interns.",
+    "about": "Rawalpindi GIS services firm doing land parcel digitisation, cadastral mapping and database work for land administration and utility projects.",
+    "tags": [
+      "cadastre",
+      "digitisation",
+      "private"
+    ],
+    "logo": "/img/employers/gravity-solutions.png",
+    "order": 49
+  },
+  {
+    "id": "punjab-forest-department",
+    "name": "Punjab Forestry, Wildlife and Fisheries Department",
+    "aliases": [
+      "Punjab Forest Department",
+      "Punjab Forestry Department",
+      "Forest Department Punjab",
+      "Forestry Department"
+    ],
+    "sector": "Government",
+    "kind": "Provincial department",
+    "hq": "Lahore",
+    "locations": [
+      "Lahore",
+      "divisional offices across Punjab"
+    ],
+    "website": "https://fwf.punjab.gov.pk/",
+    "roles": [
+      "GIS analyst",
+      "Remote sensing officer",
+      "Forest monitoring specialist"
+    ],
+    "pay": "Project posts roughly PKR 80,000 to 180,000 a month; regular posts BPS-17. Indicative.",
+    "hiring": "Punjab Public Service Commission for regular posts; project units (forest monitoring, REDD+) advertise directly.",
+    "about": "Manages Punjab's forests, wildlife and fisheries. Its GIS lab maps forest cover, plantations and encroachments and feeds the national forest monitoring system.",
+    "tags": [
+      "forests",
+      "Punjab",
+      "public sector"
+    ],
+    "logo": "/img/employers/punjab-forest-department.png",
+    "order": 50
+  },
+  {
+    "id": "pakistan-railways",
+    "name": "Pakistan Railways",
+    "aliases": [
+      "Railways",
+      "PR"
+    ],
+    "sector": "Government",
+    "kind": "National railway",
+    "hq": "Lahore",
+    "locations": [
+      "Lahore",
+      "divisional offices nationwide"
+    ],
+    "website": "https://pakrail.gov.pk/",
+    "roles": [
+      "GIS analyst (land and asset mapping)",
+      "Survey officer",
+      "Project engineer"
+    ],
+    "pay": "Regular posts on BPS scales, roughly PKR 80,000 to 150,000 a month; project consultants higher. Indicative.",
+    "hiring": "FPSC and departmental advertisements; GIS posts come with land record digitisation and ML-1 project work.",
+    "about": "The national railway holds one of the largest land estates in the country and is digitising its land records, track and asset inventory in GIS, with the ML-1 upgrade creating survey and mapping work.",
+    "tags": [
+      "transport",
+      "land records",
+      "public sector"
+    ],
+    "logo": "/img/employers/pakistan-railways.png",
+    "order": 51
   }
 ]

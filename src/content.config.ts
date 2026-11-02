@@ -152,6 +152,7 @@ const links = defineCollection({
     links: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]), // extra official pages
     updated: z.string().optional(),            // when a person last checked the facts, e.g. "October 2026"
     order: z.number().optional(),              // position within its category; unset sorts last by title
+    employer: z.string().optional(),           // jobs only: employers.json id, shows the listing on that employer's page and marks it hiring
   }),
 });
 
@@ -176,6 +177,7 @@ const employers = defineCollection({
     about: z.string(),
     tags: z.array(z.string()).default([]),
     order: z.number().optional(),              // position on the page within its sector
+    hiring_now: z.object({ note: z.string(), url: link.optional(), until: z.string().optional() }).optional(), // manual 'hiring now' flag; job listings in links.json also count
   }),
 });
 

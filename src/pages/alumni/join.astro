@@ -140,6 +140,12 @@ const sections = [
           <label data-only="alumni">One line of advice for juniors <input name="advice" maxlength="200" /><small class="muted ctr" data-for="advice"></small></label>
           <label>Your journey (Markdown allowed) <textarea name="bio" placeholder="How you got from first semester to where you are now. Honest beats polished."></textarea></label>
           <label class="check" data-only="alumni"><input type="checkbox" name="mentor" /> List me as open to mentoring students</label>
+          <fieldset class="open-to" data-only="alumni"><legend>Also open to</legend>
+            <label class="check"><input type="checkbox" name="open_to" value="referrals" /> Job referrals</label>
+            <label class="check"><input type="checkbox" name="open_to" value="collaboration" /> Collaboration on projects</label>
+            <label class="check"><input type="checkbox" name="open_to" value="talks" /> Talks and workshops</label>
+            <label class="check"><input type="checkbox" name="open_to" value="hiring" /> Hiring for my team</label>
+          </fieldset>
         </section>
 
         <section class="ed-sec" data-sec="experience" hidden>
@@ -497,6 +503,7 @@ const sections = [
       for (const k of ['name','username','batch','degree','sector','role','organization','city','country','province','lat','lng','linkedin','github','portfolio','orcid','email_public','advice','bio']) f[k].value = p[k] ?? '';
       setSkills(p.skills ?? []);
       f.mentor.checked = !!p.mentor;
+      f.querySelectorAll('[name=open_to]').forEach((c) => { c.checked = (p.open_to || []).includes(c.value); });
       setMode(p.sector === 'Student' ? 'student' : 'alumni');
       $('who').dataset.photo = p.photo_url || '';
       if (p.photo_url) { $('photo-prev').src = p.photo_url; $('photo-prev').hidden = false; }
@@ -582,6 +589,7 @@ const sections = [
           skills: skills(),
           advice: editor.dataset.mode === 'student' ? null : f.advice.value.trim() || null, bio: f.bio.value.trim() || null,
           mentor: editor.dataset.mode === 'student' ? false : f.mentor.checked,
+          open_to: editor.dataset.mode === 'student' ? [] : [...f.querySelectorAll('[name=open_to]:checked')].map((c) => c.value),
           publications: readRows('pub').filter((p) => p.title),
           education: dedupe(readRows('edu').filter((p) => p.institution)),
           experience: dedupe(readRows('exp').filter((p) => p.title)).map((p) => ({ ...p, end: p.current ? '' : p.end, current: !!p.current || !p.end })),
@@ -605,6 +613,7 @@ const sections = [
   </script>
   <style>
     .editor { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 2rem; align-items: start; padding-bottom: 5rem; }
+    .open-to { border: 1px solid var(--line); border-radius: 8px; padding: 0.5rem 0.85rem 0.6rem; display: flex; flex-wrap: wrap; gap: 0.3rem 1.25rem; margin: 0; } .open-to legend { font-size: 0.85rem; font-weight: 600; color: var(--navy); padding: 0 0.3rem; }
     .ed-nav { position: sticky; top: 84px; display: grid; gap: 0.75rem; }
     .ed-who { display: grid; gap: 0.4rem; font-size: 0.8rem; word-break: break-all; }
     .ed-progress { display: grid; gap: 0.3rem; font-size: 0.8rem; color: var(--ink-2); }

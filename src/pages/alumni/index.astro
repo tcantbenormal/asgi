@@ -10,11 +10,18 @@ const alumni = (await getCollection('alumni')).sort((a, b) => pin(a) - pin(b) ||
 const batches = [...new Set(alumni.map((a) => a.data.batch))].sort().reverse();
 const sectors = [...new Set(alumni.map((a) => a.data.sector))].sort();
 const countries = [...new Set(alumni.map((a) => a.data.country))].sort();
+const title = (s: string) => s.trim().replace(/\b\w/g, (c) => c.toUpperCase());
+const uniq = (xs: string[]) => [...new Map(xs.map((x) => [x.trim().toLowerCase(), title(x)])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
+const cities = uniq(alumni.map((a) => a.data.city));
+const orgs = uniq(alumni.filter((a) => a.data.sector !== 'Student').map((a) => a.data.organization));
+const perBatch = (b: string) => alumni.filter((a) => a.data.batch === b).length;
 ---
 <Base title="Alumni directory" description="Directory of GIS and remote sensing graduates: where they work, what they do, and how to reach them.">
   <PageHead eyebrow="Alumni" title="Alumni directory" lead="Graduates and current students of the institute, by batch and sector. Filter to find someone in the organisation or country you are aiming for.">
     <p style="margin-top:1rem"><a href="/join" class="btn btn-primary btn-sm">Add or update your profile</a></p>
+    <p class="batches" data-pagefind-ignore>{batches.map((b) => <button type="button" class="batch-chip" data-b={b}>Class of {b.slice(-2).padStart(4, '20')} <span class="count">{perBatch(b)}</span></button>)}</p>
   </PageHead>
+  <p class="notice navy claim" data-pagefind-ignore>Graduated and not listed? <a href="/join?as=alumni">Claim your profile</a>: it takes five minutes, imports from LinkedIn or a CV, and puts you on the map.</p>
 
   <form class="filters" id="filters" data-pagefind-ignore>
     <label class="sr-only" for="q">Search</label>
@@ -22,7 +29,9 @@ const countries = [...new Set(alumni.map((a) => a.data.country))].sort();
     <select id="batch" aria-label="Batch"><option value="">All batches</option>{batches.map((b) => <option>{b}</option>)}</select>
     <select id="sector" aria-label="Sector"><option value="">All sectors</option>{sectors.map((s) => <option>{s}</option>)}</select>
     <select id="country" aria-label="Country"><option value="">All countries</option>{countries.map((c) => <option>{c}</option>)}</select>
-    <label style="font-size:.9rem;display:flex;gap:.4rem;align-items:center"><input type="checkbox" id="mentor" /> Mentors only</label>
+    <select id="city" aria-label="City"><option value="">All cities</option>{cities.map(([v, l]) => <option value={v}>{l}</option>)}</select>
+    <select id="org" aria-label="Employer"><option value="">All employers</option>{orgs.map(([v, l]) => <option value={v}>{l}</option>)}</select>
+    <label class="check" style="margin:0;font-size:.9rem"><input type="checkbox" id="mentor" /> Mentors only</label>
   </form>
 
   <div class="grid" id="list">{alumni.map((a) => <AlumniCard a={a} />)}</div>
@@ -33,16 +42,33 @@ const countries = [...new Set(alumni.map((a) => a.data.country))].sort();
     const cards = [...document.querySelectorAll<HTMLElement>('#list .card')];
     const apply = () => {
       const q = $('q').value.trim().toLowerCase();
-      const batch = $('batch').value, sector = $('sector').value, country = $('country').value;
+      const batch = $('batch').value, sector = $('sector').value, country = $('country').value, city = $('city').value, org = $('org').value;
       const mentor = ($('mentor') as HTMLInputElement).checked;
       let n = 0;
       for (const c of cards) {
-        const ok = (!q || c.dataset.text!.includes(q)) && (!batch || c.dataset.batch === batch) && (!sector || c.dataset.sector === sector) && (!country || c.dataset.country === country) && (!mentor || c.dataset.mentor === '1');
+        const ok = (!q || c.dataset.text!.includes(q)) && (!batch || c.dataset.batch === batch) && (!sector || c.dataset.sector === sector) && (!country || c.dataset.country === country)
+          && (!city || c.dataset.city === city) && (!org || c.dataset.org === org) && (!skill || c.dataset.skills!.split('|').includes(skill)) && (!mentor || c.dataset.mentor === '1');
         c.hidden = !ok;
         if (ok) n++;
       }
       document.getElementById('empty')!.hidden = n > 0;
     };
     document.getElementById('filters')!.addEventListener('input', apply);
+    // Links from profiles and employer pages land here with a filter in the URL: ?skill=qgis, ?org=..., ?city=..., ?batch=...
+    const u = new URLSearchParams(location.search);
+    let skill = (u.get('skill') || '').toLowerCase();
+    for (const k of ['batch', 'sector', 'country', 'city', 'org']) if (u.get(k)) $(k).value = k === 'batch' || k === 'sector' || k === 'country' ? u.get(k)! : u.get(k)!.toLowerCase();
+    if (u.get('q')) $('q').value = u.get('q')!;
+    if (skill) { $('q').placeholder = `Skill: ${skill} (clear with the ×)`; $('q').value = ''; }
+    $('q').addEventListener('input', () => { skill = ''; $('q').placeholder = 'Search name, role, organisation, skill'; });
+    document.querySelectorAll<HTMLButtonElement>('.batch-chip').forEach((b) => b.addEventListener('click', () => { $('batch').value = $('batch').value === b.dataset.b ? '' : b.dataset.b!; apply(); }));
+    apply();
   </script>
+  <style>
+    .batches { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 0; }
+    .batch-chip { font: inherit; font-size: 0.82rem; font-weight: 600; padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--navy); cursor: pointer; }
+    .batch-chip:hover { border-color: var(--navy); }
+    .batch-chip .count { display: inline-block; min-width: 1.4em; padding: 0 0.35em; margin-left: 0.3em; border-radius: 999px; background: var(--navy-soft); font-size: 0.74rem; text-align: center; }
+    .claim { margin: 0 0 1.25rem; }
+  </style>
 </Base>

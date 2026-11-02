@@ -6,6 +6,7 @@ import Avatar from '../components/Avatar.astro';
 import AlumniMap from '../components/AlumniMap.astro';
 import Comments from '../components/Comments.astro';
 import { site } from '../config/site';
+import { orgMatches } from '../lib/industry';
 
 export async function getStaticPaths() {
   const alumni = await getCollection('alumni');
@@ -31,6 +32,13 @@ const links = [
   ['Email', d.email ? `mailto:${d.email}` : '', icons.mail, false],
 ].filter(([, href]) => href) as [string, string, string, boolean][];
 const current = d.experience.find((e) => e.current);
+const employer = d.sector === 'Student' ? undefined : (await getCollection('employers')).find((e) => orgMatches(e, d.organization));
+const OPEN: Record<string, string> = { referrals: 'Job referrals', collaboration: 'Collaboration', talks: 'Talks and workshops', hiring: 'Hiring' };
+const openTo = [...(d.mentor ? ['Mentoring'] : []), ...d.open_to.map((k) => OPEN[k] ?? k)];
+// Completeness: the same fields the editor counts, so the badge matches what the member sees.
+const checks = [d.photo, d.role, d.city, d.linkedin || d.github || d.portfolio, d.skills.length >= 3, (a.body ?? '').trim().length > 80, d.experience.length, d.education.length, d.projects.length || d.publications.length, d.advice];
+const complete = Math.round((checks.filter(Boolean).length / checks.length) * 100);
+const updated = d.updated ? new Date(d.updated).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -51,11 +59,11 @@ const jsonLd = {
       <div style="flex:1;min-width:260px">
         <div class="eyebrow">{d.degree} · Batch {d.batch}</div>
         <h1>{d.name}</h1>
-        <p class="lead" style="font-size:1.05rem;margin:0">{d.role ? `${d.role}, ${d.organization}` : `Student, ${d.degree}`}</p>
+        <p class="lead" style="font-size:1.05rem;margin:0">{d.role ? <>{d.role}, {employer ? <a href={`/industry/${employer.id}`} title="Employer page">{d.organization}</a> : d.organization}</> : `Student, ${d.degree}`}</p>
         <div class="tags" style="margin-top:.6rem">
           <span class="tag grey">{d.sector}</span>
           <span class="tag grey">{d.city}, {d.country}</span>
-          {d.mentor && <span class="tag">Open to mentoring</span>}
+          {openTo.length > 0 && <span class="tag">Open to: {openTo.join(', ')}</span>}
         </div>
         <div class="profile-links">
           {links.map(([label, href, path, primary]) => (
@@ -139,15 +147,17 @@ const jsonLd = {
       {d.skills.length > 0 && (
         <div class="card">
           <h3 style="font-size:.95rem">Skills</h3>
-          <div class="tags">{d.skills.map((s) => <span class="tag grey">{s}</span>)}</div>
+          <div class="tags">{d.skills.map((s) => <a class="tag grey" href={`/alumni?skill=${encodeURIComponent(s.toLowerCase())}`} title={`Alumni with ${s}`}>{s}</a>)}</div>
         </div>
       )}
-      <AlumniMap alumni={[a]} interactive={false} />
+      {d.sector !== 'Student' && <a href={`/map?u=${a.id}`} aria-label="See on the alumni map" style="display:block"><AlumniMap alumni={[a]} interactive={false} /></a>}
       <div class="card" style="font-size:.88rem">
         <dl class="facts">
           {current && <><dt>Now</dt><dd>{current.title}{current.organization && `, ${current.organization}`}</dd></>}
           <dt>Based in</dt><dd>{d.city}{d.province && `, ${d.province}`}, {d.country}</dd>
           <dt>Page</dt><dd><code style="font-family:var(--mono);font-size:.82rem">/{a.id}</code></dd>
+          <dt>Profile</dt><dd><span class="meter" title={`${complete}% complete`}><span style={`width:${complete}%`}></span></span> {complete}% complete</dd>
+          {updated && <><dt>Updated</dt><dd>{updated}</dd></>}
         </dl>
       </div>
     </aside>
@@ -161,5 +171,10 @@ const jsonLd = {
       setTimeout(() => (b.textContent = 'Copy link'), 1500);
     });
   </script>
-  <style>@media (max-width: 800px) { .profile-grid { grid-template-columns: 1fr !important; } }</style>
+  <style>
+    @media (max-width: 800px) { .profile-grid { grid-template-columns: 1fr !important; } }
+    .meter { display: inline-block; width: 70px; height: 6px; border-radius: 3px; background: var(--navy-soft); vertical-align: middle; overflow: hidden; margin-right: 0.3rem; }
+    .meter span { display: block; height: 100%; background: var(--red); }
+    a.tag { text-decoration: none; } a.tag:hover { background: var(--navy); color: #fff; }
+  </style>
 </Base>

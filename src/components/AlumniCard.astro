@@ -5,7 +5,7 @@ interface Props { a: CollectionEntry<'alumni'> }
 const { a } = Astro.props;
 const d = a.data;
 ---
-<article class="card" data-batch={d.batch} data-sector={d.sector} data-country={d.country} data-mentor={d.mentor ? '1' : '0'} data-text={`${d.name} ${d.role} ${d.organization} ${d.city} ${d.skills.join(' ')}`.toLowerCase()}>
+<article class="card" data-batch={d.batch} data-sector={d.sector} data-country={d.country} data-mentor={d.mentor ? '1' : '0'} data-city={d.city.trim().toLowerCase()} data-org={d.organization.trim().toLowerCase()} data-skills={d.skills.map((s) => s.toLowerCase()).join('|')} data-text={`${d.name} ${d.role} ${d.organization} ${d.city} ${d.skills.join(' ')}`.toLowerCase()}>
   <div class="person">
     <Avatar name={d.name} photo={d.photo} />
     <div>

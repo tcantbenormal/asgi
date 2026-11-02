@@ -58,5 +58,8 @@ const uid = `map-${Math.random().toString(36).slice(2, 8)}`;
     group.addTo(map);
     if (data.length) map.fitBounds(group.getBounds().pad(0.25), { maxZoom: 6 });
     else map.setView([30.4, 69.3], 5);
+    // /map?u=<username> from a profile page: zoom to that person and open their popup.
+    const want = interactive && new URLSearchParams(location.search).get('u');
+    if (want) group.eachLayer((m: any) => { const i = data.findIndex((p: any) => p.id === want); if (i >= 0 && m.getLatLng && m.getLatLng().equals([data[i].lat, data[i].lng])) { map.setView(m.getLatLng(), 11); m.openPopup(); } });
   });
 </script>

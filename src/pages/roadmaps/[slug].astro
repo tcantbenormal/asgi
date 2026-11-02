@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
 import Comments from '../../components/Comments.astro';
 
 export async function getStaticPaths() {
@@ -11,6 +12,7 @@ const { r } = Astro.props;
 const { Content } = await render(r);
 ---
 <Base title={r.data.title} description={r.data.summary}>
+  <Crumbs items={[["/roadmaps", "Roadmaps"], r.data.title]} />
   <header class="page-head">
     <div class="eyebrow">Roadmap · Demand: {r.data.demand}</div>
     <h1>{r.data.title}</h1>

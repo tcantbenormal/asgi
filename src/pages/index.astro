@@ -11,10 +11,15 @@ const roadmaps = (await getCollection('roadmaps')).sort((a, b) => a.data.order -
 const resources = await getCollection('resources');
 const events = (await getCollection('events')).filter((e) => e.data.date >= new Date().toISOString().slice(0, 10)).sort((a, b) => a.data.date.localeCompare(b.data.date));
 
+const employers = await getCollection('employers');
 const featured = (alumni.filter((a) => a.data.featured).length ? alumni.filter((a) => a.data.featured) : alumni).slice(0, 3);
-const countries = new Set(alumni.map((a) => a.data.country)).size;
-const orgs = new Set(alumni.map((a) => a.data.organization)).size;
+const graduates = alumni.filter((a) => a.data.sector !== 'Student');
+const cities = new Set(graduates.map((a) => a.data.city.trim().toLowerCase())).size;
 const mentors = alumni.filter((a) => a.data.mentor).length;
+// Forum post count at build time; a failed request just hides the tile.
+let forumPosts = 0;
+try { const r = await fetch(`${site.supabase.url}/rest/v1/posts?select=id&hidden=eq.false`, { method: 'HEAD', headers: { apikey: site.supabase.key, Authorization: `Bearer ${site.supabase.key}`, Prefer: 'count=exact' } }); forumPosts = Number(r.headers.get('content-range')?.split('/')[1] ?? 0); } catch {}
+const nextEvent = events[0];
 const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 ---
 <Base title={site.name} rail={false}>
@@ -27,9 +32,9 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
         <h1>Where our GIS graduates went, and how to get there.</h1>
         <p class="lead">Alumni career journeys, skills roadmaps, open-source tools and Pakistan-focused datasets, curated by the {site.name} for the students who come after.</p>
         <div class="actions">
-          <a href="/alumni" class="btn btn-primary">Browse alumni</a>
-          <a href="/roadmaps" class="btn btn-ghost">Skills roadmaps</a>
-          <a href="/join" class="btn btn-accent">Create your profile</a>
+          <a href="/roadmaps" class="btn btn-primary"><small>Students</small>Start a roadmap</a>
+          <a href="/join?as=alumni" class="btn btn-accent"><small>Graduates</small>Claim your profile</a>
+          <a href="/alumni" class="btn btn-ghost">Browse alumni</a>
         </div>
       </div>
       <div class="sat">
@@ -46,12 +51,33 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
   <section class="section">
     <div class="wrap">
       <div class="stats">
-        <div class="stat"><b>{alumni.length}</b><span>Alumni profiles</span></div>
-        <div class="stat"><b>{countries}</b><span>Countries</span></div>
-        <div class="stat"><b>{orgs}</b><span>Organisations</span></div>
-        <div class="stat"><b>{mentors}</b><span>Open to mentoring</span></div>
-        <div class="stat"><b>{resources.length}</b><span>Tools and datasets</span></div>
+        <a class="stat" href="/alumni"><b>{graduates.length}</b><span>Graduates listed</span></a>
+        <a class="stat" href="/map"><b>{cities}</b><span>Cities</span></a>
+        <a class="stat" href="/industry"><b>{employers.length}</b><span>Employers profiled</span></a>
+        <a class="stat" href="/mentorship"><b>{mentors}</b><span>Open to mentoring</span></a>
+        <a class="stat" href="/software"><b>{resources.length}</b><span>Tools and datasets</span></a>
+        {forumPosts > 0 && <a class="stat" href="/forum"><b>{forumPosts}</b><span>Forum posts</span></a>}
       </div>
+
+      <div class="week" id="week">
+        <div class="section-head" style="margin-bottom:.75rem"><div><div class="eyebrow">This week</div><h2 style="font-size:1.3rem">What changed</h2></div><a href="/whats-new" class="btn btn-ghost btn-sm">Everything new</a></div>
+        <div class="grid">
+          <article class="card week-card" id="week-forum"><span class="kind">Forum</span><h3><a href="/forum">Latest discussion</a></h3><p class="muted">Loading…</p></article>
+          {posts[0] && <article class="card week-card"><span class="kind">Story</span><h3><a href={`/stories/${posts[0].id}`}>{posts[0].data.title}</a></h3><p class="muted">{posts[0].data.author} · {fmt(posts[0].data.date)}</p></article>}
+          {nextEvent ? <article class="card week-card"><span class="kind">Next event</span><h3><a href="/events">{nextEvent.data.title}</a></h3><p class="muted">{new Date(nextEvent.data.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })} · {nextEvent.data.venue}</p></article>
+            : <article class="card week-card"><span class="kind">Opportunities</span><h3><a href="/opportunities?sort=deadline">Closing soonest</a></h3><p class="muted">Scholarships and jobs ordered by deadline.</p></article>}
+        </div>
+      </div>
+      <script is:inline define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
+        fetch(`${url}/rest/v1/posts?select=id,title,created_at,replies(id)&hidden=eq.false&order=created_at.desc&limit=1`, { headers: { apikey: key, Authorization: `Bearer ${key}` } })
+          .then((r) => r.json()).then((rows) => {
+            const el = document.getElementById('week-forum'), p = rows[0];
+            if (!p) { el.querySelector('p').textContent = 'No posts yet. Ask the first question.'; return; }
+            const a = el.querySelector('a'); a.href = `/forum/post?id=${p.id}`; a.textContent = p.title;
+            const days = Math.floor((Date.now() - new Date(p.created_at)) / 864e5);
+            el.querySelector('p').textContent = `${p.replies.length} ${p.replies.length === 1 ? 'reply' : 'replies'} · ${days === 0 ? 'today' : days === 1 ? 'yesterday' : days + ' days ago'}`;
+          }).catch(() => { document.getElementById('week-forum').querySelector('p').textContent = 'Open the forum.'; });
+      </script>
     </div>
   </section>
 
@@ -72,6 +98,44 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
         <a href="/alumni" class="btn btn-ghost btn-sm">All alumni</a>
       </div>
       <div class="grid">{featured.map((a) => <AlumniCard a={a} />)}</div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="eyebrow">Stories and guides</div><h2>Latest from alumni and students</h2></div>
+        <a href="/stories" class="btn btn-ghost btn-sm">All stories</a>
+      </div>
+      <div class="grid">
+        {posts.slice(0, 3).map((p) => (
+          <article class="card">
+            <span class="tag red" style="text-transform:capitalize">{p.data.type}</span>
+            <h3><a href={`/stories/${p.id}`}>{p.data.title}</a></h3>
+            <p>{p.data.summary}</p>
+            <div class="meta"><span>{p.data.author}</span><span>{fmt(p.data.date)}</span></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="eyebrow">Career tracks</div><h2>Pick a direction, follow the roadmap</h2></div>
+        <a href="/roadmaps" class="btn btn-ghost btn-sm">All roadmaps</a>
+      </div>
+      <div class="grid">
+        {roadmaps.slice(0, 6).map((r) => (
+          <article class="card">
+            <h3><a href={`/roadmaps/${r.id}`}>{r.data.title}</a></h3>
+            <p>{r.data.summary}</p>
+            <div class="foot"><span class="tag grey">Demand: {r.data.demand}</span><small class="muted">{r.data.stages.length} stages</small></div>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -110,43 +174,6 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
       })();
     </script>
     <style>@media (max-width: 900px) { #earth-grid { grid-template-columns: 1fr !important; } }</style>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <div><div class="eyebrow">Stories and guides</div><h2>Latest from alumni and students</h2></div>
-        <a href="/stories" class="btn btn-ghost btn-sm">All stories</a>
-      </div>
-      <div class="grid">
-        {posts.slice(0, 3).map((p) => (
-          <article class="card">
-            <span class="tag red" style="text-transform:capitalize">{p.data.type}</span>
-            <h3><a href={`/stories/${p.id}`}>{p.data.title}</a></h3>
-            <p>{p.data.summary}</p>
-            <div class="meta"><span>{p.data.author}</span><span>{fmt(p.data.date)}</span></div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <div><div class="eyebrow">Career tracks</div><h2>Pick a direction, follow the roadmap</h2></div>
-        <a href="/roadmaps" class="btn btn-ghost btn-sm">All roadmaps</a>
-      </div>
-      <div class="grid">
-        {roadmaps.slice(0, 6).map((r) => (
-          <article class="card">
-            <h3><a href={`/roadmaps/${r.id}`}>{r.data.title}</a></h3>
-            <p>{r.data.summary}</p>
-            <div class="foot"><span class="tag grey">Demand: {r.data.demand}</span><small class="muted">{r.data.stages.length} stages</small></div>
-          </article>
-        ))}
-      </div>
-    </div>
   </section>
 
   <section class="section">

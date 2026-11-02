@@ -23,6 +23,9 @@ const alumni = defineCollection({
     email: z.string().optional(),
     photo: z.string().optional(),
     mentor: z.boolean().default(false),
+    open_to: z.array(z.string()).default([]), // referrals, collaboration, talks... (mentoring is the `mentor` flag)
+    joined: z.string().optional(),  // created_at from Supabase, ISO
+    updated: z.string().optional(), // updated_at from Supabase, ISO
     featured: z.boolean().default(false),
     skills: z.array(z.string()).default([]),
     advice: z.string().optional(),

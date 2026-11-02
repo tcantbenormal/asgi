@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
 
 export async function getStaticPaths() {
   const items = await getCollection('resources');
@@ -12,6 +13,7 @@ const back = d.kind === 'software' ? '/software' : '/datasets';
 const mirrored = d.downloads.length > 0;
 ---
 <Base title={d.name} description={d.description}>
+  <Crumbs items={[[back, back === "/software" ? "Software" : "Datasets"], d.name]} />
   <header class="page-head res-title">
     {d.image && d.kind === 'software' && <img class="res-logo lg" src={d.image} alt="" width="72" height="72" />}
     <div>

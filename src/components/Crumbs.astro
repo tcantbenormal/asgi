@@ -1,0 +1,9 @@
+---
+// Breadcrumb trail for detail pages. Parents are [href, label]; the current page is a plain string.
+interface Props { items: ([string, string] | string)[] }
+const { items } = Astro.props;
+---
+<nav class="crumbs" aria-label="Breadcrumb" data-pagefind-ignore>
+  <a href="/">Home</a>
+  {items.map((i) => typeof i === 'string' ? <span aria-current="page">{i}</span> : <a href={i[0]}>{i[1]}</a>)}
+</nav>

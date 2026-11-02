@@ -39,7 +39,7 @@ export function alumniLoader(): Loader {
             sector: r.sector, city: r.city, country: r.country, province: r.province ?? undefined, lat: r.lat, lng: r.lng,
             linkedin: r.linkedin ?? '', github: r.github ?? '', portfolio: r.portfolio ?? '', orcid: r.orcid ?? undefined,
             cv: r.cv_url ?? '', email: r.email_public ?? undefined, photo: r.photo_url ?? undefined,
-            mentor: r.mentor, featured: r.featured, skills: r.skills ?? [], advice: r.advice ?? undefined,
+            mentor: r.mentor, open_to: r.open_to ?? [], joined: r.created_at ?? undefined, updated: r.updated_at ?? undefined, featured: r.featured, skills: r.skills ?? [], advice: r.advice ?? undefined,
             publications: r.publications ?? [], education: r.education ?? [], experience: r.experience ?? [], projects: r.projects ?? [],
           },
         });

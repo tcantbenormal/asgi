@@ -1,20 +1,15 @@
 ---
 import { site } from '../config/site';
-const path = Astro.url.pathname;
-const links = [
-  ['/alumni', 'Alumni'],
-  ['/map', 'Map'],
-  ['/forum', 'Forum'],
-  ['/stories', 'Stories'],
-  ['/roadmaps', 'Roadmaps'],
-  ['/software', 'Software'],
-  ['/datasets', 'Datasets'],
-  ['/opportunities', 'Opportunities'],
-  ['/industry', 'Industry'],
-  ['/projects', 'Projects'],
-  ['/society', 'Society'],
+const path = Astro.url.pathname.replace(/(\/index)?\.html$/, '').replace(/\/$/, '') || '/'; // build.format 'file' gives /stories.html
+// Four groups instead of twelve flat links. Each group is a native <details>, so it works without JS.
+const groups: [string, [string, string][]][] = [
+  ['Community', [['/alumni', 'Alumni directory'], ['/map', 'Alumni map'], ['/forum', 'Forum'], ['/mentorship', 'Mentorship']]],
+  ['Learn', [['/roadmaps', 'Roadmaps'], ['/stories', 'Stories'], ['/software', 'Software'], ['/datasets', 'Datasets'], ['/projects', 'FYP archive']]],
+  ['Careers', [['/opportunities', 'Opportunities'], ['/industry', 'Industry']]],
+  ['Society', [['/society', 'About and cabinet'], ['/events', 'Events'], ['/whats-new', "What's new"], ['/contact', 'Contact']]],
 ];
 const current = (href: string) => (path === href || path.startsWith(href + '/') ? 'page' : undefined);
+const inGroup = (links: [string, string][]) => links.some(([h]) => current(h));
 ---
 <header class="site-header" data-pagefind-ignore>
   <div class="wrap">
@@ -24,8 +19,17 @@ const current = (href: string) => (path === href || path.startsWith(href + '/') 
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
-      {links.map(([href, label]) => <a href={href} aria-current={current(href)}>{label}</a>)}
-      <a href="/search" aria-current={current('/search')}>Search</a>
+      {groups.map(([label, links]) => (
+        <details class="menu" data-on={inGroup(links) ? '' : undefined}>
+          <summary>{label}</summary>
+          <div class="menu-list">
+            {links.map(([href, text]) => <a href={href} aria-current={current(href)}>{text}</a>)}
+          </div>
+        </details>
+      ))}
+      <form class="nav-search" action="/search" role="search">
+        <input type="search" name="q" placeholder="Search" aria-label="Search the portal" />
+      </form>
       <span class="auth" id="hdr-auth">
         <a href="/account" aria-current={current('/account')}>Sign in</a>
         <a href="/join" class="cta">Sign up</a>
@@ -61,4 +65,9 @@ const current = (href: string) => (path === href || path.startsWith(href + '/') 
     const open = nav!.classList.toggle('open');
     btn.setAttribute('aria-expanded', String(open));
   });
+  // One dropdown open at a time; close on outside click or Escape.
+  const menus = [...document.querySelectorAll<HTMLDetailsElement>('.nav .menu')];
+  menus.forEach((m) => m.addEventListener('toggle', () => { if (m.open) menus.forEach((o) => o !== m && (o.open = false)); }));
+  document.addEventListener('click', (e) => { if (!(e.target as Element).closest('.nav .menu')) menus.forEach((m) => (m.open = false)); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') menus.forEach((m) => (m.open = false)); });
 </script>

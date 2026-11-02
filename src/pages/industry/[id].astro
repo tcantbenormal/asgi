@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
 import AlumniCard from '../../components/AlumniCard.astro';
 import { site } from '../../config/site';
 import { groupAlumniByOrg, matchEmployers, openingsFor, pastEmployeesFor, relatedEmployers, provincesOf, initials } from '../../lib/industry';
@@ -22,6 +23,7 @@ const host = new URL(d.website).hostname.replace(/^www\./, '');
 const provinces = provincesOf(e);
 ---
 <Base title={d.name} description={`${d.kind} in ${d.hq}. ${d.about}`}>
+  <Crumbs items={[["/industry", "Industry"], d.name]} />
   <header class="page-head res-title">
     <span class="logo-tile lg">{d.logo ? <img src={d.logo} alt="" /> : <span class="emp-initials" aria-hidden="true">{initials(d.name)}</span>}</span>
     <div>

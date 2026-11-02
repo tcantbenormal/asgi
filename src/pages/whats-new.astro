@@ -1,0 +1,60 @@
+---
+// Everything with a date, newest first: stories, events, opportunities, resources, employers, projects.
+// Built from the content collections, so it updates on every rebuild (Monday, or any push).
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+
+const month = (s?: string) => { if (!s) return null; const d = new Date(/^\d{4}-\d{2}/.test(s) ? s : `1 ${s}`); return isNaN(d.valueOf()) ? null : d; };
+type Item = { date: Date; kind: string; title: string; href: string; note?: string };
+const items: Item[] = [];
+for (const p of await getCollection('posts')) items.push({ date: p.data.date, kind: 'Story', title: p.data.title, href: `/stories/${p.id}`, note: p.data.summary });
+for (const e of await getCollection('events')) items.push({ date: new Date(e.data.date), kind: 'Event', title: e.data.title, href: '/events', note: e.data.venue });
+// Checked/updated months are verification dates shared by many entries, so they collapse into one row per month.
+const summarise = (rows: { d: Date | null; label: string }[], kind: string, href: string) => {
+  const by = new Map<string, { d: Date; n: number }>();
+  for (const r of rows) { if (!r.d) continue; const k = r.d.toISOString().slice(0, 7); const cur = by.get(k); if (cur) cur.n++; else by.set(k, { d: r.d, n: 1 }); }
+  for (const { d, n } of by.values()) items.push({ date: d, kind, title: `${n} ${kind.toLowerCase()}${n === 1 ? '' : 's'} checked and updated`, href });
+};
+const links = await getCollection('links');
+for (const k of ['scholarship', 'course', 'certification'] as const) summarise(links.filter((l) => l.data.category === k).map((l) => ({ d: month(l.data.updated), label: l.data.title })), { scholarship: 'Scholarship', course: 'Course', certification: 'Certification' }[k], `/opportunities#${k}`);
+for (const l of links.filter((l) => l.data.category === 'job')) { const d = month(l.data.updated); if (d) items.push({ date: d, kind: 'Job', title: l.data.title, href: l.data.details.length ? `/opportunities/${l.id}` : l.data.url, note: l.data.provider }); }
+const resources = await getCollection('resources');
+summarise(resources.filter((r) => r.data.kind === 'software').map((r) => ({ d: month(r.data.updated), label: r.data.name })), 'Software entry', '/software');
+summarise(resources.filter((r) => r.data.kind !== 'software').map((r) => ({ d: month(r.data.updated), label: r.data.name })), 'Dataset', '/datasets');
+summarise((await getCollection('employers')).map((e) => ({ d: month(e.data.checked), label: e.data.name })), 'Employer', '/industry');
+for (const p of await getCollection('projects')) items.push({ date: new Date(`${p.data.year}-06-01`), kind: 'FYP', title: p.data.title, href: '/projects', note: p.data.students.join(', ') });
+for (const a of await getCollection('alumni')) { const d = a.data.joined ? new Date(a.data.joined) : null; if (d) items.push({ date: d, kind: 'Profile', title: a.data.name, href: `/${a.id}`, note: a.data.role ? `${a.data.role}, ${a.data.organization}` : 'Student' }); }
+items.sort((a, b) => b.date.valueOf() - a.date.valueOf());
+const today = new Date();
+const groups = new Map<string, Item[]>();
+for (const i of items.filter((i) => i.date <= today).slice(0, 80)) { const k = i.date.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }); (groups.get(k) ?? groups.set(k, []).get(k)!).push(i); }
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+---
+<Base title="What's new" description="Recent additions to the portal: stories, opportunities, datasets, employers, events and profiles." noindex>
+  <PageHead eyebrow="Society" title="What's new" lead="Recent additions across the portal, newest first. The site rebuilds every Monday, so a change made in the week shows up here after that." />
+  {[...groups].map(([m, list]) => (
+    <section class="section" style="padding-top:1.25rem">
+      <h2 style="font-size:1.15rem">{m}</h2>
+      <ul class="new-list">
+        {list.map((i) => (
+          <li>
+            <span class="kind">{i.kind}</span>
+            <a href={i.href} rel={i.href.startsWith('http') ? 'noopener' : undefined}>{i.title}</a>
+            {i.note && <span class="muted">{i.note}</span>}
+            <time class="muted" datetime={i.date.toISOString().slice(0, 10)}>{fmt(i.date)}</time>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+  <style>
+    .new-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
+    .new-list li { display: grid; grid-template-columns: 110px minmax(0, 1fr) auto; gap: 0.75rem; align-items: baseline; padding: 0.45rem 0; border-bottom: 1px solid var(--line); font-size: 0.94rem; }
+    .new-list li a { font-weight: 600; text-decoration: none; color: var(--navy); }
+    .new-list li .muted { font-size: 0.84rem; }
+    .new-list li .muted:not(time) { grid-column: 2; }
+    .new-list time { grid-column: 3; grid-row: 1; white-space: nowrap; }
+    @media (max-width: 600px) { .new-list li { grid-template-columns: 1fr; } .new-list time { grid-column: 1; grid-row: auto; } }
+  </style>
+</Base>

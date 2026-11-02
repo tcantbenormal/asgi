@@ -9,7 +9,8 @@ import PageHead from '../components/PageHead.astro';
   <script is:inline src="/pagefind/pagefind-ui.js"></script>
   <script is:inline>
     window.addEventListener('DOMContentLoaded', () => {
-      new PagefindUI({ element: '#search', showSubResults: true, showImages: false, autofocus: true });
+      const ui = new PagefindUI({ element: '#search', showSubResults: true, showImages: false, autofocus: true });
+      const q = new URLSearchParams(location.search).get('q'); if (q) ui.triggerSearch(q);
     });
   </script>
   <style is:global>

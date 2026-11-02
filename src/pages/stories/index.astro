@@ -2,13 +2,17 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHead from '../../components/PageHead.astro';
+import Byline from '../../components/Byline.astro';
+import { site } from '../../config/site';
 
 const posts = (await getCollection('posts')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const types = [...new Set(posts.map((p) => p.data.type))];
 const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 ---
 <Base title="Stories and guides" description="Career stories, interviews, tutorials and news from alumni and students of the institute.">
-  <PageHead eyebrow="Stories" title="Stories and guides" lead="Career journeys, interviews with seniors, tutorials and society news." />
+  <PageHead eyebrow="Stories" title="Stories and guides" lead="Career journeys, interviews with seniors, tutorials and society news.">
+    <p style="margin-top:1rem"><a class="btn btn-primary btn-sm" href={`${site.forms.submitResource}?type=story`}>Write for us</a> <span class="muted" style="font-size:.88rem;margin-left:.5rem">Pitch a career story, a tutorial or an interview. The cabinet edits lightly and credits you.</span></p>
+  </PageHead>
   <div class="filters" data-pagefind-ignore>
     <button class="btn btn-ghost btn-sm" data-type="" aria-pressed="true">All</button>
     {types.map((t) => <button class="btn btn-ghost btn-sm" data-type={t} aria-pressed="false" style="text-transform:capitalize">{t}</button>)}
@@ -19,7 +23,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
         <span class="tag red" style="text-transform:capitalize">{p.data.type}</span>
         <h3><a href={`/stories/${p.id}`}>{p.data.title}</a></h3>
         <p>{p.data.summary}</p>
-        <div class="meta"><span>{p.data.author}</span><span>{fmt(p.data.date)}</span></div>
+        <Byline author={p.data.author} date={p.data.date} body={p.body} sm />
       </article>
     ))}
   </div>

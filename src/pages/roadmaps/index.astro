@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHead from '../../components/PageHead.astro';
 const roadmaps = (await getCollection('roadmaps')).sort((a, b) => a.data.order - b.data.order);
+const hours = (r: typeof roadmaps[number]) => r.data.stages.flatMap((s) => s.resources).reduce((n, x) => n + (parseFloat(x.hours ?? '') || 0), 0);
 ---
 <Base title="Skills roadmaps" description="Step-by-step skills roadmaps for GIS, remote sensing, GIS development, surveying and precision agriculture careers.">
   <PageHead eyebrow="Learn" title="Skills roadmaps" lead="Each track goes from first semester to job-ready, with free resources at every stage. Written with input from alumni working in that field." />
@@ -12,7 +13,7 @@ const roadmaps = (await getCollection('roadmaps')).sort((a, b) => a.data.order -
         <h3><a href={`/roadmaps/${r.id}`}>{r.data.title}</a></h3>
         <p>{r.data.summary}</p>
         <div class="tags">{r.data.tools.map((t) => <span class="tag grey">{t}</span>)}</div>
-        <div class="foot"><span class="tag">Demand: {r.data.demand}</span><small class="muted">{r.data.stages.length} stages</small></div>
+        <div class="foot"><span class="tag">Demand: {r.data.demand}</span><small class="muted">{r.data.stages.length} stages{hours(r) ? ` · about ${Math.round(hours(r))} h of resources` : ''}</small></div>
       </article>
     ))}
   </div>

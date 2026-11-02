@@ -23,6 +23,7 @@ cards.sort((a, b) => a.i - b.i);
 const groups = sectorOrder.map(([k, label]) => ({ k, label, cards: cards.filter((c) => c.e.data.sector === k) })).filter((g) => g.cards.length);
 const orgs = [...byOrg.values()].map((o) => ({ ...o, employer: employerForOrg.get(o.key) })).sort((a, b) => b.people.length - a.people.length || a.name.localeCompare(b.name));
 const placed = new Set(cards.flatMap((c) => c.people.map((a) => a.id))).size;
+const orgSectors = [...sectorOrder, ['Freelance', 'Freelance and self-employed']].map(([k, label]) => ({ k, label, orgs: orgs.filter((o) => (o.employer?.data.sector ?? o.people[0].data.sector) === k) })).filter((g) => g.orgs.length);
 const hiringCount = cards.filter((c) => c.openings.length || c.e.data.hiring_now).length;
 const countries = new Set(cards.map((c) => (c.provinces.includes('Abroad') ? 'abroad' : 'Pakistan'))).size;
 const provinces = [...new Set(cards.flatMap((c) => c.provinces))].sort((a, b) => (a === 'Abroad' ? 1 : b === 'Abroad' ? -1 : a.localeCompare(b)));
@@ -53,7 +54,7 @@ const checked = [...new Set(cards.map((c) => c.e.data.checked).filter(Boolean))]
     <label class="check" style="margin:0;font-size:.9rem"><input type="checkbox" id="einterns" /> Takes interns</label>
     <label class="check" style="margin:0;font-size:.9rem"><input type="checkbox" id="efresh" /> Hires fresh graduates</label>
   </div>
-  <p class="notice navy" style="margin-bottom:1rem">Pay figures are indicative monthly ranges from recent advertisements and alumni reports, gross, before tax, last checked {checked}. They vary with grade, city and project funding. Treat them as a starting point for negotiation, not a promise.</p>
+  <p class="notice navy" style="margin-bottom:1rem"><strong>About the pay figures.</strong> Indicative monthly ranges, gross before tax, taken from recent advertisements, public pay scales and what alumni report, last checked {checked}. Know a figure is off? <a href={`${site.forms.submitResource}?type=employer`}>Send a correction</a> and it goes in at the next check. They vary with grade, city and project funding. Treat them as a starting point for negotiation, not a promise.</p>
 
   {groups.map((g) => (
     <section class="emp-group" data-sector={g.k}>
@@ -64,7 +65,7 @@ const checked = [...new Set(cards.map((c) => c.e.data.checked).filter(Boolean))]
           return (
           <article class="card emp" data-sector={e.data.sector} data-prov={provinces.join('|')} data-hiring={hiring ? '1' : '0'} data-interns={e.data.hires.includes('interns') ? '1' : '0'} data-fresh={e.data.hires.includes('fresh graduates') ? '1' : '0'} data-text={`${e.data.name} ${e.data.aliases.join(' ')} ${e.data.kind} ${e.data.hq} ${e.data.locations.join(' ')} ${e.data.roles.join(' ')} ${e.data.tags.join(' ')}`.toLowerCase()}>
             <div class="res-head">
-              <span class="logo-tile">{e.data.logo ? <img src={e.data.logo} alt="" loading="lazy" /> : <span class="emp-initials" aria-hidden="true">{initials(e.data.name)}</span>}</span>
+              <span class="logo-tile">{e.data.logo ? <img src={e.data.logo} alt="" loading="lazy" /> : <span class="emp-initials" aria-hidden="true">{initials(e.data.name)}</span>}{people.length > 0 && <span class="tile-n" title={`${people.length} alumni here`}>{people.length}</span>}</span>
               <div>
                 <div class="tags" style="margin-bottom:.25rem">
                   {hiring && <span class="tag hiring">Hiring now</span>}
@@ -95,13 +96,20 @@ const checked = [...new Set(cards.map((c) => c.e.data.checked).filter(Boolean))]
     </section>
   ))}
   <p class="empty-state" id="eempty" hidden>Nothing matches.</p>
+  <article class="card missing" data-pagefind-ignore>
+    <h3>Your employer missing?</h3>
+    <p>Fifty-odd organisations are profiled so far. If yours is not here, send the name, what the GIS team does and a rough pay band, and it gets a page.</p>
+    <a class="btn btn-primary btn-sm" href={`${site.forms.submitResource}?type=employer`}>Suggest an employer</a>
+  </article>
 
   <section class="section" id="alumni-work">
     <h2>Where alumni work</h2>
     <p class="lead" style="margin-bottom:1.5rem">Every organisation named in an approved alumni profile, with the people there. Built from the directory at each rebuild: update the organisation on your profile and it appears here at the next build.</p>
-    {orgs.length === 0 ? <p class="empty-state">No working graduates in the directory yet. <a href="/join">Add your profile</a> to put your organisation here.</p> : (
+    {orgs.length === 0 ? <p class="empty-state">No working graduates in the directory yet. <a href="/join">Add your profile</a> to put your organisation here.</p> : orgSectors.map((g) => (
+      <>
+      <h3 class="emp-group-h" style="font-size:1.05rem;margin-top:1.25rem">{g.label} <small class="muted">{g.orgs.length}</small></h3>
       <div class="grid">
-        {orgs.map((o) => (
+        {g.orgs.map((o) => (
           <article class="card">
             <div class="res-head">
               <span class="logo-tile">{o.employer?.data.logo ? <img src={o.employer.data.logo} alt="" loading="lazy" /> : <span class="emp-initials" aria-hidden="true">{initials(o.name)}</span>}</span>
@@ -115,7 +123,8 @@ const checked = [...new Set(cards.map((c) => c.e.data.checked).filter(Boolean))]
           </article>
         ))}
       </div>
-    )}
+      </>
+    ))}
   </section>
 
   <script>

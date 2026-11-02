@@ -14,6 +14,7 @@ import { site } from '../config/site';
           <option value="opportunity">An opportunity: job, internship, scholarship, course</option>
           <option value="project">A project to showcase</option>
           <option value="employer">An employer for the Industry page</option>
+          <option value="story">A story, tutorial or interview to publish</option>
           <option value="other">Something else</option>
         </select>
       </label>
@@ -42,7 +43,7 @@ import { site } from '../config/site';
     const sb = createClient(url, key);
     const f = document.getElementById('f'), msg = document.getElementById('msg');
     watchPicker(f.images, document.getElementById('files'));
-    const kinds = ['tool', 'dataset', 'opportunity', 'project', 'employer', 'other'];
+    const kinds = ['tool', 'dataset', 'opportunity', 'project', 'employer', 'story', 'other'];
     const want = new URLSearchParams(location.search).get('type');
     if (kinds.includes(want)) f.kind.value = want;
     const { data: { session } } = await sb.auth.getSession();

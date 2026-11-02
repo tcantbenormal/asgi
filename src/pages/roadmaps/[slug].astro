@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import Comments from '../../components/Comments.astro';
+import AlumniCard from '../../components/AlumniCard.astro';
 
 export async function getStaticPaths() {
   const roadmaps = await getCollection('roadmaps');
@@ -10,6 +11,12 @@ export async function getStaticPaths() {
 }
 const { r } = Astro.props;
 const { Content } = await render(r);
+// Alumni whose skills overlap the track's tools, and the software pages for those tools.
+const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+const tools = r.data.tools.map(norm);
+const hit = (s: string) => tools.some((t) => { const k = norm(s); return k === t || k.includes(t) || t.includes(k); });
+const onTrack = (await getCollection('alumni')).filter((a) => a.data.sector !== 'Student').map((a) => ({ a, n: a.data.skills.filter(hit).length })).filter((x) => x.n > 0).sort((x, y) => y.n - x.n).slice(0, 6);
+const software = (await getCollection('resources')).filter((x) => x.data.kind === 'software' && hit(x.data.name));
 ---
 <Base title={r.data.title} description={r.data.summary}>
   <Crumbs items={[["/roadmaps", "Roadmaps"], r.data.title]} />
@@ -42,5 +49,17 @@ const { Content } = await render(r);
       </li>
     ))}
   </ol>
+  {software.length > 0 && (
+    <section class="section" style="padding-top:2rem">
+      <h2>Software for this track</h2>
+      <div class="grid">{software.map((x) => (
+        <article class="card"><div class="res-head">{x.data.image && <img class="res-logo" src={x.data.image} alt="" width="40" height="40" loading="lazy" />}<div><span class="tag grey">{x.data.category}</span><h3><a href={`/resources/${x.id}`}>{x.data.name}</a></h3></div></div><p>{x.data.description}</p></article>
+      ))}</div>
+    </section>
+  )}
+  <section class="section" style="padding-top:2rem">
+    <h2>Alumni on this track</h2>
+    {onTrack.length ? <div class="grid">{onTrack.map(({ a }) => <AlumniCard a={a} />)}</div> : <p class="empty-state">No graduate lists these tools yet. <a href="/join">Add your profile</a> with your skills to appear here.</p>}
+  </section>
   <Comments />
 </Base>

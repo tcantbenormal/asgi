@@ -66,8 +66,15 @@ const seconds = site.downloadCountdown;
       if (document.hidden) clearInterval(iv);
       else iv = setInterval(tick, 1000);
     });
-    // Network direct link: opens in a second tab on the real click, the download itself continues as normal.
-    links.forEach((a) => a.addEventListener('click', () => { if (left <= 0 && gate.dataset.direct) window.open(gate.dataset.direct, '_blank', 'noopener'); }));
+    // On the real click: the download opens in a new tab first (it gets the browser's one guaranteed
+    // popup), then the network direct link tries a second tab and falls back to this tab if blocked.
+    links.forEach((a) => a.addEventListener('click', (e) => {
+      if (left > 0) { e.preventDefault(); return; }
+      e.preventDefault();
+      window.open(a.href, '_blank', 'noopener');
+      const ad = gate.dataset.direct;
+      if (ad && !window.open(ad, '_blank', 'noopener')) location.assign(ad);
+    }));
     requestAnimationFrame(() => (bar.style.width = '0%'));
   </script>
 </Base>

@@ -154,8 +154,9 @@ model-viewer { width: 100%; height: 440px; background: transparent; --poster-col
 .stat b { display: block; font-family: var(--head); font-size: 2rem; line-height: 1.1; color: var(--navy); }
 .stat span { font-size: 0.85rem; color: var(--ink-2); }
 a.stat { text-decoration: none; display: block; transition: transform 0.15s, box-shadow 0.15s; } a.stat:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-.hero .actions .btn small { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.9; line-height: 1; margin-bottom: 0.25rem; }
-.hero .actions .btn { flex-direction: column; align-items: flex-start; line-height: 1.15; }
+.hero .actions .btn small { display: block; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: inherit; opacity: 0.72; line-height: 1; margin-bottom: 0.3rem; }
+.hero .actions .btn { flex-direction: column; align-items: flex-start; justify-content: center; line-height: 1.15; padding: 0.8rem 1.25rem; min-height: 64px; border-radius: 10px; }
+.hero .actions .btn-ghost { background: #fff; border: 1px solid var(--line); } .hero .actions .btn-ghost small { color: var(--ink-3); opacity: 1; }
 .week { margin-top: 2rem; }
 .week-card .kind { margin-bottom: 0.5rem; display: inline-block; }
 .week-card h3 { font-size: 1.02rem; }

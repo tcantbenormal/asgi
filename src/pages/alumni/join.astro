@@ -1,170 +1,220 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHead from '../../components/PageHead.astro';
 import { site } from '../../config/site';
 const sectors = ['Government', 'Private', 'NGO / UN', 'Academia', 'Freelance', 'Student'];
 const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilgit-Baltistan', 'Azad Jammu & Kashmir', 'Islamabad Capital Territory'];
+// Suggestions for the organisation and city fields: the employer list keeps names consistent so the
+// Industry page can match profiles; free text is still allowed for anything new.
+const employers = await getCollection('employers');
+const orgNames = [...new Set(employers.flatMap((e) => [e.data.name, ...e.data.aliases]))].sort();
+const cities = ['Islamabad', 'Rawalpindi', 'Lahore', 'Karachi', 'Peshawar', 'Quetta', 'Faisalabad', 'Multan', 'Gujranwala', 'Sialkot', 'Hyderabad', 'Sukkur', 'Abbottabad', 'Mardan', 'Bahawalpur', 'Sargodha', 'Gilgit', 'Skardu', 'Muzaffarabad', 'Attock', 'Jhelum', 'Murree', 'Riyadh', 'Jeddah', 'Dubai', 'Abu Dhabi', 'Doha', 'Muscat', 'London', 'Enschede', 'Salzburg', 'Wuhan', 'Beijing', 'Kathmandu'];
+const skillList = ['QGIS', 'ArcGIS Pro', 'ArcGIS Online', 'ArcGIS Enterprise', 'ArcMap', 'Google Earth Engine', 'Python', 'R', 'PostGIS', 'PostgreSQL', 'SQL', 'ENVI', 'ERDAS IMAGINE', 'SNAP', 'GRASS GIS', 'SAGA GIS', 'Remote Sensing', 'Photogrammetry', 'LiDAR', 'Pix4D', 'Agisoft Metashape', 'Drone mapping', 'Machine Learning', 'Deep Learning', 'TensorFlow', 'PyTorch', 'GDAL', 'GeoPandas', 'Rasterio', 'Leaflet', 'Mapbox', 'OpenLayers', 'Web GIS', 'JavaScript', 'Cartography', 'Spatial Analysis', 'Geostatistics', 'SAR', 'InSAR', 'Sentinel-1', 'Sentinel-2', 'Landsat', 'MODIS', 'Hydrology', 'SWAT', 'HEC-RAS', 'HEC-HMS', 'AutoCAD', 'Surveying', 'GNSS', 'Total Station', 'Excel', 'Power BI', 'MATLAB', 'Docker', 'Git', 'FME', 'eCognition', 'Survey123', 'QField', 'KoboToolbox', 'OpenStreetMap', 'Urban planning', 'Land use', 'Climate', 'Flood mapping', 'Crop mapping', 'Change detection', 'AHP'];
+const sections = [
+  ['overview', 'Overview'], ['import', 'Import'], ['identity', 'Identity'], ['location', 'Location'], ['links', 'Links'],
+  ['career', 'Career'], ['experience', 'Experience'], ['education', 'Education'], ['projects', 'Projects'], ['publications', 'Publications'],
+];
 ---
 <Base title="Your profile" description="Build a profile that doubles as your portfolio: CV, projects, publications, experience and links." rail={false} noindex>
-  <div class="wrap" style="max-width:980px">
-    <PageHead eyebrow="Account" title="Your profile and portfolio" lead="Fill what applies, save. Your page lives at a short link you choose. The cabinet approves new profiles, usually within a few days. Come back any time to edit." />
+  <div class="wrap" style="max-width:1180px">
+    <PageHead eyebrow="Account" title="Your profile and portfolio" lead="Fill what applies, section by section, and save. Your page lives at a short link you choose. The cabinet approves new profiles, usually within a few days." />
 
-    <form id="editor" class="form" hidden>
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
-        <p id="who" class="muted" style="margin:0"></p>
-        <button type="button" class="btn btn-ghost btn-sm" id="signout">Sign out</button>
-      </div>
-      <p id="state" class="status" hidden></p>
+    <form id="editor" class="form editor" hidden novalidate>
+      <nav class="ed-nav" aria-label="Profile sections">
+        <div class="ed-who"><p id="who" class="muted" style="margin:0"></p><button type="button" class="btn btn-ghost btn-sm" id="signout">Sign out</button></div>
+        <div class="ed-progress" aria-live="polite"><div class="ed-bar"><span id="pbar"></span></div><small><b id="pct">0%</b> complete</small></div>
+        <ul>
+          {sections.map(([id, label], i) => <li><button type="button" class="ed-tab" data-go={id} aria-current={i === 0 ? 'page' : undefined}><span class="ed-tick" data-tick={id}></span>{label}</button></li>)}
+        </ul>
+      </nav>
 
-      <div class="tabs" role="group" aria-label="I am" style="margin-top:.25rem">
-        <button type="button" data-mode="student">Current student</button>
-        <button type="button" data-mode="alumni">Graduate</button>
-      </div>
-      <p class="muted" id="mode-hint" style="margin:0;font-size:.88rem"></p>
+      <div class="ed-main">
+        <p id="state" class="status" hidden></p>
 
-      <fieldset>
-        <legend>Identity</legend>
-        <div class="row">
-          <label>Full name <input name="name" required maxlength="80" /></label>
-          <label>Short link <span style="display:flex;align-items:center;gap:.3rem;font-weight:400"><span class="muted" id="origin"></span>/<input name="username" placeholder="fahadkarim" pattern="[a-z0-9][a-z0-9-]{2,29}" title="3 to 30 lowercase letters, digits or hyphens" style="flex:1" /></span></label>
-        </div>
-        <div class="row">
-          <label>Photo <input type="file" name="photo" accept="image/jpeg,image/png,image/webp" /></label>
-          <label>CV (PDF, max 5 MB) <input type="file" name="cv" accept="application/pdf" /></label>
-        </div>
-        <div class="row-3">
-          <label>Batch <input name="batch" placeholder="2021-25" required pattern="\d{4}-\d{2}" /></label>
-          <label>Degree from the institute <input name="degree" placeholder="BS Geoinformatics" required /></label>
-          <label data-only="alumni">Sector <select name="sector" required><option value="">Choose…</option>{sectors.map((s) => <option>{s}</option>)}</select></label>
-        </div>
-        <div class="row">
-          <label>Current role <input name="role" placeholder="GIS Analyst" required /></label>
-          <label>Organisation <input name="organization" placeholder="SUPARCO" required /></label>
-        </div>
-      </fieldset>
+        <section class="ed-sec" data-sec="overview">
+          <h2>Overview</h2>
+          <div class="ed-steps" id="steps">
+            <div class="ed-step" data-step="saved"><b>1</b><span>Saved</span></div>
+            <div class="ed-step" data-step="review"><b>2</b><span>Cabinet review</span></div>
+            <div class="ed-step" data-step="live"><b>3</b><span>Live</span></div>
+          </div>
+          <p id="ov-status" class="muted" style="margin:.25rem 0 0"></p>
+          <div class="tabs" role="group" aria-label="I am" style="margin-top:1rem">
+            <button type="button" data-mode="student">Current student</button>
+            <button type="button" data-mode="alumni">Graduate</button>
+          </div>
+          <p class="muted" id="mode-hint" style="margin:0;font-size:.88rem"></p>
+          <h3 style="margin:1.25rem 0 .5rem">What is still empty</h3>
+          <ul class="ed-todo" id="todo"></ul>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem">
+            <button type="button" class="btn btn-primary btn-sm" data-go="import">Fill from CV or LinkedIn</button>
+            <a class="btn btn-ghost btn-sm" id="preview" href="#" hidden>Preview my page</a>
+          </div>
+        </section>
 
-      <fieldset>
-        <legend>Location</legend>
-        <div class="row-3">
-          <label>City <input name="city" required /></label>
-          <label>Country <input name="country" required /></label>
-          <label>Province (if Pakistan) <select name="province"><option value="">—</option>{provinces.map((p) => <option>{p}</option>)}</select></label>
-        </div>
-        <div class="row-3" data-only="alumni">
-          <label>Latitude <input name="lat" type="number" step="any" min="-90" max="90" required /></label>
-          <label>Longitude <input name="lng" type="number" step="any" min="-180" max="180" required /></label>
-          <label>Map pin
-            <span style="display:flex;gap:.5rem;flex-wrap:wrap">
-              <button type="button" class="btn btn-primary btn-sm" id="locate">Use my location</button>
-              <button type="button" class="btn btn-ghost btn-sm" id="geocode">Look up city</button>
-            </span>
+        <section class="ed-sec" data-sec="import" hidden>
+          <h2>Import</h2>
+          <p class="muted" style="margin:0 0 1rem;font-size:.9rem">Both imports run in your browser. Nothing is uploaded, only empty fields are filled, and you review everything before saving.</p>
+          <div class="ed-cards">
+            <div class="card">
+              <h3>From your CV</h3>
+              <p>PDF or Word. Finds your name, email, links, education, experience and skills.</p>
+              <label>CV file (PDF or .docx) <input type="file" id="cv-import" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" /></label>
+            </div>
+            <div class="card">
+              <h3>From LinkedIn</h3>
+              <p>On LinkedIn open Settings &amp; Privacy, Data privacy, <em>Get a copy of your data</em>, tick Profile, Positions, Education and Skills. The archive arrives by email; unzip it and pick the CSV files.</p>
+              <label>LinkedIn CSV files <input type="file" id="li-files" accept=".csv,text/csv" multiple /></label>
+            </div>
+            <div class="card">
+              <h3>From GitHub and ORCID</h3>
+              <p>Pull public repositories into Projects and indexed papers into Publications. Needs the links in the Links section.</p>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap"><button type="button" class="btn btn-ghost btn-sm" id="import-github">Import repositories</button><button type="button" class="btn btn-ghost btn-sm" id="import-orcid">Import publications</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ed-sec" data-sec="identity" hidden>
+          <h2>Identity</h2>
+          <div class="row">
+            <label>Full name <input name="name" required maxlength="80" /></label>
+            <label>Short link <span style="display:flex;align-items:center;gap:.3rem;font-weight:400"><span class="muted" id="origin"></span>/<input name="username" placeholder="yourname" pattern="[a-z0-9][a-z0-9-]{2,29}" title="3 to 30 lowercase letters, digits or hyphens" style="flex:1" /></span><small class="muted" id="uname-hint"></small></label>
+          </div>
+          <div class="row">
+            <label>Photo
+              <span class="ed-photo"><img id="photo-prev" alt="" hidden /><span><input type="file" name="photo" accept="image/jpeg,image/png,image/webp" /><small class="muted">Square crop, resized in your browser before upload.</small></span></span>
+            </label>
+            <label>CV (PDF, max 5 MB) <input type="file" name="cv" accept="application/pdf" /><small class="muted" id="cv-hint"></small></label>
+          </div>
+          <div class="row-3">
+            <label>Batch <input name="batch" placeholder="2021-25" required pattern="\d{4}-\d{2}" /><small class="muted">Admission year, dash, two-digit graduation year: 2021-25</small></label>
+            <label>Degree from the institute <input name="degree" placeholder="BS Geoinformatics" required /></label>
+            <label data-only="alumni">Sector <select name="sector" required><option value="">Choose…</option>{sectors.map((s) => <option>{s}</option>)}</select></label>
+          </div>
+          <div class="row">
+            <label>Current role <input name="role" placeholder="GIS Analyst, Lecturer, Research Associate" required /></label>
+            <label>Organisation <input name="organization" placeholder="SUPARCO" required list="orgs" /><small class="muted">Pick from the list when it is there, so your profile links to the employer page.</small></label>
+          </div>
+        </section>
+
+        <section class="ed-sec" data-sec="location" hidden>
+          <h2>Location</h2>
+          <div class="row-3">
+            <label>City <input name="city" required list="cities" /></label>
+            <label>Country <input name="country" required /></label>
+            <label>Province (if Pakistan) <select name="province"><option value="">—</option>{provinces.map((p) => <option>{p}</option>)}</select></label>
+          </div>
+          <div class="row-3" data-only="alumni">
+            <label>Latitude <input name="lat" type="number" step="any" min="-90" max="90" required /></label>
+            <label>Longitude <input name="lng" type="number" step="any" min="-180" max="180" required /></label>
+            <label>Map pin
+              <span style="display:flex;gap:.5rem;flex-wrap:wrap">
+                <button type="button" class="btn btn-primary btn-sm" id="locate">Use my location</button>
+                <button type="button" class="btn btn-ghost btn-sm" id="geocode">Look up city</button>
+              </span>
+            </label>
+          </div>
+        </section>
+
+        <section class="ed-sec" data-sec="links" hidden>
+          <h2>Links</h2>
+          <div class="row">
+            <label>LinkedIn <input name="linkedin" type="url" placeholder="https://linkedin.com/in/…" /></label>
+            <label>GitHub <input name="github" type="url" placeholder="https://github.com/…" /></label>
+          </div>
+          <div class="row">
+            <label>Portfolio or website <input name="portfolio" type="url" placeholder="https://…" /></label>
+            <label>ORCID iD <input name="orcid" placeholder="0000-0002-1825-0097" pattern="\d{4}-\d{4}-\d{4}-\d{3}[\dX]" /></label>
+          </div>
+          <label>Public contact email (shown on your page) <input name="email_public" type="email" /></label>
+        </section>
+
+        <section class="ed-sec" data-sec="career" hidden>
+          <h2>Career</h2>
+          <label>Skills
+            <span class="chips" id="chips"><input id="chip-in" list="skills" placeholder="Type a skill and press Enter" /></span>
+            <input type="hidden" name="skills" />
+            <small class="muted">Enter or comma adds one. Click a chip to remove it.</small>
           </label>
-        </div>
-      </fieldset>
+          <label data-only="alumni">One line of advice for juniors <input name="advice" maxlength="200" /><small class="muted ctr" data-for="advice"></small></label>
+          <label>Your journey (Markdown allowed) <textarea name="bio" placeholder="How you got from first semester to where you are now. Honest beats polished."></textarea></label>
+          <label class="check" data-only="alumni"><input type="checkbox" name="mentor" /> List me as open to mentoring students</label>
+        </section>
 
-      <fieldset>
-        <legend>Links</legend>
-        <div class="row">
-          <label>LinkedIn <input name="linkedin" type="url" placeholder="https://linkedin.com/in/…" /></label>
-          <label>GitHub <input name="github" type="url" placeholder="https://github.com/…" /></label>
-        </div>
-        <div class="row">
-          <label>Portfolio or website <input name="portfolio" type="url" placeholder="https://…" /></label>
-          <label>ORCID iD <input name="orcid" placeholder="0000-0002-1825-0097" pattern="\d{4}-\d{4}-\d{4}-\d{3}[\dX]" /></label>
-        </div>
-        <label>Public contact email (shown on your page) <input name="email_public" type="email" /></label>
-      </fieldset>
+        <section class="ed-sec" data-sec="experience" hidden>
+          <h2>Experience</h2>
+          <p class="muted" style="margin:0 0 .75rem;font-size:.88rem">Newest first. Tick "current" instead of typing an end date.</p>
+          <div id="exp"></div>
+          <button type="button" class="btn btn-ghost btn-sm" data-add="exp">Add position</button>
+        </section>
 
-      <fieldset>
-        <legend>Career</legend>
-        <label>Skills, comma separated <input name="skills" placeholder="QGIS, Python, Google Earth Engine" /></label>
-        <label data-only="alumni">One line of advice for juniors <input name="advice" maxlength="200" /></label>
-        <label>Your journey (Markdown allowed) <textarea name="bio" placeholder="How you got from first semester to where you are now. Honest beats polished."></textarea></label>
-        <label class="check" data-only="alumni"><input type="checkbox" name="mentor" /> List me as open to mentoring students</label>
-      </fieldset>
+        <section class="ed-sec" data-sec="education" hidden>
+          <h2>Education</h2>
+          <p class="muted" style="margin:0 0 .75rem;font-size:.88rem">All degrees, including the one from the institute and anything in progress.</p>
+          <div id="edu"></div>
+          <button type="button" class="btn btn-ghost btn-sm" data-add="edu">Add degree</button>
+        </section>
 
-      <fieldset>
-        <legend>Import from LinkedIn</legend>
-        <p class="muted" style="margin:0;font-size:.88rem">LinkedIn does not let sites read your profile, but it gives you a copy of your own data. On LinkedIn open Settings &amp; Privacy, Data privacy, <em>Get a copy of your data</em>, tick Profile, Positions, Education and Skills, and request the archive. It arrives by email in about ten minutes. Unzip it and pick the CSV files here. Nothing is uploaded; the files are read in your browser.</p>
-        <label>LinkedIn CSV files <input type="file" id="li-files" accept=".csv,text/csv" multiple /></label>
-      </fieldset>
+        <section class="ed-sec" data-sec="projects" hidden>
+          <h2>Projects</h2>
+          <div id="proj"></div>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap"><button type="button" class="btn btn-ghost btn-sm" data-add="proj">Add project</button><button type="button" class="btn btn-ghost btn-sm" data-go="import">Import from GitHub</button></div>
+        </section>
 
-      <fieldset>
-        <legend>Import from your CV</legend>
-        <p class="muted" style="margin:0;font-size:.88rem">Pick your CV as a PDF or Word file and the form fills in what it can find: name, email, links, education, experience and skills. It only fills fields that are still empty, and it guesses, so check every line before you save. The file is read in your browser and is not uploaded; use the CV field above if you also want it on your page.</p>
-        <label>CV file (PDF or .docx) <input type="file" id="cv-import" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" /></label>
-      </fieldset>
+        <section class="ed-sec" data-sec="publications" hidden>
+          <h2>Publications</h2>
+          <div id="pub"></div>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap"><button type="button" class="btn btn-ghost btn-sm" data-add="pub">Add publication</button><button type="button" class="btn btn-ghost btn-sm" data-go="import">Import from ORCID</button></div>
+        </section>
 
-      <fieldset>
-        <legend>Experience</legend>
-        <div id="exp"></div>
-        <button type="button" class="btn btn-ghost btn-sm" data-add="exp" style="justify-self:start">Add position</button>
-      </fieldset>
+        <div class="ed-pager"><button type="button" class="btn btn-ghost btn-sm" id="prev">← Previous</button><button type="button" class="btn btn-ghost btn-sm" id="next">Next →</button></div>
+      </div>
 
-      <fieldset>
-        <legend>Education</legend>
-        <p class="muted" style="margin:0;font-size:.88rem">All degrees, including the one from the institute and anything in progress.</p>
-        <div id="edu"></div>
-        <button type="button" class="btn btn-ghost btn-sm" data-add="edu" style="justify-self:start">Add degree</button>
-      </fieldset>
-
-      <fieldset>
-        <legend>Projects</legend>
-        <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
-          <button type="button" class="btn btn-ghost btn-sm" id="import-github">Import from GitHub</button>
-          <span class="muted" style="font-size:.85rem">Pulls your twelve most recently updated public repositories. Edit or remove anything after.</span>
-        </div>
-        <div id="proj"></div>
-        <button type="button" class="btn btn-ghost btn-sm" data-add="proj" style="justify-self:start">Add project</button>
-      </fieldset>
-
-      <fieldset>
-        <legend>Publications</legend>
-        <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
-          <button type="button" class="btn btn-ghost btn-sm" id="import-orcid">Import from ORCID</button>
-          <span class="muted" style="font-size:.85rem">Uses the open OpenAlex index. Needs your ORCID iD above.</span>
-        </div>
-        <div id="pub"></div>
-        <button type="button" class="btn btn-ghost btn-sm" data-add="pub" style="justify-self:start">Add publication</button>
-      </fieldset>
-
-      <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
+      <div class="ed-savebar" id="savebar">
+        <span class="ed-saved" id="saved"><span class="dot"></span><span id="saved-text">No changes</span></span>
+        <span class="muted" style="font-size:.8rem">By saving you agree to your profile being published. <a href="/privacy">Privacy policy</a>.</span>
         <button class="btn btn-accent" type="submit" id="save">Save profile</button>
-        <span class="muted" style="font-size:.88rem">By saving you agree to your profile being published on this site. See the <a href="/privacy">privacy policy</a>.</span>
       </div>
     </form>
+
+    <datalist id="orgs">{orgNames.map((o) => <option value={o} />)}</datalist>
+    <datalist id="cities">{cities.map((c) => <option value={c} />)}</datalist>
+    <datalist id="skills">{skillList.map((s) => <option value={s} />)}</datalist>
   </div>
 
   <template id="t-pub"><div class="rrow c4">
     <label>Title <input data-k="title" required /></label>
     <label>Venue <input data-k="venue" placeholder="Journal / conference" /></label>
-    <label>Year <input data-k="year" placeholder="2025" /></label>
+    <label>Year <input data-k="year" placeholder="2025" pattern="\d{4}" /></label>
     <label>Link <input data-k="url" type="url" placeholder="https://doi.org/…" /></label>
-    <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove">×</button>
+    <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove this publication">×</button>
   </div></template>
   <template id="t-edu"><div class="rrow c5">
     <label>Institution <input data-k="institution" required placeholder="NUST, Islamabad" /></label>
     <label>Degree <input data-k="degree" placeholder="MS" /></label>
     <label>Programme <input data-k="program" placeholder="Remote Sensing & GIS" /></label>
-    <label>Start <input data-k="start" placeholder="2025" /></label>
+    <label>Start <input data-k="start" placeholder="2025" pattern="\d{4}" /></label>
     <label>End <input data-k="end" placeholder="2027 or present" /></label>
-    <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove">×</button>
+    <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove this degree">×</button>
+    <small class="dup" hidden>Looks like a duplicate of another degree with the same years.</small>
   </div></template>
-  <template id="t-exp"><div class="rrow c4">
+  <template id="t-exp"><div class="rrow c4x">
     <label>Title <input data-k="title" required placeholder="GIS Analyst" /></label>
-    <label>Organisation <input data-k="organization" /></label>
-    <label>Start <input data-k="start" placeholder="2024-06" /></label>
-    <label>End <input data-k="end" placeholder="leave empty if current" /></label>
-    <label class="span">Description <input data-k="description" placeholder="One or two lines on what you did" /></label>
-    <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove">×</button>
+    <label>Organisation <input data-k="organization" list="orgs" /></label>
+    <label>Start <input data-k="start" type="month" /></label>
+    <label>End <input data-k="end" type="month" /><span class="check" style="font-size:.8rem;margin-top:.2rem"><input type="checkbox" data-current /> current</span></label>
+    <label class="span">Description <textarea data-k="description" rows="2" maxlength="300" placeholder="One or two lines on what you did"></textarea><small class="muted ctr"></small></label>
+    <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove this position">×</button>
+    <small class="dup" hidden>Looks like a duplicate of another position with the same title and dates.</small>
   </div></template>
   <template id="t-proj"><div class="rrow c3">
     <label>Title <input data-k="title" required /></label>
     <label>Live link <input data-k="url" type="url" placeholder="https://…" /></label>
     <label>Repository <input data-k="repo" type="url" placeholder="https://github.com/…" /></label>
-    <label class="span">Description <input data-k="description" /></label>
+    <label class="span">Description <textarea data-k="description" rows="2" maxlength="300"></textarea><small class="muted ctr"></small></label>
     <label>Tags <input data-k="tags" placeholder="Leaflet, PostGIS" /></label>
-    <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove">×</button>
+    <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove this project">×</button>
   </div></template>
 
   <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
@@ -172,45 +222,152 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
     const sb = createClient(url, key);
     const $ = (id) => document.getElementById(id);
     const editor = $('editor'), state = $('state'), f = editor.elements;
-    const say = (el, msg, kind = '') => { el.textContent = msg; el.className = `status ${kind}`; el.hidden = !msg; };
+    const say = (el, msg, kind = '') => { el.textContent = msg; el.className = `status ${kind}`; el.hidden = !msg; if (msg) el.animate?.([{ opacity: 0, transform: 'translateY(-4px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'ease-out' }); };
     $('origin').textContent = location.origin;
-
     $('signout').addEventListener('click', () => sb.auth.signOut().then(() => (location.href = '/')));
 
-    // Repeatable rows: pub, edu, exp, proj
+    // ---- Sections: one visible at a time, left nav, prev/next, hash in the URL ----
+    const SECS = [...document.querySelectorAll('.ed-sec')].map((s) => s.dataset.sec);
+    let cur = 'overview';
+    const go = (id, push = true) => {
+      if (!SECS.includes(id)) id = 'overview';
+      const from = document.querySelector(`.ed-sec[data-sec="${cur}"]`), to = document.querySelector(`.ed-sec[data-sec="${id}"]`);
+      const dir = SECS.indexOf(id) > SECS.indexOf(cur) ? 1 : -1;
+      if (from !== to) { from.hidden = true; to.hidden = false; to.animate?.([{ opacity: 0, transform: `translateX(${12 * dir}px)` }, { opacity: 1, transform: 'none' }], { duration: 260, easing: 'cubic-bezier(.2,.7,.2,1)' }); }
+      cur = id;
+      document.querySelectorAll('.ed-tab').forEach((b) => b.toggleAttribute('aria-current', b.dataset.go === id));
+      $('prev').disabled = SECS.indexOf(id) === 0; $('next').disabled = SECS.indexOf(id) === SECS.length - 1;
+      if (push) history.replaceState(null, '', `#${id}`);
+      if (id === 'overview') refreshOverview();
+      $('ed-main')?.scrollIntoView?.({ block: 'nearest' });
+      window.scrollTo({ top: Math.min(window.scrollY, document.querySelector('.editor').offsetTop - 80), behavior: 'smooth' });
+    };
+    document.addEventListener('click', (e) => { const b = e.target.closest('[data-go]'); if (b) go(b.dataset.go); });
+    $('prev').addEventListener('click', () => go(SECS[SECS.indexOf(cur) - 1]));
+    $('next').addEventListener('click', () => go(SECS[SECS.indexOf(cur) + 1]));
+
+    // ---- Repeatable rows ----
     const addRow = (kind, v = {}) => {
       const row = $(`t-${kind}`).content.firstElementChild.cloneNode(true);
-      row.querySelectorAll('[data-k]').forEach((i) => (i.value = Array.isArray(v[i.dataset.k]) ? v[i.dataset.k].join(', ') : v[i.dataset.k] ?? ''));
-      row.querySelector('[data-remove]').addEventListener('click', () => row.remove());
+      row.querySelectorAll('[data-k]').forEach((i) => {
+        let val = Array.isArray(v[i.dataset.k]) ? v[i.dataset.k].join(', ') : v[i.dataset.k] ?? '';
+        if (i.type === 'month') val = String(val).slice(0, 7).match(/^\d{4}-\d{2}$/) ? String(val).slice(0, 7) : '';
+        i.value = val;
+      });
+      const curBox = row.querySelector('[data-current]');
+      if (curBox) {
+        const end = row.querySelector('[data-k="end"]');
+        curBox.checked = !!v.current || (!v.end && !!v.title && v.current !== false);
+        if (v.title === undefined) curBox.checked = false;
+        const sync = () => { end.disabled = curBox.checked; if (curBox.checked) end.value = ''; };
+        curBox.addEventListener('change', () => { sync(); dirty(); });
+        sync();
+      }
+      row.querySelector('[data-remove]').addEventListener('click', () => { row.animate?.([{ opacity: 1 }, { opacity: 0, transform: 'scale(.98)' }], { duration: 160 }).finished.then(() => { row.remove(); dirty(); }) ?? (row.remove(), dirty()); });
+      row.querySelectorAll('textarea[maxlength]').forEach((t) => { const c = t.parentElement.querySelector('.ctr'); const u = () => (c.textContent = `${t.value.length}/${t.maxLength}`); t.addEventListener('input', u); u(); });
       $(kind).appendChild(row);
+      row.animate?.([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 200 });
+      return row;
     };
     const rowKey = (r) => `${(r.degree || r.title || '').toLowerCase().replace(/[^a-z]/g, '')}|${(r.start || '').slice(0, 4)}|${(r.end || '').slice(0, 4)}`;
     const dedupe = (rows) => rows.filter((r, i, a) => a.findIndex((o) => rowKey(o) === rowKey(r)) === i);
-    const readRows = (kind) => [...$(kind).querySelectorAll('.rrow')].map((r) => Object.fromEntries([...r.querySelectorAll('[data-k]')].map((i) => [i.dataset.k, i.value.trim()])));
-    document.querySelectorAll('[data-add]').forEach((b) => b.addEventListener('click', () => addRow(b.dataset.add)));
+    const readRows = (kind) => [...$(kind).querySelectorAll('.rrow')].map((r) => { const o = Object.fromEntries([...r.querySelectorAll('[data-k]')].map((i) => [i.dataset.k, i.value.trim()])); const c = r.querySelector('[data-current]'); if (c) o.current = c.checked; return o; });
+    const markDups = (kind) => { const rows = [...$(kind).querySelectorAll('.rrow')]; const keys = readRows(kind).map(rowKey); rows.forEach((r, i) => { r.querySelector('.dup').hidden = !(keys[i].split('|')[0] && keys.indexOf(keys[i]) !== i); }); };
+    document.querySelectorAll('[data-add]').forEach((b) => b.addEventListener('click', () => { const r = addRow(b.dataset.add); r.querySelector('input,textarea')?.focus(); dirty(); }));
 
-    // Imports. GitHub public API, 60 requests per hour per IP, no key. OpenAlex, free, polite pool with an email.
+    // ---- Skills as chips (hidden input keeps the comma string the save code expects) ----
+    const chipsEl = $('chips'), chipIn = $('chip-in');
+    const skills = () => [...chipsEl.querySelectorAll('.chip')].map((c) => c.dataset.v);
+    const renderSkills = () => { f.skills.value = skills().join(', '); };
+    const addSkill = (v) => { v = v.trim().replace(/,+$/, ''); if (!v || skills().some((s) => s.toLowerCase() === v.toLowerCase())) return; const c = document.createElement('button'); c.type = 'button'; c.className = 'chip'; c.dataset.v = v; c.textContent = v; c.title = 'Remove'; c.addEventListener('click', () => { c.remove(); renderSkills(); dirty(); }); chipsEl.insertBefore(c, chipIn); c.animate?.([{ transform: 'scale(.7)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 160 }); renderSkills(); };
+    const setSkills = (list) => { chipsEl.querySelectorAll('.chip').forEach((c) => c.remove()); list.forEach(addSkill); };
+    chipIn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); addSkill(chipIn.value); chipIn.value = ''; dirty(); } else if (e.key === 'Backspace' && !chipIn.value) { chipsEl.querySelector('.chip:last-of-type')?.remove(); renderSkills(); dirty(); } });
+    chipIn.addEventListener('change', () => { if (chipIn.value.includes(',') || chipIn.value) { chipIn.value.split(',').forEach(addSkill); chipIn.value = ''; dirty(); } });
+    chipIn.addEventListener('blur', () => { if (chipIn.value) { addSkill(chipIn.value); chipIn.value = ''; dirty(); } });
+    const mergeSkills = (list) => { list.forEach(addSkill); };
+    (() => { const c = document.querySelector('.ctr[data-for="advice"]'); const u = () => (c.textContent = `${f.advice.value.length}/200`); f.advice.addEventListener('input', u); u(); })();
+
+    // ---- Dirty tracking, save bar, autosave draft, leave warning ----
+    let isDirty = false, lastSaved = null;
+    const savedText = $('saved-text'), savedEl = $('saved');
+    const paint = () => {
+      savedEl.dataset.state = isDirty ? 'dirty' : 'clean';
+      savedText.textContent = isDirty ? 'Unsaved changes' : lastSaved ? `Saved ${lastSaved}` : 'No changes';
+    };
+    const DRAFT = 'asgi-profile-draft';
+    const snapshot = () => { const o = {}; for (const el of editor.querySelectorAll('[name]:not([type=file])')) o[el.name] = el.type === 'checkbox' ? el.checked : el.value; for (const k of ['exp', 'edu', 'proj', 'pub']) o[`rows:${k}`] = readRows(k); return o; };
+    let draftTimer;
+    const dirty = () => { isDirty = true; paint(); clearTimeout(draftTimer); draftTimer = setTimeout(() => localStorage.setItem(DRAFT, JSON.stringify({ at: Date.now(), data: snapshot() })), 600); refreshProgress(); };
+    editor.addEventListener('input', (e) => { if (e.target.id !== 'chip-in') dirty(); if (e.target.closest('#exp')) markDups('exp'); if (e.target.closest('#edu')) markDups('edu'); });
+    editor.addEventListener('change', (e) => { if (e.target.type === 'file' && !e.target.id) dirty(); });
+    window.addEventListener('beforeunload', (e) => { if (isDirty) { e.preventDefault(); e.returnValue = ''; } });
+
+    // ---- Completeness and overview ----
+    const FIELDS = { identity: ['name', 'username', 'batch', 'degree', 'role', 'organization'], location: ['city', 'country'], links: ['linkedin'], career: ['skills', 'bio'] };
+    const secDone = (id) => {
+      if (id in FIELDS) return FIELDS[id].filter((k) => f[k] && !f[k].closest('[hidden]') && f[k].value.trim()).length / FIELDS[id].filter((k) => f[k] && !f[k].closest('[hidden]')).length;
+      if (id === 'experience') return readRows('exp').some((r) => r.title) ? 1 : 0;
+      if (id === 'education') return readRows('edu').some((r) => r.institution) ? 1 : 0;
+      if (id === 'projects') return readRows('proj').some((r) => r.title) ? 1 : 0;
+      if (id === 'publications') return readRows('pub').some((r) => r.title) ? 1 : 0;
+      return null;
+    };
+    const WEIGHT = { identity: 30, location: 10, links: 10, career: 20, experience: 15, education: 10, projects: 5 };
+    const refreshProgress = () => {
+      let got = 0, total = 0;
+      for (const [id, w] of Object.entries(WEIGHT)) { const d = secDone(id); if (d === null) continue; got += d * w; total += w; }
+      const pct = Math.round((got / total) * 100);
+      $('pbar').style.width = `${pct}%`; $('pct').textContent = `${pct}%`;
+      document.querySelectorAll('[data-tick]').forEach((t) => { const d = secDone(t.dataset.tick); t.dataset.state = d === null ? '' : d >= 1 ? 'done' : d > 0 ? 'part' : 'empty'; });
+    };
+    const refreshOverview = () => {
+      refreshProgress();
+      const missing = [];
+      const names = { name: 'your name', username: 'a short link', batch: 'batch', degree: 'degree', role: 'current role', organization: 'organisation', city: 'city', country: 'country', linkedin: 'LinkedIn', skills: 'skills', bio: 'your journey' };
+      for (const [sec, keys] of Object.entries(FIELDS)) for (const k of keys) if (f[k] && !f[k].closest('[hidden]') && !f[k].value.trim()) missing.push([sec, names[k]]);
+      if (!readRows('exp').some((r) => r.title)) missing.push(['experience', 'a position']);
+      if (!readRows('edu').some((r) => r.institution)) missing.push(['education', 'a degree']);
+      if (!readRows('proj').some((r) => r.title)) missing.push(['projects', 'a project']);
+      $('todo').innerHTML = missing.length ? missing.map(([s, n]) => `<li><button type="button" class="linkish" data-go="${s}">Add ${n}</button></li>`).join('') : '<li class="muted">Nothing. Your profile is complete.</li>';
+    };
+
+    // ---- Username availability (best effort; the database has the final say on save) ----
+    let unameTimer;
+    f.username.addEventListener('input', () => {
+      clearTimeout(unameTimer); const v = f.username.value.trim().toLowerCase(); const h = $('uname-hint');
+      if (!v) return (h.textContent = '');
+      if (!/^[a-z0-9][a-z0-9-]{2,29}$/.test(v)) return (h.textContent = '3 to 30 lowercase letters, digits or hyphens.');
+      h.textContent = 'Checking…';
+      unameTimer = setTimeout(async () => { const { data } = await sb.from('profiles').select('user_id').eq('username', v).limit(1); h.textContent = data?.length && data[0].user_id !== session?.user.id ? 'Taken. Try another.' : `Your page will be ${location.origin}/${v}`; }, 400);
+    });
+
+    // ---- Photo preview ----
+    f.photo.addEventListener('change', () => { const file = f.photo.files[0]; const img = $('photo-prev'); if (!file) return; img.src = URL.createObjectURL(file); img.hidden = false; });
+    f.cv.addEventListener('change', () => { const file = f.cv.files[0]; if (file) $('cv-hint').textContent = `${file.name}, ${(file.size / 1024 / 1024).toFixed(1)} MB, uploads on save.`; });
+
+    // ---- Imports: GitHub public API (60 requests per hour per IP), OpenAlex (free) ----
     $('import-github').addEventListener('click', async () => {
       const user = (f.github.value.match(/github\.com\/([^/?#]+)/) || [])[1];
-      if (!user) return say(state, 'Add your GitHub profile link first.', 'err');
+      if (!user) { go('links'); return say(state, 'Add your GitHub profile link first.', 'err'); }
       const r = await fetch(`https://api.github.com/users/${user}/repos?sort=updated&per_page=12&type=owner`);
       if (!r.ok) return say(state, `GitHub said ${r.status}. Try again in a while.`, 'err');
       const repos = (await r.json()).filter((x) => !x.fork);
-      repos.forEach((x) => addRow('proj', { title: x.name, description: x.description || '', url: x.homepage || '', repo: x.html_url, tags: [x.language].filter(Boolean) }));
-      say(state, `Imported ${repos.length} repositories. Remove any that do not belong on a portfolio.`, 'ok');
+      const have = new Set(readRows('proj').map((p) => p.repo));
+      let n = 0; repos.forEach((x) => { if (!have.has(x.html_url)) { addRow('proj', { title: x.name, description: x.description || '', url: x.homepage || '', repo: x.html_url, tags: [x.language].filter(Boolean) }); n++; } });
+      dirty(); go('projects'); say(state, `Imported ${n} repositories. Remove any that do not belong on a portfolio.`, 'ok');
     });
     $('import-orcid').addEventListener('click', async () => {
       const id = f.orcid.value.trim();
-      if (!id) return say(state, 'Enter your ORCID iD first.', 'err');
+      if (!id) { go('links'); return say(state, 'Enter your ORCID iD first.', 'err'); }
       const r = await fetch(`https://api.openalex.org/works?filter=authorships.author.orcid:https://orcid.org/${id}&per-page=50&select=title,publication_year,primary_location,doi&mailto=portal@asgi.pk`);
       if (!r.ok) return say(state, `OpenAlex said ${r.status}.`, 'err');
       const works = (await r.json()).results || [];
-      works.forEach((w) => addRow('pub', { title: w.title, venue: w.primary_location?.source?.display_name || '', year: w.publication_year || '', url: w.doi || '' }));
-      say(state, works.length ? `Imported ${works.length} works.` : 'No works found for that ORCID in OpenAlex yet.', works.length ? 'ok' : 'err');
+      const have = new Set(readRows('pub').map((p) => p.title.toLowerCase()));
+      let n = 0; works.forEach((w) => { if (!have.has((w.title || '').toLowerCase())) { addRow('pub', { title: w.title, venue: w.primary_location?.source?.display_name || '', year: w.publication_year || '', url: w.doi || '' }); n++; } });
+      dirty(); go('publications'); say(state, n ? `Imported ${n} works.` : 'No new works found for that ORCID in OpenAlex.', n ? 'ok' : 'err');
     });
 
-    // Student or graduate. One table: sector "Student" is the status flag, so a student
-    // switches to Graduate later in this same editor and keeps everything they entered.
+    // ---- Student or graduate ----
     const CAMPUS = { city: 'Rawalpindi', country: 'Pakistan', province: 'Punjab', lat: '33.6492', lng: '73.0815' };
     const label = (name) => f[name].closest('label').firstChild;
     const setMode = (mode) => {
@@ -223,7 +380,7 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       label('degree').textContent = st ? 'Programme at the institute ' : 'Degree from the institute ';
       label('role').textContent = st ? 'Role, if any ' : 'Current role ';
       label('organization').textContent = st ? 'Organisation, if any ' : 'Organisation ';
-      f.role.placeholder = st ? 'Intern, research assistant, leave empty if none' : 'GIS Analyst';
+      f.role.placeholder = st ? 'Intern, research assistant, leave empty if none' : 'GIS Analyst, Lecturer, Research Associate';
       f.organization.placeholder = st ? 'Leave empty if none' : 'SUPARCO';
       f.role.required = f.organization.required = f.lat.required = f.lng.required = !st;
       [...f.sector.options].forEach((o) => { if (o.value === 'Student') o.hidden = !st; });
@@ -234,10 +391,11 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       $('mode-hint').textContent = st
         ? 'Students are in the directory and the forum. The map pin and mentoring open up when you graduate: come back and switch to Graduate.'
         : 'Graduates appear on the alumni map and can offer mentoring. Faculty choose the Academia sector.';
+      refreshProgress();
     };
-    document.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+    document.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => { setMode(b.dataset.mode); dirty(); }));
 
-    // LinkedIn data export. Columns as of 2026; unknown files are ignored.
+    // ---- LinkedIn data export ----
     const csv = (t) => { const rows = [[]]; let q = false, c = ''; for (let i = 0; i < t.length; i++) { const ch = t[i];
       if (q) { if (ch === '"' && t[i + 1] === '"') { c += '"'; i++; } else if (ch === '"') q = false; else c += ch; }
       else if (ch === '"') q = true; else if (ch === ',') { rows.at(-1).push(c); c = ''; } else if (ch === '\n' || ch === '\r') { if (ch === '\r' && t[i + 1] === '\n') i++; rows.at(-1).push(c); c = ''; rows.push([]); } else c += ch; }
@@ -247,18 +405,20 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
     const ym = (d) => { const m = d.match(/^([A-Za-z]{3})\w* (\d{4})$/); return m ? `${m[2]}-${months[m[1].toLowerCase()] || '01'}` : d; };
     $('li-files').addEventListener('change', async (e) => {
       let n = 0;
+      const eduKeys = new Set(readRows('edu').map(rowKey)), expKeys = new Set(readRows('exp').map(rowKey));
       for (const file of e.target.files) {
         const rows = csv(await file.text()), name = file.name.toLowerCase();
-        if (name.startsWith('positions')) rows.forEach((r) => { addRow('exp', { title: r['Title'], organization: r['Company Name'], start: ym(r['Started On']), end: ym(r['Finished On']), description: r['Description'].split('\n')[0] }); n++; });
-        else if (name.startsWith('education')) rows.forEach((r) => { const [deg, ...prog] = (r['Degree Name'] || '').split(','); addRow('edu', { institution: r['School Name'], degree: deg.trim(), program: prog.join(',').trim(), start: (r['Start Date'] || '').slice(-4), end: (r['End Date'] || '').slice(-4) }); n++; });
-        else if (name.startsWith('skills')) { const have = f.skills.value.split(',').map((x) => x.trim()).filter(Boolean); f.skills.value = [...new Set([...have, ...rows.map((r) => r['Name']).filter(Boolean)])].join(', '); n += rows.length; }
+        if (name.startsWith('positions')) rows.forEach((r) => { const v = { title: r['Title'], organization: r['Company Name'], start: ym(r['Started On']), end: ym(r['Finished On']), current: !r['Finished On'], description: r['Description'].split('\n')[0] }; if (!expKeys.has(rowKey(v))) { addRow('exp', v); expKeys.add(rowKey(v)); n++; } });
+        else if (name.startsWith('education')) rows.forEach((r) => { const [deg, ...prog] = (r['Degree Name'] || '').split(','); const v = { institution: r['School Name'], degree: deg.trim(), program: prog.join(',').trim(), start: (r['Start Date'] || '').slice(-4), end: (r['End Date'] || '').slice(-4) }; if (!eduKeys.has(rowKey(v))) { addRow('edu', v); eduKeys.add(rowKey(v)); n++; } });
+        else if (name.startsWith('skills')) { const list = rows.map((r) => r['Name']).filter(Boolean); mergeSkills(list); n += list.length; }
         else if (name.startsWith('profile')) { const r = rows[0] || {}; if (!f.name.value) f.name.value = `${r['First Name'] || ''} ${r['Last Name'] || ''}`.trim(); if (!f.bio.value) f.bio.value = r['Summary'] || ''; if (!f.city.value) f.city.value = (r['Geo Location'] || '').split(',')[0]; n++; }
       }
+      if (n) dirty();
       say(state, n ? `Imported ${n} items from LinkedIn. Check dates and remove anything you do not want public.` : 'No recognised files. Pick Positions.csv, Education.csv, Skills.csv or Profile.csv.', n ? 'ok' : 'err');
-      e.target.value = '';
+      e.target.value = ''; if (n) go('overview');
     });
 
-    // CV import: text extracted in the browser, fields guessed, only empty ones filled.
+    // ---- CV import ----
     $('cv-import').addEventListener('change', async (e) => {
       const file = e.target.files[0]; if (!file) return;
       say(state, 'Reading your CV…');
@@ -270,19 +430,20 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
         put('name', cv.name); put('email_public', cv.email); put('orcid', cv.orcid); put('bio', cv.bio);
         put('linkedin', cv.links.linkedin); put('github', cv.links.github); put('portfolio', cv.links.portfolio);
         put('role', cv.role); put('organization', cv.organization);
-        if (cv.skills.length) { const have = f.skills.value.split(',').map((x) => x.trim()).filter(Boolean); const merged = [...new Set([...have, ...cv.skills])]; n += merged.length - have.length; f.skills.value = merged.join(', '); }
-        // Add only rows that do not match an existing one on years and degree or title.
+        if (cv.skills.length) { const before = skills().length; mergeSkills(cv.skills); n += skills().length - before; }
         const eduKeys = new Set(readRows('edu').map(rowKey)), expKeys = new Set(readRows('exp').map(rowKey));
         cv.education.forEach((v) => { if (!eduKeys.has(rowKey(v))) { addRow('edu', v); eduKeys.add(rowKey(v)); n++; } });
         cv.experience.forEach((v) => { if (!expKeys.has(rowKey(v))) { addRow('exp', v); expKeys.add(rowKey(v)); n++; } });
         const arid = cv.education.find((x) => /arid|pmas/i.test(x.institution));
         if (arid) { put('degree', [arid.degree, arid.program].filter(Boolean).join(' ')); if (arid.start && arid.end && /^\d{4}$/.test(arid.end)) put('batch', `${arid.start}-${arid.end.slice(2)}`); }
+        if (n) dirty();
         say(state, n ? `Filled ${n} items from your CV: ${cv.education.length} education, ${cv.experience.length} experience, ${cv.skills.length} skills. Check dates, titles and organisations; CV layouts vary and the guesses are rough.` : 'Could not find anything usable in that file. Fill the form by hand or try the LinkedIn export.', n ? 'ok' : 'err');
+        if (n) go('overview');
       } catch (err) { say(state, err.message, 'err'); }
       e.target.value = '';
     });
 
-    // Location
+    // ---- Location ----
     $('locate').addEventListener('click', () => {
       if (!navigator.geolocation) return say(state, 'Your browser does not support location. Use "Look up city" instead.', 'err');
       say(state, 'Waiting for location permission…');
@@ -296,7 +457,7 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
           if (!f.country.value) f.country.value = a.country || '';
           if (!f.province.value && a.state) [...f.province.options].forEach((o) => { if (a.state.includes(o.value.split(' ')[0]) && o.value) f.province.value = o.value; });
         } catch {}
-        say(state, 'Pinned to your current location. Adjust if you want to show a different city.', 'ok');
+        dirty(); say(state, 'Pinned to your current location. Adjust if you want to show a different city.', 'ok');
       }, (err) => say(state, err.code === 1 ? 'Location permission denied. Use "Look up city" instead.' : 'Could not get location. Use "Look up city" instead.', 'err'), { timeout: 10000 });
     });
     $('geocode').addEventListener('click', async () => {
@@ -305,55 +466,80 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
       const [hit] = await r.json();
       if (!hit) return say(state, 'Place not found. Enter coordinates manually.', 'err');
       f.lat.value = Number(hit.lat).toFixed(4); f.lng.value = Number(hit.lon).toFixed(4);
-      say(state, `Pinned to ${hit.display_name}`, 'ok');
+      dirty(); say(state, `Pinned to ${hit.display_name}`, 'ok');
     });
 
-    // Load existing profile
+    // ---- Load ----
     const fill = (p) => {
       for (const k of ['name','username','batch','degree','sector','role','organization','city','country','province','lat','lng','linkedin','github','portfolio','orcid','email_public','advice','bio']) f[k].value = p[k] ?? '';
-      f.skills.value = (p.skills ?? []).join(', ');
+      setSkills(p.skills ?? []);
       f.mentor.checked = !!p.mentor;
       setMode(p.sector === 'Student' ? 'student' : 'alumni');
       $('who').dataset.photo = p.photo_url || '';
+      if (p.photo_url) { $('photo-prev').src = p.photo_url; $('photo-prev').hidden = false; }
+      $('cv-hint').textContent = p.cv_url ? 'A CV is on your page. Choose a file to replace it.' : '';
       for (const k of ['pub','edu','exp','proj']) $(k).innerHTML = '';
       (p.publications ?? []).forEach((v) => addRow('pub', v));
       (p.education ?? []).forEach((v) => addRow('edu', v));
       (p.experience ?? []).forEach((v) => addRow('exp', v));
       (p.projects ?? []).forEach((v) => addRow('proj', v));
       const path = p.username || p.slug;
-      say(state, p.approved ? `Your page is live at ${location.origin}/${path}. Saved edits appear there within about five minutes.` : `Saved and waiting for cabinet approval. Your page will be ${location.origin}/${path}.`, p.approved ? 'ok' : '');
+      const prev = $('preview'); prev.href = `/${path}`; prev.hidden = !p.approved;
+      document.querySelectorAll('.ed-step').forEach((s) => { s.dataset.state = s.dataset.step === 'saved' ? 'done' : s.dataset.step === 'review' ? (p.approved ? 'done' : 'now') : p.approved ? 'done' : ''; });
+      $('ov-status').textContent = p.approved ? `Your page is live at ${location.origin}/${path}. Saved edits appear there within about five minutes.` : `Saved and waiting for cabinet approval. Your page will be ${location.origin}/${path}.`;
+      isDirty = false; paint(); refreshOverview();
     };
     const { data: { session } } = await sb.auth.getSession();
     if (!session) location.replace('/account?next=/alumni/join');
     if (session) {
       editor.hidden = false;
-      $('who').textContent = `Signed in as ${session.user.email}`;
+      $('who').textContent = session.user.email;
       const { data } = await sb.from('profiles').select('*').eq('user_id', session.user.id).maybeSingle();
       if (data) fill(data); else {
         const m = session.user.user_metadata || {};
         f.name.value = m.full_name || m.name || '';
         addRow('edu'); addRow('exp');
         setMode(new URLSearchParams(location.search).get('as') === 'student' ? 'student' : 'alumni');
+        document.querySelectorAll('.ed-step').forEach((s) => (s.dataset.state = ''));
+        $('ov-status').textContent = 'Not saved yet. Fill the Identity section at least, then save.';
+        refreshOverview();
       }
+      // Offer a draft left behind by a closed tab.
+      try {
+        const d = JSON.parse(localStorage.getItem(DRAFT) || 'null');
+        if (d && Date.now() - d.at < 7 * 86400e3 && JSON.stringify(d.data) !== JSON.stringify(snapshot())) {
+          const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-ghost btn-sm'; b.textContent = 'Restore unsaved draft'; b.style.marginLeft = '.5rem';
+          say(state, `You have unsaved edits from ${new Date(d.at).toLocaleString()}.`); state.appendChild(b);
+          b.addEventListener('click', () => { for (const [k, v] of Object.entries(d.data)) { if (k.startsWith('rows:')) { const kind = k.slice(5); $(kind).innerHTML = ''; v.forEach((r) => addRow(kind, r)); } else if (k === 'skills') setSkills(v.split(',').map((s) => s.trim()).filter(Boolean)); else if (f[k]) { if (f[k].type === 'checkbox') f[k].checked = v; else f[k].value = v; } } setMode(editor.dataset.mode); dirty(); say(state, 'Draft restored. Save to keep it.', 'ok'); });
+        }
+      } catch {}
+      go(location.hash.slice(1) || 'overview', false);
     }
 
-    // Upload helper
-    const upload = async (bucket, file, name) => {
+    // ---- Upload helper ----
+    const upload = async (bucket, file, name, type) => {
       const path = `${session.user.id}/${name}`;
-      const { error } = await sb.storage.from(bucket).upload(path, file, { upsert: true, contentType: file.type });
+      const { error } = await sb.storage.from(bucket).upload(path, file, { upsert: true, contentType: type || file.type });
       if (error) throw new Error(`${bucket} upload failed: ${error.message}`);
       return sb.storage.from(bucket).getPublicUrl(path).data.publicUrl + `?v=${Date.now()}`;
     };
 
-    // Save
+    // ---- Save ----
     editor.addEventListener('submit', async (e) => {
       e.preventDefault();
-      $('save').disabled = true; say(state, 'Saving…');
+      // Validate across all sections, and jump to the first problem instead of failing silently in a hidden one.
+      for (const el of editor.querySelectorAll('input,select,textarea')) {
+        if (el.closest('[hidden]') || el.disabled) continue;
+        if (!el.checkValidity()) { const sec = el.closest('.ed-sec')?.dataset.sec; if (sec) go(sec); el.reportValidity(); el.focus(); say(state, 'Fix the highlighted field, then save again.', 'err'); return; }
+      }
+      $('save').disabled = true; $('savebar').dataset.busy = '1'; savedText.textContent = 'Saving…'; say(state, '');
       try {
         const extra = {};
         if (f.photo.files[0]) {
-          if (f.photo.files[0].size > 2 * 1024 * 1024) throw new Error('Photo must be under 2 MB.');
-          extra.photo_url = await upload('avatars', f.photo.files[0], `avatar.${f.photo.files[0].name.split('.').pop().toLowerCase()}`);
+          const { shrink } = await import('/js/imgup.js');
+          const blob = await shrink(f.photo.files[0], 640);
+          if (blob.size > 2 * 1024 * 1024) throw new Error('Photo is still over 2 MB after resizing. Crop it and try again.');
+          extra.photo_url = await upload('avatars', blob, 'avatar.webp', 'image/webp');
         }
         else if (!$('who').dataset.photo && (session.user.user_metadata?.avatar_url || session.user.user_metadata?.picture)) extra.photo_url = session.user.user_metadata.avatar_url || session.user.user_metadata.picture;
         if (f.cv.files[0]) {
@@ -369,31 +555,90 @@ const provinces = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Gilg
           lat: Number(f.lat.value), lng: Number(f.lng.value),
           linkedin: f.linkedin.value || null, github: f.github.value || null, portfolio: f.portfolio.value || null,
           orcid: f.orcid.value.trim() || null, email_public: f.email_public.value || null,
-          skills: f.skills.value.split(',').map((s) => s.trim()).filter(Boolean),
+          skills: skills(),
           advice: editor.dataset.mode === 'student' ? null : f.advice.value.trim() || null, bio: f.bio.value.trim() || null,
           mentor: editor.dataset.mode === 'student' ? false : f.mentor.checked,
           publications: readRows('pub').filter((p) => p.title),
           education: dedupe(readRows('edu').filter((p) => p.institution)),
-          experience: dedupe(readRows('exp').filter((p) => p.title)).map((p) => ({ ...p, current: !p.end })),
+          experience: dedupe(readRows('exp').filter((p) => p.title)).map((p) => ({ ...p, end: p.current ? '' : p.end, current: !!p.current || !p.end })),
           projects: readRows('proj').filter((p) => p.title).map((p) => ({ ...p, tags: p.tags.split(',').map((s) => s.trim()).filter(Boolean) })),
           ...extra,
         };
         const { data, error } = await sb.from('profiles').upsert(row, { onConflict: 'user_id' }).select().single();
         if (error) throw new Error(error.message.includes('profiles_username') ? 'That short link is taken or not allowed. Pick another.' : error.message);
+        f.photo.value = ''; f.cv.value = '';
+        localStorage.removeItem(DRAFT);
+        lastSaved = `at ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
         fill(data);
+        $('savebar').dataset.flash = '1'; setTimeout(() => delete $('savebar').dataset.flash, 1200);
+        say(state, 'Saved.', 'ok');
       } catch (err) {
-        say(state, err.message, 'err');
+        say(state, err.message, 'err'); paint();
       } finally {
-        $('save').disabled = false;
+        $('save').disabled = false; delete $('savebar').dataset.busy;
       }
     });
   </script>
   <style>
-    .rrow { display: grid; gap: 0.5rem; align-items: end; padding: 0.75rem; border: 1px dashed var(--line); border-radius: 8px; margin-bottom: 0.5rem; }
+    .editor { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 2rem; align-items: start; padding-bottom: 5rem; }
+    .ed-nav { position: sticky; top: 84px; display: grid; gap: 0.75rem; }
+    .ed-who { display: grid; gap: 0.4rem; font-size: 0.8rem; word-break: break-all; }
+    .ed-progress { display: grid; gap: 0.3rem; font-size: 0.8rem; color: var(--ink-2); }
+    .ed-bar { height: 6px; border-radius: 999px; background: var(--paper-2); overflow: hidden; }
+    .ed-bar span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--navy), var(--red)); border-radius: 999px; transition: width 0.6s cubic-bezier(.2,.7,.2,1); }
+    .ed-nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+    .ed-tab { width: 100%; display: flex; align-items: center; gap: 0.55rem; padding: 0.5rem 0.65rem; border: 0; border-radius: 8px; background: transparent; font: inherit; font-size: 0.92rem; color: var(--ink-2); cursor: pointer; text-align: left; transition: background 0.15s, color 0.15s, transform 0.15s; }
+    .ed-tab:hover { background: var(--paper-2); color: var(--navy); transform: translateX(2px); }
+    .ed-tab[aria-current] { background: var(--navy-soft); color: var(--navy); font-weight: 600; }
+    .ed-tick { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--line); flex: none; transition: background 0.3s, border-color 0.3s; }
+    .ed-tick[data-state="done"] { background: #1a7f4b; border-color: #1a7f4b; }
+    .ed-tick[data-state="part"] { background: linear-gradient(90deg, #1a7f4b 50%, transparent 50%); border-color: #1a7f4b; }
+    .ed-tick[data-state="empty"] { border-color: var(--red); }
+    .ed-main { display: grid; gap: 1rem; min-width: 0; }
+    .ed-sec { display: grid; gap: 0.9rem; padding: 1.25rem 1.5rem; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow); }
+    .ed-sec h2 { margin: 0; font-size: 1.35rem; }
+    .ed-sec h3 { margin: 0; font-size: 1.05rem; }
+    .ed-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+    .ed-cards .card p { font-size: 0.88rem; }
+    .ed-steps { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.25rem; }
+    .ed-step { display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: var(--ink-3); }
+    .ed-step b { width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; border: 2px solid var(--line); font-size: 0.8rem; transition: all 0.3s; }
+    .ed-step[data-state="done"] { color: var(--ink); } .ed-step[data-state="done"] b { background: #1a7f4b; border-color: #1a7f4b; color: #fff; }
+    .ed-step[data-state="now"] { color: var(--navy); } .ed-step[data-state="now"] b { border-color: var(--red); color: var(--red); animation: pulse 1.6s infinite; }
+    @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(227,16,28,.35); } 50% { box-shadow: 0 0 0 6px rgba(227,16,28,0); } }
+    .ed-todo { margin: 0; padding-left: 1.1rem; font-size: 0.92rem; display: grid; gap: 0.25rem; }
+    .linkish { background: none; border: 0; padding: 0; font: inherit; color: var(--navy); text-decoration: underline; cursor: pointer; }
+    .ed-pager { display: flex; justify-content: space-between; }
+    .ed-savebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: flex; align-items: center; gap: 1rem; padding: 0.7rem max(1rem, calc((100vw - 1180px) / 2 + 1rem)); background: rgba(255,255,255,0.94); backdrop-filter: blur(8px); border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(18,50,94,0.06); transition: background 0.4s; }
+    .ed-savebar[data-flash] { background: #e6f6ec; }
+    .ed-savebar .btn { margin-left: auto; }
+    .ed-saved { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.88rem; font-weight: 600; color: var(--ink-2); }
+    .ed-saved .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink-3); transition: background 0.3s; }
+    .ed-saved[data-state="dirty"] .dot { background: #e0a000; animation: pulse 1.6s infinite; }
+    .ed-saved[data-state="clean"] .dot { background: #1a7f4b; }
+    .ed-savebar[data-busy] .ed-saved .dot { background: var(--navy); }
+    .ed-photo { display: flex; gap: 0.75rem; align-items: center; font-weight: 400; }
+    .ed-photo img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0.35rem; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+    .chips input { border: 0; flex: 1; min-width: 160px; padding: 0.3rem 0.4rem; } .chips input:focus { outline: none; }
+    .chips:focus-within { border-color: var(--navy); box-shadow: 0 0 0 3px var(--navy-soft); }
+    .chip { font: inherit; font-size: 0.82rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 999px; border: 0; background: var(--navy-soft); color: var(--navy); cursor: pointer; transition: background 0.15s, transform 0.15s; }
+    .chip:hover { background: var(--red-soft); color: var(--red); transform: scale(1.04); } .chip:hover::after { content: " ×"; }
+    .form input:focus, .form select:focus, .form textarea:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px var(--navy-soft); transition: box-shadow 0.15s; }
+    .form input:user-invalid { border-color: var(--red); }
+    .ctr { text-align: right; font-weight: 400; }
+    .rrow { display: grid; gap: 0.5rem; align-items: start; padding: 0.75rem; border: 1px dashed var(--line); border-radius: 8px; margin-bottom: 0.5rem; transition: border-color 0.15s, box-shadow 0.15s; }
+    .rrow:focus-within { border-style: solid; border-color: var(--navy); box-shadow: var(--shadow); }
     .rrow.c3 { grid-template-columns: 1fr 1fr 1fr auto; }
     .rrow.c4 { grid-template-columns: 2fr 1fr 80px 2fr auto; }
+    .rrow.c4x { grid-template-columns: 2fr 2fr 150px 150px auto; }
     .rrow.c5 { grid-template-columns: 2fr 1fr 2fr 80px 110px auto; }
     .rrow .span { grid-column: 1 / -2; }
-    @media (max-width: 760px) { .rrow, .rrow.c3, .rrow.c4, .rrow.c5 { grid-template-columns: 1fr; } .rrow .span { grid-column: auto; } }
+    .rrow textarea { min-height: 0; }
+    .rrow .dup { grid-column: 1 / -1; color: var(--red); font-weight: 600; }
+    .rrow [data-remove] { align-self: start; }
+    @media (max-width: 900px) { .editor { grid-template-columns: 1fr; } .ed-nav { position: static; } .ed-nav ul { display: flex; flex-wrap: wrap; gap: 0.25rem; } .ed-tab { width: auto; padding: 0.4rem 0.6rem; font-size: 0.85rem; } .ed-savebar { padding: 0.6rem 1rem; flex-wrap: wrap; } .ed-savebar > .muted { display: none; } }
+    @media (max-width: 760px) { .rrow, .rrow.c3, .rrow.c4, .rrow.c4x, .rrow.c5 { grid-template-columns: 1fr; } .rrow .span { grid-column: auto; } }
+    @media (prefers-reduced-motion: reduce) { .ed-bar span, .ed-tab, .chip, .rrow { transition: none; } .ed-step b, .ed-saved .dot { animation: none; } }
   </style>
 </Base>

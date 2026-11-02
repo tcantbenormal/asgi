@@ -26,6 +26,8 @@ export const site = {
   // CARTO basemap tiles. Swap "voyager" for "light_all" (Positron) for a lighter grey look.
   // Restrict the key to the site's domain in the CARTO dashboard once a domain is connected.
   basemapTiles: 'https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=cb1_4l8y_1_ec349aafebc313c616d23a11',
+  // Usernames shown first in the alumni directory, in this order, before the batch sort.
+  pinnedAlumni: ['tcantbenormal'],
   // Seconds a visitor waits on the download gate before the link unlocks.
   downloadCountdown: 15,
   // Google OAuth web client ID, the same one entered in Supabase. When set, the join page renders

@@ -34,7 +34,7 @@ import { site } from '../../config/site';
     // Only images from the site's own bucket become <img>; any other URL stays a link.
     const IMG = `${url}/storage/v1/object/public/images/`;
     const rich = (s) => esc(s).replace(/https?:\/\/[^\s<]+/g, (u) => u.startsWith(IMG) ? `<a href="${u}" target="_blank" rel="noopener"><img class="pimg" src="${u}" alt="" loading="lazy"></a>` : `<a href="${u}" rel="nofollow noopener">${u}</a>`);
-    const KIND = { question: 'Question', data_request: 'Data request', discussion: 'Discussion' };
+    const KIND = { question: 'Question', data_request: 'Data request', discussion: 'General', software: 'Software help', academic: 'Academics', job: 'Jobs' };
     const when = (d) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
     const authors = async (ids) => { const { data } = await sb.from('profiles').select('user_id,name,username,photo_url').in('user_id', [...new Set(ids)]); return Object.fromEntries((data || []).map((p) => [p.user_id, p])); };
     const who = (a) => !a ? 'Member' : a.username ? `<a href="/${esc(a.username)}">${esc(a.name)}</a>` : esc(a.name);
@@ -52,7 +52,7 @@ import { site } from '../../config/site';
       const by = await authors([p.user_id, ...rs.map((r) => r.user_id)]);
       document.title = `${p.title} · ASGI forum`;
       $('post').innerHTML = `
-        <div class="eyebrow"><span class="kind ${p.kind}">${KIND[p.kind]}</span></div>
+        <div class="eyebrow"><span class="kind ${p.kind}">${KIND[p.kind] || p.kind}</span>${p.pinned ? '<span class="tag">Pinned</span>' : ''}</div>
         <h1 style="font-size:1.7rem;margin:.25rem 0 .5rem">${esc(p.title)}</h1>
         <div class="pmeta"><span>${who(by[p.user_id])}</span><span>${when(p.created_at)}</span>${p.tags.map((t) => `<span class="ptag">${esc(t)}</span>`).join('')}
           ${me === p.user_id ? '<button class="btn btn-ghost btn-sm" id="del-post">Delete post</button>' : ''}</div>

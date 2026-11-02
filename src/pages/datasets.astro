@@ -10,5 +10,6 @@ const items = (await getCollection('resources')).filter((r) => r.data.kind !== '
   <PageHead eyebrow="Datasets" title="Datasets and templates" lead="Open spatial data for Pakistan and the region, plus society templates for maps, posters and reports. Check each licence before publishing.">
     <p class="notice navy" style="margin:1rem 0 0">Have a cleaned dataset from your project? <a href={`${site.forms.submitResource}?type=dataset`}>Submit it</a> and it will be credited to you.</p>
   </PageHead>
-  <ResourceList items={items} />
+  <ResourceList items={items} pakistan={true} />
+  <p class="notice" style="margin-top:1.5rem">Cannot find a dataset? <a href="/forum?new=1&kind=data_request">Post a data request on the forum</a>.</p>
 </Base>

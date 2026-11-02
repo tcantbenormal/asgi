@@ -19,21 +19,68 @@ const counts = Object.fromEntries(groups.map(([k]) => [k, all.filter((l) => l.da
     <p style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
       <a class="btn btn-primary btn-sm" href={`${site.forms.submitResource}?type=opportunity`}>Post an opportunity</a>
       <a class="btn btn-ghost btn-sm" href="/industry">Who hires GIS graduates</a>
+      <a class="btn btn-ghost btn-sm" href={`mailto:${site.email}?subject=${encodeURIComponent('Subscribe me to the monthly opportunities digest')}`}>Monthly digest by email</a>
     </p>
   </PageHead>
-  <nav class="filters" aria-label="Sections" data-pagefind-ignore>
-    {groups.map(([k, label]) => <a class="btn btn-ghost btn-sm" href={`#${k}`}>{label} <span class="count">{counts[k]}</span></a>)}
-  </nav>
+  <div class="opp-bar" data-pagefind-ignore>
+    <nav class="tabs" id="otabs" aria-label="Sections">
+      {groups.map(([k, label], i) => <button type="button" data-tab={k} aria-current={i === 0 ? 'true' : 'false'}>{label.split(' and ')[0].split(',')[0]} <span class="count">{counts[k]}</span></button>)}
+    </nav>
+    <div class="opp-tools">
+      <label class="check" style="margin:0;font-size:.9rem"><input type="checkbox" id="osoon" /> Closing within 60 days</label>
+      <label style="margin:0;font-size:.9rem;display:flex;gap:.4rem;align-items:center">Sort <select id="osort" aria-label="Sort"><option value="curated">Curated order</option><option value="deadline">By deadline</option><option value="title">A to Z</option></select></label>
+    </div>
+  </div>
   {groups.map(([k, label, lead]) => {
     const items = all.filter((l) => l.data.category === k).sort((a, b) => (a.data.order ?? 1e9) - (b.data.order ?? 1e9) || a.data.title.localeCompare(b.data.title));
     return (
-      <section class="section" id={k}>
+      <section class="section opp-sec" id={k} data-tab={k}>
         <h2>{label}</h2>
         <p class="lead" style="margin-bottom:1.5rem">{lead}</p>
         {items.length === 0 ? <p class="empty-state">Nothing listed right now.</p> : (
-          <div class="grid grid-2">{items.map((l) => <OpportunityCard item={l} />)}</div>
+          <div class="grid grid-2 opp-grid">{items.map((l, i) => <OpportunityCard item={l} />)}</div>
         )}
+        <p class="empty-state" data-empty hidden>Nothing in this section closes within 60 days.</p>
       </section>
     );
   })}
+  <script>
+    // Tabs are hash-driven so /opportunities#course and old deep links keep working; sort and the 60-day filter
+    // reorder the cards in place using data-closes.
+    const tabs = [...document.querySelectorAll<HTMLButtonElement>('#otabs [data-tab]')];
+    const secs = [...document.querySelectorAll<HTMLElement>('.opp-sec')];
+    const soon = document.getElementById('osoon') as HTMLInputElement, sort = document.getElementById('osort') as HTMLSelectElement;
+    const show = (k: string) => {
+      if (!secs.some((s) => s.dataset.tab === k)) k = secs[0].dataset.tab!;
+      tabs.forEach((t) => t.setAttribute('aria-current', String(t.dataset.tab === k)));
+      secs.forEach((s) => (s.hidden = s.dataset.tab !== k));
+      document.title = `${tabs.find((t) => t.dataset.tab === k)!.textContent!.replace(/\d+$/, '').trim()} · ASGI`;
+    };
+    const apply = () => {
+      for (const s of secs) {
+        const grid = s.querySelector<HTMLElement>('.opp-grid'); if (!grid) continue;
+        const cards = [...grid.children] as HTMLElement[];
+        cards.forEach((c, i) => { if (!c.dataset.i) c.dataset.i = String(i); });
+        const by = sort.value;
+        cards.sort((a, b) => by === 'deadline' ? a.dataset.closes!.localeCompare(b.dataset.closes!) : by === 'title' ? a.querySelector('h3')!.textContent!.localeCompare(b.querySelector('h3')!.textContent!) : Number(a.dataset.i) - Number(b.dataset.i));
+        let n = 0;
+        for (const c of cards) { c.hidden = soon.checked && c.dataset.soon !== '1'; if (!c.hidden) n++; grid.appendChild(c); }
+        s.querySelector<HTMLElement>('[data-empty]')!.hidden = n > 0;
+      }
+    };
+    tabs.forEach((t) => t.addEventListener('click', () => { history.replaceState(null, '', `#${t.dataset.tab}`); show(t.dataset.tab!); }));
+    soon.addEventListener('change', apply); sort.addEventListener('change', apply);
+    const u = new URLSearchParams(location.search);
+    if (u.get('sort') === 'deadline') { sort.value = 'deadline'; soon.checked = true; }
+    show(location.hash.slice(1)); apply();
+    window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+  </script>
+  <style>
+    .opp-bar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+    .opp-tools { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .opp-tools select { font: inherit; font-size: 0.9rem; padding: 0.35rem 0.5rem; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+    .tabs .count { display: inline-block; min-width: 1.4em; padding: 0 0.35em; margin-left: 0.2em; border-radius: 999px; background: rgba(255,255,255,0.25); font-size: 0.74rem; text-align: center; }
+    .tabs button:not([aria-current="true"]) .count { background: var(--navy-soft); }
+    .opp-sec { padding-top: 1.5rem; }
+  </style>
 </Base>

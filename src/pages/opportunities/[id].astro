@@ -12,6 +12,7 @@ const d = l.data;
 const kind = { scholarship: 'Scholarship', course: 'Course', certification: 'Certification', job: 'Job' }[d.category];
 const cta = { scholarship: 'Programme page', course: 'Start the course', certification: 'Certification page', job: 'Apply' }[d.category];
 const host = new URL(d.url).hostname.replace(/^www\./, '');
+const closes = d.closes ? new Date(d.closes).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
 ---
 <Base title={d.title} description={d.description}>
   <Crumbs items={[["/opportunities", "Opportunities"], [`/opportunities#${d.category}`, kind], d.title]} />
@@ -39,6 +40,7 @@ const host = new URL(d.url).hostname.replace(/^www\./, '');
         {d.location && <><dt>Where</dt><dd>{d.location}</dd></>}
         {d.cost && <><dt>Cost</dt><dd>{d.cost}</dd></>}
         {d.deadline && <><dt>Deadline</dt><dd>{d.deadline}</dd></>}
+        {closes && <><dt>Next closing</dt><dd>{closes}</dd></>}
         {d.updated && <><dt>Checked</dt><dd>{d.updated}</dd></>}
       </dl>
       <a class="btn btn-primary" href={d.url} rel="noopener" style="margin-top:.75rem;justify-content:center">{cta}</a>

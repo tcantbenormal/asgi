@@ -8,8 +8,11 @@ const href = detailed ? `/opportunities/${l.id}` : d.url;
 // Show the facts a reader scans a card for; the rest live on the detail page.
 const want = ['Ranking', 'Scholarship', 'Funding', 'Stipend', 'Awards', 'Selectivity', 'Time', 'Certificate', 'Cost', 'Requirements'];
 const facts = want.map((w) => d.facts.find((f) => f.label === w)).filter(Boolean).slice(0, 3) as { label: string; value: string }[];
+const days = d.closes ? Math.ceil((new Date(d.closes).valueOf() - Date.now()) / 864e5) : null;
+const soon = days !== null && days >= 0 && days <= 60;
 ---
-<article class="card opp">
+<article class="card opp" data-closes={d.closes ?? '9999-12-31'} data-soon={soon ? '1' : '0'}>
+  {(d.via === 'alumni' || soon) && <div class="tags" style="margin-bottom:.4rem">{d.via === 'alumni' && <span class="tag">Shared by alumni</span>}{soon && <span class="tag red">Closes in {days} {days === 1 ? 'day' : 'days'}</span>}</div>}
   <h3><a href={href} rel={detailed ? undefined : 'noopener'}>{d.title}</a></h3>
   <p>{d.description}</p>
   {facts.length > 0 && <dl class="facts sm">{facts.map((f) => <><dt>{f.label}</dt><dd>{f.value}</dd></>)}</dl>}

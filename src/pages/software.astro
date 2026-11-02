@@ -10,5 +10,6 @@ const items = (await getCollection('resources')).filter((r) => r.data.kind === '
   <PageHead eyebrow="Software" title="GIS and remote sensing software" lead="What each package does, what it needs to run, and where to get it. Open-source tools link to their official downloads. Commercial tools are mirrored only where the institute holds a licence, and the licence itself comes from the lab, not from here.">
     <p class="notice" style="margin:1rem 0 0">Mirrors are hosted by the society for students on slow or filtered connections. Prefer the official download when it works for you. <a href={`${site.forms.submitResource}?type=tool`}>Suggest a tool</a>.</p>
   </PageHead>
-  <ResourceList items={items} />
+  <ResourceList items={items} pakistan={false} />
+  <p class="notice" style="margin-top:1.5rem">Stuck on an install, a plugin or an error? <a href="/forum?new=1&kind=software">Ask for software help on the forum</a>.</p>
 </Base>

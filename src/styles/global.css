@@ -289,6 +289,8 @@ a.stat { text-decoration: none; display: block; transition: transform 0.15s, box
 .posts { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
 .posts li { padding: 0.9rem 1rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
 .posts li > a { text-decoration: none; color: var(--navy); font-size: 1.05rem; font-weight: 600; }
+.posts li.pinned { background: var(--paper-2); margin: 0 -0.75rem; padding-left: 0.75rem; padding-right: 0.75rem; border-radius: 8px; }
+.posts .pin { font-size: 0.85em; }
 .posts li.solved { border-left: 4px solid #1a7f4b; }
 .pmeta { font-size: 0.82rem; color: var(--ink-3); margin-top: 0.3rem; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
 .kind { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.1rem 0.5rem; border-radius: 999px; background: var(--paper-2); color: var(--navy); }

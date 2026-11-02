@@ -157,7 +157,8 @@ const links = defineCollection({
     updated: z.string().optional(),            // when a person last checked the facts, e.g. "October 2026"
     order: z.number().optional(),              // position within its category; unset sorts last by title
     employer: z.string().optional(),           // jobs only: employers.json id, shows the listing on that employer's page and marks it hiring
-    closes: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(), // jobs only: ISO date; the listing stops counting as an opening after it
+    closes: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(), // ISO date of the next deadline where one is exact; jobs stop counting as openings after it
+    via: z.string().optional(),                // 'alumni' when it came through the submit form; shows a badge
   }),
 });
 

@@ -128,7 +128,8 @@
       }
     ],
     "updated": "October 2026",
-    "order": 2
+    "order": 2,
+    "closes": "2027-01-22"
   },
   {
     "id": "erasmus-mundus-geospatial-technologies",
@@ -247,7 +248,8 @@
       }
     ],
     "updated": "October 2026",
-    "order": 4
+    "order": 4,
+    "closes": "2027-10-15"
   },
   {
     "id": "daad-epos",
@@ -362,7 +364,8 @@
       }
     ],
     "updated": "October 2026",
-    "order": 6
+    "order": 6,
+    "closes": "2027-04-01"
   },
   {
     "id": "chevening-pakistan",
@@ -603,7 +606,8 @@
       }
     ],
     "updated": "October 2026",
-    "order": 10
+    "order": 10,
+    "closes": "2027-01-31"
   },
   {
     "id": "hong-kong-phd-fellowship",
@@ -659,7 +663,8 @@
       }
     ],
     "updated": "October 2026",
-    "order": 11
+    "order": 11,
+    "closes": "2026-12-01"
   },
   {
     "id": "kaust-fellowship",
@@ -710,7 +715,8 @@
     ],
     "links": [],
     "updated": "October 2026",
-    "order": 12
+    "order": 12,
+    "closes": "2027-01-03"
   },
   {
     "id": "stipendium-hungaricum-hec",
@@ -768,7 +774,8 @@
       }
     ],
     "updated": "October 2026",
-    "order": 13
+    "order": 13,
+    "closes": "2027-01-15"
   },
   {
     "id": "turkiye-burslari",
@@ -826,7 +833,8 @@
       }
     ],
     "updated": "October 2026",
-    "order": 14
+    "order": 14,
+    "closes": "2027-02-20"
   },
   {
     "id": "mext-japan-pakistan",
@@ -997,7 +1005,8 @@
       }
     ],
     "updated": "October 2026",
-    "order": 17
+    "order": 17,
+    "closes": "2027-01-06"
   },
   {
     "id": "polimi-geoinformatics",
@@ -1056,7 +1065,8 @@
       }
     ],
     "updated": "October 2026",
-    "order": 18
+    "order": 18,
+    "closes": "2026-12-01"
   },
   {
     "id": "lund-gis-remote-sensing",
@@ -1326,7 +1336,8 @@
     ],
     "links": [],
     "updated": "October 2026",
-    "order": 23
+    "order": 23,
+    "closes": "2027-01-15"
   },
   {
     "id": "open-doors-russia",
@@ -1375,7 +1386,8 @@
     ],
     "links": [],
     "updated": "October 2026",
-    "order": 24
+    "order": 24,
+    "closes": "2026-11-16"
   },
   {
     "id": "schlumberger-faculty-for-the-future",
@@ -1470,7 +1482,8 @@
       }
     ],
     "updated": "October 2026",
-    "order": 26
+    "order": 26,
+    "closes": "2027-03-01"
   },
   {
     "id": "erasmus-mundus-catalogue",
@@ -2520,7 +2533,8 @@
       "GIS",
       "full-time"
     ],
-    "order": 1
+    "order": 1,
+    "via": "alumni"
   },
   {
     "id": "sample-internship-rs",
@@ -2535,6 +2549,7 @@
       "remote sensing",
       "internship"
     ],
-    "order": 2
+    "order": 2,
+    "via": "alumni"
   }
 ]

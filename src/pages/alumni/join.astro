@@ -303,9 +303,10 @@ const sections = [
     window.addEventListener('beforeunload', (e) => { if (isDirty) { e.preventDefault(); e.returnValue = ''; } });
 
     // ---- Completeness and overview ----
+    const off = (el) => !!el.closest('[data-only]')?.hidden; // hidden by the student/graduate toggle, not by section switching
     const FIELDS = { identity: ['name', 'username', 'batch', 'degree', 'role', 'organization'], location: ['city', 'country'], links: ['linkedin'], career: ['skills', 'bio'] };
     const secDone = (id) => {
-      if (id in FIELDS) return FIELDS[id].filter((k) => f[k] && !f[k].closest('[hidden]') && f[k].value.trim()).length / FIELDS[id].filter((k) => f[k] && !f[k].closest('[hidden]')).length;
+      if (id in FIELDS) return FIELDS[id].filter((k) => f[k] && !off(f[k]) && f[k].value.trim()).length / FIELDS[id].filter((k) => f[k] && !off(f[k])).length;
       if (id === 'experience') return readRows('exp').some((r) => r.title) ? 1 : 0;
       if (id === 'education') return readRows('edu').some((r) => r.institution) ? 1 : 0;
       if (id === 'projects') return readRows('proj').some((r) => r.title) ? 1 : 0;
@@ -324,7 +325,7 @@ const sections = [
       refreshProgress();
       const missing = [];
       const names = { name: 'your name', username: 'a short link', batch: 'batch', degree: 'degree', role: 'current role', organization: 'organisation', city: 'city', country: 'country', linkedin: 'LinkedIn', skills: 'skills', bio: 'your journey' };
-      for (const [sec, keys] of Object.entries(FIELDS)) for (const k of keys) if (f[k] && !f[k].closest('[hidden]') && !f[k].value.trim()) missing.push([sec, names[k]]);
+      for (const [sec, keys] of Object.entries(FIELDS)) for (const k of keys) if (f[k] && !off(f[k]) && !f[k].value.trim()) missing.push([sec, names[k]]);
       if (!readRows('exp').some((r) => r.title)) missing.push(['experience', 'a position']);
       if (!readRows('edu').some((r) => r.institution)) missing.push(['education', 'a degree']);
       if (!readRows('proj').some((r) => r.title)) missing.push(['projects', 'a project']);
@@ -529,7 +530,7 @@ const sections = [
       e.preventDefault();
       // Validate across all sections, and jump to the first problem instead of failing silently in a hidden one.
       for (const el of editor.querySelectorAll('input,select,textarea')) {
-        if (el.closest('[hidden]') || el.disabled) continue;
+        if (off(el) || el.disabled) continue;
         if (!el.checkValidity()) { const sec = el.closest('.ed-sec')?.dataset.sec; if (sec) go(sec); el.reportValidity(); el.focus(); say(state, 'Fix the highlighted field, then save again.', 'err'); return; }
       }
       $('save').disabled = true; $('savebar').dataset.busy = '1'; savedText.textContent = 'Saving…'; say(state, '');

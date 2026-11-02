@@ -19,7 +19,7 @@ const perBatch = (b: string) => alumni.filter((a) => a.data.batch === b).length;
 <Base title="Alumni directory" description="Directory of GIS and remote sensing graduates: where they work, what they do, and how to reach them.">
   <PageHead eyebrow="Alumni" title="Alumni directory" lead="Graduates and current students of the institute, by batch and sector. Filter to find someone in the organisation or country you are aiming for.">
     <p style="margin-top:1rem"><a href="/join" class="btn btn-primary btn-sm">Add or update your profile</a></p>
-    <p class="batches" data-pagefind-ignore>{batches.map((b) => <button type="button" class="batch-chip" data-b={b}>Class of {b.slice(-2).padStart(4, '20')} <span class="count">{perBatch(b)}</span></button>)}</p>
+    <p class="batches" data-pagefind-ignore>{batches.map((b) => <button type="button" class="batch-chip" data-b={b} aria-pressed="false">Class of {b.slice(-2).padStart(4, '20')} <span class="count">{perBatch(b)}</span></button>)}</p>
   </PageHead>
   <p class="notice navy claim" data-pagefind-ignore>Graduated and not listed? <a href="/join?as=alumni">Claim your profile</a>: it takes five minutes, imports from LinkedIn or a CV, and puts you on the map.</p>
 
@@ -40,7 +40,9 @@ const perBatch = (b: string) => alumni.filter((a) => a.data.batch === b).length;
   <script>
     const $ = (id: string) => document.getElementById(id) as HTMLInputElement | HTMLSelectElement;
     const cards = [...document.querySelectorAll<HTMLElement>('#list .card')];
+    const chips = [...document.querySelectorAll<HTMLButtonElement>('.batch-chip')];
     const apply = () => {
+      chips.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.b === $('batch').value)));
       const q = $('q').value.trim().toLowerCase();
       const batch = $('batch').value, sector = $('sector').value, country = $('country').value, city = $('city').value, org = $('org').value;
       const mentor = ($('mentor') as HTMLInputElement).checked;
@@ -68,6 +70,8 @@ const perBatch = (b: string) => alumni.filter((a) => a.data.batch === b).length;
     .batches { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 0; }
     .batch-chip { font: inherit; font-size: 0.82rem; font-weight: 600; padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--navy); cursor: pointer; }
     .batch-chip:hover { border-color: var(--navy); }
+    .batch-chip[aria-pressed="true"] { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .batch-chip[aria-pressed="true"] .count { background: rgba(255,255,255,0.25); color: #fff; }
     .batch-chip .count { display: inline-block; min-width: 1.4em; padding: 0 0.35em; margin-left: 0.3em; border-radius: 999px; background: var(--navy-soft); font-size: 0.74rem; text-align: center; }
     .claim { margin: 0 0 1.25rem; }
   </style>

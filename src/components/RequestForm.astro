@@ -34,6 +34,8 @@ const { kind, title, cta, fields, thanks, id = 'request' } = Astro.props;
     if (f.name) f.name.value ||= m.full_name || m.name || '';
     if (f.email) f.email.value ||= session.user.email || '';
   }
+  // ?mentor=...&sector=... pre-fills matching fields (the per-mentor buttons on /mentorship use this).
+  for (const [k, v] of new URLSearchParams(location.search)) { const el = f.elements[k]; if (el && el.name !== 'website') { el.value = v; if (el.tagName === 'SELECT' && el.value !== v) el.value = ''; } }
   f.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (f.website.value) return; // honeypot

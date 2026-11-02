@@ -21,8 +21,10 @@ const d = e.data;
 const hiring = openings.length > 0 || !!d.hiring_now;
 const host = new URL(d.website).hostname.replace(/^www\./, '');
 const provinces = provincesOf(e);
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Organization', name: d.name, url: d.website, ...(d.logo ? { logo: new URL(d.logo, Astro.site).href } : {}), description: d.about, address: { '@type': 'PostalAddress', addressLocality: d.hq, addressCountry: provinces.includes('Abroad') ? undefined : 'PK' }, ...(d.aliases.length ? { alternateName: d.aliases } : {}) };
 ---
 <Base title={d.name} description={`${d.kind} in ${d.hq}. ${d.about}`}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
   <Crumbs items={[["/industry", "Industry"], d.name]} />
   <header class="page-head res-title">
     <span class="logo-tile lg">{d.logo ? <img src={d.logo} alt="" /> : <span class="emp-initials" aria-hidden="true">{initials(d.name)}</span>}</span>

@@ -58,6 +58,12 @@ import { site } from '../config/site';
       </section>
 
       <section class="section" style="padding-top:1rem">
+        <h2 style="font-size:1.2rem">Your data</h2>
+        <p class="muted">Download everything stored about you: profile, forum posts, replies and form submissions, as one JSON file.</p>
+        <button class="btn btn-ghost btn-sm" type="button" id="export">Export my data</button>
+      </section>
+
+      <section class="section" style="padding-top:1rem">
         <h2 style="font-size:1.2rem">Delete account</h2>
         <p class="muted">Removes your account, profile page, uploads, forum posts and replies. There is no undo.</p>
         <form id="delete-form" style="display:flex;gap:.5rem;flex-wrap:wrap;max-width:520px">
@@ -130,6 +136,17 @@ import { site } from '../config/site';
         const { error } = await sb.auth.updateUser({ email });
         say($('email-msg'), error ? error.message : 'Confirmation links sent to both addresses.', error ? 'err' : 'ok');
       });
+      $('export').addEventListener('click', async () => {
+        const b = $('export'); b.disabled = true; b.textContent = 'Preparing…';
+        const [profile, posts, replies, submissions] = await Promise.all([
+          sb.from('profiles').select('*').eq('user_id', u.id).maybeSingle(), sb.from('posts').select('*').eq('user_id', u.id),
+          sb.from('replies').select('*').eq('user_id', u.id), sb.from('submissions').select('*').eq('user_id', u.id),
+        ]);
+        const out = { exported_at: new Date().toISOString(), account: { id: u.id, email: u.email, provider: u.app_metadata?.provider, created_at: u.created_at }, profile: profile.data, posts: posts.data ?? [], replies: replies.data ?? [], submissions: submissions.data ?? [] };
+        const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' })); a.download = `asgi-${(out.profile?.username || 'account')}-${new Date().toISOString().slice(0, 10)}.json`; a.click();
+        b.disabled = false; b.textContent = 'Export my data';
+      });
+
       $('delete-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         if (e.target.confirm.value !== 'DELETE') return say($('delete-msg'), 'Type DELETE in capitals to confirm.', 'err');

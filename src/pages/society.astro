@@ -46,11 +46,5 @@ const sessions = [...new Set(cabinet.map((c) => c.data.session))].sort().reverse
     </section>
   ))}
 
-  <section class="section">
-    <h2>How this site is run</h2>
-    <div class="prose">
-      <p>The portal is built and maintained by students. Content is added through forms and reviewed by the cabinet before it goes live. The domain, hosting, and accounts belong to the society, not to any individual, and are handed over at each election. The site costs nothing to host. Advertising and sponsorships cover the domain and fund society activities.</p>
-      <p>Want to help maintain it? Write to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
-    </div>
-  </section>
+  <p class="muted" style="margin-top:2rem;font-size:.9rem">Curious how the portal itself is built and maintained? See <a href="/about-this-site">About this site</a>.</p>
 </Base>

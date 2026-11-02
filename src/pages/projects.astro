@@ -5,18 +5,30 @@ import PageHead from '../components/PageHead.astro';
 import { site } from '../config/site';
 const projects = (await getCollection('projects')).sort((a, b) => b.data.year - a.data.year);
 const domains = [...new Set(projects.map((p) => p.data.domain))].sort();
+const years = [...new Set(projects.map((p) => p.data.year))].sort((a, b) => b - a);
+const supervisors = [...new Set(projects.map((p) => p.data.supervisor))].sort();
+const tools = [...new Set(projects.flatMap((p) => p.data.tools))].sort();
 ---
 <Base title="Final year projects" description="Archive of final year projects from the institute: abstracts, tools used, and supervisors, to help juniors choose and scope their own.">
   <PageHead eyebrow="Academia" title="Final year project archive" lead="What seniors built, which tools they used, and who supervised. Read a few before you pick your own topic, and avoid repeating one.">
-    <p style="margin-top:1rem"><a class="btn btn-primary btn-sm" href={`${site.forms.submitResource}?type=project`}>Add your project</a></p>
+    <p style="margin-top:1rem;display:flex;gap:.75rem;align-items:center;flex-wrap:wrap"><a class="btn btn-primary" href={`${site.forms.submitResource}?type=project`}>Add your FYP</a><span class="muted" style="font-size:.88rem">Title, abstract, tools, supervisor and two or three figures. Takes five minutes and it stays here for the batches after you.</span></p>
+    <p class="batches" data-pagefind-ignore>{years.map((y) => <span class="batch-chip">{y} <span class="count">{projects.filter((p) => p.data.year === y).length}</span></span>)}</p>
   </PageHead>
   <div class="filters" data-pagefind-ignore>
     <select id="pdom" aria-label="Domain"><option value="">All domains</option>{domains.map((d) => <option>{d}</option>)}</select>
+    <select id="pyear" aria-label="Year"><option value="">All years</option>{years.map((y) => <option>{y}</option>)}</select>
+    <select id="psup" aria-label="Supervisor"><option value="">All supervisors</option>{supervisors.map((s) => <option>{s}</option>)}</select>
+    <select id="ptool" aria-label="Tool"><option value="">All tools</option>{tools.map((t) => <option>{t}</option>)}</select>
   </div>
+  <p class="empty-state" id="pempty" hidden>No project matches.</p>
   <div class="grid grid-2" id="plist">
     {projects.map((p) => (
-      <article class="card" data-dom={p.data.domain}>
-        {p.data.images[0] && <a href={p.data.images[0]} target="_blank" rel="noopener"><img class="proj-img" src={p.data.images[0]} alt={`Figure from ${p.data.title}`} loading="lazy" /></a>}
+      <article class="card" data-dom={p.data.domain} data-year={p.data.year} data-sup={p.data.supervisor} data-tools={p.data.tools.join('|')}>
+        {p.data.images.length > 0 && (
+          <div class:list={['proj-gallery', { multi: p.data.images.length > 1 }]}>
+            {p.data.images.slice(0, 3).map((src, i) => <a href={src} target="_blank" rel="noopener"><img class="proj-img" src={src} alt={`Figure ${i + 1} from ${p.data.title}`} loading="lazy" /></a>)}
+          </div>
+        )}
         <div class="meta"><span class="tag grey">{p.data.domain}</span><span>{p.data.year}</span></div>
         <h3>{p.data.title}</h3>
         <p>{p.data.abstract}</p>
@@ -29,7 +41,26 @@ const domains = [...new Set(projects.map((p) => p.data.domain))].sort();
     ))}
   </div>
   <script>
-    const sel = document.getElementById('pdom') as HTMLSelectElement;
-    sel.addEventListener('change', () => document.querySelectorAll<HTMLElement>('#plist .card').forEach((c) => (c.hidden = !!sel.value && c.dataset.dom !== sel.value)));
+    const $ = (id: string) => document.getElementById(id) as HTMLSelectElement;
+    const sels = ['pdom', 'pyear', 'psup', 'ptool'].map($);
+    const apply = () => {
+      const [dom, year, sup, tool] = sels.map((s) => s.value);
+      let n = 0;
+      document.querySelectorAll<HTMLElement>('#plist .card').forEach((c) => {
+        const ok = (!dom || c.dataset.dom === dom) && (!year || c.dataset.year === year) && (!sup || c.dataset.sup === sup) && (!tool || c.dataset.tools!.split('|').includes(tool));
+        c.hidden = !ok; if (ok) n++;
+      });
+      document.getElementById('pempty')!.hidden = n > 0;
+    };
+    sels.forEach((s) => s.addEventListener('change', apply));
   </script>
+  <style>
+    .batches { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.75rem 0 0; }
+    .batch-chip { font-size: 0.82rem; font-weight: 600; padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--navy); }
+    .batch-chip .count { display: inline-block; min-width: 1.4em; padding: 0 0.35em; margin-left: 0.3em; border-radius: 999px; background: var(--navy-soft); font-size: 0.74rem; text-align: center; }
+    .proj-gallery { display: grid; gap: 0.4rem; margin-bottom: 0.75rem; }
+    .proj-gallery.multi { grid-template-columns: 2fr 1fr; grid-auto-rows: 90px; }
+    .proj-gallery.multi a:first-child { grid-row: span 2; }
+    .proj-gallery.multi .proj-img { height: 100%; margin: 0; }
+  </style>
 </Base>

@@ -39,6 +39,12 @@ const sectors = ['Government', 'Private', 'NGO / UN', 'Academia', 'Freelance', '
   </div>
   <section class="section">
     <h2>Alumni open to mentoring</h2>
-    {mentors.length ? <div class="grid">{mentors.map((a) => <AlumniCard a={a} />)}</div> : <p class="empty-state">No mentors listed yet.</p>}
+    {mentors.length ? <div class="grid">{mentors.map((a) => (
+      <div class="mentor">
+        <AlumniCard a={a} />
+        <a class="btn btn-accent btn-sm" href={`?mentor=${encodeURIComponent(`${a.data.name} (${a.data.role}, ${a.data.organization})`)}#request`}>Request {a.data.name.split(' ')[0]}</a>
+      </div>
+    ))}</div> : <p class="empty-state">No mentors listed yet.</p>}
+    <style>.mentor { display: grid; gap: 0.5rem; } .mentor .btn { justify-self: start; }</style>
   </section>
 </Base>

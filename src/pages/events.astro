@@ -8,8 +8,10 @@ const groups = [
   ['Upcoming', events.filter((e) => e.data.date >= today).reverse(), 'Nothing scheduled yet. Follow the society\'s social pages for announcements.'],
   ['Past', events.filter((e) => e.data.date < today), 'No past events recorded.'],
 ] as const;
+const jsonLd = events.filter((e) => e.data.date >= today).map((e) => ({ '@context': 'https://schema.org', '@type': 'Event', name: e.data.title, startDate: e.data.date, location: { '@type': 'Place', name: e.data.venue }, description: e.data.description, organizer: { '@type': 'Organization', name: 'Arid Society of GIS', url: 'https://asgi.app' }, ...(e.data.url ? { url: e.data.url } : {}) }));
 ---
 <Base title="Events" description="Seminars, workshops, field trips and GIS Day celebrations organised by the society.">
+  {jsonLd.length > 0 && <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />}
   <PageHead eyebrow="Society" title="Events" lead="Workshops, guest lectures, field visits and the annual GIS Day in November." />
   {groups.map(([label, list, empty], i) => (
     <section style={i ? 'margin-top:3rem' : ''}>
@@ -24,6 +26,7 @@ const groups = [
                 <div>
                   <h3>{e.data.url ? <a href={e.data.url} style="color:inherit;text-decoration:none">{e.data.title}</a> : e.data.title}</h3>
                   <p>{e.data.venue} · {e.data.description}</p>
+                  {e.data.photos.length > 0 && <div class="ev-photos">{e.data.photos.slice(0, 4).map((src) => <a href={src} target="_blank" rel="noopener"><img src={src} alt={`Photo from ${e.data.title}`} loading="lazy" /></a>)}</div>}
                 </div>
               </div>
             );
@@ -32,4 +35,5 @@ const groups = [
       )}
     </section>
   ))}
+  <style>.ev-photos { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; } .ev-photos img { width: 120px; height: 80px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); }</style>
 </Base>

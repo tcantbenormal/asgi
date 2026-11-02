@@ -1,17 +1,24 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-interface Props { items: CollectionEntry<'resources'>[] }
-const { items } = Astro.props;
-const categories = [...new Set(items.map((i) => i.data.category))].sort();
+interface Props { items: CollectionEntry<'resources'>[]; pakistan?: boolean }
+const { items, pakistan = false } = Astro.props;
+const categories = [...new Set(items.map((i) => i.data.category))].sort().map((c) => [c, items.filter((i) => i.data.category === c).length] as const);
+// "Pakistan-specific" is a text heuristic over name and description; good enough until datasets carry a region field.
+const PK = /pakistan|punjab|sindh|balochistan|khyber|kpk|gilgit|kashmir|islamabad|lahore|karachi|rawalpindi|peshawar|quetta|indus/i;
+const sizeOf = (i: CollectionEntry<'resources'>) => i.data.size || i.data.downloads.find((d) => d.size)?.size || '';
 ---
 <div class="filters" data-pagefind-ignore>
   <label class="sr-only" for="rq">Search</label>
   <input id="rq" type="search" placeholder="Search by name or description" />
-  <select id="rcat" aria-label="Category"><option value="">All categories</option>{categories.map((c) => <option>{c}</option>)}</select>
+  {pakistan && <label class="check" style="margin:0;font-size:.9rem"><input type="checkbox" id="rpk" /> Pakistan-specific</label>}
+</div>
+<div class="cat-chips" data-pagefind-ignore role="group" aria-label="Category">
+  <button type="button" class="cat-chip" data-cat="" aria-pressed="true">All <span class="count">{items.length}</span></button>
+  {categories.map(([c, n]) => <button type="button" class="cat-chip" data-cat={c} aria-pressed="false">{c} <span class="count">{n}</span></button>)}
 </div>
 <div class="grid" id="rlist">
   {items.map((i) => (
-    <article class="card" data-cat={i.data.category} data-text={`${i.data.name} ${i.data.description} ${i.data.category}`.toLowerCase()}>
+    <article class="card" data-cat={i.data.category} data-pk={PK.test(`${i.data.name} ${i.data.description}`) ? '1' : '0'} data-text={`${i.data.name} ${i.data.description} ${i.data.category}`.toLowerCase()}>
       <div class="res-head">
         {i.data.image && i.data.kind === 'software' && <img class="res-logo" src={i.data.image} alt="" width="40" height="40" loading="lazy" />}
         <div><span class="tag grey">{i.data.category}</span><h3><a href={`/resources/${i.id}`}>{i.data.name}</a></h3></div>
@@ -19,12 +26,12 @@ const categories = [...new Set(items.map((i) => i.data.category))].sort();
       <p>{i.data.description}</p>
       <div class="meta">
         {i.data.version && <span>v{i.data.version}</span>}
-        {i.data.size && <span>{i.data.size}</span>}
+        {sizeOf(i) && <span>{sizeOf(i)}</span>}
         {i.data.os.length > 0 && <span>{i.data.os.join(' · ')}</span>}
         {i.data.credit && <span>by {i.data.credit}</span>}
       </div>
       <div class="foot">
-        <small class="muted">{i.data.license}</small>
+        <small class="muted" title="Licence">{i.data.license}</small>
         {i.data.downloads.length > 0
           ? <a class="btn btn-primary btn-sm" href={`/download/${i.id}`}>Download</a>
           : <a class="btn btn-ghost btn-sm" href={i.data.homepage} rel="noopener">Official site</a>}
@@ -35,18 +42,29 @@ const categories = [...new Set(items.map((i) => i.data.category))].sort();
 <p class="empty-state" id="rempty" hidden>Nothing matches.</p>
 <script>
   const q = document.getElementById('rq') as HTMLInputElement;
-  const cat = document.getElementById('rcat') as HTMLSelectElement;
+  const pk = document.getElementById('rpk') as HTMLInputElement | null;
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('.cat-chip')];
   const cards = [...document.querySelectorAll<HTMLElement>('#rlist .card')];
+  let cat = '';
   const apply = () => {
     const t = q.value.trim().toLowerCase();
     let n = 0;
     for (const c of cards) {
-      const ok = (!t || c.dataset.text!.includes(t)) && (!cat.value || c.dataset.cat === cat.value);
+      const ok = (!t || c.dataset.text!.includes(t)) && (!cat || c.dataset.cat === cat) && (!pk?.checked || c.dataset.pk === '1');
       c.hidden = !ok;
       if (ok) n++;
     }
     document.getElementById('rempty')!.hidden = n > 0;
   };
   q.addEventListener('input', apply);
-  cat.addEventListener('change', apply);
+  pk?.addEventListener('change', apply);
+  chips.forEach((b) => b.addEventListener('click', () => { cat = b.dataset.cat!; chips.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); apply(); }));
 </script>
+<style>
+  .cat-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: -0.5rem 0 1.25rem; }
+  .cat-chip { font: inherit; font-size: 0.82rem; font-weight: 600; padding: 0.3rem 0.7rem; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--navy); cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+  .cat-chip:hover { border-color: var(--navy); }
+  .cat-chip[aria-pressed="true"] { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .cat-chip .count { display: inline-block; min-width: 1.4em; padding: 0 0.35em; margin-left: 0.2em; border-radius: 999px; background: var(--navy-soft); color: var(--navy); font-size: 0.74rem; text-align: center; }
+  .cat-chip[aria-pressed="true"] .count { background: rgba(255,255,255,0.25); color: #fff; }
+</style>

@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { site } from '../config/site';
+---
+<Base title="About this site" description="How the ASGI portal is built, hosted and maintained, and how to help.">
+  <PageHead eyebrow="Society" title="About this site" lead="Built and maintained by students, free to run, open to contributions." />
+  <div class="prose">
+    <h2>How it is run</h2>
+
+      <p>The portal is built and maintained by students. Content is added through forms and reviewed by the cabinet before it goes live. The domain, hosting, and accounts belong to the society, not to any individual, and are handed over at each election. The site costs nothing to host. Advertising and sponsorships cover the domain and fund society activities.</p>
+      <p>Want to help maintain it? Write to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    
+    <h2>What it runs on</h2>
+    <ul>
+      <li>A static site generated with Astro and served from Cloudflare, rebuilt automatically every Monday and whenever content changes.</li>
+      <li>Member accounts, profiles, the forum and form submissions live in Supabase. Members edit their own rows; the cabinet approves profiles before they appear.</li>
+      <li>Maps use Leaflet with CARTO and OpenStreetMap tiles. Daily satellite imagery on the home page comes from NASA GIBS.</li>
+      <li>Everything is free-tier. The only running cost is the domain.</li>
+    </ul>
+    <h2>Contributing</h2>
+    <p>Content goes in through the <a href="/submit">suggestion form</a>, stories through <a href="/submit?type=story">Write for us</a>, and corrections through <a href="/contact">Contact</a>. The source is public on <a href="https://github.com/tcantbenormal/asgi" rel="noopener">GitHub</a>; pull requests are welcome.</p>
+    <h2>Credits</h2>
+    <p>Conceived, designed and built by <a href="https://www.linkedin.com/in/m-taimoor-ashfaq-b79835257/" rel="noopener">Muhammad Taimoor Ashfaq Malik</a>, with contributions from <a href="https://www.linkedin.com/in/fahadkarim2103/" rel="noopener">Fahad Karim</a>. Write to <a href={`mailto:${site.email}`}>{site.email}</a> to help maintain it.</p>
+  </div>
+</Base>

@@ -102,3 +102,21 @@ The GitHub organisation, Cloudflare account, Google account that owns the forms 
 ## Suggestions from visitors
 
 `/submit` (linked as "Suggest a tool", "Submit it", "Post an opportunity", "Add your project", "Suggest an employer") writes to the `submissions` table, and so do the mentorship request form on `/mentorship` and the membership application on `/society` (kinds `mentorship` and `membership`, migration 010; `src/components/RequestForm.astro`). Nobody can read it through the API; review rows in the Supabase dashboard under Table editor, then add the item to the right JSON or content file by hand and set `status` to `accepted` or `rejected` for your own bookkeeping.
+
+## Site organisation (November 2026)
+
+- **Navigation**: four groups (Community, Learn, Careers, Society) as native `<details>` dropdowns in `src/components/Header.astro`, a search box that lands on `/search?q=`, and breadcrumbs (`Crumbs.astro`) on every detail page.
+- **Home**: clickable stats strip, audience CTAs, a "This week" block (latest forum post fetched client-side, newest story, next event), satellite imagery below the roadmaps.
+- **What's new** (`/whats-new`): everything with a date across the collections, newest first; verification months collapse into one row.
+- **Alumni**: filters for batch, sector, country, city, employer and skill, all prefillable from the URL (`/alumni?skill=qgis`, `?org=...`); batch chips; claim banner. `/map?u=<username>` opens that pin.
+- **Profiles**: employer name links to its Industry page, skills link to the filtered directory, "Open to" row (`profiles.open_to`, migration 011), completeness meter and last-updated date.
+- **Forum**: six kinds (question, software, data_request, academic, job, discussion), cabinet-only `pinned`, last activity, `?kind=` and `?new=1&kind=...&title=...` presets used by the Ask links on mentorship, software and datasets.
+- **Opportunities**: tabs per category (hash-driven), sort by deadline or title, "closing within 60 days" using the `closes` ISO field, "Shared by alumni" badge from `via`, digest mailto.
+- **Industry**: pay explainer with correction link, missing-employer card, alumni count badge on logo tiles, "Where alumni work" grouped by sector, Organization JSON-LD on employer pages.
+- **Roadmaps / Stories**: hours total per roadmap, software and alumni matched to the track's tools; bylines with avatar and reading time (`Byline.astro`), Write for us (submission kind `story`).
+- **Software / Datasets**: category chips with counts, Pakistan-specific filter (text heuristic), size and licence on cards.
+- **Projects**: year, supervisor and tool filters, per-year counts, three-image gallery on cards.
+- **Society**: how-the-site-runs moved to `/about-this-site`; mentorship has a Request button per mentor that prefills the form; events accept `photos` and emit Event JSON-LD.
+- **Account**: Export my data (JSON of profile, posts, replies, submissions). Editor save bar shows a View public page link.
+- **Open Graph**: one card per section in `public/og/` (generated with PIL, 1200x630), chosen by the first path segment in `Base.astro`; pass `image` to override.
+- Migration **011** adds `profiles.open_to`, the extra forum kinds, `posts.pinned`, and the `story` submission kind. Run it in the Supabase SQL editor.

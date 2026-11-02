@@ -13,8 +13,13 @@ interface Props {
   rail?: boolean;
   /** Exclude from Pagefind search index. */
   noindex?: boolean;
+  /** Open Graph image. Defaults to a per-section card from /og/ chosen by the first path segment. */
+  image?: string;
 }
-const { title, description = site.tagline, rail = true, noindex = false } = Astro.props;
+const { title, description = site.tagline, rail = true, noindex = false, image } = Astro.props;
+const OG_SECTIONS = ['alumni', 'map', 'forum', 'stories', 'roadmaps', 'software', 'datasets', 'opportunities', 'industry', 'projects', 'society', 'events', 'mentorship'];
+const seg = Astro.url.pathname.replace(/\.html$/, '').split('/')[1] || '';
+const ogImage = new URL(image ?? `/og/${OG_SECTIONS.includes(seg) ? seg : 'default'}.png`, Astro.site);
 const fullTitle = title === site.name ? title : `${title} · ${site.short}`;
 const canonical = new URL(Astro.url.pathname.replace(/(\/index)?\.html$/, '') || '/', Astro.site);
 ---
@@ -35,6 +40,11 @@ const canonical = new URL(Astro.url.pathname.replace(/(\/index)?\.html$/, '') ||
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={site.name} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
     {ads.verification && <Fragment set:html={ads.verification} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

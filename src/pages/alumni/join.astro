@@ -180,6 +180,7 @@ const sections = [
       <div class="ed-savebar" id="savebar">
         <span class="ed-saved" id="saved"><span class="dot"></span><span id="saved-text">No changes</span></span>
         <span class="muted" style="font-size:.8rem">By saving you agree to your profile being published. <a href="/privacy">Privacy policy</a>.</span>
+        <a class="btn btn-ghost btn-sm" id="savebar-view" target="_blank" rel="noopener" hidden>View public page</a>
         <button class="btn btn-accent" type="submit" id="save">Save profile</button>
       </div>
     </form>
@@ -515,6 +516,7 @@ const sections = [
       (p.projects ?? []).forEach((v) => addRow('proj', v));
       const path = p.username || p.slug;
       const prev = $('preview'); prev.href = `/${path}`; prev.hidden = !p.approved;
+      $('savebar-view').href = `/${path}`; $('savebar-view').hidden = !p.approved;
       document.querySelectorAll('.ed-step').forEach((s) => { s.dataset.state = s.dataset.step === 'saved' ? 'done' : s.dataset.step === 'review' ? (p.approved ? 'done' : 'now') : p.approved ? 'done' : ''; });
       $('ov-status').textContent = p.approved ? `Your page is live at ${location.origin}/${path}. Saved edits appear there within about five minutes.` : `Saved and waiting for cabinet approval. Your page will be ${location.origin}/${path}.`;
       isDirty = false; paint(); refreshOverview();
@@ -645,7 +647,7 @@ const sections = [
     .ed-pager { display: flex; justify-content: space-between; }
     .ed-savebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: flex; align-items: center; gap: 1rem; padding: 0.7rem max(1rem, calc((100vw - 1180px) / 2 + 1rem)); background: rgba(255,255,255,0.94); backdrop-filter: blur(8px); border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(18,50,94,0.06); transition: background 0.4s; }
     .ed-savebar[data-flash] { background: #e6f6ec; }
-    .ed-savebar .btn { margin-left: auto; }
+    .ed-savebar .btn { margin-left: auto; } .ed-savebar .btn + .btn { margin-left: 0; }
     .ed-saved { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.88rem; font-weight: 600; color: var(--ink-2); }
     .ed-saved .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink-3); transition: background 0.3s; }
     .ed-saved[data-state="dirty"] .dot { background: #e0a000; animation: pulse 1.6s infinite; }

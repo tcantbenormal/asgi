@@ -214,6 +214,7 @@ const events = defineCollection({
     venue: z.string(),
     description: z.string(),
     url: link.optional(),
+    photos: z.array(z.string()).default([]), // past events: /img/events/... or images-bucket URLs
   }),
 });
 

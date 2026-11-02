@@ -46,7 +46,7 @@ small, .muted { color: var(--ink-2); }
 .section-head h2 { margin: 0; }
 
 /* Header */
-.site-header { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 50; }
+.site-header { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 1100; }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: 68px; position: relative; }
 .brand { display: flex; flex: none; align-items: center; gap: 0.6rem; margin-left: -6px; text-decoration: none; color: var(--navy); font-family: var(--head); font-weight: 600; line-height: 1.15; }
 .brand img { width: 46px; height: 46px; border-radius: 8px; object-fit: cover; }
@@ -125,7 +125,7 @@ small, .muted { color: var(--ink-2); }
 model-viewer { width: 100%; height: 440px; background: transparent; --poster-color: transparent; --progress-bar-height: 0; --progress-bar-color: transparent; }
 @media (max-width: 900px) { .hero .wrap { grid-template-columns: 1fr; } model-viewer { height: 320px; } }
 
-.map-box { height: 380px; border-radius: var(--radius); border: 1px solid var(--line); overflow: hidden; box-shadow: var(--shadow); background: #e9ece9; }
+.map-box { height: 380px; border-radius: var(--radius); border: 1px solid var(--line); overflow: hidden; box-shadow: var(--shadow); background: #e9ece9; position: relative; isolation: isolate; z-index: 0; } /* keeps Leaflet's z-indexes inside the box so the sticky header stays on top */
 .map-box.tall { height: 620px; }
 @media (max-width: 900px) { .map-box { height: 280px; } .map-box.tall { height: 460px; } }
 

@@ -717,7 +717,7 @@
     "id": "invest-workbench",
     "name": "InVEST Workbench",
     "kind": "software",
-    "category": "Statistics and scripting",
+    "category": "Modelling",
     "image": "/img/software/invest.png",
     "description": "Stanford's free ecosystem-services modelling suite: carbon storage, sediment and nutrient retention, water yield, habitat quality, pollination and coastal vulnerability, run from one desktop app on your own rasters and shapefiles.",
     "version": "3.20.2",

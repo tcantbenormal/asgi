@@ -24,9 +24,14 @@
       }
     ],
     "about": [
-      "Site suitability, groundwater potential, landslide susceptibility, facility location: most final year projects at the institute end in a weighted overlay, and the weights usually come from the Analytic Hierarchy Process. Doing AHP by hand means a spreadsheet for the pairwise matrix, another for the eigenvector and consistency ratio, then copying weights into the Weighted Sum tool and repeating the whole thing for every change. This add-in puts the entire workflow inside ArcGIS Pro as a single dockpane under an MCDA Tools tab.",
-      "You pick the criteria rasters from the map, fill the upper triangle of the pairwise matrix (reciprocals are computed for you) or import it from CSV, and choose classical AHP or fuzzy AHP. AHP uses the eigenvector (power) method with convergence detection; FAHP models judgement uncertainty with triangular fuzzy numbers using either Chang's extent analysis or Buckley's geometric mean with centroid defuzzification. The consistency ratio is computed with Saaty's random index and flagged above 0.10. A reclassification manager handles unclassified rasters with equal, geometric, defined or manual intervals onto a 1 to 5 or 1 to 10 scale. One click then runs the bundled Python toolbox, which calls Spatial Analyst's Weighted Sum and adds the suitability raster to the map. A Monte Carlo sensitivity analysis perturbs the weight of a chosen criterion across N simulations to show how stable the ranking is.",
-      "It is written in C# with WPF on the ArcGIS Pro SDK, with the spatial step in an ArcPy Python toolbox, and released under the MIT licence with a citation file, so it can be cited in a thesis and extended for your own study. The methodology document in the repository gives the full mathematics of AHP, both FAHP variants and the sensitivity analysis."
+      "Runs the whole Analytic Hierarchy Process inside ArcGIS Pro as one dockpane under an MCDA Tools tab, instead of spreadsheets plus Weighted Sum.",
+      "Pick criteria rasters from the map, fill the upper triangle of the pairwise matrix (reciprocals are computed) or import it from CSV.",
+      "Classical AHP uses the eigenvector (power) method; fuzzy AHP uses triangular fuzzy numbers with Chang's extent analysis or Buckley's geometric mean.",
+      "Consistency ratio from Saaty's random index, flagged above 0.10.",
+      "Reclassification manager puts unclassified rasters on a 1 to 5 or 1 to 10 scale with equal, geometric, defined or manual intervals.",
+      "One click runs the bundled Python toolbox (Spatial Analyst Weighted Sum) and adds the suitability raster to the map.",
+      "Monte Carlo sensitivity analysis perturbs one criterion's weight across N runs to show how stable the ranking is.",
+      "C# and WPF on the ArcGIS Pro SDK, MIT licence, citation file and a methodology document with the full mathematics, so it can be cited in a thesis."
     ],
     "requirements": [
       "ArcGIS Pro 3.5 or later on Windows, with the Spatial Analyst extension licensed",
@@ -64,9 +69,11 @@
     "homepage": "https://qgis.org/download/",
     "tutorial": "https://docs.qgis.org/latest/en/docs/training_manual/",
     "about": [
-      "QGIS is a complete desktop GIS: it reads nearly every vector and raster format through GDAL, edits data with snapping and topology tools, runs analysis through its Processing toolbox, and produces print-quality maps from its layout composer. It is the software most Pakistani employers now run alongside or instead of ArcGIS, and it is the one you can keep using after graduation without a licence.",
-      "It works as a host for other open-source engines. GRASS, SAGA and GDAL algorithms appear inside the Processing toolbox, so one install gives you several hundred tools. Python is built in through the console and plugin system, and the plugin repository adds things like Semi-Automatic Classification for imagery, QuickMapServices for basemaps and DataPlotly for charts.",
-      "Two versions are published at any time. The long-term release (LTR) changes only for bug fixes for a year and is what the course, the tutorials and most organisations use. The latest release has newer features and more surprises. Install the LTR unless a tutorial tells you otherwise."
+      "Complete desktop GIS: reads nearly every vector and raster format through GDAL, edits with snapping and topology, and prints map layouts.",
+      "Processing toolbox hosts GRASS, SAGA and GDAL algorithms, so one install gives several hundred tools.",
+      "Python built in through the console and plugin system; plugins add Semi-Automatic Classification, QuickMapServices basemaps and DataPlotly charts.",
+      "The software most Pakistani employers now run alongside or instead of ArcGIS, and the one you can keep using after graduation without a licence.",
+      "Two versions at any time: install the long-term release (LTR) unless a tutorial says otherwise; the latest release has newer features and more surprises."
     ],
     "requirements": [
       "Windows 10 or 11, 64-bit; macOS 12 or later; or any current Linux distribution",
@@ -78,7 +85,13 @@
     "kind": "software",
     "host": "Official site",
     "downloads": [],
-    "updated": "2026-10"
+    "updated": "2026-10",
+    "figures": [
+      {
+        "src": "/img/software/qgis-screen.jpg",
+        "caption": "QGIS 3: a styled map with the layer panel, browser and Processing toolbox. Screenshot from the QGIS project repository (GPL)."
+      }
+    ]
   },
   {
     "id": "arcgis-pro",
@@ -105,9 +118,11 @@
       }
     ],
     "about": [
-      "ArcGIS Pro is the 64-bit successor to ArcMap and the desktop half of Esri's platform. It combines 2D and 3D mapping in one project, uses a ribbon interface, and runs geoprocessing tools from the same toolbox you can call from Python through the arcpy library. Projects hold maps, layouts, toolboxes and connections together in a single .aprx file.",
-      "Its strengths are the depth of the geoprocessing library, the cartographic and layout tools, the tight connection to ArcGIS Online for sharing web maps, and the extensions for network, spatial statistics, image analysis and 3D. Most government departments, NESPAK and the large consultancies in Pakistan run it, and the Esri certificate is the one job adverts name.",
-      "Choose 3.7 unless a course or a plugin you depend on requires 3.6. Both need a licence before they will open. The installer is the same one Esri distributes; nothing here unlocks it."
+      "64-bit successor to ArcMap and the desktop half of Esri's platform, with 2D and 3D mapping in one project and a ribbon interface.",
+      "Geoprocessing tools run from the toolbox or from Python through arcpy; a single .aprx file holds maps, layouts, toolboxes and connections.",
+      "Strong points: depth of the geoprocessing library, cartography and layouts, sharing to ArcGIS Online, and extensions for network, spatial statistics, imagery and 3D.",
+      "Run by most government departments, NESPAK and the large consultancies in Pakistan; the Esri certificate is the one job adverts name.",
+      "Choose 3.7 unless a course or plugin needs 3.6. Both need a licence before they open; the installer is Esri's own and nothing here unlocks it."
     ],
     "requirements": [
       "Windows 11 or Windows 10 (version 22H2 or later), 64-bit; Windows Server 2019 or later also supported",
@@ -135,8 +150,11 @@
     "license": "Commercial, licensed through the institute",
     "homepage": "https://desktop.arcgis.com/en/arcmap/latest/get-started/setup/arcgis-desktop-system-requirements.htm",
     "about": [
-      "ArcGIS Desktop is the previous generation of Esri's desktop software: ArcMap for 2D mapping and editing, ArcCatalog for data management, ArcScene and ArcGlobe for 3D. It is 32-bit, single-threaded for most tools, and uses .mxd documents rather than projects.",
-      "Esri ended support for ArcMap on 1 March 2026. It no longer receives fixes and will not open newer ArcGIS Pro formats, but a great deal of training material, older tutorials and departmental workflows in Pakistan were written for it, which is why some labs still have it installed. Learn it only if a course requires it; learn ArcGIS Pro for everything else."
+      "Previous generation of Esri's desktop software: ArcMap for 2D mapping and editing, ArcCatalog for data management, ArcScene and ArcGlobe for 3D.",
+      "32-bit and single-threaded for most tools; uses .mxd documents rather than projects.",
+      "Esri ended support on 1 March 2026: no more fixes, and it will not open newer ArcGIS Pro formats.",
+      "Still installed in some labs because older tutorials and departmental workflows in Pakistan were written for it.",
+      "Learn it only if a course requires it; learn ArcGIS Pro for everything else."
     ],
     "requirements": [
       "Windows 10 or 11, 64-bit (the application itself is 32-bit)",
@@ -178,9 +196,12 @@
       }
     ],
     "about": [
-      "ENVI (Environment for Visualizing Images) is built around the spectral side of remote sensing. It reads imagery from almost every satellite and airborne sensor, handles radiometric and atmospheric correction (FLAASH and QUAC), and offers a full workflow for supervised and unsupervised classification, change detection, spectral unmixing, target detection and hyperspectral analysis. Its feature extraction module does object-based segmentation and classification.",
-      "It runs on IDL, a scientific programming language, so every tool can be scripted, and newer versions also expose the ENVI API to Python. ENVI Modeler lets you chain tools into a reusable graph without code. Compared with SNAP or QGIS it is faster and better documented for spectral work, and it is the package most Pakistani remote sensing theses in the last two decades were produced with.",
-      "Version 6.5 is a 64-bit release with the modern workflow-based interface. The Deep Learning module is a separate licensed add-on and is not included."
+      "Built around the spectral side of remote sensing: reads imagery from almost every satellite and airborne sensor.",
+      "Radiometric and atmospheric correction (FLAASH and QUAC), supervised and unsupervised classification, change detection, spectral unmixing, target detection and hyperspectral analysis.",
+      "Feature extraction module does object-based segmentation and classification.",
+      "Runs on IDL so every tool can be scripted; newer versions also expose the ENVI API to Python, and ENVI Modeler chains tools into a graph without code.",
+      "Faster and better documented than SNAP or QGIS for spectral work; most Pakistani remote sensing theses of the last two decades were produced with it.",
+      "Version 6.5 is 64-bit with the workflow-based interface. The Deep Learning module is a separate licensed add-on, not included."
     ],
     "requirements": [
       "Windows 10 or 11, 64-bit; also available for Linux",
@@ -214,9 +235,12 @@
       }
     ],
     "about": [
-      "ERDAS IMAGINE is a raster-first remote sensing system that has been in production use since the 1980s. It covers image enhancement, mosaicking, orthorectification, pan-sharpening, classification (including the machine-learning operators added in recent versions), radar processing and terrain analysis. Spatial Modeler is its visual programming environment: tools are dragged into a graph, chained and run as batch processes on thousands of images.",
-      "Its photogrammetry side, IMAGINE Photogrammetry (formerly LPS), handles aerial triangulation, DEM extraction and orthophoto production for aerial and satellite stereo imagery, and is one reason survey organisations and mapping agencies use it. The 2025 release updates the interface, the sensor model library and the deep learning operators.",
-      "In Pakistan it is common in organisations that produce orthophotos and large mosaics, and in older remote sensing courses. ENVI is stronger for spectral analysis; IMAGINE is stronger for production and photogrammetry."
+      "Raster-first remote sensing system in production use since the 1980s.",
+      "Image enhancement, mosaicking, orthorectification, pan-sharpening, classification (now with machine-learning operators), radar processing and terrain analysis.",
+      "Spatial Modeler is a visual programming environment: drag tools into a graph, chain them, and batch-run across thousands of images.",
+      "IMAGINE Photogrammetry (formerly LPS) handles aerial triangulation, DEM extraction and orthophotos, which is why survey organisations and mapping agencies use it.",
+      "The 2025 release updates the interface, the sensor model library and the deep learning operators.",
+      "In Pakistan it is common where orthophotos and large mosaics are produced; ENVI is stronger for spectral analysis, IMAGINE for production and photogrammetry."
     ],
     "requirements": [
       "Windows 10 or 11, 64-bit; Windows Server 2019 or later also supported",
@@ -249,9 +273,12 @@
       }
     ],
     "about": [
-      "ArcGIS Reality Studio is a standalone photogrammetry application in Esri's ArcGIS Reality family. It takes large collections of overlapping images from drones, aircraft or satellites, runs aerial triangulation against ground control, and produces true orthophotos, digital surface models, dense point clouds and textured 3D meshes that load directly into ArcGIS Pro and ArcGIS Online.",
-      "It is designed for city- and district-scale projects, so it is built to process tens of thousands of images on a workstation with a strong GPU and to produce outputs in Esri's scene layer formats. For small drone surveys, WebODM (free) or ArcGIS Drone2Map do the same job with far lower hardware demands; use Reality Studio when the project is large or when the deliverable must be an Esri mesh or scene layer.",
-      "Typical student uses are the campus 3D model, a true-ortho of a survey area, and comparing its surface model against GNSS check points."
+      "Standalone photogrammetry application in Esri's ArcGIS Reality family.",
+      "Takes large sets of overlapping drone, aircraft or satellite images, runs aerial triangulation against ground control, and outputs true orthophotos, surface models, dense point clouds and textured meshes.",
+      "Outputs load directly into ArcGIS Pro and ArcGIS Online in Esri's scene layer formats.",
+      "Built for city- and district-scale projects: tens of thousands of images on a workstation with a strong GPU.",
+      "For small drone surveys, WebODM (free) or ArcGIS Drone2Map do the same job with far lower hardware demands.",
+      "Typical student uses: the campus 3D model, a true-ortho of a survey area, and checking its surface model against GNSS points."
     ],
     "requirements": [
       "Windows 11 or Windows 10 (version 22H2 or later), 64-bit",
@@ -282,9 +309,12 @@
     "homepage": "https://grass.osgeo.org/download/",
     "tutorial": "https://grass.osgeo.org/learn/",
     "about": [
-      "GRASS (Geographic Resources Analysis Support System) is the oldest open-source GIS still in active development and the one with the deepest raster and terrain toolset: hydrology (watersheds, flow accumulation, stream extraction), solar radiation, cost surfaces, landscape metrics, image classification and time-series modules. Everything is a command with documented parameters, which makes it natural to script in shell or Python.",
-      "It keeps data in its own location and mapset structure rather than opening files directly, which confuses first-time users but is what makes its analysis fast and its results reproducible. Most students meet it through QGIS, where the GRASS provider in the Processing toolbox exposes the same tools on ordinary files without the mapset setup.",
-      "Install it standalone when you need the full module set, large rasters, or the r.watershed and r.sim family of tools for hydrology and erosion modelling, which are the parts that have no equal in other free packages."
+      "Oldest open-source GIS still in active development, with the deepest raster and terrain toolset.",
+      "Hydrology (watersheds, flow accumulation, stream extraction), solar radiation, cost surfaces, landscape metrics, image classification and time-series modules.",
+      "Every tool is a command with documented parameters, so it scripts naturally in shell or Python.",
+      "Keeps data in its own location and mapset structure rather than opening files directly; confusing at first, but it makes analysis fast and reproducible.",
+      "Most students meet it through QGIS, where the GRASS provider exposes the same tools on ordinary files.",
+      "Install it standalone for the full module set, large rasters, or the r.watershed and r.sim tools for hydrology and erosion modelling, which have no equal in other free packages."
     ],
     "requirements": [
       "Windows 10 or 11, macOS 11 or later, or Linux",
@@ -295,7 +325,13 @@
     "kind": "software",
     "host": "Official site",
     "downloads": [],
-    "updated": "2026-10"
+    "updated": "2026-10",
+    "figures": [
+      {
+        "src": "/img/software/grass-gis-screen.jpg",
+        "caption": "GRASS GIS 8.4 single-window interface with several map displays and the command history. Screenshot from the GRASS GIS website (CC BY-SA)."
+      }
+    ]
   },
   {
     "id": "saga-gis",
@@ -313,9 +349,11 @@
     "homepage": "https://saga-gis.sourceforge.io/",
     "tutorial": "https://sagatutorials.wordpress.com/",
     "about": [
-      "SAGA (System for Automated Geoscientific Analyses) is a lightweight GIS written for geoscientists. Its tool library is organised by theme: terrain analysis (morphometry, channels, hydrology, lighting), grid processing, geostatistics, image classification and climate tools. It is known for speed on large grids and for terrain indices (TWI, LS factor, curvature families, SAGA wetness index) that other packages lack or compute slowly.",
-      "The interface is plain, and SAGA uses its own grid format, but every tool is also available through the SAGA provider in QGIS Processing, where most students use it. Standalone SAGA is worth installing for terrain-heavy projects and for its tool chains, which can batch a whole terrain analysis from one dialog.",
-      "It has no licence cost, runs well on modest laptops, and is portable: unzip and run."
+      "Lightweight GIS written for geoscientists, organised by theme: terrain analysis, grid processing, geostatistics, image classification and climate tools.",
+      "Known for speed on large grids and for terrain indices (TWI, LS factor, curvature families, SAGA wetness index) that other packages lack or compute slowly.",
+      "Plain interface and its own grid format; every tool is also available through the SAGA provider in QGIS Processing, where most students use it.",
+      "Standalone SAGA is worth installing for terrain-heavy projects and for tool chains that batch a whole terrain analysis from one dialog.",
+      "No licence cost, runs well on modest laptops, and is portable: unzip and run."
     ],
     "requirements": [
       "Windows 10 or 11, 64-bit, or Linux",
@@ -326,7 +364,13 @@
     "kind": "software",
     "host": "Official site",
     "downloads": [],
-    "updated": "2026-10"
+    "updated": "2026-10",
+    "figures": [
+      {
+        "src": "/img/software/saga-gis-screen.jpg",
+        "caption": "SAGA's interface: tool library and data manager on the left, map view on the right. Screenshot from the SAGA project on SourceForge."
+      }
+    ]
   },
   {
     "id": "snap",
@@ -345,9 +389,12 @@
     "homepage": "https://step.esa.int/main/download/snap-download/",
     "tutorial": "https://step.esa.int/main/doc/tutorials/",
     "about": [
-      "SNAP is ESA's free toolbox for the Sentinel missions and most other Earth observation sensors. It is the standard desktop tool for Sentinel-1 radar: calibration, speckle filtering, terrain correction, interferometry (InSAR) and polarimetry are all built in, and the processing graphs that do them can be saved and run in batch from the Graph Processing Tool.",
-      "For Sentinel-2 and Sentinel-3 it provides resampling, subsetting, band maths, indices, atmospheric correction through the Sen2Cor plugin, and a classification toolbox. Everything works on the .SAFE products you download from the Copernicus Data Space, with no conversion step.",
-      "SNAP is written in Java and feels slower than ENVI for display, but it is the only free package that covers the radar workflow end to end, which matters for flood mapping in the monsoon when optical imagery is cloud. The snappy and esa_snappy modules let you drive it from Python."
+      "ESA's free toolbox for the Sentinel missions and most other Earth observation sensors.",
+      "The standard desktop tool for Sentinel-1 radar: calibration, speckle filtering, terrain correction, interferometry (InSAR) and polarimetry.",
+      "Processing graphs can be saved and run in batch from the Graph Processing Tool.",
+      "For Sentinel-2 and Sentinel-3: resampling, subsetting, band maths, indices, Sen2Cor atmospheric correction and a classification toolbox, all on the .SAFE products you download.",
+      "Written in Java and slower than ENVI for display, but the only free package that covers the radar workflow end to end, which matters for monsoon flood mapping when optical imagery is cloud.",
+      "The snappy and esa_snappy modules drive it from Python."
     ],
     "requirements": [
       "Windows 10 or 11, macOS or Linux, 64-bit",
@@ -359,7 +406,13 @@
     "kind": "software",
     "host": "Official site",
     "downloads": [],
-    "updated": "2026-10"
+    "updated": "2026-10",
+    "figures": [
+      {
+        "src": "/img/software/snap-screen.jpg",
+        "caption": "SNAP Desktop with a product open in the image view and the Product Explorer. Screenshot from the SNAP help pages (ESA, GPL)."
+      }
+    ]
   },
   {
     "id": "postgis",
@@ -378,9 +431,11 @@
     "homepage": "https://postgis.net/documentation/getting_started/",
     "tutorial": "https://postgis.net/workshops/postgis-intro/",
     "about": [
-      "PostgreSQL is a general-purpose relational database, and PostGIS is the extension that teaches it geometry: spatial types, indexes, several hundred ST_ functions for measurement, overlay, buffering, routing with pgRouting, and raster storage. Together they are the back end of almost every serious web GIS and of most organisational data stores, and spatial SQL is the single most valuable skill in the GIS Analyst and GIS Developer roadmaps.",
-      "The workflow is: install PostgreSQL, run Stack Builder to add PostGIS, create a database, run CREATE EXTENSION postgis, and connect from QGIS, pgAdmin or Python. Data loads with the shp2pgsql tool, the QGIS DB Manager, or ogr2ogr. Queries that take minutes on shapefiles run in seconds once a spatial index exists.",
-      "Learn it with the PostGIS workshop linked above. The whole workshop runs on a laptop with the default install."
+      "PostgreSQL is a general-purpose relational database; PostGIS is the extension that adds geometry: spatial types, indexes, several hundred ST_ functions, routing with pgRouting, and raster storage.",
+      "The back end of almost every serious web GIS and most organisational data stores; spatial SQL is the single most valuable skill in the GIS Analyst and GIS Developer roadmaps.",
+      "Workflow: install PostgreSQL, add PostGIS through Stack Builder, create a database, run CREATE EXTENSION postgis, connect from QGIS, pgAdmin or Python.",
+      "Load data with shp2pgsql, the QGIS DB Manager or ogr2ogr; queries that take minutes on shapefiles run in seconds once a spatial index exists.",
+      "Learn it with the PostGIS workshop linked above; the whole workshop runs on a laptop with the default install."
     ],
     "requirements": [
       "Windows 10 or 11, macOS or Linux",
@@ -411,9 +466,11 @@
     "homepage": "https://qfield.org/",
     "tutorial": "https://docs.qfield.org/",
     "about": [
-      "QField is the mobile companion to QGIS. You prepare a project on the desktop with the layers, forms, symbology and basemaps you want, copy it to the phone (or sync through QFieldCloud), and in the field you capture points, lines and polygons with the phone's GNSS or an external receiver, fill the same attribute forms, attach photos, and bring the edits back to QGIS.",
-      "It works fully offline, which matters in rural survey areas, and it supports external RTK receivers over Bluetooth for centimetre work. Field data collection with QField, a GeoPackage and an attribute form is the standard survey workflow in the Surveying and Precision Agriculture roadmaps.",
-      "Install it from the Play Store or App Store; the QField Sync plugin in QGIS packages the project."
+      "Mobile companion to QGIS: prepare the project on the desktop with layers, forms, symbology and basemaps, then copy it to the phone or sync through QFieldCloud.",
+      "In the field, capture points, lines and polygons with the phone's GNSS or an external receiver, fill the same attribute forms, attach photos, and bring the edits back to QGIS.",
+      "Works fully offline, which matters in rural survey areas, and supports external RTK receivers over Bluetooth for centimetre work.",
+      "QField, a GeoPackage and an attribute form is the standard survey workflow in the Surveying and Precision Agriculture roadmaps.",
+      "Install from the Play Store or App Store; the QField Sync plugin in QGIS packages the project."
     ],
     "requirements": [
       "Android 9 or later, or iOS 15 or later; a Windows build exists for tablets",
@@ -424,7 +481,13 @@
     "kind": "software",
     "host": "Official site",
     "downloads": [],
-    "updated": "2026-10"
+    "updated": "2026-10",
+    "figures": [
+      {
+        "src": "/img/software/qfield-screen.jpg",
+        "caption": "QField on a phone: the map canvas while navigating to a feature. Screenshot from the QField documentation (OPENGIS.ch)."
+      }
+    ]
   },
   {
     "id": "webodm",
@@ -442,9 +505,12 @@
     "homepage": "https://www.opendronemap.org/webodm/",
     "tutorial": "https://docs.opendronemap.org/",
     "about": [
-      "WebODM is the browser interface to OpenDroneMap, a free photogrammetry pipeline. Upload the photos from a drone flight, optionally add ground control points, and it runs structure-from-motion and multi-view stereo to produce an orthomosaic, a digital surface and terrain model, a dense point cloud and a textured mesh, with a viewer for each. Plant health indices and volume measurement are built in.",
-      "It runs as a set of Docker containers, so the free install on Windows means installing Docker Desktop with WSL 2 first and then running WebODM from a terminal. Processing is slow on a laptop (a 300-image flight can take an hour or more) but the results are comparable with Pix4D and Agisoft for mapping work, and the pipeline is fully documented.",
-      "The paid native Windows installer from the OpenDroneMap project is a convenience, not a different product. The Docker route is free."
+      "Browser interface to OpenDroneMap, a free photogrammetry pipeline.",
+      "Upload drone photos, optionally add ground control points, and it produces an orthomosaic, surface and terrain models, a dense point cloud and a textured mesh, each with a viewer.",
+      "Plant health indices and volume measurement are built in.",
+      "Runs as Docker containers: on Windows install Docker Desktop with WSL 2 first, then start WebODM from a terminal.",
+      "Slow on a laptop (a 300-image flight can take an hour or more) but results compare with Pix4D and Agisoft for mapping work.",
+      "The paid native Windows installer is a convenience, not a different product; the Docker route is free."
     ],
     "requirements": [
       "Windows 10 or 11 with WSL 2 and Docker Desktop, or macOS, or Linux (the simplest)",
@@ -456,7 +522,13 @@
     "kind": "software",
     "host": "Official site",
     "downloads": [],
-    "updated": "2026-10"
+    "updated": "2026-10",
+    "figures": [
+      {
+        "src": "/img/software/webodm-screen.jpg",
+        "caption": "An orthophoto opened in the WebODM map viewer after processing. Screenshot from the OpenDroneMap documentation."
+      }
+    ]
   },
   {
     "id": "google-earth-pro",
@@ -474,8 +546,11 @@
     "license": "Freeware",
     "homepage": "https://www.google.com/earth/about/versions/",
     "about": [
-      "Google Earth Pro is the desktop edition of Google Earth and has been free since 2015. Its value to a GIS student is the historical imagery slider, which shows how a site has changed over twenty years of satellite and aerial images, and the ability to draw and measure placemarks, paths and polygons and save them as KML or KMZ for import into QGIS or ArcGIS.",
-      "It also imports shapefiles and GPS tracks, exports high-resolution images for reports, records tours, and shows 3D buildings and terrain. It is not an analysis tool and the imagery cannot be downloaded for processing, but for site reconnaissance, ground-truth planning and quick visual checks of a classified map it is used daily in practice.",
+      "Desktop edition of Google Earth, free since 2015.",
+      "Historical imagery slider shows how a site has changed over twenty years of satellite and aerial images.",
+      "Draw and measure placemarks, paths and polygons and save them as KML or KMZ for QGIS or ArcGIS.",
+      "Imports shapefiles and GPS tracks, exports high-resolution images for reports, records tours, and shows 3D buildings and terrain.",
+      "Not an analysis tool and the imagery cannot be downloaded for processing, but used daily for site reconnaissance, ground-truth planning and visual checks of a classified map.",
       "Sign-in is not required."
     ],
     "requirements": [
@@ -507,9 +582,11 @@
     "homepage": "https://posit.co/download/rstudio-desktop/",
     "tutorial": "https://r.geocompx.org/",
     "about": [
-      "R is a programming language for statistics, and RStudio (from Posit) is the editor most people use it in. For spatial work the sf package handles vector data with the same simple-features model as PostGIS, terra handles rasters, tmap and ggplot2 make maps, and spdep, gstat and spatialreg cover spatial autocorrelation, interpolation and spatial regression. R is the standard tool for the statistical side of a thesis: sampling design, accuracy assessment, regression and figures that a journal will accept.",
-      "It overlaps with Python; Python is stronger for deep learning and for integration with GIS software, R is stronger for statistics, reproducible reports (Quarto and R Markdown) and plotting. Many researchers use both. The free book Geocomputation with R, linked above, is the complete course.",
-      "Install R first from CRAN, then RStudio. Packages install from inside R with install.packages()."
+      "R is a programming language for statistics; RStudio (from Posit) is the editor most people use it in.",
+      "Spatial packages: sf for vector data (same simple-features model as PostGIS), terra for rasters, tmap and ggplot2 for maps, spdep, gstat and spatialreg for autocorrelation, interpolation and spatial regression.",
+      "The standard tool for the statistical side of a thesis: sampling design, accuracy assessment, regression and journal-quality figures.",
+      "Python is stronger for deep learning and GIS integration; R is stronger for statistics, reproducible reports (Quarto, R Markdown) and plotting. Many researchers use both.",
+      "Install R first from CRAN, then RStudio; packages install from inside R with install.packages(). Geocomputation with R, linked above, is the complete free course."
     ],
     "requirements": [
       "Windows 10 or 11, macOS 12 or later, or Linux",
@@ -520,7 +597,13 @@
     "kind": "software",
     "host": "Official site",
     "downloads": [],
-    "updated": "2026-10"
+    "updated": "2026-10",
+    "figures": [
+      {
+        "src": "/img/software/r-rstudio-screen.jpg",
+        "caption": "The four RStudio panes: source editor, console, environment and files/plots/help. Screenshot from the RStudio User Guide (Posit)."
+      }
+    ]
   },
   {
     "id": "pakistan-admin-boundaries",
@@ -749,9 +832,12 @@
       }
     ],
     "about": [
-      "InVEST (Integrated Valuation of Ecosystem Services and Tradeoffs) is a family of spatial models from the Natural Capital Project at Stanford that put numbers and maps on what landscapes do for people: how much carbon a land-cover map stores, how much sediment reaches a reservoir, where nutrients run off into a river, how much water a catchment yields, how good the habitat is for a species, and how exposed a coastline is to storms. Each model takes ordinary GIS inputs, a land-use raster, a DEM, a watershed boundary, a lookup table, and writes rasters and tables you open in QGIS or ArcGIS.",
-      "The Workbench is the desktop application that wraps those models in one interface: pick a model, fill in the inputs with a form that validates them before you run, watch the log, and open the results. Every run is also reproducible from Python through the natcap.invest package, which is how most published studies script scenario comparisons. It replaced the older per-model standalone launchers in version 3.9.",
-      "For the institute's students it is the quickest route to a final year project with a policy angle: a land-cover change map from Sentinel-2 or Landsat feeds straight into the Carbon, Sediment Delivery Ratio or Habitat Quality models, and a before-and-after comparison becomes a defensible result. Projects on Margalla Hills, the Potohar plateau, mangroves along the Sindh coast and the Indus delta have all used it. The Urban Cooling and Urban Flood Risk models suit city-scale questions about Rawalpindi and Islamabad."
+      "InVEST (Integrated Valuation of Ecosystem Services and Tradeoffs) is a family of spatial models from Stanford's Natural Capital Project that put numbers and maps on what landscapes do for people.",
+      "Models include carbon storage, sediment delivery, nutrient runoff, water yield, habitat quality, pollination, coastal vulnerability, urban cooling and urban flood risk.",
+      "Inputs are ordinary GIS data (a land-use raster, a DEM, a watershed boundary, a lookup table); outputs are rasters and tables you open in QGIS or ArcGIS.",
+      "The Workbench wraps every model in one app: pick a model, fill a form that validates inputs before the run, watch the log, open the results.",
+      "Every run is reproducible from Python through the natcap.invest package, which is how most published studies script scenario comparisons.",
+      "Quickest route to a final year project with a policy angle: a Sentinel-2 or Landsat land-cover change map feeds straight into Carbon, Sediment Delivery Ratio or Habitat Quality. Projects on Margalla Hills, the Potohar plateau, the Sindh mangroves and the Indus delta have used it."
     ],
     "requirements": [
       "Windows 10 or 11, 64-bit, or macOS 11 or later; no Linux build, use the Python package there",
@@ -759,6 +845,12 @@
       "About 1 GB of disk space for the install, plus 400 MB if you add the sample data",
       "Inputs in a projected coordinate system with metres as the unit; geographic WGS 84 rasters must be reprojected first",
       "Model-specific tables (biophysical lookup tables, species sensitivity tables) prepared as CSV; the sample data shows the exact columns"
+    ],
+    "figures": [
+      {
+        "src": "/img/software/invest-workbench-screen.jpg",
+        "caption": "InVEST Workbench main screen: the model list on the left, recent runs on the right. Screenshot from the InVEST User Guide (Natural Capital Project)."
+      }
     ]
   }
 ]

@@ -28,7 +28,7 @@ const mirrored = d.downloads.length > 0;
       {d.image && d.kind !== 'software' && <figure class="res-figure"><img src={d.image} alt={`Preview of ${d.name}`} loading="lazy" /><figcaption>Preview drawn from the dataset.</figcaption></figure>}
       {d.figures.slice(0, 1).map((g) => <figure class="res-figure"><img src={g.src} alt={g.caption} loading="lazy" /><figcaption>{g.caption}</figcaption></figure>)}
       {d.about.length > 0 && <h2>What it is</h2>}
-      {d.about.map((p) => <p>{p}</p>)}
+      {d.kind === 'software' ? <ul>{d.about.map((p) => <li>{p}</li>)}</ul> : d.about.map((p) => <p>{p}</p>)}
       {d.requirements.length > 0 && <><h2>{d.kind === 'software' ? 'System requirements' : 'Before you use it'}</h2><ul>{d.requirements.map((x) => <li>{x}</li>)}</ul></>}
       {d.licensing && <><h2>Licence</h2><p class="notice navy">{d.licensing}</p></>}
       {d.figures.slice(1).map((g) => <figure class="res-figure"><img src={g.src} alt={g.caption} loading="lazy" /><figcaption>{g.caption}</figcaption></figure>)}

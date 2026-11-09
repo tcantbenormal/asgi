@@ -504,7 +504,7 @@ const sections = [
       for (const k of ['name','username','batch','degree','sector','role','organization','city','country','province','lat','lng','linkedin','github','portfolio','orcid','email_public','advice','bio']) f[k].value = p[k] ?? '';
       setSkills(p.skills ?? []);
       f.mentor.checked = !!p.mentor;
-      f.querySelectorAll('[name=open_to]').forEach((c) => { c.checked = (p.open_to || []).includes(c.value); });
+      editor.querySelectorAll('[name=open_to]').forEach((c) => { c.checked = (p.open_to || []).includes(c.value); });
       setMode(p.sector === 'Student' ? 'student' : 'alumni');
       $('who').dataset.photo = p.photo_url || '';
       if (p.photo_url) { $('photo-prev').src = p.photo_url; $('photo-prev').hidden = false; }
@@ -591,7 +591,7 @@ const sections = [
           skills: skills(),
           advice: editor.dataset.mode === 'student' ? null : f.advice.value.trim() || null, bio: f.bio.value.trim() || null,
           mentor: editor.dataset.mode === 'student' ? false : f.mentor.checked,
-          open_to: editor.dataset.mode === 'student' ? [] : [...f.querySelectorAll('[name=open_to]:checked')].map((c) => c.value),
+          open_to: editor.dataset.mode === 'student' ? [] : [...editor.querySelectorAll('[name=open_to]:checked')].map((c) => c.value),
           publications: readRows('pub').filter((p) => p.title),
           education: dedupe(readRows('edu').filter((p) => p.institution)),
           experience: dedupe(readRows('exp').filter((p) => p.title)).map((p) => ({ ...p, end: p.current ? '' : p.end, current: !!p.current || !p.end })),

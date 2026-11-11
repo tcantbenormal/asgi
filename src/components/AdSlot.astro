@@ -1,9 +1,16 @@
 ---
+// Ad slot. Banner slots load /ad/<slot> inside a sandboxed iframe with no allow-top-navigation, so a
+// creative cannot redirect the host page (rationale in ads.ts).
+// The gate slot is a page-level format (vignette) and has to run inline.
 import { ads, type AdSlotName } from '../config/ads';
 interface Props { slot: AdSlotName }
 const { slot } = Astro.props;
 const html = ads[slot];
+const size: Record<AdSlotName, [number, number]> = { sidebar: [300, 250], banner: [728, 90], gate: [300, 250], footer: [728, 90] };
+const [w, h] = size[slot];
 ---
 {html
-  ? <div class={`ad ${slot} filled`} set:html={html} />
+  ? slot === 'gate'
+    ? <div class={`ad ${slot} filled`} set:html={html} />
+    : <div class={`ad ${slot} filled`}><iframe class="ad-frame" title="Advertisement" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms" src={`/ad/${slot}`} width={w} height={h} loading="lazy" scrolling="no" style={`border:0;max-width:100%;width:${w}px;height:${h}px`} /></div>
   : import.meta.env.DEV && <div class={`ad ${slot}`} aria-hidden="true">Ad space · {slot}</div>}

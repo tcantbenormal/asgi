@@ -1,0 +1,13 @@
+---
+// Bare page holding one banner snippet. AdSlot.astro embeds it in a sandboxed cross-origin iframe; see ads.ts.
+import { ads } from '../../config/ads';
+export function getStaticPaths() {
+  return (['sidebar', 'banner', 'footer'] as const).filter((s) => ads[s]).map((slot) => ({ params: { slot } }));
+}
+const html = ads[Astro.params.slot as 'sidebar' | 'banner' | 'footer'];
+---
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8" /><meta name="robots" content="noindex" /><title>Advertisement</title><style>html,body{margin:0;overflow:hidden;background:transparent}</style></head>
+  <body><Fragment set:html={html} /></body>
+</html>

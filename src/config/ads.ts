@@ -13,15 +13,21 @@
 //                   visitor clicks the unlocked Download button on the gate.
 //   verification -> raw HTML placed in <head> on every page, for a network's
 //                   site-ownership <meta> tag. (An HTML verification file goes in public/ instead.)
-// Monetag vignette and direct link removed 11 Nov 2026 (redirected iPhone visitors). Adsterra banners stay.
+// Banner slots (sidebar, banner, footer) are not injected into the page. Each is built as its own bare page at
+// /ad/<slot> and embedded through a sandboxed iframe without allow-top-navigation, so a creative can open its
+// landing page in a new tab on a tap but cannot redirect the page the visitor is reading (the fix for Adsterra
+// creatives that hijacked iPhones, Nov 2026). The frame has to stay same-origin: Adsterra's loader does nothing
+// when it cannot reach the top window. The gate slot is a page-level format and still runs inline on /download/*.
 export const ads = {
   // Adsterra banner 300x250.
   sidebar: `<script>atOptions = { 'key' : '21c86b4e07e62fa09225ec457b8b46c7', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };</script><script src="https://bauval.org/22/21c86b4e07e62fa09225ec457b8b46c7"></script>`,
   banner: '',
-  gate: '',
+  // Monetag vignette, zone 12102160. Loads only on /download/* pages, inline (it is a page-level format).
+  gate: `<script>(function(s){s.dataset.zone='12102160',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>`,
   // Adsterra banner 728x90.
   footer: `<script>atOptions = { 'key' : '43e7c4b10471070560c28391d9ecd930', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };</script><script src="https://bauval.org/22/43e7c4b10471070560c28391d9ecd930"></script>`,
-  directLink: '',
+  // Monetag direct link, zone 12102163.
+  directLink: 'https://uplcm.com/4/12102163',
   verification: '',
 };
 export type AdSlotName = 'sidebar' | 'banner' | 'gate' | 'footer';

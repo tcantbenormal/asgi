@@ -1532,6 +1532,70 @@
     "order": 27
   },
   {
+    "id": "mitacs-globalink-research-internship",
+    "category": "scholarship",
+    "title": "Mitacs Globalink Research Internship, Canada",
+    "provider": "Mitacs",
+    "url": "https://www.mitacs.ca/our-programs/globalink-research-internship-students/",
+    "description": "A fully funded 12-week summer research placement at a Canadian university for undergraduates from Pakistan. Flights, stipend and insurance are covered; you work on a professor's project and present your results.",
+    "deadline": "Applications usually open in August and close in September for the following summer; results arrive around February",
+    "location": "Universities across Canada",
+    "cost": "Fully funded",
+    "tags": [
+      "internship",
+      "undergraduate",
+      "Canada",
+      "research",
+      "remote sensing",
+      "GIS"
+    ],
+    "facts": [
+      {
+        "label": "What it is",
+        "value": "12 weeks of supervised research in a Canadian university lab between May and October, for students still in their bachelor's degree"
+      },
+      {
+        "label": "Funding",
+        "value": "Return airfare, a stipend for accommodation and living costs, and health insurance; no fee to apply"
+      },
+      {
+        "label": "Eligibility",
+        "value": "Full-time undergraduate at a Pakistani university, 18 or over, with one to three semesters left after the internship, and a strong academic record; check the current GPA threshold on the Mitacs page"
+      },
+      {
+        "label": "How selection works",
+        "value": "You rank projects posted by Canadian professors in your field, then go through screening, project matching and interviews with prospective supervisors; a match means an offer"
+      },
+      {
+        "label": "GIS and remote sensing projects",
+        "value": "Professors in geography, environment, agriculture, forestry and civil engineering post Earth-observation, GIS and spatial-modelling projects every year"
+      },
+      {
+        "label": "IGEO alumni",
+        "value": "Syeda Samreen (University of Saskatchewan, summer 2026): wildfire mapping in Google Earth Engine, presented at the university symposium"
+      }
+    ],
+    "programmes": [],
+    "details": [
+      "Globalink is the easiest fully funded route abroad for an undergraduate at the institute, because it does not need a degree, a research proposal or a scholarship essay. You apply once with your transcript, CV, references and a ranked list of projects, and professors in Canada pick interns from the pool. The internship itself is a real research job: you join a lab for the summer, work on the professor's project with their data and tools, and usually present at a symposium or write up a report at the end.",
+      "The timeline is long. Applications open in late summer and close in September, selection runs through the autumn with interviews, and offers arrive around February for an internship starting in May or June. If you are in second or third year in September, that is the call to apply to; by the time the result comes you will still have the semesters Mitacs requires.",
+      "The application asks for official transcripts, a CV, a short statement, and referees who can be contacted in English. Have those ready before the portal opens. The project list is where applications are won: read the project descriptions properly and rank the ones that match the skills you can actually demonstrate, such as Earth Engine, R or Python work from your coursework.",
+      "One IGEO student has done it so far. Her account of the process, the lab work and the advice she would give is on the Stories page, linked below."
+    ],
+    "links": [
+      {
+        "label": "Eligibility and timeline",
+        "url": "https://www.mitacs.ca/our-programs/globalink-research-internship-students/"
+      },
+      {
+        "label": "Syeda Samreen's story on ASGI",
+        "url": "https://asgi.app/stories/mitacs-internship-canada-syeda-samreen"
+      }
+    ],
+    "updated": "November 2026",
+    "order": 1
+  },
+  {
     "id": "end-to-end-gee",
     "category": "course",
     "title": "End-to-End Google Earth Engine",

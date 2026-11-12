@@ -170,6 +170,7 @@ a.stat { text-decoration: none; display: block; transition: transform 0.15s, box
 
 /* Prose (markdown bodies) */
 .prose { max-width: 70ch; font-size: 1.05rem; }
+.prose p, .prose li { text-align: justify; hyphens: auto; }
 .prose h2 { margin-top: 2em; }
 .prose h3 { margin-top: 1.6em; }
 .prose blockquote { margin: 1.5em 0; padding: 0.6em 1.25em; border-left: 3px solid var(--red); background: var(--paper-2); font-family: var(--head); font-size: 1.1rem; color: var(--navy); }

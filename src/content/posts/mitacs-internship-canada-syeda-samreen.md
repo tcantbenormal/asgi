@@ -96,6 +96,6 @@ Three things, reading between her answers.
 - **Start early.** The Mitacs portal typically opens in the late summer for the following year's internships. Have your transcript, CV and two referees ready before it does.
 - **Build the skills she named.** Our [Remote Sensing Analyst](/roadmaps) and [GIS Developer](/roadmaps) roadmaps cover Python, R and Earth Engine with free resources at every stage.
 - **Ask someone who has done it.** Samreen heard about Mitacs from a senior. Post your questions in the [forum](/forum) or look up alumni on the [directory](/alumni?skill=Google%20Earth%20Engine) who list Earth Engine among their skills.
-- **Watch the Opportunities page.** Scholarships and internships with deadlines are listed on [Opportunities](/opportunities#scholarship), with closing dates.
+- **Read the listing.** Mitacs Globalink now has its own page under [Opportunities](/opportunities/mitacs-globalink-research-internship), with eligibility, funding and the application timeline.
 
 Have an experience of your own worth sharing, an internship, a first job, an exchange? [Write for us](/submit?type=story).

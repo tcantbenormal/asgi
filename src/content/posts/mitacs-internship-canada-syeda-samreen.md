@@ -1,14 +1,14 @@
 ---
-title: "Three months in Canada: Syeda Samreen on her Mitacs research internship"
+title: "Three months in Canada: Syeda Samreen Abid on her Mitacs research internship"
 type: story
 date: 2026-11-12
-author: Syeda Samreen
+author: Syeda Samreen Abid
 summary: An IGEO student applied to Mitacs Globalink without expecting to get in, and spent a fully funded summer at the University of Saskatchewan mapping wildfires in Google Earth Engine. Here is how it happened, step by step, and what she would tell you to do.
 cover: /img/stories/samreen-mitacs-cover.jpg
 tags: [mitacs, internship, canada, research, scholarships, earth-engine]
 ---
 
-Every year a handful of Pakistani students spend their summer in a Canadian research lab on a Mitacs Globalink Research Internship, fully funded: flights, stipend, the lot. In 2026 one of them was from our institute. Syeda Samreen, a BS Geoinformatics student of the 2023 to 2027 batch at the Institute of Geo-Information and Earth Observation, spent twelve weeks at the University of Saskatchewan in Saskatoon, working on wildfire research with satellite data and presenting her results at the university's symposium.
+Every year a handful of Pakistani students spend their summer in a Canadian research lab on a Mitacs Globalink Research Internship, fully funded: flights, stipend, the lot. In 2026 one of them was from our institute. Syeda Samreen Abid, a BS Geoinformatics student of the 2023 to 2027 batch at the Institute of Geo-Information and Earth Observation, spent twelve weeks at the University of Saskatchewan in Saskatoon, working on wildfire research with satellite data and presenting her results at the university's symposium.
 
 We asked her to walk us through it, from the first time she heard about the programme to the advice she would give a first-year sitting in the same lab she sat in. Her answers are below, lightly edited.
 
@@ -36,7 +36,7 @@ The [Mitacs Globalink Research Internship](https://www.mitacs.ca/our-programs/gl
 Five months from application to answer, then another three to departure. If you are a second- or third-year student reading this in November, the next call is the one you should be preparing for now.
 
 <figure class="res-figure">
-  <img src="/img/stories/samreen-mitacs-usask.jpg" alt="Syeda Samreen in a USask shirt in front of the University of Saskatchewan sign" loading="lazy" />
+  <img src="/img/stories/samreen-mitacs-usask.jpg" alt="Syeda Samreen Abid in a USask shirt in front of the University of Saskatchewan sign" loading="lazy" />
   <figcaption>Arrival. The University of Saskatchewan campus in Saskatoon, where Samreen spent the summer of 2026.</figcaption>
 </figure>
 

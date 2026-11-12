@@ -3,12 +3,12 @@ title: "Three months in Canada: Syeda Samreen Abid on her Mitacs research intern
 type: story
 date: 2026-11-12
 author: Syeda Samreen Abid
-summary: An IGEO student applied to Mitacs Globalink without expecting to get in, and spent a fully funded summer at the University of Saskatchewan mapping wildfires in Google Earth Engine. Here is how it happened, step by step, and what she would tell you to do.
+summary: An IGEO student applied to Mitacs Globalink without expecting to get in, and spent a fully funded summer at the University of Saskatchewan applying GIS and remote sensing to wildfire research across Canada. Here is how it happened, step by step, and what she would tell you to do.
 cover: /img/stories/samreen-mitacs-cover.jpg
 tags: [mitacs, internship, canada, research, scholarships, earth-engine]
 ---
 
-Every year a handful of Pakistani students spend their summer in a Canadian research lab on a Mitacs Globalink Research Internship, fully funded: flights, stipend, the lot. In 2026 one of them was from our institute. Syeda Samreen Abid, a BS Geoinformatics student of the 2023 to 2027 batch at the Institute of Geo-Information and Earth Observation, spent twelve weeks at the University of Saskatchewan in Saskatoon, working on wildfire research with satellite data and presenting her results at the university's symposium.
+Every year a handful of Pakistani students spend their summer in a Canadian research lab on a Mitacs Globalink Research Internship, fully funded: flights, stipend, the lot. In 2026 one of them was from our institute. Syeda Samreen Abid, a BS Geoinformatics student of the 2023 to 2027 batch at the Institute of Geo-Information and Earth Observation, spent twelve weeks at the University of Saskatchewan in Saskatoon, applying GIS and remote sensing to wildfire research across Canada, from spatial data automation and R scripting to cloud processing in Google Earth Engine, and presenting her results at the university's symposium.
 
 We asked her to walk us through it, from the first time she heard about the programme to the advice she would give a first-year sitting in the same lab she sat in. Her answers are below, lightly edited.
 
@@ -59,11 +59,11 @@ The technical side, she says, was already covered by the time she left Rawalpind
 
 > My coursework at Arid University in computer programming, GIS workflows, R scripting and Google Earth Engine established a strong technical foundation.
 
-The wildfire work ran in Google Earth Engine, which meant writing code every day, exporting land-cover and night-light layers, and keeping track of what each script did. If you have been putting off the programming and scripting courses because they feel far from "real GIS", this is what real GIS looks like in a research lab abroad.
+The wildfire research drew on all of it: automating spatial data workflows, scripting analyses in R, processing satellite archives in Google Earth Engine, and keeping track of what every script did so the results could be reproduced. If you have been putting off the programming and scripting courses because they feel far from "real GIS", this is what real GIS looks like in a research lab abroad.
 
 <figure class="res-figure">
   <img src="/img/stories/samreen-mitacs-gee.jpg" alt="A lab workstation showing a Google Earth Engine script and a land-cover map of Canada" loading="lazy" />
-  <figcaption>Desk 35. A Google Earth Engine script exporting land-cover data, with the day's notes on paper beside the keyboard.</figcaption>
+  <figcaption>Desk 35. One of the workflows, exporting land-cover layers from Google Earth Engine, with the day's notes beside the keyboard.</figcaption>
 </figure>
 
 What she is proudest of is not a map.
@@ -76,7 +76,7 @@ Three things, reading between her answers.
 
 **Confidence that holds up abroad.** The skills taught at IGEO were enough to contribute in a Canadian research group from the first week. That is useful to know before you apply anywhere.
 
-**A research record.** A summer of wildfire mapping, a symposium presentation and a supervisor who knows her work. That is what a strong graduate school application or a reference letter is built on.
+**A research record.** A summer of applied wildfire research, a symposium presentation and a supervisor who knows her work. That is what a strong graduate school application or a reference letter is built on.
 
 **Independence.** Visa, flights, housing, a new city, a new lab, alone, at undergraduate age. Nothing in a classroom teaches that.
 

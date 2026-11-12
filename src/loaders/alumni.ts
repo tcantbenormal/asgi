@@ -7,6 +7,17 @@ import { site } from '../config/site';
  * Entry id = chosen username, else the generated slug. It becomes the public URL: /<id>.
  * ponytail: once real profiles exist, delete the sample .md files and the fallback branch.
  */
+// Member-written fields are untrusted. Bios go through the Markdown renderer, which passes raw HTML
+// through, so every '<' is escaped first (Markdown itself still works). Links are kept only when they
+// are http(s); anything else, such as a javascript: URL, is dropped rather than failing the build.
+const noHtml = (s: string) => s.replace(/</g, '&lt;');
+const httpOnly = (u: unknown) => (typeof u === 'string' && /^https?:\/\/\S+$/i.test(u.trim()) ? u.trim() : '');
+const safeRows = (rows: unknown) => (Array.isArray(rows) ? rows : []).map((r) => {
+  const o: Record<string, unknown> = { ...(r as object) };
+  for (const k of ['url', 'repo']) if (k in o) { const v = httpOnly(o[k]); if (v) o[k] = v; else delete o[k]; }
+  return o;
+});
+
 export function alumniLoader(): Loader {
   const fallback = glob({ pattern: '**/*.md', base: './src/content/alumni' });
   return {
@@ -31,16 +42,16 @@ export function alumniLoader(): Loader {
       ctx.store.clear();
       for (const r of rows) {
         const id = r.username || r.slug;
-        const body = r.bio ?? '';
+        const body = noHtml(r.bio ?? '');
         const data = await ctx.parseData({
           id,
           data: {
             name: r.name, batch: r.batch, degree: r.degree, role: r.role, organization: r.organization,
             sector: r.sector, city: r.city, country: r.country, province: r.province ?? undefined, lat: r.lat, lng: r.lng,
-            linkedin: r.linkedin ?? '', github: r.github ?? '', portfolio: r.portfolio ?? '', orcid: r.orcid ?? undefined,
-            cv: r.cv_url ?? '', email: r.email_public ?? undefined, photo: r.photo_url ?? undefined,
+            linkedin: httpOnly(r.linkedin), github: httpOnly(r.github), portfolio: httpOnly(r.portfolio), orcid: r.orcid ?? undefined,
+            cv: httpOnly(r.cv_url), email: r.email_public ?? undefined, photo: httpOnly(r.photo_url) || undefined,
             mentor: r.mentor, open_to: r.open_to ?? [], joined: r.created_at ?? undefined, updated: r.updated_at ?? undefined, featured: r.featured, skills: r.skills ?? [], advice: r.advice ?? undefined,
-            publications: r.publications ?? [], education: r.education ?? [], experience: r.experience ?? [], projects: r.projects ?? [],
+            publications: safeRows(r.publications), education: safeRows(r.education), experience: safeRows(r.experience), projects: safeRows(r.projects),
           },
         });
         ctx.store.set({ id, data, body, rendered: await ctx.renderMarkdown(body) });

@@ -46,7 +46,7 @@ Not the facilities, not the weather. The people.
 
 > What impressed me most was how exceptionally supportive the faculty was, especially my supervisor. He ensured I made the most of this opportunity by encouraging me to attend valuable academic conferences. I also had the privilege of presenting my research on wildfires across Canada at the university symposium under his guidance.
 
-Presenting your own work to a room of researchers as an undergraduate is not something most of us get to do before a final-year defence. It happened because her supervisor pushed for it, and because she said yes.
+Her supervisor was [Oscar Zapata](https://www.linkedin.com/in/oscar-zapata-rios/) at the University of Saskatchewan. Presenting your own work to a room of researchers as an undergraduate is not something most of us get to do before a final-year defence. It happened because he pushed for it, and because she said yes.
 
 <figure class="res-figure">
   <img src="/img/stories/samreen-mitacs-workshop.jpg" alt="A seminar room at the University of Saskatchewan during a research workshop" loading="lazy" />
@@ -97,5 +97,7 @@ Three things, reading between her answers.
 - **Build the skills she named.** Our [Remote Sensing Analyst](/roadmaps) and [GIS Developer](/roadmaps) roadmaps cover Python, R and Earth Engine with free resources at every stage.
 - **Ask someone who has done it.** Samreen heard about Mitacs from a senior. Post your questions in the [forum](/forum) or look up alumni on the [directory](/alumni?skill=Google%20Earth%20Engine) who list Earth Engine among their skills.
 - **Read the listing.** Mitacs Globalink now has its own page under [Opportunities](/opportunities/mitacs-globalink-research-internship), with eligibility, funding and the application timeline.
+
+Samreen is happy to hear from students thinking about applying. You can reach her on [LinkedIn](https://www.linkedin.com/in/samreen-abid/).
 
 Have an experience of your own worth sharing, an internship, a first job, an exchange? [Write for us](/submit?type=story).

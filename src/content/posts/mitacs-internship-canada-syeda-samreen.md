@@ -8,7 +8,7 @@ cover: /img/stories/samreen-mitacs-cover.jpg
 tags: [mitacs, internship, canada, research, scholarships, earth-engine]
 ---
 
-Every year a handful of Pakistani students spend their summer in a Canadian research lab on a Mitacs Globalink Research Internship, fully funded: flights, stipend, the lot. In 2026 one of them was from our institute. Syeda Samreen, a student at the Institute of Geo-Information and Earth Observation, spent twelve weeks at the University of Saskatchewan in Saskatoon, working on wildfire research with satellite data and presenting her results at the university's symposium.
+Every year a handful of Pakistani students spend their summer in a Canadian research lab on a Mitacs Globalink Research Internship, fully funded: flights, stipend, the lot. In 2026 one of them was from our institute. Syeda Samreen, a BS Geoinformatics student of the 2023 to 2027 batch at the Institute of Geo-Information and Earth Observation, spent twelve weeks at the University of Saskatchewan in Saskatoon, working on wildfire research with satellite data and presenting her results at the university's symposium.
 
 We asked her to walk us through it, from the first time she heard about the programme to the advice she would give a first-year sitting in the same lab she sat in. Her answers are below, lightly edited.
 

@@ -18,7 +18,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 
   <header class="page-head">
     <div class="eyebrow" style="text-transform:capitalize">{p.data.type}</div>
     <h1>{p.data.title}</h1>
-    <p class="lead">{p.data.summary}</p>
+    <p class="lead" style="text-align:justify;hyphens:auto">{p.data.summary}</p>
     <div style="margin-top:1rem"><Byline author={p.data.author} date={p.data.date} body={p.body} /></div>
   </header>
   {p.data.cover && <img src={p.data.cover} alt="" style="border-radius:var(--radius);margin-bottom:2rem" />}

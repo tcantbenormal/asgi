@@ -25,7 +25,7 @@ const { kind, title, cta, fields, thanks, id = 'request' } = Astro.props;
 </form>
 
 <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key, id }}>
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+  import { createClient } from '/vendor/supabase-js.js';
   const sb = createClient(url, key);
   const f = document.getElementById(id), msg = f.querySelector('[data-msg]');
   const { data: { session } } = await sb.auth.getSession();

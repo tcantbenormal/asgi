@@ -7,11 +7,16 @@
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
-    "sync": "node scripts/sync-sheets.mjs"
+    "sync": "node scripts/sync-sheets.mjs",
+    "vendor": "esbuild node_modules/@supabase/supabase-js/dist/index.mjs --bundle --format=esm --minify --target=es2020 --platform=browser --legal-comments=none --outfile=public/vendor/supabase-js.js"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.3.8",
     "pagefind": "^1.5.2"
+  },
+  "devDependencies": {
+    "@supabase/supabase-js": "^2.119.0",
+    "esbuild": "^0.28.2"
   }
 }

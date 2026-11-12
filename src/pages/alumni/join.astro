@@ -225,7 +225,7 @@ const sections = [
   </div></template>
 
   <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    import { createClient } from '/vendor/supabase-js.js';
     const sb = createClient(url, key);
     const $ = (id) => document.getElementById(id);
     const editor = $('editor'), state = $('state'), f = editor.elements;

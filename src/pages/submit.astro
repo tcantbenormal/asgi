@@ -38,7 +38,7 @@ import { site } from '../config/site';
   <style>.two { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; } @media (max-width: 600px) { .two { grid-template-columns: 1fr; } }</style>
 
   <script is:inline type="module" define:vars={{ url: site.supabase.url, key: site.supabase.key }}>
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    import { createClient } from '/vendor/supabase-js.js';
     import { uploadImages, watchPicker } from '/js/imgup.js';
     const sb = createClient(url, key);
     const f = document.getElementById('f'), msg = document.getElementById('msg');

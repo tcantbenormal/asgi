@@ -1,5 +1,83 @@
 [
   {
+    "id": "usu-legasys-graduate-research-assistantship",
+    "category": "scholarship",
+    "title": "Funded MS or PhD in Remote Sensing, GIS and GeoAI, Utah State University",
+    "provider": "LEGASYS Lab, Utah State University",
+    "url": "https://www.linkedin.com/posts/ngabajunior_im-recruiting-an-ms-or-phd-student-in-share-7526406866101227521-ZqVm/",
+    "description": "A graduate research assistantship with Dr. Elise Laugier on a UtahView-funded project mapping historical land-use and landscape change in Utah. Stipend, tuition support and health insurance; contact the supervisor by 1 December 2026.",
+    "deadline": "Contact the supervisor by 1 December 2026 (open until filled); the formal graduate application to the university is separate",
+    "location": "Logan, Utah, USA",
+    "cost": "Funded: stipend, tuition support, subsidised health insurance",
+    "tags": [
+      "usa",
+      "phd",
+      "ms",
+      "assistantship",
+      "geoai",
+      "remote sensing"
+    ],
+    "facts": [
+      {
+        "label": "Position",
+        "value": "Graduate Research Assistant, MS or PhD, in the Department of Environment and Society"
+      },
+      {
+        "label": "Supervisor",
+        "value": "Dr. Elise Laugier, Principal Investigator, Legacy Systems (LEGASYS) Lab"
+      },
+      {
+        "label": "Start",
+        "value": "11 January 2027 preferred; summer 2027 also considered"
+      },
+      {
+        "label": "Funding",
+        "value": "PhD: up to four years, two as a research assistant then two as a teaching assistant, subject to satisfactory progress. MS: duration set by the programme and appointment. Includes a stipend, tuition support and subsidised health insurance"
+      },
+      {
+        "label": "Required",
+        "value": "A bachelor's or master's degree in geography, environmental science, anthropology or a related field, with demonstrated ArcGIS Pro proficiency and Python experience"
+      },
+      {
+        "label": "Preferred",
+        "value": "QGIS, Google Earth Engine or other open-source geospatial tools; earlier research experience in remote sensing or geospatial analysis"
+      },
+      {
+        "label": "The work",
+        "value": "Processing historical aerial photography and satellite imagery, building reproducible workflows for image classification, feature extraction and change detection, and contributing to publications while writing your own thesis or dissertation"
+      },
+      {
+        "label": "Extras",
+        "value": "USU's Remote Sensing and Geospatial Artificial Intelligence (RS-GeoAI) Certificate through coursework, and the national AmericaView network for outreach and contacts"
+      },
+      {
+        "label": "How to apply",
+        "value": "Email elise.laugier@usu.edu to discuss the position and the application process. Formal admission to a graduate programme at Utah State University is also required"
+      }
+    ],
+    "programmes": [],
+    "details": [
+      "Dr. Elise Laugier is recruiting one MS or PhD student for the Legacy Systems (LEGASYS) Lab at Utah State University. The lab studies long-term human and environment interaction and landscape change, combining historical imagery, satellite remote sensing and field observation. Its current projects are in the Kurdistan Region of Iraq and the western United States.",
+      "The student will work mainly on a research project funded by UtahView, the Utah member of the AmericaView network, examining historical land-use and landscape change in Utah: agricultural land use, vegetation change and landscape transformation. The work uses historical aerial photography, satellite imagery and geospatial programming, with room to apply machine learning and GeoAI to image classification, feature extraction and change detection. It is meant to become your own MS thesis or PhD dissertation.",
+      "This is a direct-to-supervisor opening, which is how most funded graduate places in the United States are filled. The first step is an email, not a portal. Write to Dr. Laugier by 1 December 2026 with your CV, your transcript and two or three lines on what you have actually built in ArcGIS Pro and Python. If you can start in January 2027, say so early: those applicants are preferred and are asked to make contact as soon as possible.",
+      "The announcement does not mention nationality, English tests or the GRE. International applicants should ask about visa timing for a January start and check Utah State University's graduate admission requirements before applying."
+    ],
+    "links": [
+      {
+        "label": "Email Dr. Elise Laugier",
+        "url": "mailto:elise.laugier@usu.edu"
+      },
+      {
+        "label": "Utah State University",
+        "url": "https://www.usu.edu/"
+      }
+    ],
+    "image": "/img/opportunities/usu-legasys-assistantship.jpg",
+    "updated": "November 2026",
+    "order": 0,
+    "closes": "2026-12-01"
+  },
+  {
     "id": "itc-twente-mgeo",
     "category": "scholarship",
     "title": "MSc Geo-information Science and Earth Observation at ITC, University of Twente",

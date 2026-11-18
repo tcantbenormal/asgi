@@ -25,6 +25,7 @@ const closes = d.closes ? new Date(d.closes).toLocaleDateString('en-GB', { day: 
   <div style="display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:2.5rem;align-items:start" class="res-grid">
     <div class="prose">
       {d.details.map((p) => <p>{p}</p>)}
+      {d.image && <figure class="res-figure"><a href={d.image}><img src={d.image} alt={`Official announcement: ${d.title}`} loading="lazy" /></a><figcaption>The official announcement from {d.provider}.</figcaption></figure>}
       {d.programmes.length > 0 && <><h2>{d.category === 'scholarship' ? 'Programmes this funds' : 'What is included'}</h2><ul>{d.programmes.map((x) => <li>{x}</li>)}</ul></>}
       {d.facts.length > 0 && <><h2>At a glance</h2><dl class="facts">{d.facts.map((f) => <><dt>{f.label}</dt><dd>{f.value}</dd></>)}</dl></>}
       <h2>Links</h2>

@@ -158,6 +158,7 @@ const links = defineCollection({
     order: z.number().optional(),              // position within its category; unset sorts last by title
     employer: z.string().optional(),           // jobs only: employers.json id, shows the listing on that employer's page and marks it hiring
     closes: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(), // ISO date of the next deadline where one is exact; jobs stop counting as openings after it
+    image: z.string().optional(),              // official flyer or announcement, shown on the detail page
     via: z.string().optional(),                // 'alumni' when it came through the submit form; shows a badge
   }),
 });

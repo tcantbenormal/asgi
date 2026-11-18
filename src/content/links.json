@@ -4,7 +4,7 @@
     "category": "scholarship",
     "title": "Funded MS or PhD in Remote Sensing, GIS and GeoAI, Utah State University",
     "provider": "LEGASYS Lab, Utah State University",
-    "url": "https://www.linkedin.com/posts/ngabajunior_im-recruiting-an-ms-or-phd-student-in-share-7526406866101227521-ZqVm/",
+    "url": "https://www.legasyslab.com/team/join-us",
     "description": "A graduate research assistantship with Dr. Elise Laugier on a UtahView-funded project mapping historical land-use and landscape change in Utah. Stipend, tuition support and health insurance; contact the supervisor by 1 December 2026.",
     "deadline": "Contact the supervisor by 1 December 2026 (open until filled); the formal graduate application to the university is separate",
     "location": "Logan, Utah, USA",
@@ -64,12 +64,24 @@
     ],
     "links": [
       {
-        "label": "Email Dr. Elise Laugier",
-        "url": "mailto:elise.laugier@usu.edu"
+        "label": "Position announcement (PDF)",
+        "url": "https://asgi.app/files/usu-legasys-spring-2027-grad-position.pdf"
       },
       {
-        "label": "Utah State University",
-        "url": "https://www.usu.edu/"
+        "label": "LEGASYS Lab: geospatial science",
+        "url": "https://www.legasyslab.com/geospatial-science"
+      },
+      {
+        "label": "USU Geospatial Collective",
+        "url": "https://www.usu.edu/geospatial/"
+      },
+      {
+        "label": "Announcement on LinkedIn",
+        "url": "https://www.linkedin.com/posts/ngabajunior_im-recruiting-an-ms-or-phd-student-in-share-7526406866101227521-ZqVm/"
+      },
+      {
+        "label": "Email Dr. Elise Laugier",
+        "url": "mailto:elise.laugier@usu.edu"
       }
     ],
     "image": "/img/opportunities/usu-legasys-assistantship.jpg",

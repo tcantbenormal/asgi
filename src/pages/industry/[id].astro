@@ -47,7 +47,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Organization', name
         ? <p>No opening is listed for {d.name} right now. Check the {d.careers ? <a href={d.careers} rel="noopener">careers page</a> : <a href={d.website} rel="noopener">website</a>}, and if you see one, <a href={`${site.forms.submitResource}?type=opportunity`}>report it</a> so it shows here.</p>
         : <ul>
             {d.hiring_now && <li>{d.hiring_now.url ? <a href={d.hiring_now.url} rel="noopener">{d.hiring_now.note}</a> : d.hiring_now.note}{d.hiring_now.until && ` (until ${d.hiring_now.until})`}</li>}
-            {openings.map((j) => <li><a href={j.data.url} rel="noopener">{j.data.title}</a>{j.data.location && `, ${j.data.location}`}{j.data.closes ? ` · closes ${j.data.closes}` : j.data.deadline && ` · deadline ${j.data.deadline}`}<br /><small class="muted">{j.data.description}</small></li>)}
+            {openings.map((j) => <li><a href={j.data.url} rel="noopener">{j.data.title}</a>{j.data.location && `, ${j.data.location}`}{j.data.closes ? <> · closes {j.data.closes} <span class="tag red" data-until={j.data.closes} hidden></span></> : j.data.deadline && ` · deadline ${j.data.deadline}`}<br /><small class="muted">{j.data.description}</small></li>)}
           </ul>}
       <h2>Roles they hire for</h2>
       <ul>{d.roles.map((r) => <li>{r}</li>)}</ul>

@@ -75,5 +75,19 @@ const canonical = new URL(Astro.url.pathname.replace(/(\/index)?\.html$/, '') ||
         if (a.origin && a.origin !== location.origin && /^https?:$/.test(a.protocol)) { a.target = '_blank'; a.rel = 'noopener'; }
       }, true);
     </script>
+    <script is:inline>
+      // Deadline countdowns: every [data-until="YYYY-MM-DD"] badge is recomputed from the visitor's own date,
+      // so it stays right between builds. data-max hides it when the deadline is further off than that many days.
+      document.querySelectorAll('[data-until]').forEach(function (el) {
+        var p = el.dataset.until.split('-').map(Number), n = new Date();
+        var days = Math.round((new Date(p[0], p[1] - 1, p[2]) - new Date(n.getFullYear(), n.getMonth(), n.getDate())) / 864e5);
+        var show = days <= Number(el.dataset.max || 1e9);
+        el.textContent = days < 0 ? 'Closed' : days === 0 ? 'Closes today' : days === 1 ? 'Closes tomorrow' : 'Closes in ' + days + ' days';
+        el.classList.toggle('red', days >= 0); el.classList.toggle('grey', days < 0);
+        el.hidden = !show;
+        var card = el.closest('.opp'); if (card) card.dataset.soon = days >= 0 && days <= 60 ? '1' : '0';
+        var box = el.parentElement; if (box.classList.contains('tags') && box.children.length === 1) box.hidden = !show;
+      });
+    </script>
   </body>
 </html>
